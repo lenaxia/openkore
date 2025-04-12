@@ -17,12 +17,13 @@
 ## Validation Checklist
 - [X] ConcurrencyCore integration
 - [X] Internal policy baseline
-- [X] Container metrics collection
+- [X] Container metrics collection 
 - [X] Core atomic/lock/channel checks
-- [ ] NUMA cross-node validation
-- [ ] Channel stall recovery workflows
 - [X] Lock hierarchy visualization
 - [X] Internal policy integration
+- [X] Systems domain contract validation
+- [ ] NUMA cross-node validation
+- [ ] Channel stall recovery workflows
 - [ ] Lock-free benchmarks
 - [ ] Cache optimization tests
 
@@ -62,6 +63,5 @@
 - [X] Core atomic/lock/channel checks
 - [X] Systems policy integration
 - [ ] Container scaling tests
-- [ ] Kubernetes CRD validation (depends on ConcurrencyCore completion)
-- [ ] NUMA cross-node validation (requires Systems domain finalization)
+- [ ] NUMA cross-node validation (requires Systems domain finalization) 
 - [ ] QoS end-to-end tests
