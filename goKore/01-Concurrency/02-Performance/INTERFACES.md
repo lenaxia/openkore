@@ -28,6 +28,11 @@ type ChannelValidator interface {
     // From SUPPLEMENT-channel-safety.md
     CheckBufferRules(ch chan interface{}, policy Systems.ChannelPolicy) error
     HandleStall(ch chan interface{}, action Systems.RecoveryAction) error
+    // From SUPPLEMENT-channel-safety.md
+    CreateRecoveryHandler(policy Systems.ChannelPolicy) (Systems.RecoveryAction, error)
+    GetChannelMetrics(ch chan interface{}) Systems.ChannelMetrics
+    // Systems domain integration
+    WithSystemsProvider(provider Systems.Provider) ChannelValidator
 }
 
 ## Optional Optimization Contracts

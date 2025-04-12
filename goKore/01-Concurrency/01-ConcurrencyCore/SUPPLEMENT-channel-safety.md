@@ -27,10 +27,32 @@ graph TD
 3. **Recovery**:
    ```go
    type RecoveryAction interface {
-       ResetChannel(ch chan interface{})
-       ExpandBuffer(ch chan interface{}, delta int) error
-       DrainChannel(ch chan interface{}, fn func(interface{}))
-       NotifyStall(StallEvent)
+       ResetChannel(ctx context.Context, ch chan interface{}, policy Systems.ChannelPolicy) error
+       ExpandBuffer(ctx context.Context, ch chan interface{}, delta int, policy Systems.ChannelPolicy) error
+       DrainChannel(ctx context.Context, ch chan interface{}, fn func(interface{})) (int, error)
+       NotifyStall(ctx context.Context, event Systems.StallEvent) error
+       Metrics() Systems.RecoveryMetrics
+       WithSystemsProvider(provider Systems.Provider) RecoveryAction
+   }
+
+   // Base implementation for Systems integration
+   type DefaultRecovery struct {
+       systems Systems.Provider
+   }
+
+   func (d *DefaultRecovery) WithSystemsProvider(provider Systems.Provider) {
+       d.systems = provider
+   }
+
+   // Example Systems-integrated method
+   func (d *DefaultRecovery) ExpandBuffer(ctx context.Context, ch chan interface{}, delta int, policy Systems.ChannelPolicy) error {
+       if d.systems.GetQOSClass().AllowedBufferDelta(delta) {
+           newch := make(chan interface{}, cap(ch)+delta)
+           close(ch)
+           ch = newch
+           return nil
+       }
+       return Systems.ErrPolicyViolation
    }
    ```
 
