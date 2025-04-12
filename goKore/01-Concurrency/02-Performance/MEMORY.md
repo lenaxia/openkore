@@ -28,12 +28,13 @@
 - [ ] Cache optimization tests
 
 ## Key Missing Pieces (Domain-Internal)
-- [ ] Channel stall recovery implementation
+- [X] Channel stall recovery implementation
 - [ ] Lock-free pattern benchmarks
 - [ ] Cache-line optimization guide
 - [ ] QoS worker mapping tables
 - [ ] Atomic validation edge cases
 - [ ] Stress test framework
+- [ ] Channel stall edge case handling
 
 ## Critical Path Monitoring
 | Metric                  | Tracking System     |
@@ -43,7 +44,16 @@
 | Channel Utilization     | Grafana Dashboards  |
 | QoS Enforcement         | Systems Orchestration |
 | NUMA Error Rates        | Node Exporter + Custom Metrics |
-| NUMA Cross-Node Validation | Node Exporter Metrics |
+| Channel Recovery        | Custom Metrics Pipeline |
+| NUMA Cross-Node         | Node Exporter Metrics |
+
+## Validation Checklist
+- [X] Core atomic/lock/channel checks
+- [X] Systems policy integration
+- [ ] Container scaling tests
+- [ ] NUMA cross-node validation (awaiting Systems domain finalization) 
+- [ ] QoS end-to-end tests
+- [ ] Recovery action edge cases
 
 ## Performance Targets
 ### Functional
