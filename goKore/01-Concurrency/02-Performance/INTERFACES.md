@@ -24,8 +24,10 @@ type ChannelValidator interface {
     VerifyClosure(ch chan interface{}) error
     DetectStalls(bufferThreshold int) []ChannelStall 
     MonitorThroughput(ch chan interface{}) Systems.ChannelMetrics
-    // Added container awareness
     ApplyQoSPolicy(policy Systems.QoSPolicy) error
+    // From SUPPLEMENT-channel-safety.md
+    CheckBufferRules(ch chan interface{}, policy Systems.ChannelPolicy) error
+    HandleStall(ch chan interface{}, action Systems.RecoveryAction) error
 }
 
 ## Optional Optimization Contracts
