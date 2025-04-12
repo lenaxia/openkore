@@ -45,7 +45,45 @@ Go:  Release/acquire semantics with sync/atomic
 - [X] Benchmark against original
 - [X] Add GC pause instrumentation
 - [X] Document edge case behaviors
-- [X] Integrate with Systems domain QoS policies
+- [ ] Integrate with Systems domain QoS policies
+
+## Systems QoS Contracts
+```go
+type QoSEnforcer interface {
+    ApplyThreadPolicy(pool PolicyTarget) error
+    ValidatePool(pool PolicyTarget) []QoSViolation
+    GetNUMAPolicy() Systems.NUMAPolicy
+    GetResourceLimits() Systems.ContainerResources
+}
+
+type PolicyTarget interface {
+    SetMinWorkers(int) 
+    SetMaxWorkers(int)
+    SetQueueSize(int)
+    SetNUMAffinity(Systems.NUMAPolicy)
+    CurrentStats() PoolStats
+}
+
+// Systems-integrated implementation
+type SystemsQoS struct {
+    provider Systems.PolicyProvider
+}
+
+func (s *SystemsQoS) ApplyThreadPolicy(pool PolicyTarget) error {
+    limits := s.provider.GetResourceLimits()
+    numa := s.provider.GetNUMAPolicy()
+    
+    pool.SetMinWorkers(limits.MinWorkers)
+    pool.SetMaxWorkers(limits.MaxWorkers)
+    pool.SetQueueSize(limits.MaxQueueDepth)
+    pool.SetNUMAffinity(numa)
+    
+    if violations := s.ValidatePool(pool); len(violations) > 0 {
+        return Systems.ErrPolicyViolation
+    }
+    return nil
+}
+```
 
 ## Verification Protocol
 1. Kubernetes QoS compliance via PolicyProvider interface
