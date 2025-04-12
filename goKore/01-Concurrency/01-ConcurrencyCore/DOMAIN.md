@@ -118,6 +118,7 @@ type TopologyHints struct {
    - NUMA-aware work distribution
    - Kubernetes CRD specifications
    - Systems policy integration
+   - Explicit Systems contracts
 
 4. **SUPPLEMENT-numa.md**
    - NUMA-aware locking/work distribution
@@ -132,6 +133,13 @@ type TopologyHints struct {
    - NUMA-aware error types
    - Systems alert integration
    - Context cancellation workflows
+
+6. **SUPPLEMENT-channel-safety.md**
+   - Buffer management policies
+   - Stall detection heuristics
+   - Recovery automation
+   - Systems-integrated monitoring
+   - Kubernetes CRD specifications
 
 3. **INTERFACES.md**
    - Core concurrency interface contracts

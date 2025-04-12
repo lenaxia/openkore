@@ -25,15 +25,53 @@ graph TD
    - Deadlock: No activity for 30s
 
 3. **Recovery**:
-   ```go
-   type RecoveryAction interface {
-       ResetChannel(ctx context.Context, ch chan interface{}, policy Systems.ChannelPolicy) error
-       ExpandBuffer(ctx context.Context, ch chan interface{}, delta int, policy Systems.ChannelPolicy) error
-       DrainChannel(ctx context.Context, ch chan interface{}, fn func(interface{})) (int, error)
-       NotifyStall(ctx context.Context, event Systems.StallEvent) error
-       Metrics() Systems.RecoveryMetrics
-       WithSystemsProvider(provider Systems.Provider) RecoveryAction
-   }
+```go
+type RecoveryAction interface {
+    ResetChannel(ctx context.Context, ch chan interface{}, policy Systems.ChannelPolicy) error
+    ExpandBuffer(ctx context.Context, ch chan interface{}, delta int) error
+    DrainChannel(ctx context.Context, ch chan interface{}, fn func(interface{})) (int, error)
+    NotifyStall(ctx context.Context, event Systems.StallEvent) error
+    Metrics() Systems.RecoveryMetrics
+    WithSystemsProvider(provider Systems.Provider) RecoveryAction
+}
+
+// Systems-compliant implementation
+type SystemsRecovery struct {
+    provider Systems.PolicyProvider
+}
+
+func (sr *SystemsRecovery) ExpandBuffer(ctx context.Context, ch chan interface{}, delta int) error {
+    currentCap := cap(ch)
+    
+    // Check against container limits
+    if currentCap + delta > sr.provider.GetResourceLimits().MaxChannelBuffer {
+        return Systems.ErrPolicyViolation
+    }
+    
+    // Create new channel with expanded buffer
+    newch := make(chan interface{}, currentCap+delta)
+    
+    // Atomically swap channels
+    close(ch)
+    ch = newch
+    
+    return nil
+}
+
+func (sr *SystemsRecovery) ValidatePolicy(policy Systems.ChannelPolicy) error {
+    limits := sr.provider.GetResourceLimits()
+    
+    if policy.BaseSize > limits.MaxChannelBuffer {
+        return fmt.Errorf("base size exceeds container limit")
+    }
+    
+    if policy.ScalingFactor > limits.MaxChannelScaling {
+        return fmt.Errorf("scaling factor exceeds container limit")
+    }
+    
+    return nil
+}
+```
 
    // Base implementation for Systems integration
    type DefaultRecovery struct {
