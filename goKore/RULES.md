@@ -94,7 +94,9 @@ ALWAYS respect domain boundaries. When designing domain models, carefully think 
 1. **Design Phase**
    - No functional code yet
    - Focus on interface contracts
-   - Document Perl compatibility
+   - We are deprecating all Perl use
+   - We are deprecating as much C++ as possible
+   - Any C++ we cannot deprecate should be wrapped
    - DO NOT create any *.go files
    - When design has reached a point where we can move to implementation, tell the user
 
@@ -107,7 +109,7 @@ ALWAYS respect domain boundaries. When designing domain models, carefully think 
 3. **Integration**
    - Document cross-domain contracts
    - Update interface versions
-   - Add compatibility tests
+   - Verify compatibility across domains
    - DO NOT create any *.go files
 
 ## Commit Rules
