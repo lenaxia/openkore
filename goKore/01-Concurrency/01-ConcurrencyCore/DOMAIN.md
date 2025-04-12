@@ -111,14 +111,22 @@ type TopologyHints struct {
    - Systems domain topology coordination
    - CRD definitions for cluster-wide policies
 
-3. **SUPPLEMENT-numa.md**
+3. **SUPPLEMENT-threadpools.md**
+   - Worker pool architectures
+   - Work stealing algorithms
+   - QoS-driven scaling policies
+   - NUMA-aware work distribution
+   - Kubernetes CRD specifications
+   - Systems policy integration
+
+4. **SUPPLEMENT-numa.md**
    - NUMA-aware locking/work distribution
    - Node affinity and cross-node policies
    - Work stealing algorithms
    - Kubernetes NUMA CRD definitions
    - Systems domain integration specs
 
-4. **SUPPLEMENT-errorhandling.md**
+5. **SUPPLEMENT-errorhandling.md**
    - Panic recovery and context propagation
    - Deadlock resolution strategies
    - NUMA-aware error types
