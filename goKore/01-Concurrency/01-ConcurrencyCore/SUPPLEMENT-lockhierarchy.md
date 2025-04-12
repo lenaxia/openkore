@@ -144,12 +144,9 @@ graph TD
 
 ## Enforcement & Visualization
 
-### Kubernetes CRD Specification (v1alpha1)
-```yaml
-apiVersion: apiextensions.k8s.io/v1
-kind: CustomResourceDefinition
-metadata:
-  name: lockpolicies.concurrency.gokore.io
+// See Systems Orchestration CRD definitions in:
+// goKore/05-Systems/06-Orchestration/INTERFACES.md
+// for full Kubernetes integration specs
 spec:
   group: concurrency.gokore.io
   names:
@@ -253,27 +250,9 @@ spec:
 
 ### Systems Domain Integration
 ```go
-// Expanded to include Prometheus metrics
-type LockValidator interface {
-    ValidateLockOrder(currentLevel int) error
-    GetLockPolicy() LockPolicy
-    ReportViolation(v LockViolation)
-    InstrumentMetrics(registry prometheus.Registerer) // Add metrics collection
-}
-
-// Integrated with cluster monitoring
-var (
-    lockHoldDuration = prometheus.NewHistogramVec(prometheus.HistogramOpts{
-        Name: "gk_lock_hold_seconds",
-        Help: "Duration of lock holdings by QoS class",
-        Buckets: []float64{.0001, .0005, .001, .005, .01, .05, .1, .5, 1},
-    }, []string{"qos_class", "numa_node"})
-    
-    lockViolations = prometheus.NewCounterVec(prometheus.CounterOpts{
-        Name: "gk_lock_violations_total",
-        Help: "Total lock hierarchy violations",
-    }, []string{"violation_type"})
-)
+// Metrics integration handled by Systems domain instrumentation
+// See goKore/05-Systems/06-Orchestration/INTERFACES.md
+// for monitoring contracts
 ```
 ```go
 // LockTracker with systems domain integration

@@ -145,19 +145,19 @@ type TopologyHints struct {
    - Replaced platform-specific implementations with Go runtime
    - Added container-aware resource limits
    
-3. **Container Considerations**:
+3. **Systems Domain Integration**:
    ```mermaid
    graph LR
-       A[Concurrency] -->|Queries| B[Systems Domain]
+       A[Concurrency] -->|Policy Requests| B[Systems Domain]
        B -->|Provides| C[Resource Limits]
-       B -->|Provides| D[NUMA Affinity]
-       B -->|Provides| E[K8s QoS Class]
+       B -->|Provides| D[NUMA Policy]
+       B -->|Provides| E[QoS Class]
        style B stroke:#ffaa00
    ```
-   - Worker pools auto-scale based on container CPU limits
-   - Lock placement considers NUMA node topology
-   - Deadlock detection integrates with k8s eviction policies
-   - Metrics include container migration events
+   - Worker pools scale using Systems-provided resource limits
+   - Lock placement follows Systems-defined NUMA policies
+   - Deadlock handling uses Systems resolution strategies
+   - Metrics pipeline feeds into Systems monitoring
 
 4. **Dropped Components**:
    | Component          | Reason                  | Replacement            |

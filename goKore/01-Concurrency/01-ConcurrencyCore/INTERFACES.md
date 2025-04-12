@@ -116,20 +116,15 @@ type SystemsProvider interface {
     GetHierarchyRules() []HierarchyRule
     ReportViolation(violation LockViolation) error
     
-    // Kubernetes integration
-    GetCRDValidator() CRDValidator
-    ApplyLockPolicy(policy LockPolicyCRD) error
+    // Systems domain integration
+    GetPolicyProvider() Systems.PolicyProvider
 }
 
 // From Systems Orchestration INTERFACES.md
-type LockPolicyCRD struct {
-    QOSClass      QOSLevel        `json:"qosClass"`
-    NUMAAffinity  NUMAAffinitySpec `json:"numaAffinity"`
-    Rules         []HierarchyRule `json:"rules"`
-    RetryPolicy   RetryPolicySpec `json:"retryPolicy"`
-    MaxHoldTime   time.Duration   `json:"maxHoldTime"`
-    ContainerID   string          `json:"containerID"`
-}
+// Systems domain implements these - reference only
+type LockPolicy = Systems.LockPolicyCRD
+type NUMAAffinitySpec = Systems.NUMAAffinitySpec
+type RetryPolicySpec = Systems.RetryPolicySpec
 
 type NUMAAffinitySpec struct {
     Required         bool     `json:"required"`
