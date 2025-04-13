@@ -113,6 +113,14 @@ type TopologyHints struct {
 
 3. **SUPPLEMENT-threadpools.md**
    - Worker pool architectures
+   - Work stealing algorithms  
+   - QoS-driven scaling policies
+   - NUMA-aware work distribution
+   - Kubernetes CRD specifications
+   - Systems policy integration
+
+3. **SUPPLEMENT-threadpools.md**
+   - Worker pool architectures
    - Work stealing algorithms
    - QoS-driven scaling policies
    - NUMA-aware work distribution
