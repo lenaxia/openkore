@@ -36,12 +36,28 @@ type DeadlockDetector interface {
 type PanicHandler interface {
     Recover(ctx context.Context, fn func())
     RecoverWithRestart(ctx context.Context, fn func(), restartPolicy Policy)
+    // Systems integration
+    ReportPanicToSystems(stack []byte) 
+    GetRecoveryConfig() Systems.RecoveryProfile
+    WithNUMANode(node int) PanicHandler
 }
 
 type CircuitBreaker interface {
     Execute(func() error) error
     State() CircuitState
     Reset()
+    // Systems integration
+    WithQoSBackoff(qos Systems.QOSLevel) CircuitBreaker
+    GetBreakerMetrics() Systems.CircuitMetrics
+    ApplyClusterPolicy(policy Systems.CircuitPolicy)
+}
+
+// Matches Systems Orchestration INTERFACES.md
+type SystemsProvider interface {
+    GetDeadlockStrategy() Systems.DeadlockResolution
+    GetPressureHandler() Systems.PressureHandler
+    GetRecoveryConfig() Systems.RecoveryProfile
+    ReportKubernetesEvent(event Systems.KubernetesEvent) error
 }
 ```
 
