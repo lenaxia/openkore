@@ -163,12 +163,16 @@ type ConcurrencyError struct {
 
 // Reduced to only concurrency-specific metrics
 type PoolMetrics struct {
-    WorkerUtilization  float64 
-    QueueDepth         int64
-    StealAttempts      int64  
-    StealSuccesses     int64
-    ContextCancels     int64
-    NUMACrossings      int64
+    WorkerUtilization  float64         `json:"workerUtilization"`  // 0-1 ratio
+    QueueDepth         int64           `json:"queueDepth"`         // Current backlog
+    StealAttempts      int64           `json:"stealAttempts"`      // Cross-node tries
+    StealSuccesses     int64           `json:"stealSuccesses"`     // Successful steals
+    ContextCancels     int64           `json:"contextCancels"`     // Canceled tasks
+    NUMACrossings      int64           `json:"numaCrossings"`      // Cross-NUMA ops
+    QoSClass           QOSLevel        `json:"qosClass"`           // From Systems
+    ContainerID        string          `json:"containerId"`        // Systems ID
+    NodeAffinity       []int           `json:"nodeAffinity"`       // Preferred nodes
+    PressureLevel      PressureLevel   `json:"pressureLevel"`      // From Orchestration
 }
 
 // Cluster coordination contract (implemented by Systems domain)
