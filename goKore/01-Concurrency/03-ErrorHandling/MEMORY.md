@@ -15,9 +15,10 @@
 ## Open Issues
 - #88: C++ exception translation incomplete (partial)
 - #92: Context cancellation propagation lag (testing)
+- #95: Systems alert webhook integration (in progress)
 
 ## Validation Checklist
 - [X] Verify C++ exception coverage
-- [X] Test panic recovery paths
+- [X] Test panic recovery paths 
 - [X] Audit error context data
-- [ ] Integrate Systems alert webhooks
+- [ ] Integrate Systems alert webhooks (partial - CRD defined but not tested)
