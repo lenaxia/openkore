@@ -22,8 +22,8 @@
 - [X] Lock hierarchy visualization
 - [X] Internal policy integration
 - [X] Systems domain contract validation
-- [ ] NUMA cross-node validation
-- [ ] Channel stall recovery workflows
+- [X] NUMA cross-node validation
+- [X] Channel stall recovery workflows
 - [ ] Lock-free benchmarks
 - [ ] Cache optimization tests
 

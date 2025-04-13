@@ -144,14 +144,15 @@ type QoSEnforcer interface {
     GetViolationHistory() []QoSViolation
 }
 
-// Example Systems-integrated implementation
+// Systems-integrated implementation with full policy enforcement
 type SystemsQoS struct {
-    provider Systems.PolicyProvider
+    provider Systems.Provider
 }
 
 func (s *SystemsQoS) ApplyThreadPolicy(pool PolicyTarget) error {
     limits := s.provider.GetResourceLimits()
     numa := s.provider.GetNUMAPolicy()
+    lockPolicy := s.provider.GetLockPolicy()
     
     violations := make([]QoSViolation, 0)
     
@@ -238,7 +239,22 @@ type LegacyMetricsAdapter interface {
 // Implemented by Systems Orchestration
 type SystemsProvider interface {
     GetQoSPolicy() Systems.QoSPolicy
-    GetNUMAPolicy() Systems.NUMAPolicy
+    GetNUMAPolicy() Systems.NUMAPolicy 
+    GetLockPolicy() Systems.LockPolicy
+    GetContainerContext() Systems.ContainerContext
     ReportAnomaly(metric string, value float64)
+    GetClusterCoordinator() Systems.ClusterCoordinator
+    GetDeadlockStrategy() Systems.DeadlockResolution
+    GetPressureHandler() Systems.PressureHandler
+}
+
+// Matches Systems Orchestration INTERFACES.md
+type ResourceLimit struct {
+    CPUMillicores int
+    MemoryMB      int
+    MaxLocks      int       
+    MaxGoroutines int       
+    QoSLevel      Systems.QOSLevel  
+    NUMAffinity   Systems.NUMAPolicy
 }
 ```
