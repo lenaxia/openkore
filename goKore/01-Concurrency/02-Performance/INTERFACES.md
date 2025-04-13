@@ -38,11 +38,13 @@ type ChannelValidator interface {
 // Hardware optimizations
 type NUMACoordinator interface {
     GetAffinity() Systems.NUMAPolicy
-    Pin(pool ConcurrencyCore.Pool, node int) error  // Stronger typing
-    ReportCrossNode(accessType string, count int)  // Added metrics
+    Pin(pool ConcurrencyCore.Pool, node int) error
+    ReportCrossNode(accessType string, count int)
     GetTopology() Systems.ClusterTopology
-    RegisterPressureHandler(handler Systems.PressureHandler)  // Systems integration
-    GetWorkStealers() []ConcurrencyCore.WorkStealer  // Direct access
+    RegisterPressureHandler(handler Systems.PressureHandler)
+    ValidatePlacement() Systems.NUMAValidation
+    GetStealMetrics() Systems.StealMetrics
+    WithRetryPolicy(policy Systems.RetryConfig) NUMACoordinator
 }
 
 // Cluster optimizations
