@@ -51,7 +51,8 @@
 - [X] Core atomic/lock/channel checks
 - [X] Systems policy integration
 - [ ] Container scaling tests
-- [ ] NUMA cross-node validation (awaiting Systems domain finalization) 
+- [ ] NUMA cross-node validation 
+- [ ] Channel stall recovery workflows
 - [ ] QoS end-to-end tests
 - [ ] Recovery action edge cases
 
