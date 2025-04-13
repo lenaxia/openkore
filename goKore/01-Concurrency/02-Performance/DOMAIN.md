@@ -54,11 +54,11 @@ graph TD
 ## 2. Architectural Alignment
 ```mermaid
 graph TD
-    A[Performance] --> B[Functional]
-    A --> C[Optimization]
+    A[Performance] --> B[Functional Validation]
+    A --> C[Systems Integration]
     
-    B --> D[ConcurrencyCore]
-    C --> E[Systems Orchestration]
+    B --> D{ConcurrencyCore}
+    C --> E{Systems Orchestration}
     
     D --> F[Atomic Validation]
     D --> G[Lock Hierarchy]
@@ -67,7 +67,13 @@ graph TD
     E --> I[QoS Policies]
     E --> J[NUMA Allocation]
     E --> K[Container Scaling]
-    E --> L[Kubernetes CRDs]
+    
+    E -->|Implements| F
+    E -->|Enforces| G
+    E -->|Monitors| H
+    
+    style E stroke:#44cc44,stroke-width:2px
+    style D stroke:#0044ff,stroke-width:2px
     
     F --> M[Core Contracts]
     G --> M
@@ -108,7 +114,7 @@ graph TD
     I --> K
 ```
 
-## 3. Interface Contracts (Simplified)
+## 3. Interface Contracts
 
 ### Mandatory Functional Interfaces
 ```go
@@ -123,11 +129,15 @@ type LockAuditor interface {
     TrackAcquisition(lockID uintptr, stack []byte)
     VerifyHierarchy() error // From ConcurrencyCore.SUPPLEMENT-lockhierarchy
     DetectPotentialDeadlocks() []ConcurrencyCore.DeadlockPath
+    // Systems domain integration
+    ApplyLockPolicy(policy Systems.LockPolicy) error
 }
 
 type ChannelValidator interface {
-    VerifyClosure(ch chan interface{}) error
-    DetectStalls(bufferThreshold int) []ChannelStall
+    VerifyClosure(ch chan interface{}) error 
+    DetectStalls(bufferThreshold int) []Systems.StallEvent
+    // Systems domain integration
+    ApplyQoSPolicy(policy Systems.QoSPolicy) error
 }
 
 ### Optional Performance Optimizations  
