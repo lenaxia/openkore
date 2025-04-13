@@ -35,6 +35,9 @@
 - [ ] Atomic validation edge cases
 - [ ] Stress test framework
 - [ ] Channel stall edge case handling
+- [ ] Remove duplicate SystemsProvider interface definitions
+- [ ] Verify NUMACoordinator method signature alignment
+- [ ] Finalize ContainerOptimizer migration to Systems domain
 
 ## Critical Path Monitoring
 | Metric                  | Tracking System     |
@@ -46,6 +49,8 @@
 | NUMA Error Rates        | Node Exporter + Custom Metrics |
 | Channel Recovery        | Custom Metrics Pipeline |
 | NUMA Cross-Node         | Node Exporter Metrics |
+| Interface Consistency   | Custom Linter Rules |
+| Cross-Domain Contracts  | Integration Tests   |
 
 ## Validation Checklist
 - [X] Core atomic/lock/channel checks
