@@ -38,37 +38,26 @@ type ChannelValidator interface {
 // Hardware optimizations
 type NUMACoordinator interface {
     GetAffinity() Systems.NUMAPolicy
-    Pin(pool ConcurrencyCore.Pool, node int) error
+    Pin(resource interface{}, node int) error
     ReportCrossNode(accessType string, count int)
     GetTopology() Systems.ClusterTopology
     RegisterPressureHandler(handler Systems.PressureHandler)
-    ValidatePlacement() Systems.NUMAValidation
+    ValidatePlacement(resource interface{}) Systems.NUMAValidation
     GetStealMetrics() Systems.StealMetrics
     WithRetryPolicy(policy Systems.RetryConfig) NUMACoordinator
+    GetContainerAffinity() Systems.NUMAAffinitySpec
 }
 
-// Cluster optimizations
-type ContainerOptimizer interface {
-    CalculateWorkerPool(baseSize int) int
-    AdjustGOGC(currentUtilization float64) int
-    ReportPressureLevel() Systems.PressureLevel
-}
-
-// Systems integration
 type SystemsProvider interface {
     GetQoSPolicy() Systems.QoSPolicy
-    GetNUMAPolicy() Systems.NUMAPolicy
+    GetNUMAPolicy() Systems.NUMAPolicy 
     GetLockPolicy() Systems.LockPolicy
     GetContainerContext() Systems.ContainerContext
     ReportAnomaly(metric string, value float64)
     GetClusterCoordinator() Systems.ClusterCoordinator
-}
-
-type NUMACoordinator interface {
-    GetAffinity() Systems.NUMAPolicy
-    Pin(resource interface{}, node int) error
-    ReportCrossNode(accessType string) int
-    GetTopology() Systems.ClusterTopology
+    GetDeadlockStrategy() Systems.DeadlockResolution
+    GetPressureHandler() Systems.PressureHandler
+    GetMemoryModel() Systems.MemoryModel
 }
 
 type ContainerOptimizer interface {
@@ -118,9 +107,10 @@ type SystemsProvider interface {
 type ResourceAdjustment struct {
     CPUShares     int
     MemoryMB      int
-    MaxLocks      int           // From Systems INTERFACES.md
+    MaxLocks      int
     QoSClass      Systems.QOSLevel
     NUMAffinity   Systems.NUMAPolicy
+    MinNUMANode   int // From Systems domain topology constraints
 }
 
 type ContainerScaler interface {
@@ -141,12 +131,13 @@ type SystemsIntegration interface {
 
 // Expanded error handling with Systems codes
 type ConcurrencyError struct {
-    Code     Systems.ErrorCode
-    Message  string
-    Resource string  
-    Stack    []byte
-    // New NUMA context field
-    NUMANode int
+    Code        Systems.ErrorCode
+    Message     string
+    Resource    string  
+    Stack       []byte
+    NUMANode    int
+    QoSClass    Systems.QOSLevel // From Systems domain
+    ContainerID string          // From Systems domain
 }
 
 // Example compliance implementation
