@@ -40,22 +40,26 @@ type DeadlockDetector interface {
 
 // Expanded error type with Systems integration
 type ConcurrencyErrorStruct struct {
-    Code        Systems.ErrorCode
-    Message     string  
-    Resource    string
-    Stack       []byte
-    NUMANode    int
-    QoSClass    Systems.QOSLevel
-    // Systems domain handles container context
+    Code           Systems.ErrorCode
+    Message        string  
+    Resource       string
+    Stack          []byte
+    NUMANode       int
+    QoSClass       Systems.QOSLevel
     SystemsContext Systems.ErrorContext
+    KubernetesContext *K8sErrorContext // From Systems orchestration
+    RetryPolicy    Systems.RetryConfig
 }
 
 type K8sErrorContext struct {
-    Pod         string
-    Node        string
-    Namespace   string
-    Deployment  string
-    Timestamp   time.Time
+    Pod            string
+    Node           string
+    Namespace      string
+    Deployment     string
+    Timestamp      time.Time
+    QoSClass       Systems.QOSLevel
+    NUMAAffinity   Systems.NUMAPolicy
+    OwnerReference string // From Systems orchestration
 }
 ```
 
@@ -92,7 +96,31 @@ type SystemsProvider interface {
 }
 ```
 
-## 4. Migration Strategy
+## 4. NUMA-Aware Error Handling Example
+
+```go
+// Example of NUMA error resolution using Systems policies
+func handleNUMAError(err NUMAError, handler NUMAErrorHandler) error {
+    policy := handler.GetAffinityMap()
+    
+    if allowedNodes := policy.AllowedNodes; len(allowedNodes) > 0 {
+        // Try allowed nodes first
+        for _, node := range allowedNodes {
+            if handler.ResolveWithPolicy(policy.ForNode(node)) == nil {
+                return nil
+            }
+        }
+    }
+    
+    // Fallback to Systems policy
+    return handler.ResolveWithPolicy(
+        Systems.NUMAPolicy{
+            FallbackStrategy: Systems.NUMAFallbackSteal,
+            StealThreshold:   75,
+        })
+}
+
+## 5. Migration Strategy
 
 ### Exception Mapping
 | C++ Exception        | Go Error               | Recovery Pattern |

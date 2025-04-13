@@ -49,8 +49,11 @@ func (e NUMAError) Error() string {
 
 type NUMAErrorHandler interface {
     Handle(err error) (retry bool, node int)
+    ResolveWithPolicy(policy Systems.NUMAPolicy) error
     RegisterFallback(handler func(NUMAError) bool)
     Metrics() NUMAErrorMetrics
+    GetAffinityMap() Systems.NUMATopology
+    WithSystemsProvider(provider Systems.Provider) NUMAErrorHandler
 }
 ```
 
