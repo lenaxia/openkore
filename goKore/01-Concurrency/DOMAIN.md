@@ -102,10 +102,23 @@ type DeadlockDetector interface {
 
 ## 3. Migration Notes
 1. **Lock Hierarchy** (NEW):
-   - Strict acquisition order enforced via SUPPLEMENT-lockhierarchy.md
+   - Strict acquisition order enforced via [SUPPLEMENT-lockhierarchy.md](./SUPPLEMENT-lockhierarchy.md)
    - Runtime verification integrated with container metadata
    - Visualizer generates mermaid/graphviz/prometheus outputs
-   - Deadlock detection waits on AI interface finalization
+   - Kubernetes CRD-backed policy enforcement (see supplement)
+   - Systems domain integration:
+     ```go
+     type LockPolicyCRD struct {
+         QoSClass      Systems.QOSLevel
+         NUMAAffinity  Systems.NUMAPolicy
+         MaxHoldTime   time.Duration
+         RetryPolicy   Systems.RetryConfig
+     }
+     ```
+   - Enforcement mechanisms:
+     - Admission controller hooks
+     - Namespaced policy inheritance
+     - Priority inversion protection
 
 
 3. **Dropped Components**:
