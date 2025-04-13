@@ -41,13 +41,13 @@ type DeadlockDetector interface {
 // Expanded error type with Systems integration
 type ConcurrencyErrorStruct struct {
     Code        Systems.ErrorCode
-    Message     string
+    Message     string  
     Resource    string
     Stack       []byte
-    NUMANode    int                  // From Systems topology
-    QoSClass    Systems.QOSLevel     // From Systems domain
-    ContainerID string               // From Orchestration
-    KubernetesInfo *K8sErrorContext  // Optional Kubernetes data
+    NUMANode    int
+    QoSClass    Systems.QOSLevel
+    // Systems domain handles container context
+    SystemsContext Systems.ErrorContext
 }
 
 type K8sErrorContext struct {
@@ -86,6 +86,7 @@ type SystemsProvider interface {
     GetPressureHandler() Systems.PressureHandler
     GetRecoveryConfig() Systems.RecoveryProfile
     ReportKubernetesEvent(event Systems.KubernetesEvent) error
+    GetContainerDiagnostics() Systems.ContainerContext
 }
 ```
 

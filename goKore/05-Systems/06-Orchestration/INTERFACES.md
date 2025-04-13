@@ -84,10 +84,12 @@ type ContainerOptimizer interface {
 }
 
 type Deadlock struct {
-    Resources    []string
-    Duration     time.Duration
-    GoroutineIDs []int
-    StackTraces  []string
+    Resources        []string
+    Duration         time.Duration 
+    GoroutineIDs     []int
+    StackTraces      []string
+    ContainerContext ContainerContext
+    QoSClass         QOSLevel
 }
 
 type SystemsProvider interface {
