@@ -22,17 +22,15 @@ type LockAuditor interface {
 
 type ChannelValidator interface {
     VerifyClosure(ch chan interface{}) error
-    DetectStalls(bufferThreshold int) []ChannelStall 
+    DetectStalls(bufferThreshold int) []Systems.StallEvent 
     MonitorThroughput(ch chan interface{}) Systems.ChannelMetrics
     ApplyQoSPolicy(policy Systems.QoSPolicy) error
-    // From SUPPLEMENT-channel-safety.md
     CheckBufferRules(ch chan interface{}, policy Systems.ChannelPolicy) error
     HandleStall(ch chan interface{}, action Systems.RecoveryAction) error
-    // From SUPPLEMENT-channel-safety.md
     CreateRecoveryHandler(policy Systems.ChannelPolicy) (Systems.RecoveryAction, error)
     GetChannelMetrics(ch chan interface{}) Systems.ChannelMetrics
-    // Systems domain integration
     WithSystemsProvider(provider Systems.Provider) ChannelValidator
+    RegisterStallListener(listener Systems.StallListener)
 }
 
 ## Optional Optimization Contracts
