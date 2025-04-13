@@ -22,12 +22,40 @@ type ConcurrencyError interface {
     error
     IsRecoverable() bool
     Context() map[string]interface{}
+    // Systems integration
+    WithSystemsProvider(provider Systems.Provider) ConcurrencyError
+    GetNUMAPolicy() Systems.NUMAPolicy
+    KubernetesContext() *K8sErrorContext
 }
 
 type DeadlockDetector interface {
     Monitor(resources []ResourceID) error
     Report() []Deadlock
     AddResolver(resolver DeadlockResolver)
+    // Systems integration
+    ApplyClusterPolicy(policy Systems.DeadlockPolicy)
+    GetKubernetesCRD() Systems.DeadlockCRD
+    WithQoSClass(qos Systems.QOSLevel) DeadlockDetector
+}
+
+// Expanded error type with Systems integration
+type ConcurrencyErrorStruct struct {
+    Code        Systems.ErrorCode
+    Message     string
+    Resource    string
+    Stack       []byte
+    NUMANode    int                  // From Systems topology
+    QoSClass    Systems.QOSLevel     // From Systems domain
+    ContainerID string               // From Orchestration
+    KubernetesInfo *K8sErrorContext  // Optional Kubernetes data
+}
+
+type K8sErrorContext struct {
+    Pod         string
+    Node        string
+    Namespace   string
+    Deployment  string
+    Timestamp   time.Time
 }
 ```
 
