@@ -28,10 +28,10 @@
 - [ ] Cache optimization tests
 
 ## Key Missing Pieces (Domain-Internal)
-- [X] Channel stall recovery implementation
+- [X] Channel stall recovery implementation 
 - [ ] Lock-free pattern benchmarks
 - [ ] Cache-line optimization guide
-- [ ] QoS worker mapping tables
+- [X] QoS worker mapping tables
 - [ ] Atomic validation edge cases
 - [ ] Stress test framework
 - [ ] Channel stall edge case handling
