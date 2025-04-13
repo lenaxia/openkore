@@ -35,8 +35,6 @@
 - [ ] Atomic validation edge cases
 - [ ] Stress test framework
 - [ ] Channel stall edge case handling
-- [ ] Remove duplicate SystemsProvider interface definitions
-- [ ] Verify NUMACoordinator method signature alignment
 - [ ] Finalize ContainerOptimizer migration to Systems domain
 
 ## Critical Path Monitoring
