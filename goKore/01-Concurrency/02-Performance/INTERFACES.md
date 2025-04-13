@@ -68,22 +68,11 @@ type ContainerOptimizer interface {
 }
 
 // Integrated Systems Contracts
-type SystemsProvider interface {
-    GetQoSPolicy() Systems.QoSPolicy
-    GetNUMAPolicy() Systems.NUMAPolicy 
-    GetLockPolicy() Systems.LockPolicy
-    GetContainerContext() Systems.ContainerContext
-    ReportAnomaly(metric string, value float64)
-    GetClusterCoordinator() Systems.ClusterCoordinator
-}
+// Systems domain contract referenced (defined in 05-Systems/06-Orchestration/INTERFACES.md)
+type SystemsProvider = Systems.SystemsProvider
 
-type NUMACoordinator interface {
-    GetAffinity() Systems.NUMAPolicy
-    Pin(pool Pool, node int) error
-    ReportCrossNode(accessType string, count int)
-    GetTopology() Systems.ClusterTopology
-    RegisterPressureHandler(handler Systems.PressureHandler)
-}
+// Systems domain contract referenced (defined in 05-Systems/06-Orchestration/INTERFACES.md)
+type NUMACoordinator = Systems.NUMACoordinator
 
 type ConcurrencyInstrumenter interface {
     InstrumentMutex(mu sync.Locker) sync.Locker
