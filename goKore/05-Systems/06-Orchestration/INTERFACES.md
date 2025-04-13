@@ -88,7 +88,7 @@ type Deadlock struct {
     Duration         time.Duration 
     GoroutineIDs     []int
     StackTraces      []string
-    ContainerContext ContainerContext
+    SystemsContext   Systems.ErrorContext  // Replaces direct container ref
     QoSClass         QOSLevel
 }
 
