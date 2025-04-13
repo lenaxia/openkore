@@ -87,6 +87,8 @@ type SystemsProvider interface {
     GetRecoveryConfig() Systems.RecoveryProfile
     ReportKubernetesEvent(event Systems.KubernetesEvent) error
     GetContainerDiagnostics() Systems.ContainerContext
+    GetNUMAPolicy() Systems.NUMAPolicy
+    GetQoSPolicy() Systems.QoSPolicy
 }
 ```
 
