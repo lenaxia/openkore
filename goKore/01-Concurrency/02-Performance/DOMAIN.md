@@ -134,9 +134,63 @@ type ChannelValidator interface {
 ```go
 // Systems-integrated enhancements
 type QoSEnforcer interface {
-    ApplyPolicy(policy Systems.QoSPolicy) error
-    CurrentClass() Systems.QOSLevel
-    Throttle(pool ConcurrencyCore.PoolMetrics) error
+    ApplyNUMAPolicy(policy Systems.NUMAPolicy) error
+    CheckResourceLimits(res Systems.ContainerResources) []QoSViolation
+    ValidatePoolCompliance(pool PolicyTarget) []QoSViolation
+    GetNUMAAffinity() Systems.NUMAPolicy
+    WithSystemsProvider(provider Systems.Provider) QoSEnforcer
+    CurrentQoSClass() Systems.QOSLevel
+    ApplyBurstCredit(credits int) error
+    GetViolationHistory() []QoSViolation
+}
+
+// Example Systems-integrated implementation
+type SystemsQoS struct {
+    provider Systems.PolicyProvider
+}
+
+func (s *SystemsQoS) ApplyThreadPolicy(pool PolicyTarget) error {
+    limits := s.provider.GetResourceLimits()
+    numa := s.provider.GetNUMAPolicy()
+    
+    violations := make([]QoSViolation, 0)
+    
+    // Apply NUMA affinity
+    if err := pool.SetNUMAffinity(numa); err != nil {
+        violations = append(violations, QoSViolation{
+            Type:       "NUMA",
+            Message:    err.Error(),
+            Severity:   Systems.SeverityCritical,
+            ResourceID: pool.GetID(),
+        })
+    }
+    
+    // Validate worker counts
+    if pool.CurrentStats().Workers > limits.MaxWorkers {
+        violations = append(violations, QoSViolation{
+            Type:       "Workers",
+            Message:    fmt.Sprintf("%d workers exceeds limit %d", 
+                        pool.CurrentStats().Workers, limits.MaxWorkers),
+            Severity:   Systems.SeverityHigh,
+            ResourceID: pool.GetID(),
+        })
+    }
+    
+    // Validate queue depth
+    if pool.CurrentStats().QueueDepth > limits.MaxQueueDepth {
+        violations = append(violations, QoSViolation{
+            Type:       "QueueDepth",
+            Message:    fmt.Sprintf("%d queue depth exceeds limit %d",
+                        pool.CurrentStats().QueueDepth, limits.MaxQueueDepth),
+            Severity:   Systems.SeverityMedium,
+            ResourceID: pool.GetID(),
+        })
+    }
+    
+    if len(violations) > 0 {
+        return NewQoSError("policy violations detected", violations)
+    }
+    return nil
 }
 
 type NUMACoordinator interface {
