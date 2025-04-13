@@ -60,12 +60,6 @@ type SystemsProvider interface {
     GetMemoryModel() Systems.MemoryModel
 }
 
-type ContainerOptimizer interface {
-    CalculateWorkerPool(baseSize int) int
-    AdjustGOGC(currentUtilization float64) int
-    ReportPressureLevel() Systems.PressureLevel
-    GetContainerProfile() Systems.ContainerProfile
-}
 
 // Integrated Systems Contracts
 // Systems domain contract referenced (defined in 05-Systems/06-Orchestration/INTERFACES.md)
@@ -112,10 +106,10 @@ type ContainerScaler interface {
 type SystemsIntegration interface {
     ReportQoSViolation(violation Systems.QoSViolation)
     RequestNUMAMigration(resource uintptr, targetNode int)
-    GetContainerProfile() Systems.ContainerProfile
     // Added from Systems Orchestration INTERFACES.md
     GetDeadlockStrategy() Systems.DeadlockResolution
     GetPressureHandler() Systems.PressureHandler
+    GetContainerOptimizer() Systems.ContainerOptimizer
 }
 
 // Expanded error handling with Systems codes

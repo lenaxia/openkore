@@ -69,9 +69,18 @@ type ContainerContext struct {
     ID            string
     QoSClass      QOSLevel
     NUMANode      int
-    MaxLocks      int
+    MaxLocks      int 
     CPUShares     int
     MemoryMB      int
+}
+
+type ContainerOptimizer interface {
+    CalculateWorkerPool(baseSize int) int
+    AdjustGOGC(currentUtilization float64) int
+    ReportPressureLevel() Systems.PressureLevel
+    GetContainerProfile() Systems.ContainerProfile
+    WithQoSClass(QOSLevel) ContainerOptimizer
+    GetNUMAAffinity() Systems.NUMAPolicy
 }
 
 type Deadlock struct {
