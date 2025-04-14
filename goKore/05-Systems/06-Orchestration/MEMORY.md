@@ -11,25 +11,15 @@
 ## Pending Contracts
 | Contract             | Status  | Priority |
 |----------------------|---------|----------|
-| PolicyPropagation    | Testing | High     |
-| StealAuthValidation  | Draft   | Medium   |
+| StealAuthValidation  | Testing | Medium   |
 
 ## Migration Risks
 | Risk Area           | Mitigation Strategy                |
 |---------------------|------------------------------------|
-| Policy Propagation  | Adapter pattern + fallbacks        |
 | Metric Collection   | Dual-write during transition       |
 | Lock Visualization  | Shadow mode comparison             |
 | Atomic Consistency  | Cross-implementation validation    |
 | CRD Validation      | Add integration tests              |
-
-## Migration Risks
-| Risk Area           | Mitigation Strategy                |
-|---------------------|------------------------------------|
-| Policy Propagation  | Adapter pattern + fallbacks        |
-| Metric Collection   | Dual-write during transition       |
-| Lock Visualization  | Shadow mode comparison             |
-| Atomic Consistency  | Cross-implementation validation    |
 
 ## Performance Targets
 | Metric                  | Target          |
