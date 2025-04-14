@@ -36,6 +36,10 @@ type DeadlockDetector interface {
     ApplyClusterPolicy(policy Systems.DeadlockPolicy)
     GetKubernetesCRD() Systems.DeadlockCRD
     WithQoSClass(qos Systems.QOSLevel) DeadlockDetector
+    // Added per Systems Orchestration DOMAIN.md
+    RegisterCRDValidator(validator Systems.CRDValidator)
+    GetNodeAffinity() Systems.NUMAAffinitySpec
+    WithPressureHandler(handler Systems.PressureHandler) DeadlockDetector
 }
 
 // Expanded error type with Systems integration
@@ -111,31 +115,38 @@ type SystemsProvider interface {
 ## 4. NUMA-Aware Error Handling
 
 ```go
-// Example integrating Systems orchestration policies
-func handleNUMAAccessError(err NUMAAccessError, systems SystemsProvider) error {
-    policy := systems.GetNUMAPolicy()
-    metrics := systems.GetStealMetrics()
+// Example integrating Systems orchestration policies with Kubernetes CRD
+func handleDeadlock(d Deadlock, systems SystemsProvider) error {
+    policy := systems.GetDeadlockStrategy()
+    crd := systems.GetKubernetesCRD()
     
-    if slices.Contains(policy.AllowedNodes, err.TargetNode) {
-        if metrics.CurrentSteals < policy.MaxSteals {
-            // Attempt allowed cross-node access
-            return tryNUMAAccess(err.TargetNode)
-        }
-        return fmt.Errorf("steal threshold exceeded: %d/%d", 
-            metrics.CurrentSteals, policy.MaxSteals)
-    }
-    
-    // Fallback to Systems-defined strategy
-    switch policy.FallbackStrategy {
-    case Systems.NUMAFallbackAnyNode:
-        return tryNUMAAccess(-1) // Any node
-    case Systems.NUMAFallbackWait:
-        return waitForLocalResource(err.ResourceType)
-    default:
-        return systems.GetContainerOptimizer().RelocateResource(
-            err.ResourceType, 
+    // Apply CRD-defined resolution strategy
+    switch crd.Spec.ResolutionStrategy {
+    case Systems.EvictPod:
+        return systems.EvictPod(crd.Spec.EvictPolicy)
+    case Systems.RotateNodes:
+        return systems.RotateNodeGroup(d.AffectedNodes, crd.Spec.RotationParams)
+    case Systems.ThrottleWorkers:
+        return systems.AdjustWorkerPool(
+            d.PoolName, 
+            crd.Spec.ThrottlePercentage,
             systems.GetContainerContext().ID)
+    default:
+        return fmt.Errorf("no valid resolution strategy in CRD %s", crd.Name)
     }
+}
+
+// Extended Deadlock type with Systems integration
+type Deadlock struct {
+    Resources        []string
+    Duration         time.Duration 
+    GoroutineIDs     []int
+    StackTraces      []string
+    QoSClass         Systems.QOSLevel
+    ContainerContext Systems.ContainerContext
+    AffectedNodes    []string
+    PoolName         string
+    CRDReference     Systems.DeadlockCRD
 }
 ```
 
