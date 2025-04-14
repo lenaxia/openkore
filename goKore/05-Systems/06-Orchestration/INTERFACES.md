@@ -127,11 +127,14 @@ type MemoryModelProvider interface {
     CheckConsistency()
 }
 
-type NUMACoordinator interface {
-    PreferredNodes() []int
-    Distance(from, to int) int
-    FallbackStrategy() NUMARules
-    RegisterPressureHandler(handler PressureHandler)
+type NUMAPolicyManager interface {
+    GetClusterPolicy() Systems.NUMAClusterPolicy
+    ValidatePlacement(resource interface{}) Systems.NUMAValidation
+    GetStealMetrics() Systems.StealMetrics
+    RegisterPressureHandler(handler Systems.PressureHandler)
+    GetTopology() Systems.NUMATopology
+    CreateErrorHandler() Systems.NUMAErrorHandler
+    GetQoSPolicy() Systems.QoSPolicy
 }
 
 type DeadlockResolver interface {
