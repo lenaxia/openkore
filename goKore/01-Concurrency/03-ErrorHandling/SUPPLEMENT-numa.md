@@ -46,9 +46,8 @@ graph TD
 ```go
 type NUMAErrorHandler interface {
     Handle(err error) (retry bool, adjustedNode int)
-    ApplyClusterPolicy(policy Systems.NUMAClusterPolicy)
-    GetAffinityMap() Systems.NUMATopology
-    WithStealingEnabled(enabled bool) NUMAErrorHandler
     RecordSteal(metric Systems.StealMetric)
+    WithSystemsContext(provider Systems.Provider) NUMAErrorHandler
+    GetErrorMetrics() Systems.NUMAErrorMetrics
 }
 ```

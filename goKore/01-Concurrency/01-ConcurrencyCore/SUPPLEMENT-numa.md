@@ -2,27 +2,12 @@
 
 ## Policy Implementation
 ```go
-// Updated to implement Systems Orchestration INTERFACES.md contracts
-type NUMAPolicy interface {
-    Systems.PolicyProvider  // Embed core systems interface
-    
-    // Node topology
-    PreferredNode() int
-    AllowedNodes() []int
-    Distance(from, to int) int
-    
-    // Resource management
-    StealThreshold() float64 
-    MaxCrossNodeAccess() int
-    RegisterPressureHandler(Systems.PressureHandler)
-    
-    // Metrics integration
-    CrossNodeAccessCount() map[int]int
-    StealAttemptMetrics() Systems.StealMetrics
-    
-    // Systems orchestration
-    GetNUMAPolicy() Systems.NUMAPolicy
-    ValidatePlacement(resource interface{}) Systems.NUMAValidation
+type NUMACoordinator interface {
+    GetAffinityMap() Systems.NUMATopology
+    PinResource(resource interface{}, node int) error
+    GetCrossNodeCounts() map[int]int
+    WithSystemsProvider(provider Systems.Provider) NUMACoordinator
+    GetStealMetrics() Systems.StealMetrics
 }
 ```
 
