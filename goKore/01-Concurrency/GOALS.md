@@ -7,3 +7,5 @@ We are currently in architectural design phase using domain driven design. We ar
 DO NOT CREATE ANY FUNCTIONAL CODE FILES YET. We are only creating design documents (low and high level).
 
 REMEMBER we are documenting information needed to complete a reimplementation in golang, so define things in a way that is conducive to golang best practices
+
+We are currently working on the Concurrency Error Handling domain

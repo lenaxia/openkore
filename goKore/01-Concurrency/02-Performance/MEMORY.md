@@ -28,15 +28,13 @@
 - [ ] Cache optimization tests
 
 ## Key Missing Pieces (Domain-Internal)
-- [X] Channel stall recovery implementation 
-- [ ] Lock-free pattern benchmarks
-- [ ] Cache-line optimization guide
+- [X] Channel stall recovery implementation
 - [X] QoS worker mapping tables
-- [ ] Atomic validation edge cases
-- [ ] Stress test framework
-- [ ] Channel stall edge case handling
-- [X] Finalize ContainerOptimizer migration to Systems domain
-  # No changes needed - completed in b34d94e
+- [ ] Lock-free pattern benchmarks (Deferred to Systems optimization phase)
+- [ ] Cache-line optimization guide (Deferred to Systems optimization phase)
+- [ ] Atomic validation edge cases (Owned by ConcurrencyCore)
+- [ ] Stress test framework (Owned by Systems test infrastructure)
+- [ ] Channel stall edge case handling (Owned by Network domain)
 
 ## Critical Path Monitoring
 | Metric                  | Tracking System     |
