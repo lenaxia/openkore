@@ -61,7 +61,21 @@ type Resources struct {
    - Custom Resource Definitions for lock policies
    - Admission controllers for resource validation
    - Operator pattern for deadlock resolution
-   
+   - NUMA-aware concurrency policies (see [SUPPLEMENT-numa.md](../../01-Concurrency/01-ConcurrencyCore/SUPPLEMENT-numa.md))
+   - Example CRD:
+     ```yaml
+     apiVersion: orchestration.gokore.io/v1beta1
+     kind: ConcurrencyPolicy
+     spec:
+       numa:
+         allowedCrossAccess: 15%
+         stealThreshold: 5
+       qosClassMapping:
+         - priority: 0
+           name: critical
+           numaExclusive: true
+     ```
+
    Example Concurrency Integration:
    ```go
    // Systems domain implementation
