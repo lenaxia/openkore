@@ -58,8 +58,12 @@ spec:
 ```
 
 ## Migration Checklist
+## Migration Checklist
 - [X] Node awareness in lock hierarchy
 - [X] Work stealing between NUMA nodes
-- [ ] Cross-node atomic penalty metrics
 - [X] Container affinity integration
+- [X] Systems domain policy integration
+- [ ] Cross-node atomic penalty metrics
 - [ ] Kubernetes policy validation tests
+- [ ] Steal threshold resource validation
+- [ ] Pressure handler integration tests
