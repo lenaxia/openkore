@@ -11,8 +11,17 @@
 ## Pending Contracts
 | Contract             | Status  | Priority |
 |----------------------|---------|----------|
-| NUMAValidation       | Draft   | Medium   |
 | KubernetesCRDVal     | Draft   | High     |
+| NUMAStealValidation  | Draft   | Medium   |
+
+## Migration Risks
+| Risk Area           | Mitigation Strategy                |
+|---------------------|------------------------------------|
+| Policy Propagation  | Adapter pattern + fallbacks        |
+| Metric Collection   | Dual-write during transition       |
+| Lock Visualization  | Shadow mode comparison             |
+| Atomic Consistency  | Cross-implementation validation    |
+| CRD Validation      | Add integration tests              |
 
 ## Migration Risks
 | Risk Area           | Mitigation Strategy                |
