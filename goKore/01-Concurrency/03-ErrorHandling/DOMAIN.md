@@ -86,39 +86,63 @@ type CircuitBreaker interface {
 
 // Matches Systems Orchestration INTERFACES.md
 type SystemsProvider interface {
+    // Policy interfaces
     GetDeadlockStrategy() Systems.DeadlockResolution
-    GetPressureHandler() Systems.PressureHandler
-    GetRecoveryConfig() Systems.RecoveryProfile
-    ReportKubernetesEvent(event Systems.KubernetesEvent) error
-    GetContainerDiagnostics() Systems.ContainerContext
     GetNUMAPolicy() Systems.NUMAPolicy
     GetQoSPolicy() Systems.QoSPolicy
+    GetRecoveryProfile() Systems.RecoveryProfile
+    
+    // Resource awareness
+    GetContainerContext() Systems.ContainerContext
+    GetStealMetrics() Systems.StealMetrics
+    GetTopologyHints() Systems.TopologyHints
+    
+    // Cluster operations
+    ReportKubernetesEvent(event Systems.KubernetesEvent) error
+    GetContainerOptimizer() Systems.ContainerOptimizer
+    GetPressureHandler() Systems.PressureHandler
+    
+    // Monitoring integration
+    ReportNUMAAccess(metric Systems.NUMAMetric)
+    RecordPolicyViolation(violation Systems.PolicyViolation)
 }
 ```
 
-## 4. NUMA-Aware Error Handling Example
+## 4. NUMA-Aware Error Handling
 
 ```go
-// Example of NUMA error resolution using Systems policies
-func handleNUMAError(err NUMAError, handler NUMAErrorHandler) error {
-    policy := handler.GetAffinityMap()
+// Example integrating Systems orchestration policies
+func handleNUMAAccessError(err NUMAAccessError, systems SystemsProvider) error {
+    policy := systems.GetNUMAPolicy()
+    metrics := systems.GetStealMetrics()
     
-    if allowedNodes := policy.AllowedNodes; len(allowedNodes) > 0 {
-        // Try allowed nodes first
-        for _, node := range allowedNodes {
-            if handler.ResolveWithPolicy(policy.ForNode(node)) == nil {
-                return nil
-            }
+    if slices.Contains(policy.AllowedNodes, err.TargetNode) {
+        if metrics.CurrentSteals < policy.MaxSteals {
+            // Attempt allowed cross-node access
+            return tryNUMAAccess(err.TargetNode)
         }
+        return fmt.Errorf("steal threshold exceeded: %d/%d", 
+            metrics.CurrentSteals, policy.MaxSteals)
     }
     
-    // Fallback to Systems policy
-    return handler.ResolveWithPolicy(
-        Systems.NUMAPolicy{
-            FallbackStrategy: Systems.NUMAFallbackSteal,
-            StealThreshold:   75,
-        })
+    // Fallback to Systems-defined strategy
+    switch policy.FallbackStrategy {
+    case Systems.NUMAFallbackAnyNode:
+        return tryNUMAAccess(-1) // Any node
+    case Systems.NUMAFallbackWait:
+        return waitForLocalResource(err.ResourceType)
+    default:
+        return systems.GetContainerOptimizer().RelocateResource(
+            err.ResourceType, 
+            systems.GetContainerContext().ID)
+    }
 }
+```
+
+## 5. Supplemental References
+1. **SUPPLEMENT-errorhandling.md** - Core panic/deadlock handling
+2. **SUPPLEMENT-numa.md** - NUMA-specific error types and resolution
+3. **SUPPLEMENT-context-propagation.md** - Cross-domain context rules
 
 ## 5. Migration Strategy
 
