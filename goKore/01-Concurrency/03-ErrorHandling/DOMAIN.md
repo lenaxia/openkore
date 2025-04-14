@@ -147,11 +147,11 @@ func handleNUMAAccessError(err NUMAAccessError, systems SystemsProvider) error {
 ## 5. Migration Strategy
 
 ### Exception Mapping
-| C++ Exception        | Go Error               | Recovery Pattern |
-|----------------------|------------------------|------------------|
-| ThreadException      | ErrThreadStart         | Retry 3x         |
-| MutexTimeout         | ErrLockTimeout         | Backoff          |  
-| DeadlockDetected     | ErrDeadlock            | Full restart     |
+| C++ Exception        | Go Error               | Recovery Pattern | Systems Integration | Kubernetes CRD Reference |
+|----------------------|------------------------|------------------|----------------------|--------------------------|
+| ThreadException      | ErrThreadStart         | Retry with Systems-provided config | SystemsProvider.GetThreadPolicy() | `ConcurrencyPolicy.spec.threads` |
+| MutexTimeout         | ErrLockTimeout         | QoS-aware backoff with NUMA hint | SystemsProvider.GetLockPolicy().RetryPolicy | `LockPolicy.spec.retryConfig` |
+| DeadlockDetected     | ErrDeadlock            | CRD-driven resolution | SystemsProvider.GetDeadlockResolver() | `DeadlockResolution.fallbackStrategy` |
 
 ### Critical Code Paths
 1. Network packet processing
