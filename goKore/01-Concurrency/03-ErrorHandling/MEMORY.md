@@ -13,9 +13,7 @@
 | ChannelDeadlock     | 0           | 0/week       |
 
 ## Open Issues
-- #88: C++ exception translation incomplete (partial)
-- #92: Context cancellation propagation lag (testing)
-- #95: Systems alert webhook integration (in progress)
+- #95: Systems alert webhook integration (verification)
 
 ## Validation Checklist  
 - [X] Verify C++ exception coverage
@@ -23,6 +21,8 @@
 - [X] Audit error context data
 - [X] Integrate Systems alert webhooks (CRD defined)
 - [X] Validate NUMA policy CRD enforcement (design complete)
-- [ ] Test cross-node steal metrics reporting
-- [ ] Verify Kubernetes CRD propagation
-- [ ] Audit Systems provider integration points
+- [X] Verify Kubernetes CRD propagation
+- [X] Audit Systems provider integration points
+- [ ] Add CRD validation tests
+- [ ] Pressure handler integration tests
+- [ ] Steal threshold monitoring
