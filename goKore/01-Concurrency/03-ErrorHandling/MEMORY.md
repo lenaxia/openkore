@@ -17,8 +17,10 @@
 - #92: Context cancellation propagation lag (testing)
 - #95: Systems alert webhook integration (in progress)
 
-## Validation Checklist
+## Validation Checklist  
 - [X] Verify C++ exception coverage
-- [X] Test panic recovery paths 
+- [X] Test panic recovery paths
 - [X] Audit error context data
-- [ ] Integrate Systems alert webhooks (partial - CRD defined but not tested)
+- [ ] Integrate Systems alert webhooks (CRD defined, needs test deployment)
+- [ ] Validate NUMA policy CRD enforcement
+- [ ] Test cross-node steal metrics reporting

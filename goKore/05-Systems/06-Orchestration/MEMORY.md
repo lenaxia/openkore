@@ -11,8 +11,8 @@
 ## Pending Contracts
 | Contract             | Status  | Priority |
 |----------------------|---------|----------|
-| KubernetesCRDVal     | Draft   | High     |
-| NUMAStealValidation  | Draft   | Medium   |
+| PolicyPropagation    | Testing | High     |
+| StealAuthValidation  | Draft   | Medium   |
 
 ## Migration Risks
 | Risk Area           | Mitigation Strategy                |
