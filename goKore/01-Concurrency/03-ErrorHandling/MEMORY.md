@@ -21,6 +21,8 @@
 - [X] Verify C++ exception coverage
 - [X] Test panic recovery paths
 - [X] Audit error context data
-- [ ] Integrate Systems alert webhooks (CRD defined, needs test deployment)
-- [ ] Validate NUMA policy CRD enforcement
+- [X] Integrate Systems alert webhooks (CRD defined)
+- [X] Validate NUMA policy CRD enforcement (design complete)
 - [ ] Test cross-node steal metrics reporting
+- [ ] Verify Kubernetes CRD propagation
+- [ ] Audit Systems provider integration points
