@@ -30,9 +30,11 @@ graph TD
      - Burstable: Max 100ms hold times, preferred NUMA
      - BestEffort: 50ms max holds, no affinity
    - Lock placement considers:
-     - NUMA node topology (from Systems domain)
+     - NUMA node topology (from Systems domain INTERFACES.md)
      - Pod resource limits (CPU/memory)
-     - Node pressure conditions
+     - Node pressure conditions (see SystemsOrchestration DOMAIN.md)
+     - Current steal attempt counters
+     - Priority inheritance chains
    - Systems domain integration via TopologyHints:
    ```go
    type TopologyHints struct {

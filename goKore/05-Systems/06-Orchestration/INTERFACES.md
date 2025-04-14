@@ -35,10 +35,11 @@ type ConcurrencyMetrics interface {
 type LockPolicy struct {
     MaxHoldTime      time.Duration     `json:"maxHoldTime,omitempty"`
     DefaultTimeout   time.Duration     `json:"defaultTimeout,omitempty"`
-    RetryPolicy      RetryPolicySpec   `json:"retryPolicy" validate:"required"`
-    NUMAffinity      NUMAAffinitySpec  `json:"numaAffinity"`
+    RetryPolicy      RetryConfig       `json:"retryPolicy" validate:"required"`
+    NUMAAffinity     Systems.NUMAPolicy `json:"numaAffinity"` // From Systems domain
     QoSClass         QOSLevel          `json:"qosClass"`
-    ContainerID      string            `json:"containerID"`
+    ContainerContext Systems.ContainerContext `json:"containerContext"`
+    PriorityInheritance bool           `json:"priorityInheritance"`
     
     // Matches Systems Orchestration's LockPolicyCRD
     HierarchyRules   []HierarchyRule   `json:"hierarchyRules"`
