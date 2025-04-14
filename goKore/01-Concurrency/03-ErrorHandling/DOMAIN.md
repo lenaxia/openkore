@@ -117,20 +117,25 @@ type SystemsProvider interface {
 ```go
 // Example integrating Systems orchestration policies with Kubernetes CRD
 func handleDeadlock(d Deadlock, systems SystemsProvider) error {
-    policy := systems.GetDeadlockStrategy()
+    // Get resolution strategy from CRD spec
+    strategy := systems.GetDeadlockStrategy()
     crd := systems.GetKubernetesCRD()
     
-    // Apply CRD-defined resolution strategy
-    switch crd.Spec.ResolutionStrategy {
+    // Apply CRD-defined resolution strategy with Systems context
+    switch crd.Spec.Resolution.Strategy {
     case Systems.EvictPod:
-        return systems.EvictPod(crd.Spec.EvictPolicy)
+        return systems.EvictPod(crd.Spec.Resolution.EvictPolicy, d.KubernetesContext)
     case Systems.RotateNodes:
-        return systems.RotateNodeGroup(d.AffectedNodes, crd.Spec.RotationParams)
+        return systems.RotateNodeGroup(
+            d.AffectedNodes, 
+            crd.Spec.Resolution.RotationParams,
+            systems.GetNUMAPolicy())
     case Systems.ThrottleWorkers:
         return systems.AdjustWorkerPool(
-            d.PoolName, 
-            crd.Spec.ThrottlePercentage,
-            systems.GetContainerContext().ID)
+            d.PoolName,
+            crd.Spec.Resolution.ThrottlePercentage,
+            systems.GetContainerContext(),
+            d.SystemsContext)
     default:
         return fmt.Errorf("no valid resolution strategy in CRD %s", crd.Name)
     }
@@ -143,7 +148,8 @@ type Deadlock struct {
     GoroutineIDs     []int
     StackTraces      []string
     QoSClass         Systems.QOSLevel
-    ContainerContext Systems.ContainerContext
+    SystemsContext   Systems.ErrorContext
+    KubernetesContext *Systems.K8sErrorContext
     AffectedNodes    []string
     PoolName         string
     CRDReference     Systems.DeadlockCRD

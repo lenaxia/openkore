@@ -58,8 +58,12 @@ type NUMAErrorHandler interface {
 ```
 
 ## Migration Checklist
-- [X] Context propagation in core primitives
+- [X] Context propagation in core primitives  
 - [X] Panic recovery middleware
 - [X] Deadlock resolution strategies
 - [X] NUMA error types
-- [ ] Integration with Systems domain alerts
+- [X] Integration with Systems domain alerts
+- [X] Kubernetes CRD policy enforcement
+- [ ] CRD validation tests
+- [ ] Pressure handler integration tests
+- [ ] Steal threshold monitoring
