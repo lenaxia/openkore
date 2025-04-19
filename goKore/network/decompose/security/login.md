@@ -1,0 +1,60 @@
+**Disconnection Handlers:**
+- errors (lines 6060-6138)
+  - Handles various disconnection/ban scenarios:
+    - Server shutdown (type 0)
+    - Server closed (type 1)
+    - Dual login (type 2)
+    - Timeout/lag (type 3)
+    - Server full (type 4)
+    - Underaged (type 5)
+    - GM forced DC (type 15)
+    - And 20+ other error types
+  - Features:
+    - Configurable auto-disconnect
+    - Reconnect timing control
+    - Detailed error messages
+    - 'disconnected' hook trigger
+
+**Login Error Handler:**
+- login_error (lines 5356-5452)
+  - Handles various login failure scenarios:
+    - REFUSE_INVALID_ID/REFUSE_INVALID_ID2 (5359-5372)
+      - Invalid username handling
+      - Option to re-enter username
+    - REFUSE_INVALID_PASSWD/REFUSE_INVALID_PASSWD2 (5373-5386)
+      - Invalid password handling  
+      - Triggers 'invalid_password' hook
+      - Option to re-enter password
+    - REFUSE_BAN_BY_GM/REFUSE_NOT_CONFIRMED (5389-5391)
+      - Account blocked messages
+    - REFUSE_INVALID_VERSION (5392-5398)
+      - Version mismatch handling
+      - Shows version/serverType details
+    - REFUSE_BLOCK_TEMPORARY (5399-5400)
+      - Temporary block with expiry date
+    - REFUSE_USER_PHONE_BLOCK (5401-5404)
+      - Phone lock requirement
+      - Triggers 'dial' hook
+    - REFUSE_EMAIL_NOT_CONFIRMED (5407-5409)
+      - Unconfirmed email handling
+    - REFUSE_BLOCKED_ID (5410-5412)
+      - User-specific blocking
+    - REFUSE_BLOCKED_COUNTRY (5413-5415)
+      - Country blocking
+    - REFUSE_BILLING (5416-5418)
+      - Billing issues
+    - REFUSE_CHANGE_PASSWD_FORCE2 (5419-5433)
+      - Forced password change
+    - REFUSE_ACCOUNT_NOT_PREMIUM (5434-5437)
+      - Non-premium account on premium server
+    - REFUSE_NOT_ALLOWED_IP_ON_TESTING (5438-5441)
+      - IP not allowed during testing
+    - REFUSE_TOKEN_EXPIRED (5442-5443)
+      - Expired token
+    - Default case (5444-5446)
+      - Unknown error handling
+
+  - Additional behaviors:
+    - Writes servers.txt if version search was active (5448-5451)
+    - Calls serverDisconnect() on all errors
+    - May trigger quit() or relog() based on error type
