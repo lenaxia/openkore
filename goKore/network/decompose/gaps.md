@@ -1,59 +1,63 @@
 Gaps (missing coverage):
-[ ] Gap: 1-609 (609 lines)
+[x] Gap: 1-609 (609 lines)
     Before: N/A
     After:  goKore/network/decompose/common/network.md:41:## Packet Parser (parse) - lines 610-626
-[ ] Gap: 627-631 (5 lines)
+    Resolution: Added documentation for constants and utility functions in network.md
+[x] Gap: 627-631 (5 lines)
     Before: goKore/network/decompose/common/network.md:41:## Packet Parser (parse) - lines 610-626
     After:  goKore/network/decompose/security/pin.md:29:### queryLoginPinCode() - lines 632-655
-[ ] Gap: 656-662 (7 lines)
+    Resolution: Structural whitespace between methods - no documentation needed
+[x] Gap: 656-662 (7 lines)
     Before: goKore/network/decompose/security/pin.md:29:### queryLoginPinCode() - lines 632-655
     After:  goKore/network/decompose/security/pin.md:51:### queryAndSaveLoginPinCode() - lines 663-671
-[ ] Gap: 694-699 (6 lines)
+    Resolution: Documentation comments already covered in pin.md - no additional docs needed
+[x] Gap: 694-699 (6 lines)
     Before: goKore/network/decompose/common/network.md:68:## State Management (changeToInGameState) - lines 673-693
     After:  goKore/network/decompose/handlers/characters.md:69:### received_characters_blockSize() - lines 700-708
+    Resolution: Added packet structure documentation to characters.md
 [ ] Gap: 709-710 (2 lines)
     Before: goKore/network/decompose/handlers/characters.md:69:### received_characters_blockSize() - lines 700-708
     After:  goKore/network/decompose/handlers/characters.md:82:### received_characters_unpackString() - lines 711-809
-[ ] Gap: 1022-1047 (26 lines)
+[X] Gap: 1022-1047 (26 lines)
     Before: goKore/network/decompose/handlers/characters.md:158:### received_char_create_status() - lines 1001-1021
     After:  goKore/network/decompose/common/network.md:99:## Server Info Parsing (parse_account_server_info) - lines 1048-1107
-[ ] Gap: 1108-1236 (129 lines)
+[X] Gap: 1108-1236 (129 lines)
     Before: goKore/network/decompose/common/network.md:99:## Server Info Parsing (parse_account_server_info) - lines 1048-1107
     After:  goKore/network/decompose/common/network.md:168:## Map Loading (map_loaded) - lines 1237-1287
-[ ] Gap: 1288-1329 (42 lines)
+[X] Gap: 1288-1329 (42 lines)
     Before: goKore/network/decompose/common/network.md:168:## Map Loading (map_loaded) - lines 1237-1287
     After:  goKore/network/decompose/handlers/characters.md:193:### stat_info_handlers - lines 1330-1500
-[ ] Gap: 1501-1607 (107 lines)
+[X] Gap: 1501-1607 (107 lines)
     Before: goKore/network/decompose/handlers/experience.md:97:## Core Experience Calculations (stat_info_handlers) - lines 1330-1420
     After:  goKore/network/decompose/handlers/characters.md:239:### stat_info() - lines 1608-1668
-[ ] Gap: 1791-1832 (42 lines)
+[X] Gap: 1791-1832 (42 lines)
     Before: goKore/network/decompose/handlers/characters.md:315:### stats_info() - lines 1740-1790
     After:  goKore/network/decompose/handlers/actors.md:105:### actor_display_compatibility() - lines 1833-1839
 [ ] Gap: 1840-1841 (2 lines)
     Before: goKore/network/decompose/handlers/actors.md:105:### actor_display_compatibility() - lines 1833-1839
     After:  goKore/network/decompose/handlers/actors.md:116:### actor_display() - lines 1842-2100
-[ ] Gap: 2101-2400 (300 lines)
+[X] Gap: 2101-2400 (300 lines)
     Before: goKore/network/decompose/handlers/actors.md:116:### actor_display() - lines 1842-2100
     After:  goKore/network/decompose/handlers/actors.md:500:#### Actor Death/Disappearance Handling (lines 2401-2586)
-[ ] Gap: 2701-2711 (11 lines)
+[X] Gap: 2701-2711 (11 lines)
     Before: goKore/network/decompose/handlers/actors.md:553:#### Actor Actions (lines 2588-2700)
     After:  goKore/network/decompose/handlers/actors.md:598:#### Actor Information Updates (lines 2712-2804)
-[ ] Gap: 2805-2818 (14 lines)
+[X] Gap: 2805-2818 (14 lines)
     Before: goKore/network/decompose/handlers/actors.md:598:#### Actor Information Updates (lines 2712-2804)
     After:  goKore/network/decompose/handlers/actors.md:629:#### Level Up Effects (lines 2819-2844)
-[ ] Gap: 2845-2896 (52 lines)
+[X] Gap: 2845-2896 (52 lines)
     Before: goKore/network/decompose/handlers/actors.md:629:#### Level Up Effects (lines 2819-2844)
     After:  goKore/network/decompose/handlers/actors.md:655:#### Homunculus Properties (lines 2897-3000)
-[ ] Gap: 3001-3173 (173 lines)
+[X] Gap: 3001-3173 (173 lines)
     Before: goKore/network/decompose/handlers/actors.md:655:#### Homunculus Properties (lines 2897-3000)
     After:  goKore/network/decompose/handlers/skills.md:106:#### Sage Auto Spell (lines 3174-3206)
-[ ] Gap: 3207-3215 (9 lines)
+[X] Gap: 3207-3215 (9 lines)
     Before: goKore/network/decompose/handlers/skills.md:106:#### Sage Auto Spell (lines 3174-3206)
     After:  goKore/network/decompose/handlers/equipment.md:1:#### Equipment Display (lines 3216-3281)
 [ ] Gap: 3282-3286 (5 lines)
     Before: goKore/network/decompose/handlers/equipment.md:1:#### Equipment Display (lines 3216-3281)
     After:  goKore/network/decompose/handlers/config.md:1:#### Configuration Settings (lines 3287-3300, 3333-3363)
-[ ] Gap: 3301-3373 (73 lines)
+[X] Gap: 3301-3373 (73 lines)
     Before: goKore/network/decompose/handlers/config.md:1:#### Configuration Settings (lines 3287-3300, 3333-3363)
     After:  goKore/network/decompose/handlers/actors.md:95:- show_script (lines 3374-3387)
 [ ] Gap: 3388-3389 (2 lines)
