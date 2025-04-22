@@ -1,0 +1,54 @@
+**Method Implementations:**
+- received_characters_blockSize() - Character data block size handler (lines 695-708)
+  - Determines the block size for character data packets
+  - Can be overridden by server-specific configurations (charBlockSize)
+  - Defaults to 155 bytes (standard for kRO and most official/emulator servers)
+  - Used when parsing character selection/creation packets
+  - Last updated: 2020-11-13
+
+- received_characters_unpackString() - Character data format handler (lines 711-719)
+  - Defines unpack formats for character data packets
+  - Supports different versions:
+    - 175 bytes (PACKETVER >= 20201007): handles uint64 HP/SP fields
+    - 155 bytes (PACKETVER >= 20170830): handles uint64 exp fields
+  - Unpacks key character attributes:
+    - Basic info (charID, name, job, stats)
+    - Appearance (hair style, colors)
+    - Status (HP, SP, exp)
+    - Equipment and position
+
+**Actor Display Handlers:**
+
+- actor_display - Main actor display handler (lines 1833-2397)
+  - Handles all actor types:
+    - Players
+    - Monsters
+    - NPCs
+    - Portals
+    - Pets
+    - Homunculus/Mercenary
+    - Elementals
+  - Processes different actor states:
+    - Exists (standing)
+    - Connected (new)
+    - Moved
+    - Spawned
+  - Manages actor properties:
+    - Position and movement
+    - Visual appearance
+    - Status effects
+    - Equipment
+    - Guild information
+  - Maintains actor lists:
+    - playersList
+    - monstersList
+    - npcsList
+    - portalsList
+    - petsList
+    - slavesList
+    - elementalsList
+  - Handles special cases:
+    - Off-map coordinates
+    - Client sight distance
+    - Guild flags
+    - Visual effects

@@ -1,0 +1,42 @@
+**Method Implementations:**
+- char_delete2_result - Character deletion result handler (lines 3562-3583)
+  - Processes character deletion result packets
+  - Handles successful deletion case:
+    - Sets deletion date for character
+    - Displays time remaining until deletion
+  - Handles various error cases:
+    - Character already planned for deletion (error 0)
+    - Database error (error 3)
+    - Guild membership prevents deletion (error 4)
+    - Party membership prevents deletion (error 5)
+    - Unknown errors (default case)
+  - Returns to character select screen after processing
+  - Uses internationalized strings (T()) for messages
+
+- char_delete2_accept_result - Character deletion acceptance handler (lines 3586-3633)
+  - Processes character deletion acceptance packets
+  - Handles successful deletion:
+    - Removes character data from memory
+    - Cleans up empty character slots
+    - Returns to character select screen
+  - Handles various error cases:
+    - Birthday required (error 0)
+    - System settings prevent deletion (error 2)
+    - Database error (error 3)
+    - Temporary deletion block (error 4)
+    - Birthday mismatch (error 5)
+    - Incorrect email (error 7)
+    - Unknown errors (default case)
+  - Always returns to character select screen
+  - Uses internationalized strings (T()) for messages
+
+- char_delete2_cancel_result - Character deletion cancellation handler (lines 3636-3650)
+  - Processes character deletion cancellation packets
+  - Handles successful cancellation:
+    - Clears deletion date
+    - Shows confirmation message
+  - Handles error cases:
+    - Database error (error 2)
+    - Unknown errors (default case)
+  - Returns to character select screen
+  - Uses internationalized strings (T()) for messages

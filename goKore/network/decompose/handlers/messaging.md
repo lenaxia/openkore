@@ -1,0 +1,21 @@
+**Method Implementations:**
+- local_broadcast - Local broadcast message handler (lines 3137-3148)
+  - Processes ZC_BROADCAST2 packets
+  - Handles formatted messages with color codes
+  - Converts message bytes to string
+  - Formats color as 6-digit hex code
+  - Supports logging via chatLog when configured
+  - Triggers packet_localBroadcast plugin hook
+  - Displays messages in schat channel
+
+- system_chat - System chat message handler (lines 3482-3495)
+  - Processes various system chat message formats
+  - Handles different message prefixes:
+    - "ssss": War of Emperium messages (yellow color)
+    - "micc": Player broadcast messages (with color codes)
+    - "blue": System messages (blue color)
+  - Extracts color codes from micc format messages
+  - Uses internationalized strings (T()) for prefixes
+  - Supports Chinese character detection in names
+  - Handles null-padded message formats
+  - Processes message bytes to string conversion

@@ -1,0 +1,33 @@
+**Method Implementations:**
+- misc_config - Configuration handler (lines 3287-3321)
+  - Manages various player configuration flags:
+    - Equipment visibility (show_eq_flag)
+    - Summoning permissions (call_flag)
+    - Pet autofeeding (pet_autofeed_flag)
+    - Homunculus autofeeding (homunculus_autofeed_flag)
+  - Provides feedback messages for each configuration change
+  - Uses internationalized strings (T())
+  - Notes Ragexe client features where applicable
+  - Handles packet types:
+    - 02D9: Configuration packet
+    - 0A95: Login configuration packet
+    - 0AA8: Extended login configuration packet
+
+- misc_config_reply - Configuration reply handler (lines 3333-3363)
+  - Handles server replies to configuration changes
+  - Uses enumerated types instead of direct flags:
+    - CONFIG_OPEN_EQUIPMENT_WINDOW
+    - CONFIG_CALL
+    - CONFIG_PET_AUTOFEED
+    - CONFIG_HOMUNCULUS_AUTOFEED
+  - Provides similar feedback messages as misc_config
+  - Handles unknown configuration types with error message
+  - Uses internationalized strings (T() and TF())
+  - Notes Ragexe client features where applicable
+
+- show_eq_msg_self - Equipment visibility message handler (lines 3365-3372)
+  - Simplified version of equipment visibility notification
+  - Uses boolean type instead of enumerated values
+  - Provides same messages as misc_config_reply for equipment visibility
+  - Handles packet type:
+    - 08B2: Simple equipment visibility packet

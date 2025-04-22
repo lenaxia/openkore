@@ -1,0 +1,17 @@
+**Method Implementations:**
+- show_eq - Equipment display handler (lines 3216-3281)
+  - Handles multiple packet versions for equipment display:
+    - 02D7: Default packet version
+    - 0906: Unimplemented on eAthena
+    - 0859: Added in 20101124
+    - 0997: Added in 20120925
+    - 0A2D: Added in 20150226
+    - 0B03: Added in 20150226 (alternative)
+  - Parses equipment info with different formats per version
+  - Supports robe equipment (PACKETVER >= 20100629)
+  - Formats and displays equipment info with:
+    - Centered title with character name
+    - List of equipment by slot
+    - Proper item naming and identification
+  - Uses internationalized strings (T())
+  - Outputs to 'list' message channel
