@@ -1,60 +1,136 @@
-**Disconnection Handlers:**
-- errors (lines 6060-6138)
-  - Handles various disconnection/ban scenarios:
-    - Server shutdown (type 0)
-    - Server closed (type 1)
-    - Dual login (type 2)
-    - Timeout/lag (type 3)
-    - Server full (type 4)
-    - Underaged (type 5)
-    - GM forced DC (type 15)
-    - And 20+ other error types
-  - Features:
-    - Configurable auto-disconnect
-    - Reconnect timing control
-    - Detailed error messages
-    - 'disconnected' hook trigger
+**Login Handlers:**
 
-**Login Error Handler:**
-- login_error (lines 5356-5452)
-  - Handles various login failure scenarios:
-    - REFUSE_INVALID_ID/REFUSE_INVALID_ID2 (5359-5372)
-      - Invalid username handling
-      - Option to re-enter username
-    - REFUSE_INVALID_PASSWD/REFUSE_INVALID_PASSWD2 (5373-5386)
-      - Invalid password handling  
-      - Triggers 'invalid_password' hook
-      - Option to re-enter password
-    - REFUSE_BAN_BY_GM/REFUSE_NOT_CONFIRMED (5389-5391)
-      - Account blocked messages
-    - REFUSE_INVALID_VERSION (5392-5398)
-      - Version mismatch handling
-      - Shows version/serverType details
-    - REFUSE_BLOCK_TEMPORARY (5399-5400)
-      - Temporary block with expiry date
-    - REFUSE_USER_PHONE_BLOCK (5401-5404)
-      - Phone lock requirement
-      - Triggers 'dial' hook
-    - REFUSE_EMAIL_NOT_CONFIRMED (5407-5409)
-      - Unconfirmed email handling
-    - REFUSE_BLOCKED_ID (5410-5412)
-      - User-specific blocking
-    - REFUSE_BLOCKED_COUNTRY (5413-5415)
-      - Country blocking
-    - REFUSE_BILLING (5416-5418)
-      - Billing issues
-    - REFUSE_CHANGE_PASSWD_FORCE2 (5419-5433)
-      - Forced password change
-    - REFUSE_ACCOUNT_NOT_PREMIUM (5434-5437)
-      - Non-premium account on premium server
-    - REFUSE_NOT_ALLOWED_IP_ON_TESTING (5438-5441)
-      - IP not allowed during testing
-    - REFUSE_TOKEN_EXPIRED (5442-5443)
-      - Expired token
-    - Default case (5444-5446)
-      - Unknown error handling
+**received_characters_slots_info** - Character slot information handler (lines 811-836)
+- Manages character slot configuration during login
+- Handles different slot types:
+  - Normal slots
+  - Premium slots 
+  - Billing slots
+- Tracks slot counts and validity
+- Updates connection state to CONNECTED_TO_LOGIN_SERVER
+- Stores character server information
+- Calls received_characters if character info is present
+- Parameters:
+  - total_slot: Total available character slots
+  - premium_start_slot: First premium slot index
+  - premium_end_slot: Last premium slot index  
+  - normal_slot: Normal slot count
+  - premium_slot: Premium slot count
+  - billing_slot: Billing slot count
+  - producible_slot: Slots available for character creation
+  - valid_slot: Valid/usable slots
+  - options: Additional connection options
+  - charInfo: Character information if present
 
-  - Additional behaviors:
-    - Writes servers.txt if version search was active (5448-5451)
-    - Calls serverDisconnect() on all errors
-    - May trigger quit() or relog() based on error type
+**received_characters** - Character data handler (lines 841-915)
+- Processes character information packets during login
+- Manages character objects and slots
+- Handles character reuse/creation logic:
+  - Reuses existing character if IDs match
+  - Creates new Actor::You if needed
+- Updates character attributes:
+  - Name, ID, levels, headgear
+  - Last map, gender, delete date
+- Maintains character slot array ($chars)
+- Handles login state transitions
+- Parameters:
+  - charInfo: Packed character data
+  - Uses masterServer->{charBlockSize} for parsing
+- Related methods:
+  - received_characters_blockSize()
+  - received_characters_unpackString()
+- Post-processing:
+  - Sends ban check if needed
+  - Handles PIN code requests
+  - Manages login pause timeouts
+
+**sync_received_characters** - Character synchronization handler (lines 920-930)
+- Handles character page synchronization during login
+- Manages sync count and state in $charSvrSet
+- Tracks number of pages in character selection screen
+- Parameters:
+  - sync_Count: Total pages to sync
+- Behavior:
+  - Resets sync_received_characters counter when new sync_Count received
+  - Sends sync packets to server if client is alive
+  - Only works with DirectConnection network type
+- Related packets:
+  - PACKET_HC_CHARLIST_NOTIFY (0x09A0)
+
+**reconstruct_received_characters** - Character data reconstruction handler (lines 935-940)
+- Reconstructs packed character data for network transmission
+- Uses received_characters_unpackString helper method
+- Parameters:
+  - chars: Array of character data structures
+  - charInfo: Output packed character data
+- Packing format:
+  - Uses masterServer->{charBlockSize} for packing
+  - Processes each character in chars array
+  - Maps character attributes using unpackString keys/types
+- Related methods:
+  - received_characters_unpackString()
+  - reconstruct_received_characters_info()
+
+**reconstruct_received_characters_info** - Character info reconstruction handler (lines 942-947)
+- Reconstructs packed character info for network transmission
+- Similar to reconstruct_received_characters but for info packets
+- Parameters:
+ - chars: Array of character data structures
+ - charInfo: Output packed character info
+- Packing format:
+ - Uses masterServer->{charBlockSize} for packing
+ - Processes each character in chars array
+ - Maps character attributes using unpackString keys/types
+- Related packets:
+ - PACKET_HC_ACCEPT_MAKECHAR_NEO_UNION (0x006E)
+
+**character_creation_successful** - Character creation handler (lines 952-965)
+- Handles successful character creation notification
+- Creates new Actor::You instance for the character
+- Parameters:
+ - charInfo: Packed character data
+- Initialization:
+ - Unpacks character attributes using received_characters_unpackString
+ - Sets character ID to accountID
+ - Initializes headgear (top/bottom)
+ - Tracks initial job/base levels for exp calculation
+- Related methods:
+ - received_characters_unpackString()
+- Related packets:
+ - PACKET_HC_ACCEPT_MAKECHAR_NEO_UNION (0x006E)
+
+**character_creation_failed** - Character creation failure handler (lines 999-1021)
+- Handles failed character creation attempts
+- Processes different failure reasons:
+ - 0x00: Character name already exists
+ - 0xFF: General creation denied
+ - 0x01: Underage restriction
+ - 0x02: Invalid symbols in name
+ - 0x03: Slot eligibility issue
+- Displays appropriate error messages to user
+- Manages state transition:
+ - Returns to character selection screen
+ - Updates network state if needed
+ - Maintains first login map flag
+ - Preserves starting zeny amount
+- Parameters:
+ - flag: Failure reason code
+- Related methods:
+ - charSelectScreen()
+- Related packets:
+ - PACKET_HC_REFUSE_MAKECHAR (0x006F)
+
+**received_characters_info** - Character info timeout handler (lines 1027-1044)
+- Manages character info timeout during login
+- Sets up timeout hooks for character selection screen:
+ - 6 second timeout for server connection
+ - Cleans up timeout hooks when character selected
+- Calls received_characters_slots_info with provided args
+- Tracks character login time
+- Parameters:
+ - args: Character info arguments passed to received_characters_slots_info
+- Related methods:
+ - received_characters_slots_info()
+- Related packets:
+ - PACKET_HC_ACCEPT_ENTER_NEO_UNION (0x006B)
+ - PACKET_HC_ACCEPT2 (0x082D)

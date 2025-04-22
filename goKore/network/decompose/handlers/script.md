@@ -1,0 +1,12 @@
+**Method Implementations:**
+- show_script - NPC script message handler (lines 3375-3387)
+  - Handles script/show messages from NPCs
+  - Processes message content and NPC ID
+  - Uses bytesToString for message conversion
+  - Looks up NPC by ID in npcsList
+  - Outputs debug message with NPC name and message
+  - Calls plugin hook 'show_script' with:
+    - ID: NPC ID
+    - message: Decoded message content
+  - Handles packet type:
+    - 08B3: NPC script/show packet

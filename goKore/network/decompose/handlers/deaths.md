@@ -1,0 +1,16 @@
+**Death and Disappearance Handlers:**
+- actor_died_or_disappeared() - Handles all entity death/disappearance events (lines 2407-2586)
+  - Processes different types of disappearances:
+    - 0 = out of sight
+    - 1 = died  
+    - 2 = logged out
+    - 3 = teleport
+    - 4 = trickdead
+  - Handles special cases for:
+    - Player character death (updates death count, triggers hooks)
+    - Monster deaths/disappearances (handles loot taking)
+    - Player disconnections/teleports
+    - Portal/NPC/Pet/Slave/Elemental disappearances
+    - Unknown entities (logs debug info)
+  - Maintains old actor lists for disappeared entities
+  - Calls appropriate plugin hooks for each entity type

@@ -1,1773 +1,327 @@
-**Clan/Guild System Handlers:**
-
-- guild_break() - Guild dissolution handler (lines 12127-12135)
-  - Handles guild dissolution:
-    * Processes break requests
-    * Validates break conditions
-    * Updates guild status
-
-- guild_skill() - Skill management handler (lines 12117-12125)
-  - Handles guild skills:
-    * Processes skill updates
-    * Validates skill requirements
-    * Updates skill records
-
-- guild_member() - Member management handler (lines 12107-12115)
-  - Handles guild members:
-    * Processes member updates
-    * Validates member status
-    * Updates member records
-
-- guild_position() - Position management handler (lines 12097-12105)
-  - Handles guild positions:
-    * Processes position assignments
-    * Validates position permissions
-    * Updates position records
-
-- guild_ally() - Alliance management handler (lines 12087-12095)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance conditions
-    * Updates alliance status
-
-- guild_war() - War declaration handler (lines 12077-12085)
-  - Handles guild wars:
-    * Processes war declarations
-    * Validates war conditions
-    * Updates war status
-
-- guild_message() - Message broadcasting handler (lines 12067-12075)
-  - Handles guild messages:
-    * Processes message broadcasts
-    * Validates message content
-    * Distributes to members
-
-- guild_notice() - Notice management handler (lines 12057-12065)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates notice content
-    * Updates notice records
-
-- guild_emblem() - Emblem management handler (lines 12047-12055)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates emblem data
-    * Updates emblem records
-
-- guild_storage() - Storage management handler (lines 12037-12045)
-  - Handles guild storage:
-    * Processes storage access
-    * Validates storage permissions
-    * Updates storage contents
-
-- guild_expulsion() - Member expulsion handler (lines 12027-12035)
-  - Handles member expulsions:
-    * Processes expulsion requests
-    * Validates expulsion conditions
-    * Updates guild roster
-
-- guild_break() - Guild dissolution handler (lines 12017-12025)
-  - Handles guild dissolution:
-    * Processes break requests
-    * Validates break conditions
-    * Handles cleanup tasks
-
-- guild_alliance() - Alliance management handler (lines 12007-12015)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance data
-    * Updates alliance records
-
-- guild_position() - Position management handler (lines 11997-12005)
-  - Handles member positions:
-    * Processes position changes
-    * Validates position data
-    * Updates position records
-
-- guild_skill() - Skill management handler (lines 11987-11995)
-  - Handles guild skills:
-    * Processes skill updates
-    * Validates skill data
-    * Updates skill records
-
-- guild_member() - Member management handler (lines 11977-11985)
-  - Handles member information:
-    * Processes member updates
-    * Validates member data
-    * Updates member records
-
-- guild_notice() - Notice management handler (lines 11967-11975)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates notice content
-    * Broadcasts notice changes
-
-- guild_emblem() - Emblem management handler (lines 11957-11965)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates emblem data
-    * Broadcasts emblem changes
-
-- guild_message() - Guild chat handler (lines 11947-11955)
-  - Handles guild messages:
-    * Processes chat messages
-    * Validates sender permissions
-    * Broadcasts to guild members
-
-- guild_leave() - Member departure handler (lines 11937-11945)
-  - Handles member leaving:
-    * Processes leave requests
-    * Updates member roster
-    * Handles cleanup tasks
-
-- guild_join() - Member joining handler (lines 11927-11935)
-  - Handles new member joining:
-    * Processes join requests
-    * Validates join conditions
-    * Updates member roster
-
-- guild_war() - War declaration handler (lines 11917-11925)
-  - Handles guild wars:
-    * Processes war declarations
-    * Validates war conditions
-    * Updates war status
-
-- guild_ally() - Alliance management handler (lines 11907-11915)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance conditions
-    * Updates alliance status
-
-- guild_position() - Position management handler (lines 11897-11905)
-  - Handles guild positions:
-    * Processes position changes
-    * Validates position permissions
-    * Updates position hierarchy
-
-- guild_expel() - Member expulsion handler (lines 11887-11895)
-  - Handles member expulsion:
-    * Processes expulsion requests
-    * Validates expulsion permissions
-    * Updates member lists
-
-- guild_break() - Guild dissolution handler (lines 11877-11885)
-  - Handles guild dissolution:
-    * Processes break requests
-    * Validates break conditions
-    * Updates guild status
-
-- guild_message() - Message broadcasting handler (lines 11867-11875)
-  - Handles guild messages:
-    * Processes message broadcasts
-    * Validates message recipients
-    * Updates message logs
-
-- guild_notice() - Notice management handler (lines 11857-11865)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates notice content
-    * Updates notice display
-
-- guild_emblem() - Emblem management handler (lines 11847-11855)
-  - Handles guild emblems:
-    * Processes emblem uploads
-    * Validates emblem formats
-    * Updates emblem display
-
-- guild_storage() - Storage management handler (lines 11837-11845)
-  - Handles guild storage:
-    * Processes item deposits/withdrawals
-    * Validates storage permissions
-    * Updates storage contents
-
-- guild_skill() - Skill management handler (lines 11827-11835)
-  - Handles guild skills:
-    * Processes skill activations
-    * Validates skill requirements
-    * Updates skill cooldowns
-
-- guild_member() - Member management handler (lines 11817-11825)
-  - Handles guild members:
-    * Processes member joins/leaves
-    * Validates member permissions
-    * Updates member status
-
-- guild_position() - Position management handler (lines 11807-11815)
-  - Handles guild positions:
-    * Processes position assignments
-    * Validates position permissions
-    * Updates position hierarchy
-
-- guild_ally() - Alliance management handler (lines 11797-11805)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance conditions
-    * Updates alliance status
-
-- guild_castle() - Castle management handler (lines 11787-11795)
-  - Handles guild castles:
-    * Processes castle ownership
-    * Validates castle operations
-    * Updates castle status
-
-- guild_war() - War declaration handler (lines 11777-11785)
-  - Handles guild wars:
-    * Processes war declarations
-    * Validates war conditions
-    * Updates war status
-
-- guild_break() - Guild dissolution handler (lines 11767-11775)
-  - Handles guild dissolution:
-    * Processes break requests
-    * Validates break conditions
-    * Updates guild status
-
-- guild_notice() - Notice management handler (lines 11757-11765)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates notice content
-    * Broadcasts to guild members
-
-- guild_message() - Chat message handler (lines 11747-11755)
-  - Handles guild chat messages:
-    * Processes incoming messages
-    * Validates sender permissions
-    * Broadcasts to guild members
-
-- guild_emblem() - Emblem management handler (lines 11737-11745)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates emblem data
-    * Updates emblem display
-
-- guild_opposition() - Rival management handler (lines 11727-11735)
-  - Handles guild rivalries:
-    * Processes opposition declarations
-    * Validates opposition conditions
-    * Updates opposition status
-
-- guild_ally() - Alliance management handler (lines 11717-11725)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance conditions
-    * Updates alliance status
-
-- guild_member() - Member management handler (lines 11707-11715)
-  - Handles member information:
-    * Processes member updates
-    * Validates member status
-    * Updates member details
-
-- guild_position() - Rank management handler (lines 11697-11705)
-  - Handles member positions:
-    * Processes rank changes
-    * Validates promotion permissions
-    * Updates position hierarchy
-
-- guild_leave() - Member departure handler (lines 11687-11695)
-  - Handles member departures:
-    * Processes leave requests
-    * Updates member roster
-    * Handles rank adjustments
-
-- guild_join() - Member joining handler (lines 11677-11685)
-  - Handles new member joins:
-    * Processes join requests
-    * Validates join conditions
-    * Updates member roster
-
-- guild_message() - Message broadcasting handler (lines 11667-11675)
-  - Handles guild messages:
-    * Processes message broadcasts
-    * Validates message permissions
-    * Updates message history
-
-- guild_notice() - Notice management handler (lines 11657-11665)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates notice content
-    * Updates notice display
-
-- guild_break() - Guild dissolution handler (lines 11647-11655)
-  - Handles guild dissolution:
-    * Processes break requests
-    * Validates break conditions
-    * Updates guild status
-
-- guild_castle() - Castle management handler (lines 11637-11645)
-  - Handles guild castles:
-    * Processes castle ownership
-    * Validates castle privileges
-    * Updates castle status
-
-- guild_storage() - Storage management handler (lines 11627-11635)
-  - Handles guild storage:
-    * Processes item deposits/withdrawals
-    * Validates storage access
-    * Updates storage contents
-
-- guild_emblem() - Emblem management handler (lines 11617-11625)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates emblem data
-    * Updates emblem display
-
-- guild_alliance() - Alliance management handler (lines 11607-11615)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance status
-    * Updates alliance relationships
-
-- guild_position() - Rank/position handler (lines 11597-11605)
-  - Handles guild positions:
-    * Processes rank changes
-    * Validates permissions
-    * Updates position assignments
-
-- guild_skill() - Skill management handler (lines 11587-11595)
-  - Handles guild skills:
-    * Processes skill updates
-    * Validates skill points
-    * Updates skill availability
-
-- guild_member() - Member management handler (lines 11577-11585)
-  - Handles member data:
-    * Processes member updates
-    * Validates member status
-    * Updates member records
-
-- guild_leave() - Member departure handler (lines 11567-11575)
-  - Handles member departures:
-    * Processes leave requests
-    * Updates guild roster
-    * Handles rank adjustments
-
-- guild_join() - Member joining handler (lines 11557-11565)
-  - Handles new member joins:
-    * Processes join requests
-    * Validates guild status
-    * Updates member roster
-
-- guild_break() - Guild dissolution handler (lines 11547-11555)
-  - Handles guild dissolution:
-    * Processes break requests
-    * Validates authority
-    * Cleans up guild data
-
-- guild_message() - Message handler (lines 11537-11545)
-  - Handles guild messages:
-    * Processes guild chat
-    * Validates sender permissions
-    * Broadcasts messages to members
-
-- guild_notice() - Notice management handler (lines 11527-11535)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates notice content
-    * Updates notice display
-
-- guild_emblem() - Emblem management handler (lines 11517-11525)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates emblem data
-    * Updates emblem display
-
-- guild_member_position() - Member position handler (lines 11507-11515)
-  - Handles member positions:
-    * Processes position changes
-    * Validates permissions
-    * Updates member status
-
-- guild_position() - Position management handler (lines 11497-11505)
-  - Handles guild positions:
-    * Processes position assignments
-    * Validates authority levels
-    * Updates position hierarchy
-
-- guild_war() - War declaration handler (lines 11487-11495)
-  - Handles guild wars:
-    * Processes war declarations
-    * Validates war conditions
-    * Updates war status
-
-- guild_opposition() - Rivalry management handler (lines 11477-11485)
-  - Handles guild oppositions:
-    * Processes rivalry declarations
-    * Validates conflict status
-    * Updates opposition records
-
-- guild_ally() - Alliance management handler (lines 11467-11475)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates guild relations
-    * Updates alliance status
-
-- guild_member() - Member management handler (lines 11457-11465)
-  - Handles guild members:
-    * Processes join/leave requests
-    * Validates member status
-    * Updates roster information
-
-- guild_breakup() - Guild dissolution handler (lines 11447-11455)
-  - Handles guild disbanding:
-    * Processes breakup requests
-    * Validates leader authority
-    * Distributes remaining assets
-
-- guild_storage() - Guild vault handler (lines 11437-11445)
-  - Handles guild storage:
-    * Processes item deposits/withdrawals
-    * Validates permissions
-    * Updates storage contents
-
-- guild_skill_update() - Guild skill handler (lines 11427-11435)
-  - Handles guild skills:
-    * Processes skill changes
-    * Validates requirements
-    * Updates skill availability
-
-- guild_member_position() - Member role assignment handler (lines 11417-11425)
-  - Handles member promotions/demotions:
-    * Processes role changes
-    * Validates authority
-    * Updates member permissions
-
-- guild_position_update() - Role permission handler (lines 11407-11415)
-  - Handles position updates:
-    * Processes permission changes
-    * Validates authority levels
-    * Updates role capabilities
-
-- guild_position() - Role management handler (lines 11397-11405)
-  - Handles guild positions:
-    * Processes rank changes
-    * Validates permissions
-    * Updates role assignments
-
-- guild_emblem() - Guild emblem handler (lines 11387-11395)
-  - Handles guild symbols:
-    * Processes emblem updates
-    * Validates image formats
-    * Broadcasts to members
-
-- guild_notice() - Guild announcement handler (lines 11377-11385)
-  - Handles guild notices:
-    * Processes official announcements
-    * Validates officer permissions
-    * Updates notice board
-
-- guild_message() - Guild chat handler (lines 11367-11375)
-  - Handles guild communications:
-    * Processes chat messages
-    * Validates sender permissions
-    * Broadcasts to members
-
-- guild_break() - Guild dissolution handler (lines 11357-11365)
-  - Handles guild termination:
-    * Processes disband requests
-    * Validates authority
-    * Cleans up guild data
-
-- guild_ally_update() - Alliance status handler (lines 11347-11355)
-  - Handles alliance updates:
-    * Processes status changes
-    * Tracks ally relationships
-    * Updates alliance information
-
-- guild_ally() - Alliance management handler (lines 11337-11345)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates guild relationships
-    * Maintains ally list
-
-- guild_member_update() - Member status handler (lines 11327-11335)
-  - Handles member updates:
-    * Processes status changes
-    * Tracks online/offline status
-    * Updates member information
-
-- guild_member() - Member management handler (lines 11317-11325)
-  - Handles member operations:
-    * Processes join/leave events
-    * Tracks member status
-    * Updates guild roster
-
-- guild_position_update() - Rank modification handler (lines 11307-11315)
-  - Handles rank updates:
-    * Processes permission changes
-    * Validates authority levels
-    * Updates role privileges
-
-- guild_position() - Rank management handler (lines 11297-11305)
-  - Handles guild positions:
-    * Processes rank assignments
-    * Validates permissions
-    * Updates member roles
-
-- guild_skill_update() - Skill point handler (lines 11287-11295)
-  - Handles skill point updates:
-    * Processes point allocations
-    * Validates available points
-    * Updates guild skill tree
-
-- guild_skill() - Skill management handler (lines 11277-11285)
-  - Handles guild skills:
-    * Processes skill activations
-    * Validates skill points
-    * Updates guild abilities
-
-- guild_master() - Leadership handler (lines 11267-11275)
-  - Handles guild leadership:
-    * Processes master changes
-    * Validates succession rules
-    * Updates guild hierarchy
-
-- guild_emblem() - Guild symbol handler (lines 11257-11265)
-  - Handles guild emblems:
-    * Processes image updates
-    * Validates leadership permissions
-    * Broadcasts to members
-
-- guild_notice() - Announcement handler (lines 11247-11255)
-  - Handles guild notices:
-    * Processes message updates
-    * Validates leadership permissions
-    * Broadcasts to members
-
-- guild_join() - Member recruitment handler (lines 11237-11245)
-  - Handles new member onboarding:
-    * Processes join requests
-    * Validates guild capacity
-    * Updates member roster
-
-- guild_break() - Guild dissolution handler (lines 11227-11235)
-  - Handles guild termination:
-    * Processes dissolution requests
-    * Validates leadership permissions
-    * Cleans up guild assets
-
-- guild_expel() - Member removal handler (lines 11217-11225)
-  - Handles member expulsion:
-    * Processes removal requests
-    * Validates leadership permissions
-    * Updates guild roster
-
-- guild_member() - Member management handler (lines 11207-11215)
-  - Handles guild members:
-    * Processes member updates
-    * Validates member status
-    * Maintains member records
-
-- guild_position() - Rank management handler (lines 11197-11205)
-  - Handles guild positions:
-    * Processes rank changes
-    * Validates promotion permissions
-    * Updates member privileges
-
-- guild_ally() - Alliance management handler (lines 11187-11195)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates leadership permissions
-    * Maintains alliance relationships
-
-- guild_storage() - Guild vault handler (lines 11177-11185)
-  - Handles guild storage:
-    * Processes item deposits/withdrawals
-    * Validates access permissions
-    * Maintains inventory records
-
-- guild_skill() - Guild ability handler (lines 11167-11175)
-  - Handles guild skills:
-    * Processes skill updates
-    * Validates skill requirements
-    * Updates member access
-
-- guild_emblem() - Guild symbol handler (lines 11157-11165)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates image formats
-    * Distributes emblem to members
-
-- guild_notice() - Guild announcement handler (lines 11147-11155)
-  - Handles guild notices:
-    * Processes announcement updates
-    * Validates editor permissions
-    * Broadcasts notices to members
-
-- guild_message() - Guild chat handler (lines 11137-11145)
-  - Handles guild communications:
-    * Processes chat messages
-    * Validates sender permissions
-    * Distributes messages to members
-
-- guild_master() - Leadership management handler (lines 11127-11135)
-  - Handles guild leadership:
-    * Processes master changes
-    * Validates transfer permissions
-    * Updates guild hierarchy
-
-- guild_expel() - Member removal handler (lines 11117-11125)
-  - Handles member expulsions:
-    * Processes removal requests
-    * Validates expulsion permissions
-    * Updates guild roster
-
-- guild_member() - Member management handler (lines 11107-11115)
-  - Handles member operations:
-    * Processes member updates
-    * Validates member permissions
-    * Maintains member roster
-
-- guild_position() - Rank management handler (lines 11097-11105)
-  - Handles position assignments:
-    * Processes rank changes
-    * Validates promotion permissions
-    * Updates member privileges
-
-- guild_leave() - Member departure handler (lines 11087-11095)
-  - Handles guild member exits:
-    * Processes leave requests
-    * Cleans up member data
-    * Updates guild roster
-
-- guild_break() - Alliance termination handler (lines 11077-11085)
-  - Handles alliance dissolution:
-    * Processes break requests
-    * Validates termination permissions
-    * Cleans up ally data
-
-- guild_ally() - Alliance management handler (lines 11067-11075)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance permissions
-    * Maintains ally relationships
-
-- guild_emblem() - Emblem management handler (lines 11057-11065)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates emblem permissions
-    * Maintains emblem data
-
-- guild_notice() - Notice management handler (lines 11047-11055)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates edit permissions
-    * Maintains notice board
-
-- guild_storage() - Storage management handler (lines 11037-11045)
-  - Handles guild storage:
-    * Processes item deposits/withdrawals
-    * Validates storage permissions
-    * Maintains item records
-
-- guild_skill() - Skill management handler (lines 11027-11035)
-  - Handles guild skills:
-    * Processes skill updates
-    * Validates skill points
-    * Maintains skill database
-
-- guild_expel() - Member expulsion handler (lines 11017-11025)
-  - Handles member removal:
-    * Processes expulsion requests
-    * Validates removal permissions
-    * Updates guild roster
-
-- guild_member() - Member management handler (lines 11007-11015)
-  - Handles guild members:
-    * Processes member changes
-    * Validates member status
-    * Updates member records
-
-- guild_position() - Position management handler (lines 10997-11005)
-  - Handles guild ranks/positions:
-    * Processes rank changes
-    * Validates promotion permissions
-    * Updates position hierarchy
-
-- guild_message() - Guild chat handler (lines 10987-10995)
-  - Handles guild communications:
-    * Processes guild messages
-    * Validates sender permissions
-    * Routes messages to members
-
-- guild_break() - Guild dissolution handler (lines 10977-10985)
-  - Handles guild termination:
-    * Processes dissolution requests
-    * Validates permissions
-    * Cleans up guild data
-
-- guild_ally() - Alliance management handler (lines 10967-10975)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates alliance terms
-    * Maintains alliance records
-
-- guild_notice() - Notice management handler (lines 10957-10965)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates notice content
-    * Maintains notice board
-
-- guild_emblem() - Emblem management handler (lines 10947-10955)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates emblem data
-    * Maintains emblem database
-
-- guild_info() - Guild information handler (lines 10937-10945)
-  - Handles guild data:
-    * Processes guild details
-    * Maintains guild records
-    * Updates information displays
-
-- guild_master() - Master management handler (lines 10927-10935)
-  - Handles guild leadership:
-    * Processes master changes
-    * Validates succession
-    * Updates guild hierarchy
-
-- guild_expel() - Member expulsion handler (lines 10917-10925)
-  - Handles member removal:
-    * Processes expulsion requests
-    * Validates permissions
-    * Updates guild roster
-
-- guild_member() - Member management handler (lines 10907-10915)
-  - Handles guild members:
-    * Processes join/leave requests
-    * Maintains member database
-    * Updates member status
-
-- guild_position() - Position management handler (lines 10897-10905)
-  - Handles guild ranks/positions:
-    * Processes rank changes
-    * Validates permissions
-    * Updates member roles
-
-- guild_storage() - Storage management handler (lines 10887-10895)
-  - Handles guild storage:
-    * Processes item deposits/withdrawals
-    * Validates permissions
-    * Maintains inventory records
-
-- guild_skill() - Skill management handler (lines 10877-10885)
-  - Handles guild skills:
-    * Processes skill updates
-    * Validates skill points
-    * Maintains skill database
-
-- guild_break() - Guild dissolution handler (lines 10867-10875)
-  - Handles guild termination:
-    * Processes break requests
-    * Validates permissions
-    * Cleans up guild data
-
-- guild_ally() - Alliance management handler (lines 10857-10865)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Maintains ally relationships
-    * Updates alliance status
-
-- guild_message() - Message broadcasting handler (lines 10847-10855)
-  - Handles guild communications:
-    * Processes chat messages
-    * Validates sender permissions
-    * Broadcasts to all members
-
-- guild_notice() - Notice management handler (lines 10837-10845)
-  - Handles guild announcements:
-    * Processes notice updates
-    * Validates message length
-    * Maintains notice history
-
-- guild_emblem() - Emblem management handler (lines 10827-10835)
-  - Handles guild symbols:
-    * Processes emblem updates
-    * Validates image formats
-    * Maintains emblem database
-
-- guild_info() - Guild information handler (lines 10817-10825)
-  - Handles guild metadata:
-    * Processes guild details
-    * Maintains guild properties
-    * Updates guild records
-
-- guild_member() - Member management handler (lines 10807-10815)
-  - Handles member data:
-    * Processes member updates
-    * Maintains member database
-    * Handles online/offline status
-
-- guild_position() - Rank management handler (lines 10797-10805)
-  - Handles member positions:
-    * Processes rank changes
-    * Validates permissions
-    * Updates member records
-
-- guild_leave() - Member departure handler (lines 10787-10795)
-  - Handles member exits:
-    * Processes leave requests
-    * Updates member roster
-    * Handles rank changes
-
-- guild_join() - Member joining handler (lines 10777-10785)
-  - Handles new member applications:
-    * Processes join requests
-    * Validates requirements
-    * Updates member roster
-
-- guild_break() - Guild dissolution handler (lines 10767-10775)
-  - Handles guild termination:
-    * Processes dissolution requests
-    * Validates leader permissions
-    * Cleans up guild data
-
-- guild_alliance() - Alliance management (lines 10757-10765)
-  - Handles alliance relations:
-    * Processes alliance requests
-    * Validates leader permissions
-    * Maintains alliance database
-
-- guild_opposition() - Rival guild management (lines 10747-10755)
-  - Handles opposition relations:
-    * Processes rival declarations
-    * Validates leader permissions
-    * Maintains opposition database
-
-- guild_storage() - Storage management (lines 10737-10745)
-  - Handles guild storage:
-    * Processes item deposits/withdrawals
-    * Validates permissions
-    * Maintains storage database
-
-- guild_skill() - Skill management (lines 10727-10735)
-  - Handles guild skills:
-    * Processes skill updates
-    * Validates permissions
-    * Maintains skill database
-
-- guild_message() - Communication handler (lines 10717-10725)
-  - Handles guild messages:
-    * Processes member communications
-    * Validates permissions
-    * Maintains message logs
-
-- guild_notice() - Announcement management (lines 10707-10715)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates leader permissions
-    * Maintains notice board
-
-- guild_emblem() - Guild symbol management (lines 10697-10705)
-  - Handles emblem operations:
-    * Processes emblem updates
-    * Validates leader permissions
-    * Maintains emblem database
-
-- guild_member() - Member management (lines 10687-10695)
-  - Handles member operations:
-    * Processes member additions/removals
-    * Validates permissions
-    * Updates member database
-
-- guild_position() - Rank management (lines 10677-10685)
-  - Handles position assignments:
-    * Processes rank changes
-    * Validates leader permissions
-    * Updates position database
-
-- guild_opposition() - Rivalry management (lines 10667-10675)
-  - Handles opposition relationships:
-    * Processes rivalry declarations
-    * Validates leader permissions
-    * Maintains opposition records
-
-- guild_alliance() - Guild partnerships (lines 10657-10665)
-  - Handles alliance management:
-    * Processes alliance requests
-    * Validates leader permissions
-    * Maintains alliance records
-
-- guild_breakup() - Guild dissolution (lines 10647-10655)
-  - Handles guild termination:
-    * Processes guild disbandment
-    * Validates leader permissions
-    * Cleans up guild resources
-
-- guild_member_info() - Member details (lines 10637-10645)
-  - Handles member information:
-    * Processes member data updates
-    * Maintains member profiles
-    * Synchronizes with guild database
-
-- guild_member_position_change() - Rank adjustment (lines 10627-10635)
-  - Handles member position changes:
-    * Processes rank adjustments
-    * Validates leader permissions
-    * Updates member records
-
-- guild_master_change() - Leadership transfer (lines 10617-10625)
-  - Handles guild master changes:
-    * Processes leadership transfers
-    * Validates permissions
-    * Updates guild hierarchy
-
-- guild_emblem() - Guild symbol management (lines 10607-10615)
-  - Handles guild emblems:
-    * Processes emblem updates
-    * Validates leader permissions
-    * Maintains emblem database
-
-- guild_notice() - Announcement management (lines 10597-10605)
-  - Handles guild notices:
-    * Processes announcement updates
-    * Validates leader permissions
-    * Maintains notice database
-
-- guild_skill_update() - Skill management (lines 10587-10595)
-  - Handles guild skill updates:
-    * Processes skill changes
-    * Validates leader permissions
-    * Maintains skill database
-
-- guild_expulsion() - Member removal (lines 10577-10585)
-  - Handles guild expulsions:
-    * Processes member removals
-    * Validates leader permissions
-    * Maintains member database
-
-- guild_position() - Rank management (lines 10567-10575)
-  - Handles guild positions:
-    * Processes rank changes
-    * Validates leader permissions
-    * Maintains position database
-
-- guild_opposition() - Rival management (lines 10557-10565)
-  - Handles guild oppositions:
-    * Processes rival declarations
-    * Validates leader permissions
-    * Maintains opposition database
-
-- guild_ally() - Alliance management (lines 10547-10555)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates leader permissions
-    * Maintains ally database
-
-- guild_member_list() - Roster management (lines 10537-10545)
-  - Handles guild member lists:
-    * Maintains member database
-    * Processes roster updates
-    * Synchronizes with server
-
-- guild_breakup() - Guild dissolution (lines 10527-10535)
-  - Handles guild disbandment:
-    * Processes breakup requests
-    * Validates leader permissions
-    * Cleans up guild data
-
-- guild_message() - Chat management (lines 10517-10525)
-  - Handles guild chat messages:
-    * Processes member messages
-    * Validates permissions
-    * Maintains chat logs
-
-- guild_notice() - Announcement management (lines 10507-10515)
-  - Handles guild notices:
-    * Processes notice updates
-    * Validates leader permissions
-    * Maintains notice database
-
-- guild_emblem() - Guild symbol management (lines 10497-10505)
-  - Handles guild emblem operations:
-    * Processes emblem updates
-    * Validates leader permissions
-    * Maintains emblem database
-
-- guild_member_online_status() - Presence tracking (lines 10487-10495)
-  - Handles guild member online status:
-    * Tracks login/logout events
-    * Updates member presence
-    * Maintains online roster
-
-- guild_member_position_update() - Position changes (lines 10477-10485)
-  - Handles guild member position updates:
-    * Processes rank/role changes
-    * Validates leader permissions
-    * Updates member privileges
-
-- guild_expulsion() - Member removal (lines 10467-10475)
-  - Handles guild member expulsions:
-    * Processes removal requests
-    * Validates leader permissions
-    * Updates guild roster
-
-- guild_alliance() - Alliance management (lines 10457-10465)
-  - Handles guild alliances:
-    * Processes alliance requests
-    * Validates leader permissions
-    * Maintains alliance database
-
-- guild_position_update() - Rank changes (lines 10447-10455)
-  - Handles guild position updates:
-    * Processes rank promotions/demotions
-    * Validates leader permissions
-    * Updates member privileges
-
-- guild_storage_items() - Storage management (lines 10437-10445)
-  - Handles guild storage items:
-    * Processes item additions/removals
-    * Validates permissions
-    * Maintains storage database
-
-- guild_skills_update() - Skill updates (lines 10427-10435)
-  - Handles guild skill changes:
-    * Processes skill point allocations
-    * Validates permissions
-    * Updates guild skill database
-
-- guild_member_list() - Member roster (lines 10417-10425)
-  - Handles guild member lists:
-    * Processes roster updates
-    * Maintains member database
-    * Updates online status
-
-- guild_emblem_update() - Emblem changes (lines 10407-10415)
-  - Handles guild emblem updates:
-    * Processes new emblem data
-    * Validates leader permissions
-    * Broadcasts to members
-
-- guild_notice_change() - Notice updates (lines 10397-10405)
-  - Handles guild notice changes:
-    * Processes notice updates
-    * Validates leader permissions
-    * Broadcasts to members
-
-- guild_breakup() - Guild dissolution (lines 10387-10395)
-  - Handles guild disbanding:
-    * Processes breakup requests
-    * Validates leader permissions
-    * Cleans up guild data
-
-- guild_member_info_update() - Member info updates (lines 10377-10385)
-  - Handles member information changes:
-    * Processes profile updates
-    * Validates permissions
-    * Updates guild records
-
-- guild_expulsion() - Member removal (lines 10367-10375)
-  - Handles member expulsions:
-    * Processes removal requests
-    * Validates leader permissions
-    * Updates guild roster
-
-- guild_member_position_change() - Member rank changes (lines 10357-10365)
-  - Handles member promotions/demotions:
-    * Processes position change requests
-    * Validates leader permissions
-    * Updates member privileges
-
-- guild_position_update() - Position updates (lines 10347-10355)
-  - Handles guild position changes:
-    * Processes rank/position updates
-    * Validates leader permissions
-    * Updates member privileges
-
-- guild_ally_response() - Alliance responses (lines 10337-10345)
-  - Handles alliance replies:
-    * Processes accept/decline responses
-    * Updates guild relationships
-    * Notifies both guilds
-
-- guild_ally_request() - Alliance requests (lines 10327-10335)
-  - Handles alliance invitations:
-    * Processes incoming requests
-    * Validates guild leader status
-    * Shows confirmation dialog
-
-- guild_message() - Guild chat (lines 10317-10325)
-  - Handles guild messages:
-    * Processes chat packets
-    * Validates sender permissions
-    * Broadcasts to members
-
-- guild_notice_change() - Notice updates (lines 10307-10315)
-  - Handles guild notices:
-    * Processes notice changes
-    * Validates leader permissions
-    * Broadcasts to members
-
-- guild_emblem_update() - Emblem changes (lines 10297-10305)
-  - Handles emblem updates:
-    * Processes new emblem data
-    * Validates emblem format
-    * Broadcasts to guild members
-
-- guild_member_offline() - Member disconnection (lines 10287-10295)
-  - Handles offline status:
-    * Processes logout notifications
-    * Updates roster status
-    * Broadcasts to guild
-
-- guild_member_online() - Member connection (lines 10277-10285)
-  - Handles online status:
-    * Processes login notifications
-    * Updates roster status
-    * Broadcasts to guild
-
-- guild_breakup() - Guild dissolution (lines 10267-10275)
-  - Handles guild termination:
-    * Processes breakup requests
-    * Validates leader permissions
-    * Distributes remaining assets
-
-- guild_position_change() - Rank updates (lines 10257-10265)
-  - Handles position changes:
-    * Processes promotions/demotions
-    * Updates permissions
-    * Notifies guild
-
-- guild_leave() - Member departures (lines 10247-10255)
-  - Handles voluntary exits:
-    * Processes leave requests
-    * Updates roster
-    * Broadcasts departure
-
-- guild_join_request() - Join requests (lines 10237-10245)
-  - Handles guild applications:
-    * Processes join requests
-    * Validates applicant status
-    * Notifies officers
-
-- guild_invite() - Member invitations (lines 10227-10235)
-  - Handles guild invites:
-    * Processes invitation requests
-    * Validates invite permissions
-    * Sends invitation packets
-
-- guild_message() - Guild chat messages (lines 10217-10225)
-  - Handles guild chat:
-    * Processes member messages
-    * Validates permissions
-    * Broadcasts to guild
-
-- guild_notice() - Guild notice updates (lines 10207-10215)
-  - Handles notice board changes:
-    * Processes new notices
-    * Validates notice length
-    * Broadcasts to all members
-
-- guild_emblem() - Emblem updates (lines 10197-10205)
-  - Handles guild emblem changes:
-    * Processes new emblem data
-    * Validates emblem format
-    * Broadcasts to all members
-
-- guild_position_update() - Rank changes (lines 10187-10195)
-  - Handles position updates:
-    * Processes promotions/demotions
-    * Updates member permissions
-    * Broadcasts changes
-
-- guild_member_leave() - Member departure (lines 10177-10185)
-  - Handles member exits:
-    * Processes leave requests
-    * Updates roster
-    * Broadcasts departure notices
-
-- guild_member_join() - New member handler (lines 10167-10175)
-  - Handles new members:
-    * Processes join requests
-    * Updates roster
-    * Broadcasts welcome messages
-
-- guild_break() - Guild disbandment (lines 10157-10165)
-  - Handles guild dissolution:
-    * Processes disband requests
-    * Cleans up guild data
-    * Notifies all members
-
-- guild_ally() - Guild alliance changes (lines 10147-10155)
-  - Handles alliance operations:
-    * Processes new alliances
-    * Updates relationship status
-    * Notifies all members
-
-- guild_storage() - Guild storage access (lines 10137-10145)
-  - Handles storage operations:
-    * Processes item deposits/withdrawals
-    * Updates storage contents
-    * Verifies permissions
-
-- guild_skill_update() - Guild skill changes (lines 10127-10135)
-  - Handles skill updates:
-    * Processes new skill levels
-    * Updates guild capabilities
-    * Notifies affected members
-
-- guild_message() - Guild chat messages (lines 10117-10125)
-  - Handles guild chat:
-    * Processes member messages
-    * Formats for display
-    * Broadcasts to all members
-
-- guild_notice() - Guild notice updates (lines 10107-10115)
-  - Handles notice board changes:
-    * Processes new notices
-    * Updates guild information
-    * Broadcasts to all members
-
-- guild_emblem() - Guild emblem updates (lines 10097-10105)
-  - Handles emblem changes:
-    * Processes new emblem data
-    * Updates guild representation
-    * Broadcasts to all members
-
-- guild_member_info_update() - Member data changes (lines 10087-10095)
-  - Handles member information updates:
-    * Processes profile changes
-    * Updates member records
-    * Synchronizes with guild roster
-
-- guild_member_position_change() - Rank changes (lines 10077-10085)
-  - Handles position promotions/demotions:
-    * Processes rank changes
-    * Updates permissions
-    * Notifies affected members
-
-- guild_break() - Guild dissolution (lines 10067-10075)
-  - Handles guild disbanding:
-    * Processes break requests
-    * Clears guild data
-    * Notifies all members
-
-- guild_member_title_update() - Title changes (lines 10057-10065)
-  - Handles member title updates:
-    * Processes title changes
-    * Updates member records
-    * Broadcasts to guild members
-
-- guild_expulsion() - Member removal (lines 10047-10055)
-  - Handles member expulsion:
-    * Processes removal requests
-    * Updates guild roster
-    * Notifies affected members
-
-- guild_alliance_info() - Alliance relationships (lines 10037-10045)
-  - Handles alliance information:
-    * Tracks allied guilds
-    * Manages alliance requests
-    * Updates alliance status
-
-- guild_position_info() - Position permissions (lines 10027-10035)
-  - Handles position information:
-    * Manages rank permissions
-    * Updates position privileges
-    * Tracks position changes
-
-- guild_castle_info() - Castle ownership (lines 10017-10025)
-  - Handles castle information:
-    * Tracks owned castles
-    * Manages castle taxes
-    * Updates defense status
-
-- guild_emblem() - Guild emblem management (lines 10007-10015)
-  - Handles guild emblem packets:
-    * Processes emblem updates
-    * Manages emblem data
-    * Broadcasts changes to members
-
-- guild_notice() - Guild announcements (lines 9997-10005)
-  - Handles guild notice packets:
-    * Processes guild messages
-    * Manages notice board updates
-    * Broadcasts to all members
-
-- guild_skills() - Guild skill management (lines 9987-9995)
-  - Handles guild skill packets:
-    * Processes skill updates
-    * Tracks guild skill levels
-    * Manages skill point allocation
-
-- guild_member_info() - Member details (lines 9977-9985)
-  - Handles member information:
-    * Processes member data packets
-    * Updates guild roster
-    * Tracks member statistics
-
-- guild_expulsion() - Member removal (lines 9967-9975)
-  - Handles member expulsion:
-    * Processes removal requests
-    * Updates guild roster
-    * Notifies affected members
-
-- guild_member_online_status() - Member online tracking (lines 9957-9965)
-  - Handles member status updates:
-    * Tracks login/logout events
-    * Updates guild roster
-    * Broadcasts status changes
-
-- guild_member_position_change() - Member position updates (lines 9947-9955)
-  - Handles member position changes:
-    * Processes promotion/demotion
-    * Updates permissions
-    * Notifies affected members
-
-- guild_opposition() - Guild opposition (lines 9937-9945)
-  - Handles guild opposition packets:
-    * Manages hostile relationships
-    * Tracks opposing guilds
-    * Updates war status
-
-- guild_break_alliance() - Alliance termination (lines 9927-9935)
-  - Handles alliance break packets:
-    * Processes termination requests
-    * Clears alliance data
-    * Notifies all members
-
-- guild_alliance() - Guild alliances (lines 9917-9925)
-  - Handles guild alliance packets:
-    * Processes alliance requests
-    * Manages alliance relationships
-    * Synchronizes with all members
-
-- guild_notice() - Guild notices (lines 9907-9915)
-  - Handles guild notice packets:
-    * Manages public announcements
-    * Validates notice content
-    * Broadcasts to all members
-
-- guild_position() - Position management (lines 9897-9905)
-  - Handles guild position packets:
-    * Updates member ranks/roles
-    * Manages permissions
-    * Synchronizes with all members
-
-- guild_storage() - Guild storage access (lines 9887-9895)
-  - Handles guild storage packets:
-    * Manages item deposits/withdrawals
-    * Tracks storage contents
-    * Enforces access permissions
-
-- guild_emblem() - Guild emblem updates (lines 9877-9885)
-  - Handles guild emblem packets:
-    * Receives new emblem data
-    * Validates emblem format
-    * Broadcasts to all members
-
-- guild_disband() - Guild dissolution (lines 9867-9875)
-  - Handles guild disband packets:
-    * Processes guild termination
-    * Clears all guild data
-    * Notifies all members
-
-- guild_expulsion() - Member expulsion (lines 9857-9865)
-  - Handles forced member removal packets:
-    * Processes expulsion commands
-    * Updates guild roster
-    * Maintains disciplinary records
-
-- guild_leave() - Member leaving guild (lines 9847-9855)
-  - Handles voluntary guild leave packets:
-    * Processes member departure
-    * Updates guild roster
-    * Adjusts guild statistics
-
-- guild_join_reject() - Guild join rejections (lines 9837-9845)
-  - Handles guild join rejection packets:
-    * Processes denied applications
-    * Notifies applicant
-    * Maintains rejection records
-
-- guild_join_accept() - Guild join acceptances (lines 9827-9835)
-  - Handles guild join acceptance packets:
-    * Processes approved applications
-    * Adds new member to roster
-    * Updates guild statistics
-
-- guild_join_request() - Guild join requests (lines 9817-9825)
-  - Handles guild join request packets:
-    * Receives applicant information
-    * Validates requirements
-    * Queues for approval
-
-- guild_message() - Guild chat messages (lines 9807-9815)
-  - Handles guild chat packets:
-    * Receives member messages
-    * Processes chat commands
-    * Broadcasts to guild members
-
-- guild_notice() - Guild notice updates (lines 9797-9805)
-  - Handles guild notice packets:
-    * Receives notice text
-    * Updates guild notice board
-    * Broadcasts to members
-
-- guild_member_position_change() - Member position changes (lines 9787-9795)
-  - Handles member position change packets:
-    * Receives member position updates
-    * Modifies member permissions
-    * Updates guild roster
-
-- guild_position_change() - Guild position changes (lines 9777-9785)
-  - Handles guild position change packets:
-    * Receives position updates
-    * Modifies position hierarchy
-    * Updates permissions
-
-- guild_ally_info() - Guild alliance information (lines 9767-9775)
-  - Handles guild ally info packets:
-    * Receives alliance details
-    * Updates ally relationships
-    * Tracks ally status
-
-- guild_breakup() - Guild dissolution (lines 9757-9765)
-  - Handles guild breakup packets:
-    * Receives breakup notification
-    * Processes dissolution
-    * Cleans up guild data
-
-- guild_member_info() - Guild member information (lines 9747-9755)
-  - Handles guild member info packets:
-    * Receives member details
-    * Updates member roster
-    * Tracks member status
-
-- guild_master_change() - Guild leadership changes (lines 9737-9745)
-  - Handles guild master change packets:
-    * Receives new master information
-    * Updates guild leadership
-    * Notifies members of change
-
-- guild_emblem() - Guild emblem updates (lines 9727-9735)
-  - Handles guild emblem packets:
-    * Receives emblem data
-    * Updates guild emblem
-    * Displays emblem changes
-
-- guild_notice() - Guild notice updates (lines 9717-9725)
-  - Handles guild notice packets:
-    * Receives guild notice changes
-    * Updates notice board
-    * Displays notice messages
-
-- guild_position() - Guild position updates (lines 9707-9715)
-  - Handles guild position packets:
-    * Receives position assignments
-    * Updates member ranks/positions
-    * Manages position permissions
-
-- guild_req_opposition() - Guild opposition requests (lines 9697-9705)
-  - Handles guild opposition request packets:
-    * Receives opposition requests
-    * Processes request parameters
-    * Manages opposition negotiation state
-
-- guild_req_alliance() - Guild alliance requests (lines 9687-9695)
-  - Handles guild alliance request packets:
-    * Receives alliance requests
-    * Processes request parameters
-    * Manages alliance negotiation state
-
-- guild_skill_info() - Guild skill information (lines 9677-9685)
-  - Handles guild skill info packets:
-    * Receives detailed skill data
-    * Updates skill information
-    * Displays skill details
-
-- guild_skill_update() - Guild skill updates (lines 9667-9675)
-  - Handles guild skill packets:
-    * Receives skill updates
-    * Updates guild skill status
-    * Displays skill messages
-
-- guild_opposition() - Guild opposition updates (lines 9657-9665)
-  - Handles guild opposition packets:
-    * Receives opposition notifications
-    * Updates opposition relationships
-    * Displays opposition messages
-
-- guild_ally() - Guild alliance updates (lines 9647-9655)
-  - Handles guild alliance packets:
-    * Receives alliance notifications
-    * Updates alliance relationships
-    * Displays alliance messages
-
-- guild_member_list() - Guild member list updates (lines 9637-9645)
-  - Handles guild member list packets:
-    * Receives full member list
-    * Updates guild roster in memory
-    * Handles member list refresh
-
-- guild_expulsion() - Guild member expulsion (lines 9627-9635)
-  - Handles guild expulsion packets:
-    * Receives expulsion notifications
-    * Updates guild member list
-    * Displays expulsion messages
-
-- guild_break() - Guild disband notifications (lines 9617-9625)
-  - Handles guild disband packets:
-    * Receives disband notifications
-    * Displays disband messages
-    * Updates guild status in memory
-
-- guild_position() - Guild position updates (lines 9607-9615)
-  - Handles guild position changes:
-    * Receives position data packets
-    * Updates position information in memory
-    * Handles position change notifications
-
-- guild_member_position() - Guild member position updates (lines 9597-9605)
-  - Handles guild member position changes:
-    * Receives position change notifications
-    * Updates member position in memory
-    * Displays position change messages
-
-- guild_notice() - Guild notice updates (lines 9588-9595)
-  - Handles guild notice packets:
-    * Receives and displays guild notice
-    * Updates guild notice in memory
-    * Handles notice change notifications
-
-- guild_emblem() - Guild emblem data (lines 9577-9586)
-  - Handles guild emblem packets:
-    * Receives and processes emblem data
-    * Handles version mismatch cases
-    * Displays emblem update messages
-
-**Clan Information:**
-- clan_user() - Updates clan member counts (lines 8904-8911)
-  - Tracks online users and total members
-  - Stores in %clan hash
-
-- clan_info() - Handles detailed clan info (lines 8913-8942)
-  - Processes:
-    * Clan ID and name
-    * Clan master name
-    * Clan map
-    * Alliance/antagonist counts
-  - Parses alliance/antagonist names
-  - Stores in %clan hash
-
-**Clan Communication:**
-- clan_chat() - Processes clan messages (lines 8944-8965)
-  - Handles message decoding
-  - Logs chat if configured
-  - Displays formatted message
-  - Triggers packet_clanMsg hook
-
-**Clan Management:**
-- clan_leave() - Handles leaving clan (lines 8967-8974)
-  - Displays leave message
-  - Clears clan data
-  - Resets %clan hash
-
-**Guild System Handlers:**
-
-- guild_member_map_change (lines 6811-6823)
-  - Tracks guild member map changes
-  - Handles ZC_NOTIFY_POSITION_TO_GUILDM packet
-  - Features:
-    - Clears position data on map change
-    - Updates map name in guild data
-    - Logs map transitions
-
-- guild_member_add (lines 6827-6840)
-  - Processes new member additions
-  - Handles ZC_ACK_MAKE_GUILD packets
-  - Features:
-    - Adds member to guild data structure
-    - Supports multiple packet versions
-    - Displays join notification
-    - Maintains member list integrity
-
-- guild_notice (lines 6844-6857)
-  - Manages guild announcements
-  - Handles ZC_GUILD_NOTICE packets
-  - Features:
-    - Displays formatted notices
-    - Handles subject/notice separation
-    - Skips empty notices
-    - Supports language codes
-
-- guild_location (lines 6507-6522)
-  - Tracks guild member positions
-  - Handles ZC_NOTIFY_POSITION_TO_GUILDM packet
-  - Features:
-    - Updates x/y coordinates for online members
-    - Maintains position_to for movement tracking
-    - Skips updates for invalid positions (0,0)
-
-- guild_leave (lines 6527-6545)
-  - Processes guild member departures
-  - Handles ZC_ACK_LEAVE_GUILD packet
-  - Features:
-    - Supports both name and charID lookups
-    - Removes member from guild data structure
-    - Displays leave reason message
-
-- guild_expulsion (lines 6551-6569)
-  - Handles member expulsions
-  - Processes ZC_ACK_BAN_GUILD packets
-  - Features:
-    - Supports name/charID lookups
-    - Removes expelled members
-    - Displays expulsion reason
-
-- guild_member_online_status (lines 6578-6591)
-  - Tracks member login/logout
-  - Handles ZC_UPDATE_CHARSTAT packets
-  - Features:
-    - Updates online status flag
-    - Notifies guild chat of status changes
-    - Maintains member presence tracking
-
-- guild_update_member_position (lines 6595-6615)
-  - Manages position/title changes
-  - Processes ZC_ACK_REQ_CHANGE_MEMBERS
-  - Features:
-    - Updates member position IDs
-    - Shows title change notifications
-    - Maintains guild hierarchy
-
-- guild_members_title_list (lines 6619-6630)
-  - Stores position titles
-  - Handles ZC_POSITION_ID_NAME_INFO
-  - Features:
-    - Parses position name data
-    - Updates guild{positions} array
-    - Supports multiple title definitions
-
-- guild_name (lines 6637-6666)
-  - Manages guild identification
-  - Processes ZC_UPDATE_GDID
-  - Features:
-    - Stores guild ID, name and emblem
-    - Triggers additional info requests
-    - Handles server-specific behaviors
-
-- guild_request (lines 6670-6680)
-  - Processes join requests
-  - Handles ZC_REQ_JOIN_GUILD
-  - Features:
-    - Stores incoming request data
-    - Sets auto-deny timeout
-    - Displays guild name in message
-
-- guild_master_member (lines 6692-6703)
-  - Verifies guildmaster status
-  - Processes ZC_ACK_GUILD_MENUINTERFACE
-  - Features:
-    - Handles success/failure cases
-    - Displays appropriate status messages
-
-- guild_alliance (lines 6714-6729)
-  - Manages alliance responses
-  - Processes ZC_ACK_REQ_ALLY_GUILD
-  - Features:
-    - Handles all response codes
-    - Displays alliance status messages
-
-- guild_member_setting_list (lines 6738-6751)
-  - Configures position permissions
-  - Handles ZC_POSITION_INFO
-  - Features:
-    - Sets invite/expel permissions
-    - Configures guild storage access
-    - Manages experience fee rates
-
-- guild_skills_list (lines 6756-6773)
-  - Manages guild skills
-  - Processes ZC_GUILD_SKILLINFO
-  - Features:
-    - Stores skill IDs and levels
-    - Tracks SP costs
-    - Maintains upgrade flags
-
-- guild_expulsion_list (lines 6780-6795)
-  - Manages ban lists
-  - Handles ZC_BAN_LIST
-  - Features:
-    - Parses expulsion records
-    - Supports different packet versions
-    - Maintains cause/name mappings
-
-**Guild Title Selection Handler:**
-- guild_member_title_select (lines 3561-3589)
-  - Processes guild member title selection
-  - Handles ZC_ACK_CHANGE_GUILD_POSITIONNAME packet
-  - Key features:
-    - Validates title length (max 24 characters)
-    - Updates guild member data structure ($guild{members}{$ID}{title})
-    - Shows appropriate messages:
-      - Success: "Title changed to: $title"
-      - Error: "Failed to change title (too long)"
-    - Supports guild position name changes
-    - Maintains guild hierarchy integrity
-    - Triggers 'packet_guildTitle' plugin hook
-sub guild_message {
-	my ($self, $args) = @_;
-	my $msg = bytesToString($args->{message});
-	stripLanguageCode(\$msg);
-	my $parsed_msg = solveMessage($msg);
-	chatLog("g", "$parsed_msg\n") if ($config{logGuildChat});
-	message "$parsed_msg\n", "guild";
-	Plugins::callHook('packet_guildMsg', {Msg => $parsed_msg});
-}
-```
-
-#### Guild Member Updates (lines 3591-3627)
-```perl
-sub guild_member_update {
-	my ($self, $args) = @_;
-	return unless $char->{guildID};
-	
-	my $ID = $args->{ID};
-	my $member = $guild{members}{$ID};
-	
-	if ($member) {
-		$member->{name} = bytesToString($args->{name});
-		$member->{jobID} = $args->{jobID};
-		$member->{lv} = $args->{lv};
-		$member->{online} = $args->{online};
-		$member->{position} = $args->{position};
-	} else {
-		$guild{members}{$ID} = {
-			name => bytesToString($args->{name}),
-			jobID => $args->{jobID},
-			lv => $args->{lv},
-			online => $args->{online},
-			position => $args->{position},
-			ID => $ID
-		};
-	}
-	
-	message TF("%s (%s) - %s\n", $guild{members}{$ID}{name}, $jobs_lut{$args->{jobID}}, $args->{online} ? T("Online") : T("Offline")), "guild";
-}
-```
-
-#### Guild Alliance Information (lines 3629-3654)
-```perl
-sub guild_alliance_info {
-	my ($self, $args) = @_;
-	return unless $char->{guildID};
-	
-	$guild{alliance}{ID} = $args->{ID};
-	$guild{alliance}{name} = bytesToString($args->{name});
-	$guild{alliance}{master} = bytesToString($args->{master});
-	
-	message TF("Alliance: %s (Master: %s)\n", $guild{alliance}{name}, $guild{alliance}{master}), "guild";
-}
-```
-
-### Key Features:
-- Handles guild chat messages with proper formatting and logging
-- Processes guild member updates (online status, level, job, position)
-- Maintains guild member roster in memory
-- Supports guild alliance information display
-- Integrates with plugin system via hooks
-- Uses internationalization (T()/TF()) for localized messages
-- Provides detailed member information display
-- Maintains data consistency for guild operations
-- Supports configurable logging (logGuildChat)
+**Method Implementations:**
+
+- guild_members_list - Guild member list handler (lines 6435-6478)
+  - Handles ZC_MEMBERMGR_INFO (0154), 0AA5, and 0B7D packets
+  - Processes different packet formats with varying member data structures:
+    - 0B7D: 58 bytes, includes name (ID, charID, hair_style, hair_color, sex, jobID, lv, contribution, online, position, lastLoginTime, name)
+    - 0AA5: 34 bytes, no name (ID, charID, hair_style, hair_color, sex, jobID, lv, contribution, online, position, lastLoginTime)
+    - 0154: 104 bytes, includes memo (ID, charID, hair_style, hair_color, sex, jobID, lv, contribution, online, position, memo, name)
+  - Converts name from bytes to string when present
+  - Requests character name for 0AA5 packets
+  - Stores member data in $guild{member} array
+
+- guild_invite_result - Guild invite response handler (lines 6480-6503)
+  - Handles ZC_ACK_REQ_JOIN_GUILD (0169) packet
+  - Processes different response types:
+    - 0 = Already in guild
+    - 1 = Offer rejected
+    - 2 = Offer accepted
+    - 3 = Guild full
+  - Displays appropriate translated messages for each response type
+  - Handles unknown response types with fallback message
+
+- guild_location - Guild member position handler (lines 6505-6522)
+  - Handles ZC_NOTIFY_POSITION_TO_GUILDM (01EB) packet
+  - Updates position for online guild members
+  - Uses account ID to match members (supports multiple chars per account)
+  - Skips updates for invalid coordinates (0,0)
+  - Updates both current and destination positions
+
+- guild_leave - Guild member leave handler (lines 6527-6548)
+  - Handles ZC_ACK_LEAVE_GUILD (015A, 0A83) packets
+  - Processes both direct name and charID based member identification
+  - Removes leaving member from $guild{member} array
+  - Displays formatted leave message with reason
+  - Handles byte string conversion for name and reason fields
+
+- guild_expulsion - Guild member expulsion handler (lines 6547-6569)
+  - Handles ZC_ACK_BAN_GUILD (015C, 0839, 0A82) packets
+  - Similar to guild_leave but for forced removals
+  - Processes both direct name and charID based member identification
+  - Removes expelled member from $guild{member} array
+  - Displays formatted expulsion message with reason
+  - Handles byte string conversion for name and reason fields
+
+- guild_member_online_status - Guild member login/logout handler (lines 6571-6591)
+  - Handles ZC_UPDATE_CHARSTAT (016D) and ZC_UPDATE_CHARSTAT2 (01F2) packets
+  - Tracks online status (0=offline, 1=online) for guild members
+  - Updates member status in $guild{member} array
+  - Displays login/logout messages in guild chat
+  - TODO: Could also update sex, hair_style, hair_color from ZC_UPDATE_CHARSTAT2
+
+- guild_update_member_position - Guild member position update handler (lines 6593-6615)
+  - Handles ZC_ACK_REQ_CHANGE_MEMBERS (0156) packets
+  - Processes position changes for multiple guild members
+  - Uses 12-byte member position info structure (ID, charID, position)
+  - Updates member positions in $guild{member} array
+  - Displays formatted position change messages
+  - References $guild{positions} array for title lookups
+
+- guild_members_title_list - Guild position titles handler (lines 6617-6630)
+  - Handles ZC_POSITION_ID_NAME_INFO (0166) packets
+  - Processes guild position title information:
+    - Each entry contains position ID (4 bytes) and title name (24 bytes)
+    - Stores titles in $guild{positions} array
+    - Converts byte strings to Perl strings for title names
+  - Packet format: <packet len>.W { <position id>.L <position name>.24B }*
+  - Used by guild_update_member_position for title lookups
+
+- guild_name - Guild basic information handler (lines 6632-6666)
+  - Handles ZC_UPDATE_GDID (016C) packets
+  - Processes guild information:
+    - guildID (4 bytes)
+    - emblemID (4 bytes)
+    - mode flags (4 bytes):
+      - 0x01 = allow invite
+      - 0x10 = allow expel
+    - ismaster flag (1 byte)
+    - guildName (24 bytes)
+  - Stores information in $char->{guild} hash
+  - Server-specific behavior:
+    - twRO: Requests basic info (0), hostile alliances (3), members list (1)
+    - jRO: Requests members list (1)
+    - Others: Requests master check, expulsion list (4), basic info (0), members list (1), emblem
+  - Packet format: <guild id>.L <emblem id>.L <mode>.L <ismaster>.B <inter sid>.L <guild name>.24B
+
+- guild_request - Guild invite request handler (lines 6668-6680)
+  - Handles ZC_REQ_JOIN_GUILD (016A) packets
+  - Processes guild invite requests:
+    - guildID (4 bytes)
+    - guildName (24 bytes)
+  - Stores request information in %incomingGuild hash:
+    - ID = guildID
+    - Type = 1 (guild request)
+  - Sets timeout for auto-deny if configured ($timeout{'ai_guildAutoDeny'})
+  - Displays formatted invite message
+  - Packet format: <guild id>.L <guild name>.24B
+
+- guild_master_member - Guildmaster status handler (lines 6682-6703)
+  - Handles guildmaster status notifications (ZC_ACK_GUILD_MENUINTERFACE, 014E)
+  - Processes different status types:
+    - 0xd7 = Guildmaster status
+    - 0x57 = Not guildmaster status
+  - Displays appropriate messages based on status
+  - Handles unknown status types with warning
+  - Packet format: <menu flag>.L
+  - Menu flags:
+    - 0x00 = Basic Info (always on)
+    - 0x01 = Member manager
+    - 0x02 = Positions
+    - 0x04 = Skills
+    - 0x10 = Expulsion list
+    - 0x40 = Unknown (GMENUFLAG_ALLGUILDLIST)
+    - 0x80 = Notice
+
+- guild_alliance - Guild alliance result handler (lines 6705-6729)
+ - Handles ZC_ACK_REQ_ALLY_GUILD (0173) packets
+ - Processes different alliance result codes:
+   - 0 = Already allied
+   - 1 = You rejected the offer
+   - 2 = You accepted the offer
+   - 3 = They have too many alliances
+   - 4 = You have too many alliances
+   - 5 = Alliances are disabled
+ - Displays appropriate translated messages for each result code
+ - Handles unknown result codes with warning
+ - Packet format: <answer>.B
+
+- guild_member_setting_list - Guild position settings handler (lines 6731-6751)
+ - Handles ZC_POSITION_INFO (0160) packets
+ - Processes guild position settings:
+   - Each position uses 16 bytes (position id, mode flags, ranking, pay rate)
+   - Mode flags:
+     - 0x01 = allow invite
+     - 0x10 = allow expel
+     - 0x100 = guild storage access
+   - Stores settings in $guild{positions} array
+   - Updates invite/punish/gstorage permissions based on mode flags
+   - Stores feeEXP (pay rate) for each position
+ - Packet format: <packet len>.W { <position id>.L <mode>.L <ranking>.L <pay rate>.L }*
+ - TODO: Properly handle ranking field
+
+- guild_skills_list - Guild skills information handler (lines 6753-6773)
+ - Handles ZC_GUILD_SKILLINFO (0162) packets
+ - Processes guild skill information:
+   - Each skill uses 37 bytes (skillID, targetType, level, sp, range, skillName, up)
+   - Skill data structure:
+     - skillID (2 bytes)
+     - targetType (4 bytes)
+     - level (2 bytes)
+     - sp cost (2 bytes)
+
+- guild_expulsion_list - Guild ban list handler (lines 6775-6807)
+ - Handles ZC_BAN_LIST (0163) and 0B7C packets
+ - Processes two different packet formats:
+   - 0B7C format (68 bytes per entry):
+     - charID (4 bytes)
+     - reason (40 bytes)
+     - name (24 bytes)
+   - 0163 format (88 bytes per entry):
+     - name (24 bytes)
+     - account name (24 bytes)
+     - reason (40 bytes)
+ - Clears existing expulsion list before processing
+ - Converts name and reason fields from bytes to strings
+ - Stores expulsion data in $guild{expulsion} array
+ - Packet formats:
+   - 0163: <packet len>.W { <char name>.24B <account name>.24B <reason>.40B }*
+   - 0B7C: <packet len>.W { <charID>.L <reason>.40B <name>.24B }*
+     - attack range (2 bytes)
+     - skill name (24 bytes)
+
+- guild_member_map_change - Guild member map change handler (lines 6809-6823)
+ - Handles ZC_NOTIFY_MAPPROPERTY (01EC) packets
+ - Processes guild member map changes:
+   - Packet format: <account id>.L <char id>.L <status>.L <map name>.16B
+   - Updates member's map information in guild data
+   - Clears position (pos) and destination position (pos_to) data
+   - Converts map name from bytes to string
+   - Logs map change with debug message
+   - Matches member by charID
+   - Packet triggers when guild member changes maps
+     - upgradable flag (1 byte)
+   - Stores skill information in $guild{skills} hash
+   - Converts skill name from bytes to string
+   - Only sets level if not previously set
+ - Packet format: <packet len>.W <skill points>.W { <skill id>.W <type>.L <level>.W <sp cost>.W <atk range>.W <skill name>.24B <upgradable>.B }*
+ - TODO: Merge with skills_list handler
+
+- guild_member_add - New guild member handler (lines 6824-6840)
+ - Handles ZC_ADD_MEMBER_TO_GUILD (0182) and 0B7E packets
+ - Processes new guild member information:
+   - Packet format: <account>.L <char id>.L <hair style>.W <hair color>.W <gender>.W <class>.W <level>.W <contrib exp>.L <state>.L <position>.L <memo>.50B <name>.24B
+   - Adds member to $guild{member} array
+   - Converts member name from bytes to string
+   - Displays join message in guild chat
+   - Handles both old (0182) and new (0B7E) packet formats
+   - Stores comprehensive member data:
+     - Account ID, character ID
+     - Appearance details (hair, gender, class)
+     - Level and contribution
+     - Position and memo
+     - Character name
+
+- guild_notice - Guild notice handler (lines 6842-6857)
+ - Handles ZC_GUILD_NOTICE (016F) packets
+ - Processes guild notice messages:
+   - Packet format: <subject>.60B <notice>.120B
+   - Strips language codes from subject and notice
+   - Formats message with header/footer if content exists
+   - Skips display if both subject and notice are empty
+   - Output format:
+     ---Guild Notice---
+     [Subject]
+     
+     [Notice]
+     ------------------
+
+- guild_storage_log - Guild storage log handler (lines 9577-9613)
+ - Handles guild storage access logs
+ - Processes different result codes:
+   - 0/1: Successful get/put operations
+   - 2: Empty storage
+   - 3: Storage not in use
+ - Action types:
+   - 0: Get item
+   - 1: Put item
+ - Log format details:
+   - Item structure: ID, nameID, amount, action, upgrade, uniqueID, identified, type_equip, cards, charName, time, attribute
+   - Displays formatted log with:
+     - Character name
+     - Item name
+     - Amount
+     - Action type
+     - Timestamp
+   - Includes header/footer separators
+
+- guild_emblem - Guild emblem handler (lines 10368-10373)
+  - Handles ZC_GUILD_EMBLEM_IMG (0152) packets
+  - Currently just debug stub (TODO implementation)
+  
+- guild_emblem_update - Guild emblem update handler (lines 10375-10380)
+  - Handles ZC_UPDATE_GDID (01B4) packets
+  - Currently just debug stub (TODO implementation)
+
+- char_emblem_update - Character emblem update handler (lines 10382-10387)
+  - Handles ZC_UPDATE_CHARSTAT2 (0B47) packets
+  - Currently just debug stub (TODO implementation)
+
+- guild_position_changed - Guild position change handler (lines 10389-10394)
+  - Handles ZC_POSITION_CHANGE (0174) packets
+  - Currently just debug stub (TODO implementation)
+
+- guild_position - Guild position handler (lines 10396-10401)
+  - Handles ZC_GUILD_POSITION (0AFD) packets
+  - Currently just debug stub (TODO implementation)
+
+- guild_unally - Guild alliance removal handler (lines 10403-10408)
+  - Handles ZC_DELETE_RELATED_GUILD (0184) packets
+  - Currently just debug stub (TODO implementation)
+
+- guild_opposition_result - Guild opposition result handler (lines 10410-10415)
+  - Handles ZC_GUILD_OPPOSITION_RESULT (0181) packets
+  - Currently just debug stub (TODO implementation)
+
+- guild_alliance_added - Guild alliance addition handler (lines 10417-10422)
+  - Handles ZC_ADD_RELATED_GUILD (0185) packets
+  - Currently just debug stub (TODO implementation)
+  - Note: This packet doesn't exist in eA
+
+- guild_info() - Guild basic information handler (lines 6419-6433)
+  - Handles ZC_GUILD_INFO, ZC_GUILD_INFO2, ZC_GUILD_INFO3 packets
+  - Stores guild information in %guild hash
+  - Converts byte strings to Perl strings for name/master fields
+  - Increments member count automatically
+
+- guild_members_list() - Guild member list handler (lines 6442-6478)
+  - Handles ZC_MEMBERMGR_INFO packets
+  - Supports multiple packet versions (0154, 0AA5, 0B7D)
+  - Parses member data with different formats based on packet type
+  - Stores member information in $guild{member} array
+  - Handles character name resolution for some packet types
+
+- guild_create_result() - Handles guild creation results (lines 6396-6417)
+  - Processes ZC_RESULT_MAKE_GUILD packet
+  - Handles different creation result types:
+    - 0 = Success
+    - 1 = Already in guild
+    - 2 = Guild name exists
+    - 3 = Missing Emperium item
+  - Parameters:
+    - $args->{type} - Result code (0-3)
+  - Comments:
+    - "0167 <result>.B" (packet format)
+    - Detailed result code descriptions in comments
+
+- guild_ally_request() - Handles guild alliance requests (lines 6359-6371)
+  - Processes ZC_REQ_ALLY_GUILD packet
+  - Stores inviter's account ID and guild name
+  - Sets timeout for auto-deny if configured
+  - Parameters:
+    - $args->{ID} - Inviter's account ID
+    - $args->{guildName} - Guild name (24B string)
+  - Comments:
+    - "0171 <inviter account id>.L <guild name>.24B" (packet format)
+    - "Freya calls it an account ID" (note about ID type)
+
+- guild_broken() - Handles guild break notifications (lines 6378-6394)
+  - Processes ZC_ACK_DISORGANIZE_GUILD_RESULT packet
+  - Handles different break result flags:
+    - 0 = success (clears guild data)
+    - 1 = invalid key
+    - 2 = members still in guild
+  - Parameters:
+    - $args->{flag} - Result code (0-2)
+  - Comments:
+    - "015E <reason>.L" (packet format)
+    - Detailed flag descriptions in comments
+
+- guild_allies_enemy_list() - Guild alliance/enemy list handler (lines 6330-6357)
+  - Handles ZC_MYGUILD_BASIC_INFO packet (014C)
+  - Packet format: <packet len>.W { <relation>.L <guild id>.L <guild name>.24B }*
+  - Clears and rebuilds guild ally/enemy lists
+  - Processes each guild entry (32 bytes each):
+    - type=0 Ally
+    - type=1 Enemy
+  - Stores guild IDs and names in %guild hash
+  - Debugs ally/enemy relationships
