@@ -1,5 +1,62 @@
 **Login Handlers:**
 
+**secure_login_key** - Secure login key handler (lines 11377-11381)
+- Processes secure login key notifications
+- Stores secure key in secureLoginKey variable
+- Outputs debug message with hexadecimal representation of key
+- Uses "connection" debug category
+- Simple implementation focused on key storage
+
+**received_login_token** - Login token handler (lines 8022-8029)
+- Processes login token notifications
+- Skips processing for XKore mode 1 (version == 1)
+- Gets master server configuration
+- Sends token to server with:
+  - Username and password
+  - Master version and client version
+  - Login token and length
+  - OTP IP and port
+- Comment notes that rathena uses 0064 packet instead of 0825
+- Simple implementation focused on token forwarding
+
+**character_ban_list** - Character ban list handler (lines 7945-7948)
+- Processes character ban list notifications
+- Contains only comment about packet structure:
+  - Header + Len + CharList[character_name(size:24)]
+- Empty implementation (stub function)
+- No actual processing or message display
+
+**login_error_game_login_server** - Character server login error handler (lines 5454-5456)
+- Handles login errors specific to character server
+- Displays error message for invalid character selection
+- Resets network state to 1 (disconnected)
+- Simple implementation with minimal error handling
+
+**login_error** - Login error handler (lines 5356-5452)
+- Processes login error responses from server
+- Handles multiple error types:
+  - REFUSE_INVALID_ID/REFUSE_INVALID_ID2: Account doesn't exist
+  - REFUSE_INVALID_PASSWD/REFUSE_INVALID_PASSWD2: Password error
+  - REFUSE_BAN_BY_GM/REFUSE_NOT_CONFIRMED: Account blocked
+  - REFUSE_INVALID_VERSION: Version mismatch
+  - REFUSE_BLOCK_TEMPORARY: Temporary connection block
+  - REFUSE_USER_PHONE_BLOCK: Phone lock
+  - REFUSE_EMAIL_NOT_CONFIRMED: Email not confirmed
+  - REFUSE_BLOCKED_ID: User blocked
+  - REFUSE_BLOCKED_COUNTRY: Country blocked
+  - REFUSE_BILLING: Billing issues
+  - REFUSE_CHANGE_PASSWD_FORCE2: Password change required
+  - REFUSE_ACCOUNT_NOT_PREMIUM: Premium server access denied
+  - REFUSE_NOT_ALLOWED_IP_ON_TESTING: Connection delayed
+  - REFUSE_TOKEN_EXPIRED: Token expired
+- Manages reconnection attempts:
+  - Prompts for username/password re-entry
+  - Resets connection timeouts
+  - Handles offline mode transitions
+- Triggers hooks:
+  - invalid_password
+  - dial
+
 **received_characters_slots_info** - Character slot information handler (lines 811-836)
 - Manages character slot configuration during login
 - Handles different slot types:

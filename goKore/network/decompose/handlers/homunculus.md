@@ -1,5 +1,33 @@
 **Homunculus Handlers:**
 
+- slave_calcproperty_handler - Slave property calculator (lines 6281-6291)
+  - Utility function for calculating slave (homunculus/mercenary) properties
+  - Used by homunculus_property and similar handlers
+  - Currently only calculates attack_speed:
+    * Formula: 200 - (aspd < 10 ? 10 : aspd/10)
+    * Converts server aspd value to client-side attack speed
+  - Contains commented-out code for hp_max/sp_max calculation
+  - Has TODO comment about calculation optimization
+  - Simple implementation focused on property calculation
+
+- homunculus_food - Homunculus feeding handler (lines 6265-6278)
+  - Processes homunculus feeding results (ZC_FEED_MER)
+  - Handles two result scenarios:
+    * Success (result=1):
+      - Displays "Fed homunculus with [item]" message
+    * Failure (result=0):
+      - Shows error about missing food
+      - Implements auto-vaporize safety feature:
+        - Checks if hunger <= 11
+        - Verifies vaporize timeout (5 seconds)
+        - Sends vaporize skill (244,1) if conditions met
+        - Updates vaporize_time timestamp
+        - Displays "Critical hunger" message
+  - Uses itemNameSimple() for food item display
+  - Result codes (from packet comments):
+    * 0 = failure
+    * 1 = success
+
 - enforce_homun_state() - Validates homunculus state (lines 2927-2936)
   - Checks if character exists
   - Creates temporary homunculus if missing

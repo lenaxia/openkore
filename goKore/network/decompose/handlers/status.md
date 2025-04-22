@@ -1,38 +1,37 @@
-**Status Change Handlers:**
+# Character Status Related Handlers
 
-- unit_levelup() - Handles level up and effect notifications (lines 2819-2844)
-  - Processes different effect types:
-    * Base level up (triggers base_level hook)
-    * Job level up (triggers job_level hook)
-    * Refine success/failure
-    * Pharmacy success/failure
-    * Game over
-  - Displays appropriate messages for each effect type
-  - Uses Actor::get() to retrieve actor information
+**Method Implementations:**
 
-- stats_added() - Handles status change acknowledgments (lines 1676-1738)
-  - Processes ZC_STATUS_CHANGE_ACK packets
-  - Handles success/failure cases (207 = failure)
-  - Updates character stats including:
-    - Basic stats (STR, AGI, VIT, INT, DEX, LUK)
-    - Special stats (POW, STA, WIS, SPL, CON, CRT)
-  - Calls packet_charStats hook after processing
-  - Debug logs each stat update
-
-- stats_info() - Character status updates (lines 1743-1790)
-  - Processes ZC_STATUS packets
+- actor_status_active - Status effect handler (lines 4220-4239)
+  - Processes status effect activation notifications
   - Requires in-game state (changeToInGameState)
-  - Updates comprehensive character stats including:
-    - Base stats (STR, AGI, VIT, INT, DEX, LUK) with points
-    - Attack values (physical and magic)
-    - Defense values (physical and magic)
-    - Combat stats (hit, flee, critical)
-    - Free stat points
-  - Detailed debug output showing all updated stats
-- stat_info2() - Extended status information (lines 1794-1825)
-  - Processes ZC_COUPLESTATUS packets
-  - Requires in-game state (changeToInGameState)
-  - Updates base and bonus values for:
-    - STR, AGI, VIT, INT, DEX, LUK
-  - Triggers inventory callback (onStatInfo2) for certain server types
-  - Debug logs each updated stat with base+bonus values
+  - Gets status type, ID, and duration from packet
+  - Translates numeric status type to named status using statusHandle
+  - Falls back to "UNKNOWN_STATUS_$type" for undefined statuses
+  - Special handling for cart activation (type 673)
+  - Sets status on actor with appropriate duration
+  - Special handling for Rolling Cutter counters (type 0x153):
+    * Updates character's spirit counter value
+    * Displays appropriate message based on target (self vs other)
+    * Uses "parseMsg_statuslook" message category
+- resurrection - Resurrection handler (lines 11341-11375)
+  - Processes resurrection notifications
+  - Gets target ID and type from packet
+  - Gets player reference from playersList
+  - Handles different target scenarios:
+    * Self resurrection (targetID = accountID):
+      - Displays "You have been resurrected" message
+      - Clears character dead and dead_time flags
+      - Sets character resurrected flag
+    * Other player resurrection:
+      - Clears player dead flag
+      - Resets player deltaHp to 0
+    * Slave resurrection (isMySlaveID):
+      - Enforces homunculus state
+      - Gets slave reference
+      - For homunculus slaves:
+        * Displays "Slave Resurrected" message
+        * Clears homunculus_info dead flag
+        * Adds homunculus to SlaveManager if needed
+      - Displays resurrection message with actor name
+  - Uses "info" message category
