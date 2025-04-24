@@ -421,3 +421,14 @@
    - Proper item naming and identification
  - Uses internationalized strings (T())
  - Outputs to 'list' message channel
+
+- change_title - Character title change handler (lines 8975-8980)
+  - Processes character title change notifications
+  - Displays message with the new title ID
+  - Uses "info" message category
+  - Contains TODO comment about result parameter
+  - Simple implementation focused on notification
+  - No plugin hooks triggered
+  - No state changes beyond logging
+  - Packet: 0A2F
+  - Format: 'C V' (result title_id)

@@ -1,6 +1,63 @@
 # Inventory Related Handlers
 
 **Method Implementations:**
+- identify - Item identification result handler (lines 6917-6930)
+  - Processes item identification result notifications
+  - Handles success/failure based on flag value:
+    * 0: Successful identification
+      - Gets item from character's inventory by ID
+      - Sets identified flag to 1
+      - Updates item's type_equip based on nameID
+      - Displays success message with item name and binID
+    * Other: Failed identification
+      - Displays "Item Appraisal has failed" message
+  - Clears identifyID array after processing
+  - Uses "info" message category for success messages
+  - Packet: 0179 (ZC_ACK_ITEMIDENTIFY)
+  - Format: 'W B' (ID flag)
+- identify_list - Identifiable items list handler (lines 6898-6915)
+  - Processes list of items that can be identified
+  - Clears existing identifyID array
+  - Parses raw message data to extract item IDs:
+    * Processes message in 2-byte chunks
+    * Gets item from character's inventory by ID
+    * Adds item's binID to identifyID array
+  - Counts number of identifiable items
+  - Displays message with item count
+  - Suggests using 'identify' command
+  - Uses "info" message category
+  - Packet: 0177 (ZC_ITEMIDENTIFY_LIST)
+  - Format: 'W a*' (len itemList)
+- item_upgrade - Item upgrade result handler (lines 7120-7131)
+  - Processes item upgrade result notifications
+  - Extracts type, ID, and upgrade level from args
+  - Gets item from character's inventory by ID
+  - Updates item's upgrade level
+  - Displays message with item name and new upgrade level
+  - Uses "parseMsg/upgrade" message category
+  - Updates item name to reflect new upgrade level
+  - Simple implementation focused on inventory update
+- item_used - Item usage result handler (lines 6956-7002)
+  - Processes item usage result notifications
+  - Extracts ID, itemID, actorID, remaining, and success from args
+  - Prepares hook arguments for packet_useitem hook
+  - Handles different user scenarios:
+    * Self usage (ID matches accountID):
+      - Gets item from character's inventory by ID
+      - For successful usage:
+        * Calculates amount used
+        * Displays success message with item details
+        * Calls inventoryItemRemoved to update inventory
+        * Adds item details to hook arguments
+      - For failed usage:
+        * Displays failure message with item name
+      - Handles unknown items with generic messages
+    * Other actor usage:
+      - Gets actor reference using Actor::get
+      - Gets item name using itemNameSimple
+      - Displays usage message with actor name and item
+  - Triggers packet_useitem hook with all arguments
+  - Uses "useItem" message category (priority 1 for self, 2 for others)
 - inventory_items_stackable - Stackable inventory items handler (lines 5210-5230)
   - Processes stackable items in inventory
   - Requires in-game state (changeToInGameState)
@@ -60,15 +117,6 @@
     - Four Spirit Analysis skill (7)
     - Unknown reasons (default)
   - Packets: 00AF, 07FA
-
-- inventory_items_nonstackable - Non-stackable items handler (lines 1101-1126)
-  - Handles adding non-stackable items to inventory
-  - Manages equipment updates
-  - Uses _items_list helper method
-  - Processes item additions through inventory->add()
-  - Handles equipment slot updates
-  - Triggers packet_inventory hook
-  - Packets: 00A4, 0295, 02D0, 0992, 0A0D
 
 # Cart Related Handlers
 

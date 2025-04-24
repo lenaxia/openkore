@@ -155,3 +155,127 @@
   - Displays which value from server
   - Simple implementation with minimal functionality
   - Packet name: ZC_STARPLACE
+
+- area_spell - Area effect spell handler (lines 4267-4313)
+  - Processes area effect spell notifications (including traps)
+  - Supports multiple packet formats:
+    * 011F: Basic format with ID, sourceID, x, y, type, isVisible
+    * 01C9: Extended format with scribble message support
+    * 08C7: Newer format with range parameter
+  - Manages spell tracking:
+    * Adds spell to spellsID array
+    * Updates spell properties in spells hash
+    * Tracks position, type, visibility
+  - Special handling for warp portals (type 0x81)
+  - Displays debug message with spell name and location
+  - Special handling for scribble messages (01C9 packet)
+  - Triggers packet_areaSpell hook with all parameters
+  - Packets: 011F, 01C9, 08C7
+
+- area_spell_multiple2 - Multiple area spells handler (lines 4315-4361)
+  - Processes multiple area effect spells in a single packet
+  - Parses variable-length data with fixed-size entries (18 bytes each)
+  - Unpacks each entry with format: 'a4 a4 v2 V C2'
+  - Extracts: ID, sourceID, x, y, type, range, isVisible
+  - Similar spell tracking to area_spell:
+    * Adds spells to spellsID array
+    * Updates spell properties in spells hash
+    * Tracks position, type, visibility, range
+  - Special handling for warp portals (type 0x81)
+  - Displays debug message for each spell
+  - Triggers packet_areaSpell hook with parameters from last spell
+  - Packet: 099F
+
+- area_spell_multiple3 - Multiple area spells with level handler (lines 4363-4411)
+  - Processes multiple area effect spells with level information
+  - Parses variable-length data with fixed-size entries (19 bytes each)
+  - Unpacks each entry with format: 'a4 a4 v2 V C3'
+  - Extracts: ID, sourceID, x, y, type, range, isVisible, lvl
+  - Similar spell tracking to area_spell_multiple2:
+    * Adds spells to spellsID array
+    * Updates spell properties in spells hash
+    * Tracks position, type, visibility, range, level
+  - Special handling for warp portals (type 0x81)
+  - Displays debug message for each spell including level
+  - Triggers packet_areaSpell hook with parameters from last spell
+  - Packet: 09CA
+- skill_delete - Skill removal handler (lines 9614-9624)
+  - Processes skill removal notifications
+  - Creates Skill object from skillID
+  - Performs validation checks:
+    * Returns early if skill object creation fails
+    * Returns early if skill doesn't exist in character's skills
+  - Displays "Lost skill" message with skill name
+  - Removes skill from character's skills hash
+  - Removes skill handle from skillsID array
+  - Uses "skill" message category
+  - Simple implementation focused on skill removal
+- skill_exchange_item - Material exchange skill handler (lines 7863-7880)
+  - Processes material exchange skill notifications
+  - Handles different skill types:
+    * Type 0: Change Material
+      - Displays "Change Material is ready" message
+      - Suggests using 'cm' command
+    * Other types: Four Spirit Analysis
+      - Displays "Four Spirit Analysis is ready" message
+      - Suggests using 'analysis' command
+  - Contains detailed comments about type values:
+    * 0: Change Material
+    * 1: Elemental Analysis Lv 1
+    * 2: Elemental Analysis Lv 2
+  - Sets skillExchangeItem global variable to type+1
+  - Uses "info" message category
+  - Simple implementation focused on notification
+- skill_msg - Skill message handler (lines 9285-9294)
+  - Processes skill-related messages
+  - Looks up message ID in msgTable array
+  - For known message IDs:
+    * Creates Skill object from skill ID
+    * Gets skill name from the Skill object
+    * Displays formatted message with skill name and message text
+    * Uses "info" message category
+  - For unknown message IDs:
+    * Displays warning about missing message
+    * Suggests updating msgstringtable.txt from data.grf
+    * Includes message ID and skill ID in warning
+    * Uses "warning" message category
+  - Simple implementation focused on message display
+- skills_list - Skills list handler (lines 9326-9393)
+  - Processes skill list notifications for different actors
+  - Requires in-game state (changeToInGameState)
+  - Supports multiple packet formats:
+    * 0B32: Compact format with 15-byte entries
+    * Others: Extended format with 37-byte entries including skill handle
+  - Determines owner type and appropriate hook based on packet switch:
+    * 010F/0B32: Character skills (OWNER_CHAR)
+    * 0235: Homunculus skills (OWNER_HOMUN)
+    * 029D: Mercenary skills (OWNER_MERC)
+  - Selects appropriate skillsID reference based on owner type
+  - Clears existing skills from the actor's skills hash
+  - Parses variable-length data with fixed-size entries
+  - For each skill entry:
+    * Unpacks skill data using appropriate format
+    * Gets skill handle from ID
+    * Updates actor's skills hash with all skill properties
+    * Adds handle to skillsID array if not already present
+    * Adds skill to Skill::DynamicInfo
+    * Triggers appropriate hook with skill details
+  - Contains TODO comments about moving skillsID to Actor
+  - Complex implementation for comprehensive skill management
+  - Packets: 010F, 0235, 029D, 0B32
+- skill_update - Skill update handler (lines 9395-9420)
+  - Processes skill update notifications
+  - Extracts skill details from args:
+    * skillID, lv, sp, range, up
+  - Creates Skill object from skillID
+  - Gets handle and name from the Skill object
+  - Updates character's skills hash with:
+    * Level, SP cost, range, upgradable status
+  - Adds skill to Skill::DynamicInfo with:
+    * ID, handle, level, SP, range, target type
+    * Sets owner to Skill::OWNER_CHAR
+  - Triggers packet_charSkills hook with:
+    * ID, handle, level, upgradable, level2
+  - Outputs debug message with skill name and level
+  - Contains TODO comment about using type parameter
+  - Simple implementation focused on skill data update
