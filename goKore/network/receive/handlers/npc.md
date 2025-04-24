@@ -134,3 +134,15 @@
   - Supports different image types (type=2 for show, 255 for hide)
   - Manages talk{image} state
   - Logs image operations with debug messages
+
+- show_script - NPC script message handler (lines 3375-3387)
+  - Handles script/show messages from NPCs
+  - Processes message content and NPC ID
+  - Uses bytesToString for message conversion
+  - Looks up NPC by ID in npcsList
+  - Outputs debug message with NPC name and message
+  - Calls plugin hook 'show_script' with:
+    - ID: NPC ID
+    - message: Decoded message content
+  - Handles packet type:
+    - 08B3: NPC script/show packet

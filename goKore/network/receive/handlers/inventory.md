@@ -290,3 +290,16 @@
     * INVTYPE_STORAGE/INVTYPE_GUILD_STORAGE: Storage/guild storage
   - Calls appropriate onitemListStart method for each container
   - Warns on unsupported container types
+
+- inventory_expansion_result - Inventory expansion result handler (lines 12155-12180)
+  - Processes inventory expansion result notifications (0B18)
+  - Handles multiple result codes:
+    * EXPAND_INVENTORY_RESULT_SUCCESS (0x0): Success message
+    * EXPAND_INVENTORY_RESULT_FAILED (0x1): Generic failure message
+    * EXPAND_INVENTORY_RESULT_OTHER_WORK (0x2): Window closure required
+    * EXPAND_INVENTORY_RESULT_MISSING_ITEM (0x3): Missing required item
+    * EXPAND_INVENTORY_RESULT_MAX_SIZE (0x4): Maximum limit reached
+    * Other: Unknown result message with code
+  - Uses "info" message category for all messages
+  - References msgstringtable for messages
+  - Comprehensive error handling

@@ -325,3 +325,13 @@
     - type=1 Enemy
   - Stores guild IDs and names in %guild hash
   - Debugs ally/enemy relationships
+
+# Emblem Related Handlers
+
+**Method Implementations:**
+- char_emblem_update - Character emblem update handler (lines 10384-10387)
+  - Processes character emblem update notifications
+  - Outputs debug message with packet information
+  - Contains TODO comment indicating incomplete implementation
+  - Packet: 0B47
+  - Simple implementation focused on debugging

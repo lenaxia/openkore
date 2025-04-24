@@ -10,3 +10,15 @@
   - Uses "useItem" message category
   - Contains TODO comment: "only used to report failure? $args->{success}"
   - Simple implementation focused on notification and inventory update
+
+- item_preview - Item preview handler (lines 12182-12193)
+  - Processes item preview notifications
+  - Gets item reference from inventory using ID
+  - Updates item properties:
+    * broken status (if defined)
+    * upgrade level
+    * card information
+    * option information
+  - Updates item name using itemName function
+  - Simple implementation focused on item data updates
+
