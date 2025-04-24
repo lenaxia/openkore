@@ -273,13 +273,6 @@
   - Converts byte strings to Perl strings for name/master fields
   - Increments member count automatically
 
-- guild_members_list() - Guild member list handler (lines 6442-6478)
-  - Handles ZC_MEMBERMGR_INFO packets
-  - Supports multiple packet versions (0154, 0AA5, 0B7D)
-  - Parses member data with different formats based on packet type
-  - Stores member information in $guild{member} array
-  - Handles character name resolution for some packet types
-
 - guild_create_result() - Handles guild creation results (lines 6396-6417)
   - Processes ZC_RESULT_MAKE_GUILD packet
   - Handles different creation result types:
@@ -326,12 +319,3 @@
   - Stores guild IDs and names in %guild hash
   - Debugs ally/enemy relationships
 
-# Emblem Related Handlers
-
-**Method Implementations:**
-- char_emblem_update - Character emblem update handler (lines 10384-10387)
-  - Processes character emblem update notifications
-  - Outputs debug message with packet information
-  - Contains TODO comment indicating incomplete implementation
-  - Packet: 0B47
-  - Simple implementation focused on debugging

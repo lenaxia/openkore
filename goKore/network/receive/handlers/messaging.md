@@ -282,3 +282,151 @@
   - Supports Chinese character detection in names
   - Handles null-padded message formats
   - Processes message bytes to string conversion
+
+
+## Chat room management
+
+- chat_removed - Chat room removal handler (lines 5813-5823)
+  - Processes chat room removal packets (ZC_DESTROY_ROOM)
+  - Updates chat room data structures:
+    * Removes room ID from chatRoomsID list
+    * Deletes room from chatRooms hash
+  - Stores removed chat data for hook
+  - Triggers chat_removed hook with:
+    * Room ID
+    * Room data (before removal)
+  - Simple implementation for room removal events
+
+- chat_user_leave - Chat room user leave handler (lines 5792-5809)
+  - Processes user leave notifications (ZC_MEMBER_EXIT)
+  - Converts user name bytes to string
+  - Updates chat room data structures:
+    * Removes user from room's users hash
+    * Removes user from currentChatRoomUsers list
+    * Updates room's user count
+  - Handles two scenarios:
+    * Current character leaving:
+      - Removes room from chatRoomsID list
+      - Deletes room from chatRooms hash
+      - Clears currentChatRoomUsers array
+      - Resets currentChatRoom
+      - Displays "You left" message
+      - Triggers chat_leave hook
+    * Other user leaving:
+      - Displays "[user] has left" message
+  - Leave flags (from packet comments):
+    * 0 = left
+    * 1 = kicked
+
+- chat_user_join - Chat room user join handler (lines 5775-5785)
+  - Processes user join notifications (ZC_MEMBER_NEWENTRY)
+  - Converts user name bytes to string
+  - Only processes if in a chat room (currentChatRoom not empty)
+  - Updates chat room data structures:
+    * Adds user to currentChatRoomUsers list
+    * Sets user's role in room to normal (1)
+    * Updates room's user count
+  - Displays join message with user name
+  - Simple implementation for user join events
+
+- chat_newowner - Chat room owner change handler (lines 5746-5771)
+  - Processes chat room owner change packets (ZC_ROLE_CHANGE)
+  - Converts user name bytes to string
+  - Handles owner role assignment (type 0):
+    * If current character is new owner:
+      - Sets room ownerID to accountID
+    * If another player is new owner:
+      - Searches playersList for matching name
+      - Sets room ownerID to player ID when found
+    * Updates user's role in room to owner (2)
+  - Handles normal role assignment (type 1):
+    * Updates user's role in room to normal (1)
+  - User roles (from packet comments):
+    * 0 = owner (menu)
+    * 1 = normal
+
+- chat_modified - Chat room modification handler (lines 5710-5739)
+  - Processes chat room property changes (ZC_CHANGE_CHATROOM)
+  - Converts title bytes to string
+  - Extracts room properties:
+    * Owner ID, chat ID, user limit
+    * Public/private status
+    * Current user count
+  - Determines room ID based on ownership
+  - Creates temporary chat data structure
+  - Triggers chat_modified hook with:
+    * Room ID
+    * Old room data
+    * New room data
+  - Updates chatRooms global with new properties
+  - Displays modification message to user
+  - Chat room types (from packet comments):
+    * 0 = private (password protected)
+    * 1 = public
+    * 2 = arena (NPC waiting room)
+    * 3 = PK zone (non-clickable)
+
+- chat_join_result - Chat room join result handler (lines 5679-5701)
+  - Processes chat room join result packets (ZC_REFUSE_ENTER_ROOM)
+  - Displays appropriate message based on result type:
+    * 0: Room is full
+    * 1: Incorrect password
+    * 2: You're kicked (note: has duplicate cases)
+    * Other types: Unknown reason
+  - Note: Has implementation issues with duplicate type=2 cases for:
+    * Joined Chat Room
+    * Not enough zeny
+    * Low level
+    * High level
+    * Unsuitable job class
+  - Simple implementation focused on user feedback
+
+- chat_users - Chat room users handler (lines 5636-5666)
+  - Processes chat room user list packets (ZC_ENTER_ROOM)
+  - Extracts chat room ID from raw message
+  - Sets currentChatRoom to this ID
+  - Creates or retrieves chat room data structure
+  - Resets user count for the room
+  - Processes each user entry (28 bytes each):
+    * Extracts user type and name
+    * Converts name bytes to string
+    * Adds new users to currentChatRoomUsers list
+    * Sets user role (2 for owner, 1 for normal)
+    * Increments room user count
+  - Displays room join message with room title
+  - Triggers chat_joined hook with room data
+  - User roles (from packet comments):
+    * 0 = owner (menu)
+    * 1 = normal
+
+- chat_info - Chat room information handler (lines 5604-5629)
+  - Processes chat room information packets (ZC_ROOM_NEWENTRY)
+  - Converts title bytes to string
+  - Manages chat room data structures:
+    * Creates new chat room entry if needed
+    * Updates existing chat room information
+    * Adds room ID to chatRoomsID list if new
+  - Updates room properties:
+    * Title, owner ID, user limit
+    * Public/private status
+    * Current user count
+  - Triggers packet_chatinfo hook with room data
+  - Chat room types (from packet comments):
+    * 0 = private (password protected)
+    * 1 = public
+    * 2 = arena (NPC waiting room)
+    * 3 = PK zone (non-clickable)
+
+- chat_created - Chat room creation handler (lines 5585-5595)
+  - Processes chat room creation result packets (ZC_ACK_CREATE_CHATROOM)
+  - Sets up chat room data structures:
+    * Sets currentChatRoom to accountID
+    * Copies createdChatRoom data to chatRooms
+    * Adds room ID to chatRoomsID list
+    * Adds character name to currentChatRoomUsers
+  - Displays success message to user
+  - Triggers chat_created hook with room data
+  - Flag values (not used in handler):
+    * 0 = Room successfully created
+    * 1 = Room limit exceeded
+    * 2 = Same room already exists

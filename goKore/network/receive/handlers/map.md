@@ -94,3 +94,34 @@
     - Private server status handling
   - User feedback:
     - Displays connection and coordinate messages
+
+**Navigation System Handlers:**
+
+- navigate_to - Navigation request handler (lines 12037-12054)
+  - Processes navigation requests from server (08E2)
+  - Handles two navigation types:
+    * Monster hunting: When mob_id is provided
+      - Displays message about navigating to map to find monster
+    * Location navigation: When x,y coordinates are provided
+      - Displays message about navigating to specific coordinates
+  - Calls 'navigate_to' plugin hook with all arguments
+  - Simple implementation focused on notification
+  - Contains TODO comment about documenting type and flag parameters
+
+- warp_portal_list - Warp portal list handler (lines 3521-3559)
+  - Processes warp portal memo packets
+  - Handles two types of portal lists (type 26 and 27)
+  - Strips .gat extensions from map names
+  - Auto-detects and updates saveMap configuration:
+    - Type 26: Uses memo2 as saveMap
+    - Type 27: Uses memo1 as saveMap and updates all memos
+  - Maintains character's warp portal state:
+    - Stores warp type
+    - Updates memo list array
+  - Formats and displays portal list with:
+    - Map names from maps_lut
+    - Numbered list with place names
+    - Proper column alignment
+  - Handles teleport skill queue:
+    - Sends warp teleport packet if teleport is queued
+    - Clears AI queue

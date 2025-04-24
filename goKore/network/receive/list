@@ -1,16 +1,15 @@
- account_id() 
- account_payment_info() 
+ account_id 
+ account_payment_info 
  account_server_info 
  achievement_list 
  achievement_reward_ack 
  achievement_update 
  action_ui 
- actor_action() 
- actor_died_or_disappeared() 
- actor_died_or_disappeared() 
+ actor_action 
+ actor_died_or_disappeared 
  actor_display 
- actor_display_compatibility() 
- actor_info() 
+ actor_display_compatibility 
+ actor_info 
  actor_look_at 
  actor_movement_interrupted 
  actor_status_active 
@@ -74,7 +73,7 @@
  cash_shop_open_result 
  cast_cancelled 
  change_to_constate25 
- changeToInGameState() 
+ changeToInGameState 
  character_ban_list 
  character_creation_failed 
  character_creation_successful 
@@ -85,7 +84,6 @@
  char_delete2_accept_result 
  char_delete2_cancel_result 
  char_delete2_result 
- char_emblem_update 
  char_emblem_update 
  chat_created 
  chat_info 
@@ -116,8 +114,8 @@
  egg_list 
  elemental_info 
  emoticon 
- enforce_homun_state() 
- exp() 
+ enforce_homun_state 
+ exp 
  flag 
  font 
  friend_list 
@@ -133,15 +131,15 @@
  gospel_buff_aligned 
  guild_alliance 
  guild_alliance_added 
- guild_allies_enemy_list() 
- guild_ally_request() 
- guild_broken() 
- guild_create_result() 
+ guild_allies_enemy_list 
+ guild_ally_request 
+ guild_broken 
+ guild_create_result 
  guild_emblem 
  guild_emblem_update 
  guild_expulsion 
  guild_expulsion_list 
- guild_info() 
+ guild_info 
  guild_invite_result 
  guild_leave 
  guild_location 
@@ -151,7 +149,6 @@
  guild_member_online_status 
  guild_member_setting_list 
  guild_members_list 
- guild_members_list() 
  guild_members_title_list 
  guild_name 
  guild_notice 
@@ -167,9 +164,9 @@
  hat_effect 
  high_jump 
  homunculus_food 
- homunculus_info() 
- homunculus_property() 
- homunculus_state_handler() 
+ homunculus_info 
+ homunculus_property 
+ homunculus_state_handler 
  hotkeys 
  ignore_all_result 
  ignore_player_result 
@@ -183,8 +180,6 @@
  inventory_item_favorite 
  inventory_item_removed 
  inventory_items_nonstackable 
- inventory_items_nonstackable 
- inventory_items_stackable 
  inventory_items_stackable 
  item_list_end 
  item_list_nonstackable 
@@ -195,8 +190,8 @@
  local_broadcast 
  login_error 
  login_error_game_login_server 
- login_pin_code_request() 
- login_pin_new_code_result() 
+ login_pin_code_request 
+ login_pin_new_code_result 
  macro_detector 
  macro_detector_image 
  macro_detector_show 
@@ -218,8 +213,8 @@
  map_changed 
  map_loaded 
  map_load_error 
- map_property3() 
- marriage_partner_name() 
+ map_property3 
+ marriage_partner_name 
  married 
  memo_success 
  mercenary_init 
@@ -262,12 +257,12 @@
  open_buying_store_item_list 
  open_store_status 
  open_ui 
- parse() 
+ parse 
  parse_account_server_info 
  parse_hat_effect 
  parse_merge_item_open 
  parse_merge_item_result 
- parse_minimap_indicator() 
+ parse_minimap_indicator 
  parse_npc_chat 
  parse_npc_image 
  parse_sage_autospell 
@@ -302,8 +297,8 @@
  progress_bar_stop 
  progress_bar_unit 
  pvp_rank 
- queryAndSaveLoginPinCode() 
- queryLoginPinCode() 
+ queryAndSaveLoginPinCode 
+ queryLoginPinCode 
  quest_active 
  quest_add 
  quest_all_list 
@@ -315,13 +310,13 @@
  rates_info2 
  received_character_ID_and_Map 
  received_characters 
- received_characters_blockSize() 
+ received_characters_blockSize 
  received_characters_info 
  received_characters_slots_info 
- received_characters_unpackString() 
+ received_characters_unpackString 
  received_login_token 
  reconstruct_account_server_info 
- reconstruct_minimap_indicator() 
+ reconstruct_minimap_indicator 
  reconstruct_npc_image 
  reconstruct_received_characters 
  reconstruct_received_characters_info 
@@ -374,7 +369,6 @@
  slave_calcproperty_handler 
  sound_effect 
  sprite_change 
- starplace 
  starplace 
  stat_info 
  stat_info2 

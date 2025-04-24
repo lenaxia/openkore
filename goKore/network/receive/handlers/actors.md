@@ -107,24 +107,6 @@
   - Resets damage tracking statistics
   - Displays notification message about the change
   - Packet: 01B0 (ZC_NPCSPRITE_CHANGE)
-- received_characters_blockSize() - Character data block size handler (lines 695-708)
-  - Determines the block size for character data packets
-  - Can be overridden by server-specific configurations (charBlockSize)
-  - Defaults to 155 bytes (standard for kRO and most official/emulator servers)
-  - Used when parsing character selection/creation packets
-  - Last updated: 2020-11-13
-
-- received_characters_unpackString() - Character data format handler (lines 711-719)
-  - Defines unpack formats for character data packets
-  - Supports different versions:
-    - 175 bytes (PACKETVER >= 20201007): handles uint64 HP/SP fields
-    - 155 bytes (PACKETVER >= 20170830): handles uint64 exp fields
-  - Unpacks key character attributes:
-    - Basic info (charID, name, job, stats)
-    - Appearance (hair style, colors)
-    - Status (HP, SP, exp)
-    - Equipment and position
-
 **Actor Display Handlers:**
 
 - actor_display - Main actor display handler (lines 1833-2397)
@@ -289,3 +271,153 @@
     * actor_connected
     * actor_moved
     * actor_spawned
+
+**Social Interaction Handlers:**
+
+- marriage_partner_name() - Marriage partner name handler (lines 4112-4116)
+  - Processes marriage partner name packets
+  - Converts byte data to string using bytesToString()
+  - Displays partner name in message log
+  - Triggered before "I miss you" skill is cast
+
+- married - Marriage notification handler (lines 7004-7009)
+  - Processes marriage event notifications
+  - Gets actor reference using Actor::get
+  - Displays "[Actor] got married!" message
+  - Simple implementation focused on notification
+
+
+- ignore_player_result - Individual ignore result handler (lines 6946-6955)
+  - Processes results of ignoring individual players
+  - Handles two operation types:
+    * 0 = Enable ignore: Displays "Player ignored" message
+    * 1 = Disable ignore:
+      - Checks for error code 0 (success)
+      - Displays "Player unignored" message
+  - Contains TODO comment about storing list of ignored players
+  - Simple implementation focused on user feedback
+
+- ignore_all_result - Global ignore result handler (lines 6933-6943)
+  - Processes results of ignore all players commands
+  - Handles two operation types:
+    * 0 = Enable ignore all:
+      - Sets ignored_all flag to 1
+      - Displays "All Players ignored" message
+    * 1 = Disable ignore all:
+      - Checks for error code 0 (success)
+      - Displays "All players unignored" message
+  - Contains TODO comment about storing this state
+  - Simple implementation focused on user feedback
+
+- friend_response - Friend request response handler (lines 6235-6258)
+  - Processes friend request response notifications (ZC_ADD_FRIENDS_LIST)
+  - Extracts response information:
+    * Response type
+    * Friend name (converted from bytes to string)
+  - Handles different response types:
+    * 0 = Success:
+      - Adds new friend to friendsID array
+      - Extracts accountID and charID from raw message
+      - Sets name and online status (1)
+      - Displays "You have become friends with" message
+    * 1 = Rejection: "[Player] does not want to be friends"
+    * 2 = Your list full: "Your Friend List is full"
+    * 3 = Their list full: "[Player]'s Friend List is full"
+    * Other: "[Player] rejected to be your friend"
+  - Result codes (from packet comments):
+    * 0 = "You have become friends with (%s)."
+    * 1 = "(%s) does not want to be friends with you."
+    * 2 = "Your Friend List is full."
+    * 3 = "(%s)'s Friend List is full."
+
+- friend_removed - Friend removal handler (lines 6212-6226)
+  - Processes friend removal notifications (PACKET_ZC_DELETE_FRIENDS)
+  - Extracts friend information:
+    * Account ID
+    * Character ID
+  - Searches through friendsID array for matching friend
+  - When found:
+    * Displays "[Friend] is no longer your friend" message
+    * Removes friend ID from friendsID array
+    * Deletes friend entry from friends hash
+  - Simple implementation focused on friend removal
+
+- friend_request - Friend request handler (lines 6194-6208)
+  - Processes incoming friend requests (ZC_REQ_ADD_FRIENDS)
+  - Stores request information in incomingFriend hash:
+    * Account ID
+    * Character ID
+    * Name (converted from bytes to string)
+  - Displays notification messages:
+    * "[Player] wants to be your friend"
+    * Instructions for accepting/rejecting request
+  - Triggers friend_request hook with:
+    * Account ID
+    * Character ID
+    * Name
+  - Simple implementation focused on request notification
+
+- friend_logon - Friend online status handler (lines 6171-6190)
+  - Processes friend online/offline notifications (ZC_FRIENDS_STATE)
+  - Extracts friend information:
+    * Account ID
+    * Character ID
+    * Online status (isNotOnline flag)
+  - Searches through friendsID array for matching friend
+  - Updates online status in friends hash (1-isNotOnline)
+  - Displays appropriate message:
+    * "[Friend] has disconnected" when isNotOnline=1
+    * "[Friend] has connected" when isNotOnline=0
+  - State values (from packet comments):
+    * 0 = online
+    * 1 = offline
+
+- friend_list - Friend list handler (lines 6143-6163)
+  - Processes friend list packets (ZC_FRIENDS_LIST)
+  - Resets existing friend data structures:
+    * Clears friendsID array
+    * Clears friends hash
+  - Parses raw message data in 32-byte chunks
+  - For each friend entry:
+    * Adds ID to friendsID array
+    * Extracts accountID, charID, and name
+    * Converts name bytes to string
+    * Initializes online status to 0 (offline)
+    * Increments ID counter
+  - Simple implementation focused on data structure setup
+
+- emoticon - Emoticon display handler (lines 5961-6024)
+  - Processes emoticon/emotion display packets
+  - Looks up emotion display text from emotions_lut
+  - Handles different actor types:
+    * Current character:
+      - Displays simple message with name and emotion
+    * Other players:
+      - Calculates distance to player
+      - Displays message with distance, name, and emotion
+      - Handles follow emotion response if configured
+      - Mirrors specific emotions (30↔31) when following
+    * Monsters/slaves:
+      - Calculates distance
+      - Displays message with actor type, name, and emotion
+    * Other/unknown actors:
+      - Uses generic display with nameIdx
+  - Logs emotions to chat log if configured
+  - Triggers packet_emotion hook with emotion and ID
+
+- show_eq - Equipment display handler (lines 3216-3281)
+ - Handles multiple packet versions for equipment display:
+   - 02D7: Default packet version
+   - 0906: Unimplemented on eAthena
+   - 0859: Added in 20101124
+   - 0997: Added in 20120925
+   - 0A2D: Added in 20150226
+   - 0B03: Added in 20150226 (alternative)
+ - Parses equipment info with different formats per version
+ - Supports robe equipment (PACKETVER >= 20100629)
+ - Formats and displays equipment info with:
+   - Centered title with character name
+   - List of equipment by slot
+   - Proper item naming and identification
+ - Uses internationalized strings (T())
+ - Outputs to 'list' message channel

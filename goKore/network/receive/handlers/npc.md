@@ -146,3 +146,116 @@
     - message: Decoded message content
   - Handles packet type:
     - 08B3: NPC script/show packet
+
+- npc_market_purchase_result - Market purchase result handler (lines 7763-7781)
+  - Processes NPC market purchase results (PACKET_ZC_NPC_MARKET_OPEN)
+  - Outputs debug message with result code
+  - Handles multiple result codes:
+    * MARKET_BUY_RESULT_ERROR (-1): General error
+    * MARKET_BUY_RESULT_SUCCESS (0): Success
+    * MARKET_BUY_RESULT_NO_ZENY (1): Insufficient zeny
+    * MARKET_BUY_RESULT_OVER_WEIGHT (2): Overweight
+    * MARKET_BUY_RESULT_OUT_OF_SPACE (3): No inventory space
+    * MARKET_BUY_RESULT_AMOUNT_TOO_BIG (4): Amount exceeds available stock
+    * Other: Unknown error with code
+  - Displays appropriate success/error messages
+  - Uses "info" message category for all messages
+  - Packet: 09D7
+
+- npc_market_info - NPC market item list handler (lines 7710-7751)
+  - Processes NPC market shop item listings (PACKET_ZC_NPC_MARKET_OPEN)
+  - Uses server-specific pack format (npc_market_info_pack) or default 'v C V2 v'
+  - Clears storeList and talk hash
+  - Processes each item in the itemList:
+    * Creates new Actor::Item
+    * Unpacks item data (nameID, type, price, amount, weight)
+    * Skips items with zero amount (client behavior)
+    * Sets item ID to storeList size (workaround for duplicate items)
+    * Sets item name using itemName function
+    * Adds item to storeList
+  - Returns early if no items in store
+  - Automatically runs 'store' command if not in buyAuto mode
+  - Sets in_market flag to 1
+  - Updates AI variables:
+    * Sets npc_talk state to 'store'
+    * Records timestamp
+  - Outputs debug messages for each item added
+  - Packets: 09D5 (two versions with different nameID field sizes)
+
+- npc_sell_list - NPC sellable items handler (lines 7637-7663)
+  - Processes list of items that can be sold to NPC (ZC_PC_SELL_ITEMLIST)
+  - Checks if message contains item data
+  - Processes each item in itemsdata:
+    * Unpacks index, price, and overcharge price
+    * Gets item reference from inventory by ID
+    * Flags item as sellable
+    * Displays item amount, name, and price
+  - Flags all other inventory items as unsellable:
+    * Skips equipped items
+    * Skips already flagged sellable items
+    * Sets unsellable flag
+  - Clears talk hash
+  - Displays "Ready to start selling items" message
+  - Updates AI variables:
+    * Sets npc_talk state to 'sell'
+    * Records timestamp
+  - Packet: 00C7
+
+- npc_store_info - NPC shop item list handler (lines 7588-7633)
+  - Processes NPC shop item listings (ZC_PC_PURCHASE_ITEMLIST)
+  - Supports multiple packet versions:
+    * 0B77: Uses V3 C v V pack format with nameID, price, type, sprite_id, location
+    * Others: Uses server-specific pack format (npc_store_info_pack) or default 'V V C v'
+  - Clears storeList and talk hash
+  - Processes each item in the raw message:
+    * Creates new Actor::Item
+    * Unpacks item data using appropriate format
+    * Sets item ID to storeList size (workaround for duplicate items)
+    * Sets item name using itemName function
+    * Adds item to storeList
+  - Updates AI variables:
+    * Sets npc_talk state to 'store'
+    * Records timestamp
+  - Automatically runs 'store' command if not in buyAuto mode
+  - Outputs debug messages for each item added
+  - Packets: 00C6, 0B77
+
+- npc_store_begin - NPC shop dialog handler (lines 7573-7581)
+  - Processes NPC shop dialog notifications (ZC_SELECT_DEALTYPE)
+  - Clears talk hash to reset dialog state
+  - Sets talk{ID} to NPC ID
+  - Updates AI variables:
+    * Sets npc_talk state to 'buy_or_sell'
+    * Records timestamp
+  - Sets storeList NPC name using getNPCName
+  - Falls back to "Unknown" if name not found
+  - Simple implementation focused on shop dialog initialization
+  - Packet: 00C4
+
+- sell_result - Item selling result handler (lines 9519-9527)
+  - Processes item selling result notifications
+  - Handles two result states:
+    * fail=1: Failure - "Sell failed"
+    * fail=0: Success - "Sold X items" and "Sell completed"
+  - Clears sellList array after processing
+  - Checks if AI is in sellAuto mode
+  - Uses "error" message category for failures
+  - Uses "success" message category for successful sales
+  - Packet: 00CB
+- buy_result - Shop purchase result handler (lines 7681-7704)
+  - Processes NPC shop purchase results (ZC_PC_PURCHASE_RESULT)
+  - Handles multiple result codes:
+    * 0: Success - "Buy completed"
+    * 1: Insufficient zeny
+    * 2: Insufficient weight capacity
+    * 3: Too many different inventory items
+    * 4: Item does not exist in store
+    * 5: Item cannot be exchanged
+    * 6: Invalid store
+    * Other: Generic failure with code
+  - Sets recv_buy_packet flag if in buyAuto mode
+  - Triggers buy_result hook with fail code
+  - Uses appropriate message categories:
+    * "success" for successful purchases
+    * Default (error) for failures
+  - Packet: 00CA

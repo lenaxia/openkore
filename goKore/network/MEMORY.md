@@ -366,70 +366,102 @@ Format Example:
 [ ] reputation.md:repair_weapon:56 - items.md
 ```
 
-## Common Directory
-
-[ ] common/constants.md:HO_PRE_INIT:5 - handlers/homunculus.md
-[ ] common/constants.md:HO_RELATIONSHIP_CHANGED:6 - handlers/homunculus.md
-[ ] common/constants.md:HO_FULLNESS_CHANGED:7 - handlers/homunculus.md
-[ ] common/constants.md:HO_ACCESSORY_CHANGED:8 - handlers/homunculus.md
-[ ] common/constants.md:HO_HEADTYPE_CHANGED:9 - handlers/homunculus.md
-
 ## Security Directory
 
-[ ] security/pin.md:queryLoginPinCode:26 - common/account.md
-[ ] security/pin.md:queryAndSaveLoginPinCode:35 - common/account.md
+[X] security/pin.md:queryLoginPinCode:26 - common/account.md
+[X] security/pin.md:queryAndSaveLoginPinCode:35 - common/account.md
 
 ## Handlers Directory
 
-[ ] handlers/account.md:account_id:3 - common/account.md
+[X] handlers/account.md:account_id:3 - common/account.md
 
-[ ] handlers/actors.md:received_characters_blockSize:83 - security/login.md
-[ ] handlers/actors.md:received_characters_unpackString:90 - security/login.md
+[X] handlers/actors.md:received_characters_blockSize:83 - security/login.md
+[X] handlers/actors.md:received_characters_unpackString:90 - security/login.md
 
-[ ] handlers/character.md:char_delete2_result:2 - security/login.md
-[ ] handlers/character.md:char_delete2_accept_result:16 - security/login.md
-[ ] handlers/character.md:char_delete2_cancel_result:33 - security/login.md
+[X] handlers/characters.md:char_delete2_result - security/login.md
+[X] handlers/characters.md:char_delete2_accept_result - security/login.md
+[X] handlers/characters.md:char_delete2_cancel_result - security/login.md
 
-[ ] handlers/characters.md:switch_character:4 - security/login.md
-[ ] handlers/characters.md:received_character_ID_and_Map:17 - security/login.md
-[ ] handlers/characters.md:character_name:43 - security/login.md
-[ ] handlers/characters.md:character_deletion_failed:51 - security/login.md
-[ ] handlers/characters.md:character_deletion_successful:62 - security/login.md
-[ ] handlers/characters.md:show_eq:77 - security/login.md
+[X] handlers/characters.md:switch_character:4 - security/login.md
+[X] handlers/characters.md:received_character_ID_and_Map:17 - security/login.md
+[X] handlers/characters.md:character_name:43 - security/login.md
+[X] handlers/characters.md:character_deletion_failed:51 - security/login.md
+[X] handlers/characters.md:character_deletion_successful:62 - security/login.md
+[X] handlers/characters.md:show_eq:77 - security/login.md
 
-[ ] handlers/connection.md:change_to_constate25:4 - common/connection.md
+[X] handlers/connection.md:change_to_constate25:4 - common/connection.md
 
-[ ] handlers/deaths.md:actor_died_or_disappeared:2 - handlers/actors.md
+[X] handlers/deaths.md:actor_died_or_disappeared:2 - handlers/actors.md
 
-[ ] handlers/effects.md:minimap_indicator:90 - handlers/minimap.md
+[X] handlers/effects.md:minimap_indicator:90 - handlers/minimap.md
 
-[ ] handlers/emblems.md:char_emblem_update:4 - handlers/guild.md
+[X] handlers/emblems.md:char_emblem_update:4 - handlers/guild.md
 
-[ ] handlers/inventory.md:cart_off:14 - handlers/cart.md
+[X] handlers/movement.md:actor_action:80 - handlers/actors.md
+[X] handlers/movement.md:actor_display_compatibility:100 - handlers/actors.md
 
-[ ] handlers/items_list.md:item_list_start:42 - handlers/inventory.md (inventory part)
-[ ] handlers/items_list.md:item_list_start:42 - handlers/cart.md (cart part)
-[ ] handlers/items_list.md:item_list_start:42 - handlers/storage.md (storage part)
+[X] handlers/script.md:show_script:2 - handlers/npc.md
 
-[ ] handlers/items_list.md:item_list_stackable:29 - handlers/inventory.md (inventory part)
-[ ] handlers/items_list.md:item_list_stackable:29 - handlers/cart.md (cart part)
-[ ] handlers/items_list.md:item_list_stackable:29 - handlers/storage.md (storage part)
+[X] handlers/social.md:actor_info:278 - handlers/actors.md
 
-[ ] handlers/items_list.md:item_list_nonstackable:14 - handlers/inventory.md (inventory part)
-[ ] handlers/items_list.md:item_list_nonstackable:14 - handlers/cart.md (cart part)
-[ ] handlers/items_list.md:item_list_nonstackable:14 - handlers/storage.md (storage part)
+[X] handlers/system.md:changeToInGameState:2 - common/connection.md
 
-[ ] handlers/items_list.md:item_list_end:4 - handlers/inventory.md (inventory part)
-[ ] handlers/items_list.md:item_list_end:4 - handlers/cart.md (cart part)
-[ ] handlers/items_list.md:item_list_end:4 - handlers/storage.md (storage part)
+[X] handlers/ui.md:map_loaded:150 - handlers/map.md
 
-[ ] handlers/movement.md:actor_action:80 - handlers/actors.md
-[ ] handlers/movement.md:actor_display_compatibility:100 - handlers/actors.md
+# Recommended File Merges
 
-[ ] handlers/script.md:show_script:2 - handlers/npc.md
+Based on Go best practices around grouping methods and objects, the following files should be merged to create a more maintainable and idiomatic Go codebase:
 
-[ ] handlers/social.md:actor_info:278 - handlers/actors.md
 
-[ ] handlers/system.md:changeToInGameState:2 - common/connection.md
+## 2. Actor-Related Files
+[X] **Merge: `actors.md`, `deaths.md`, and parts from `social.md` and `movement.md`**
 
-[ ] handlers/ui.md:map_loaded:150 - handlers/map.md
+These files all deal with actor management:
+- `actors.md` handles actor appearance, direction, and HP
+- `deaths.md` handles actor death and disappearance
+- Parts of `social.md` and `movement.md` contain actor-related methods
+
+The migrations section already identifies several methods that should move to `actors.md`, confirming this merge makes sense.
+
+## 3. Character-Related Files
+[X] **Merge: `character.md` and `characters.md`**
+
+These files handle closely related functionality:
+- `character.md` focuses on character deletion
+- `characters.md` handles character switching, ID/map info, and name updates
+
+## 4. Connection-Related Files
+**Merge: `connection.md` (handlers), `system.md`, and parts of `common/connection.md`**
+
+These files all deal with connection state management and would benefit from consolidation.
+
+## 5. Map-Related Files
+[X] **Merge: `map.md`, `navigation.md`, and `portals.md`**
+
+These files handle related map functionality:
+- `map.md` handles map changes and properties
+- `navigation.md` processes navigation requests
+- `portals.md` manages warp portal functionality
+
+## 6. Social Interaction Files
+[X] **Merge: `messaging.md`, parts of `social.md`, and `mail.md`**
+
+These files handle different types of communication:
+- `messaging.md` covers private messages and broadcasts
+- Parts of `social.md` handle chat rooms
+- `mail.md` handles the mail system
+
+## 7. Shop-Related Files
+[X] **Merge: `shop.md`, `vending.md`, `buying_store.md`, and `search_store.md`**
+
+These files all handle different aspects of the shopping system but share similar patterns and data structures.
+
+## Implementation Approach
+
+When implementing these merges in Go, we should:
+
+1. Create interfaces for common functionality (e.g., a Container interface for inventory/cart/storage)
+2. Use composition over inheritance to share behavior
+3. Organize packages by domain functionality rather than by packet type
+4. Use consistent naming conventions across merged files
+5. Ensure each merged file maintains a clear, single responsibility
