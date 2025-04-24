@@ -1,420 +1,435 @@
-List of subroutines in src/Network/Receive.pm
+## Task
+We have now decomposed Receive.pm into a bunch of separate files in preparation for a re-implemnetation in golang. But we need to ensure that the structure that we're going to reimplement it into follows golang best practices. This implementation is intended to provide a Receive golang module that will be used in a larger go program, so please keep that in mind.
 
-[ ] = TO DO
-[X] = Completed task
-[-] = Skipped task
+We will do this in three steps. Make sure to regularly update MEMORY.md. Make sure to mark step 1 and step 2 boxes as complete `[X]` when the file is done being reviewed. Review the sections below in case files have been reviewed but not checked off.
 
-[X] 572:sub exp {
-[X] 610:sub parse {
-[X] 638:sub queryLoginPinCode {
-[X] 662:sub queryAndSaveLoginPinCode {
-[X] 673:sub changeToInGameState {
-[X] 700:sub received_characters_blockSize {
-[X] 711:sub received_characters_unpackString {
-[X] 811:sub received_characters_slots_info {
-[X] 841:sub received_characters {
-[X] 920:sub sync_received_characters {
-[X] 935:sub reconstruct_received_characters {
-[X] 942:sub reconstruct_received_characters_info {
-[X] 952:sub character_creation_successful {
-[X] 999:sub character_creation_failed {
-[X] 1027:sub received_characters_info {
-[X] 1048:sub parse_account_server_info {
-[X] 1109:sub reconstruct_account_server_info {
-[X] 1156:sub account_server_info {
-[X] 1227:sub connection_refused {
-[X] 1237:sub map_loaded {
-[X] 1297:sub map_load_error {
-[X] 1623:sub stat_info {
-[X] 1676:sub stats_added {
-[X] 1743:sub stats_info {
-[X] 1794:sub stat_info2 {
-[X] 1833:sub actor_display_compatibility {
-[X] 1842:sub actor_display {
-[X] 2407:sub actor_died_or_disappeared {
-[X] 2588:sub actor_action {
-[X] 2712:sub actor_info {
-[X] 2819:sub unit_levelup {
-[X] 2853:sub parse_minimap_indicator {
-[X] 2867:sub account_payment_info {
-[X] 2888:sub reconstruct_minimap_indicator {
-[X] 2897:sub homunculus_property {
-[X] 2927:sub enforce_homun_state {
-[X] 2938:sub homunculus_state_handler {
-[X] 3022:sub homunculus_info {
-[X] 3071:sub minimap_indicator {
-[X] 3102:sub parse_npc_image {
-[X] 3108:sub reconstruct_npc_image {
-[X] 3117:sub npc_image {
-[X] 3137:sub local_broadcast {
-[X] 3150:sub parse_sage_autospell {
-[X] 3160:sub reconstruct_sage_autospell {
-[X] 3174:sub sage_autospell {
-[X] 3216:sub show_eq {
-[X] 3287:sub misc_config {
-[X] 3333:sub misc_config_reply {
-[X] 3365:sub show_eq_msg_self {
-[X] 3375:sub show_script {
-[X] 3391:sub skill_post_delay {
-[X] 3403:sub skill_post_delaylist {
-[X] 3447:sub gospel_buff_aligned {
-[X] 3482:sub system_chat {
-[X] 3521:sub warp_portal_list {
-[X] 3562:sub char_delete2_result {
-[X] 3586:sub char_delete2_accept_result {
-[X] 3636:sub char_delete2_cancel_result {
-[ ] 3653:sub arrow_equipped {
-[X] 3679:sub inventory_item_added {
-[X] 3756:sub inventory_item_removed {
-[ ] 3789:sub rental_expired {
-[ ] 3804:sub cart_off {
-[ ] 3810:sub shop_skill {
-[ ] 3820:sub shop_sold {
-[ ] 3861:sub shop_sold_long {
-[ ] 3908:sub vending_start {
-[ ] 3942:sub vender_items_list {
-[ ] 3999:sub revolving_entity {
-[ ] 4050:sub monster_typechange {
-[ ] 4073:sub monster_hp_info {
-[ ] 4086:sub monster_hp_info_tiny {
-[ ] 4100:sub account_id {
-[ ] 4112:sub marriage_partner_name {
-[ ] 4118:sub login_pin_code_request {
-[ ] 4198:sub login_pin_new_code_result {
-[ ] 4220:sub actor_status_active {
-[ ] 4242:sub map_property3 {
-[ ] 4268:sub area_spell {
-[ ] 4316:sub area_spell_multiple2 {
-[ ] 4364:sub area_spell_multiple3 {
-[ ] 4413:sub sync_request_ex {
-[ ] 4443:sub cash_shop_list {
-[ ] 4483:sub cash_shop_open_result {
-[ ] 4493:sub cash_shop_buy_result {
-[ ] 4528:sub sprite_change {
-[ ] 4576:sub progress_bar {
-[ ] 4590:sub progress_bar_stop {
-[ ] 4599:sub quest_all_list {
-[ ] 4698:sub quest_all_mission {
-[ ] 4759:sub quest_add {
-[ ] 4827:sub quest_update_mission_hunt {
-[ ] 4928:sub quest_delete {
-[ ] 4937:sub quest_active {
-[ ] 4951:sub parse_npc_chat {
-[ ] 4957:sub npc_chat {
-[ ] 5000:sub makable_item_list {
-[ ] 5021:sub storage_opened {
-[ ] 5026:sub storage_closed {
-[ ] 5040:sub storage_items_stackable {
-[ ] 5062:sub storage_items_nonstackable {
-[ ] 5077:sub storage_item_added {
-[ ] 5108:sub storage_item_removed {
-[ ] 5120:sub cart_items_stackable {
-[ ] 5133:sub cart_items_nonstackable {
-[ ] 5146:sub cart_item_added {
-[ ] 5176:sub cart_item_removed {
-[ ] 5190:sub cart_info {
-[ ] 5196:sub cart_add_failed {
-[ ] 5210:sub inventory_items_stackable {
-[ ] 5232:sub item_list_start {
-[ ] 5249:sub item_list_stackable {
-[ ] 5291:sub item_list_nonstackable {
-[ ] 5341:sub item_list_end {
-[ ] 5356:sub login_error {
-[ ] 5454:sub login_error_game_login_server {
-[ ] 5463:sub character_deletion_successful {
-[ ] 5483:sub character_deletion_failed {
-[ ] 5496:sub character_moves {
-[ ] 5533:sub character_name {
-[ ] 5551:sub character_status {
-[ ] 5571:sub whisper_list {
-[ ] 5585:sub chat_created {
-[ ] 5604:sub chat_info {
-[ ] 5636:sub chat_users {
-[ ] 5679:sub chat_join_result {
-[ ] 5710:sub chat_modified {
-[ ] 5746:sub chat_newowner {
-[ ] 5775:sub chat_user_join {
-[ ] 5792:sub chat_user_leave {
-[ ] 5813:sub chat_removed {
-[ ] 5825:sub deal_add_other {
-[ ] 5846:sub deal_begin {
-[ ] 5882:sub deal_cancelled {
-[ ] 5890:sub deal_complete {
-[ ] 5898:sub deal_finalize {
-[ ] 5913:sub deal_request {
-[ ] 5929:sub devotion {
-[ ] 5948:sub egg_list {
-[ ] 5961:sub emoticon {
-[ ] 6060:sub errors {
-[ ] 6143:sub friend_list {
-[ ] 6171:sub friend_logon {
-[ ] 6194:sub friend_request {
-[ ] 6212:sub friend_removed {
-[ ] 6235:sub friend_response {
-[ ] 6265:sub homunculus_food {
-[ ] 6281:sub slave_calcproperty_handler {
-[ ] 6293:sub EAC_key {
-[ ] 6300:sub gameguard_grant {
-[ ] 6318:sub gameguard_request {
-[ ] 6861:sub misc_effect {
-[ ] 6882:sub sound_effect {
-[ ] 6900:sub identify_list {
-[ ] 6919:sub identify {
-[ ] 6933:sub ignore_all_result {
-[ ] 6946:sub ignore_player_result {
-[ ] 6957:sub item_used {
-[ ] 7004:sub married {
-[ ] 7015:sub item_appeared {
-[ ] 7054:sub item_exists {
-[ ] 7088:sub item_disappeared {
-[ ] 7121:sub item_upgrade {
-[ ] 7134:sub high_jump {
-[ ] 7157:sub hp_sp_changed {
-[ ] 7180:sub map_change {
-[ ] 7248:sub map_changed {
-[ ] 7367:sub parse_hat_effect {
-[ ] 7375:sub hat_effect {
-[ ] 7410:sub npc_talk {
-[ ] 7455:sub npc_talk_close {
-[ ] 7478:sub npc_talk_continue {
-[ ] 7489:sub npc_talk_number {
-[ ] 7501:sub npc_talk_responses {
-[ ] 7561:sub npc_talk_text {
-[ ] 7573:sub npc_store_begin {
-[ ] 7588:sub npc_store_info {
-[ ] 7637:sub npc_sell_list {
-[ ] 7665:sub npc_clear_dialog {
-[ ] 7681:sub buy_result {
-[ ] 7710:sub npc_market_info {
-[ ] 7763:sub npc_market_purchase_result {
-[ ] 7828:sub deal_add_you {
-[ ] 7864:sub skill_exchange_item {
-[ ] 7885:sub refineui_opened {
-[ ] 7895:sub refineui_info {
-[ ] 7938:sub refine_status {
-[ ] 7945:sub character_ban_list {
-[ ] 7950:sub flag {
-[ ] 7954:sub offline_clone_found {
-[ ] 7994:sub offline_clone_lost {
-[ ] 8017:sub remain_time_info {
-[ ] 8022:sub received_login_token {
-[ ] 8032:sub hotkeys {
-[ ] 8055:sub received_character_ID_and_Map {
-[ ] 8115:sub received_sync {
-[ ] 8121:sub actor_look_at {
-[ ] 8136:sub actor_movement_interrupted {
-[ ] 8160:sub actor_trapped {
-[ ] 8168:sub party_join {
-[ ] 8223:sub party_allow_invite {
-[ ] 8233:sub party_chat {
-[ ] 8258:sub party_exp {
-[ ] 8288:sub party_leader {
-[ ] 8301:sub party_hp_info {
-[ ] 8311:sub party_invite {
-[ ] 8324:sub party_invite_result {
-[ ] 8348:sub party_leave {
-[ ] 8371:sub party_location {
-[ ] 8383:sub party_organize_result {
-[ ] 8399:sub party_show_picker {
-[ ] 8415:sub party_users_info {
-[ ] 8472:sub party_dead {
-[ ] 8490:sub rodex_mail_list {
-[ ] 8580:sub rodex_read_mail {
-[ ] 8666:sub unread_rodex {
-[ ] 8672:sub rodex_remove_item {
-[ ] 8692:sub rodex_add_item {
-[ ] 8734:sub rodex_open_write {
-[ ] 8748:sub rodex_check_player {
-[ ] 8779:sub rodex_write_result {
-[ ] 8791:sub rodex_get_zeny {
-[ ] 8805:sub rodex_get_item {
-[ ] 8819:sub rodex_delete {
-[ ] 8834:sub booking_register_request {
-[ ] 8848:sub booking_search_request {
-[ ] 8870:sub booking_delete_request {
-[ ] 8884:sub booking_insert {
-[ ] 8891:sub booking_update {
-[ ] 8898:sub booking_delete {
-[ ] 8904:sub clan_user {
-[ ] 8913:sub clan_info {
-[ ] 8944:sub clan_chat {
-[ ] 8967:sub clan_leave {
-[ ] 8976:sub change_title {
-[ ] 8985:sub pet_capture_process {
-[ ] 8990:sub pet_capture_result {
-[ ] 8999:sub pet_emotion {
-[ ] 9008:sub pet_evolution_result {
-[ ] 9025:sub pet_food {
-[ ] 9034:sub pet_info {
-[ ] 9046:sub pet_info2 {
-[ ] 9100:sub elemental_info {
-[ ] 9114:sub upgrade_list {
-[ ] 9137:sub cooking_list {
-[ ] 9161:sub refine_result {
-[ ] 9179:sub upgrade_message {
-[ ] 9194:sub open_buying_store_fail { #0x812
-[ ] 9209:sub search_store_open {
-[ ] 9221:sub search_store_fail {
-[ ] 9241:sub search_store_result {
-[ ] 9280:sub search_store_pos {
-[ ] 9286:sub skill_msg {
-[ ] 9302:sub message_string {
-[ ] 9327:sub skills_list {
-[ ] 9396:sub skill_update {
-[ ] 9423:sub overweight_percent {
-[ ] 9428:sub partylv_info {
-[ ] 9437:sub achievement_reward_ack {
-[ ] 9442:sub achievement_update {
-[ ] 9452:sub achievement_list {
-[ ] 9492:sub quit_response {
-[ ] 9501:sub private_airship_type {
-[ ] 9519:sub sell_result {
-[ ] 9533:sub GM_req_acc_name {
-[ ] 9539:sub boss_map_info {
-[ ] 9557:sub adopt_reply {
-[ ] 9568:sub GM_silence {
-[ ] 9615:sub skill_delete {
-[ ] 9629:sub captcha_session_ID {
-[ ] 9636:sub captcha_image {
-[ ] 9658:sub captcha_answer {
-[ ] 9667:sub open_buying_store {
-[ ] 9674:sub buyer_items
-[ ] 9697:sub open_buying_store_item_list {
-[ ] 9738:sub buying_store_found {
-[ ] 9750:sub buying_store_lost {
-[ ] 9758:sub buying_store_items_list {
-[ ] 9829:sub buying_store_item_delete {
-[ ] 9840:sub buying_store_fail {
-[ ] 9853:sub buying_store_update {
-[ ] 9866:sub buyer_found {
-[ ] 9878:sub buyer_lost {
-[ ] 9886:sub buying_buy_fail {
-[ ] 9904:sub special_item_obtain {
-[ ] 9955:sub inventory_item_favorite {
-[ ] 9965:sub private_message_sent {
-[ ] 9986:sub vender_buy_fail {
-[ ] 10008:sub cash_dealer {
-[ ] 10046:sub merge_item_open {
-[ ] 10063:sub parse_merge_item_open {
-[ ] 10072:sub merge_item_result {
-[ ] 10095:sub parse_merge_item_result {
-[ ] 10100:sub memo_success {
-[ ] 10111:sub change_to_constate25 {
-[ ] 10117:sub adopt_request {
-[ ] 10128:sub rank_points {
-[ ] 10139:sub blacksmith_points {
-[ ] 10146:sub alchemist_point {
-[ ] 10151:sub area_spell_disappears {
-[ ] 10161:sub arrow_none {
-[ ] 10184:sub arrowcraft_list {
-[ ] 10219:sub attack_range {
-[ ] 10239:sub auction_my_sell_stop {
-[ ] 10254:sub auction_windows {
-[ ] 10264:sub auction_add_item {
-[ ] 10274:sub premium_rates_info {
-[ ] 10285:sub rates_info2 {
-[ ] 10325:sub auction_result {
-[ ] 10356:sub battleground_message {
-[ ] 10363:sub battleground_emblem {
-[ ] 10384:sub char_emblem_update {
-[ ] 10426:sub map_change_cell {
-[ ] 10433:sub blade_stop {
-[ ] 10442:sub divorced {
-[ ] 10447:sub hack_shield_alarm {
-[ ] 10452:sub talkie_box {
-[ ] 10457:sub manner_message {
-[ ] 10476:sub instance_window_start {
-[ ] 10484:sub instance_window_queue {
-[ ] 10491:sub instance_window_join {
-[ ] 10507:sub instance_window_leave {
-[ ] 10525:sub card_merge_list {
-[ ] 10543:sub card_merge_status {
-[ ] 10587:sub combo_delay {
-[ ] 10601:sub book_read {
-[ ] 10607:sub rental_time {
-[ ] 10614:sub cash_buy_fail {
-[ ] 10628:sub equip_item {
-[ ] 10656:sub equip_item_switch {
-[ ] 10685:sub equip_switch_run_res {
-[ ] 10696:sub equip_switch_log {
-[ ] 10707:sub font {
-[ ] 10712:sub initialize_message_id_encryption {
-[ ] 10729:sub mail_delete {
-[ ] 10739:sub mail_window {
-[ ] 10749:sub mail_return {
-[ ] 10756:sub mail_read {
-[ ] 10780:sub mail_refreshinbox {
-[ ] 10824:sub mail_getattachment {
-[ ] 10835:sub mail_setattachment {
-[ ] 10864:sub mail_send {
-[ ] 10871:sub mail_new {
-[ ] 10878:sub top10 {
-[ ] 10896:sub top10_alchemist_rank {
-[ ] 10908:sub top10_blacksmith_rank {
-[ ] 10920:sub top10_pk_rank {
-[ ] 10932:sub top10_taekwon_rank {
-[ ] 10944:sub taekwon_packets {
-[ ] 10966:sub taekwon_rank {
-[ ] 10971:sub storage_password_request {
-[ ] 11056:sub storage_password_result {
-[ ] 11093:sub mercenary_init {
-[ ] 11131:sub mercenary_off {
-[ ] 11140:sub monster_ranged_attack {
-[ ] 11165:sub mvp_item {
-[ ] 11172:sub mvp_other {
-[ ] 11179:sub mvp_you {
-[ ] 11186:sub no_teleport {
-[ ] 11200:sub private_message {
-[ ] 11241:sub progress_bar_unit {
-[ ] 11246:sub pvp_rank {
-[ ] 11265:sub repair_list {
-[ ] 11327:sub repair_result {
-[ ] 11341:sub resurrection {
-[ ] 11377:sub secure_login_key {
-[ ] 11383:sub self_chat {
-[ ] 11408:sub sync_request {
-[ ] 11427:sub sense_result {
-[ ] 11450:sub skill_cast {
-[ ] 11568:sub cast_cancelled {
-[ ] 11593:sub switch_character {
-[ ] 11612:sub unequip_item {
-[ ] 11643:sub unequip_item_switch {
-[ ] 11673:sub use_item {
-[ ] 11683:sub users_online {
-[ ] 11689:sub vender_found {
-[ ] 11704:sub vender_lost {
-[ ] 11712:sub skill_add {
-[ ] 11740:sub isvr_disconnect {
-[ ] 11744:sub skill_use_failed {
-[ ] 11839:sub open_store_status {
-[ ] 11853:sub stylist_res {
-[ ] 11878:sub open_ui {
-[ ] 11909:sub action_ui {
-[ ] 11922:sub attendance_ui {
-[ ] 11963:sub move_interrupt {
-[ ] 11976:sub banking_check {
-[ ] 11997:sub banking_deposit {
-[ ] 12021:sub banking_withdraw {
-[ ] 12044:sub navigate_to {
-[ ] 12061:sub roulette_window {
-[ ] 12091:sub roulette_info {
-[ ] 12111:sub roulette_recv_item {
-[ ] 12119:sub roulette_window_update {
-[ ] 12150:sub load_confirm {
-[ ] 12163:sub inventory_expansion_result {
-[ ] 12182:sub item_preview {
-[ ] 12196:sub ping {
-[ ] 12203:sub starplace {
-[ ] 12217:sub captcha_upload_request {
-[ ] 12232:sub captcha_upload_request_status {
-[ ] 12238:sub macro_reporter_status {
-[ ] 12255:sub macro_detector {
-[ ] 12265:sub macro_detector_image {
-[ ] 12308:sub macro_detector_show {
-[ ] 12318:sub macro_detector_status {
-[ ] 12335:sub captcha_preview {
-[ ] 12353:sub captcha_preview_image {
-[ ] 12376:sub macro_reporter_select {
-[ ] 12388:sub repute_info {
-[ ] 12409:sub gold_pc_cafe_point {
-[ ] 12415:sub dynamicnpc_create_result {
+Step 1: Review each md file one by one and documemt the purpose and content in the `Receive Descriptions` section below. Do these in batches, read 5-7 files then write descriptions to MEMORY.md, don't do too many or else context will get too long.
+
+Step 2: Review each md file again, but this time verify each of the objects (methods, constants, types, etc) in each markdown file. Answer each of the two following questions: 1/ Does this object belong in this file or is there a better place for it? 2/ If there is a better place for it, where should it be? Document this migration in the `Receive Migrations` section below. DO NOT MAKE ANY CHANGES TO MD FILES YET. You can do these in batches of 2-3 files depending on the length of the file then write updates to MEMORY.md, but keep it shorter for large files to prevent long context. If the file is longer than 500 lines, iteratively review sections of the file until you have parsed the entire contents. Only review complete sections. If a section seems to be partial or incomplete, ignore it and ensure that the entire block is reviewed when fetching the next batch of lines.
+
+Step 3: Based on the file descriptions recommend any changes to the folder structure that better follows goland best practices. This may mean consolidating files.
+
+## File List
+
+### common/
+ 1   2
+[X] [X] account.md
+[X] [X] connection.md
+[X] [X] constants.md
+[X] [X] network.md
+
+### security/
+ 1   2
+[X] [X] anti_cheat.md
+[X] [X] encryption.md
+[X] [X] login.md
+[X] [X] pin.md
+
+### handlers/
+ 1   2
+[X] [X] account.md
+[X] [X] account_rates.md
+[X] [X] achievements.md
+[X] [X] actors.md
+[X] [X] adoption.md
+[X] [X] auction.md
+[X] [X] banking.md
+[X] [X] battleground.md
+[X] [X] booking.md
+[X] [X] books.md
+[X] [X] boss.md
+[X] [X] buying_store.md
+[X] [X] captcha.md
+[X] [X] card_merge.md
+[X] [X] cart.md
+[X] [X] character.md
+[X] [X] characters.md
+[X] [X] clan.md
+[X] [X] combat.md
+[X] [X] config.md
+[X] [X] connection.md
+[X] [X] cooking.md
+[X] [X] deaths.md
+[X] [X] effects.md
+[X] [X] elemental.md
+[X] [X] emblems.md
+[X] [X] equipment.md
+[X] [X] experience.md
+[X] [X] gm.md
+[X] [X] guild.md
+[X] [X] homunculus.md
+[X] [X] instance.md
+[X] [X] inventory.md
+[X] [X] item_merge.md
+[X] [X] items_list.md
+[X] [X] items.md
+[X] [X] mail.md
+[X] [X] map.md
+[X] [X] marriage.md
+[X] [X] memo.md
+[X] [X] mercenary.md
+[X] [X] messaging.md
+[X] [X] minimap.md
+[X] [X] misc.md
+[X] [X] monster_info.md
+[X] [X] movement.md
+[X] [X] mvp.md
+[X] [X] navigation.md
+[X] [X] npc.md
+[X] [X] party.md
+[X] [X] pc_cafe.md
+[X] [X] pets.md
+[X] [X] portals.md
+[X] [X] pvp.md
+[X] [X] quests.md
+[X] [X] ranking.md
+[X] [X] refine.md
+[X] [X] rental.md
+[X] [X] repair.md
+[X] [X] reputation.md
+[X] [X] roulette.md
+[X] [X] script.md
+[X] [X] search_store.md
+[X] [X] shop.md
+[X] [X] skills.md
+[X] [X] social.md
+[X] [X] stats.md
+[X] [X] status.md
+[X] [X] storage.md
+[X] [X] system.md
+[X] [X] system_misc.md
+[X] [X] taekwon.md
+[X] [X] trade.md
+[X] [X] transportation.md
+[X] [X] ui.md
+[X] [X] vending.md
+
+
+# Receive Descriptions
+
+## Common Directory
+
+- common/account.md: Contains handlers for account server information processing. Includes methods for parsing and reconstructing server info packets for different server types, and handling account information from login servers.
+
+- common/connection.md: Contains handlers for connection-related events, including map server connection errors and connection refusal. Manages error codes, disconnection behavior, and state management.
+
+- common/constants.md: Contains constant definitions used across the network module. Currently only includes homunculus state constants used with the homunculus_info handler. Contains references to other blocks of constances in src/Network/Receive.pm.
+
+- common/network.md: Contains core network functionality, specifically the parse() method which wraps the parent class's parse method and adds debug logging capabilities for packet inspection.
+
+## Security Directory
+
+- security/anti_cheat.md: Contains handlers for various anti-cheat systems including Hack Shield, GameGuard, and Easy Anti-Cheat. Manages detection responses, verification requests, and graceful exits when unsupported protection is detected.
+
+- security/encryption.md: Contains handlers for message ID encryption initialization. Sets up complex encryption using nibble extraction, XOR operations, and bit shifting to establish secure communication.
+
+- security/login.md: Contains comprehensive login-related handlers including secure login key processing, character data management, login error handling, character creation, and character slot management.
+
+- security/pin.md: Contains handlers for PIN code validation, requests, and management. Handles various PIN states, validates PIN format, and manages PIN storage and reuse.
+
+## Handlers Directory
+
+- handlers/account.md: Contains handlers for account-related information, including displaying account ID in debug logs and formatting account payment information (subscription time remaining in days/hours/minutes).
+
+- handlers/account_rates.md: Contains handlers for account rate information, including detailed rate information for experience, death penalties, and drop rates, as well as premium account rate bonuses.
+
+- handlers/achievements.md: Contains handlers for the achievement system, including listing achievements, updating achievement progress, and acknowledging achievement rewards.
+
+- handlers/actors.md: Contains comprehensive handlers for actor management, including appearance changes, direction changes, HP information, and character data formatting. Handles various actor types (players, monsters, NPCs) and their display properties.
+
+- handlers/adoption.md: Contains handlers for the adoption system, processing adoption requests and replies with appropriate validation messages.
+
+- handlers/auction.md: Contains handlers for the auction system, including auction results, item addition, window status, and auction ending with appropriate success/failure messages.
+
+- handlers/banking.md: Contains handlers for the banking system, including account balance checking, deposits, and withdrawals with appropriate success/failure messages and balance updates.
+
+- handlers/battleground.md: Contains stub handlers for battleground-related functionality, including emblem and message notifications. Currently focused on debugging with TODO comments.
+
+- handlers/booking.md: Contains handlers for the party booking system, including creation, deletion, updating, and searching for booking entries with appropriate success/failure messages.
+
+- handlers/books.md: Contains a simple handler for book reading notifications, currently only logging debug information with a TODO comment about adding table file support.
+
+- handlers/boss.md: Contains handlers for boss monster information, including location tracking, detection notifications, and respawn timers with appropriate messages for each state.
+
+- handlers/buying_store.md: Contains comprehensive handlers for the buying store system, including store creation, item listing, store discovery, item purchases, and various failure conditions with appropriate messages.
+
+- handlers/captcha.md: Contains extensive handlers for CAPTCHA and macro detection systems, including image processing, answer validation, upload/download functionality, and macro reporter features.
+
+- handlers/card_merge.md: Contains handlers for the card merging system, including listing mergeable items and processing merge results with appropriate success/failure messages and inventory updates.
+
+- handlers/cart.md: Contains handlers for cart-related functionality, including item addition/removal, weight/capacity tracking, and handling of stackable and non-stackable items with appropriate messages.
+
+- handlers/character.md: Contains handlers for character deletion operations, including deletion results, deletion acceptance, and deletion cancellation with appropriate success/failure messages and state management.
+
+- handlers/characters.md: Contains handlers for character-related operations, including character switching, character ID and map information, character name updates, character deletion, and equipment display.
+
+- handlers/clan.md: Contains handlers for the clan system, including clan information updates, clan chat messages, clan member counts, and clan leaving operations with appropriate data structure management.
+
+- handlers/combat.md: Contains handlers for combat-related functionality, including monster ranged attacks, combo delays, and attack range updates with appropriate debug messages and configuration adjustments.
+
+- handlers/config.md: Contains handlers for player configuration settings, including equipment visibility, summoning permissions, and pet/homunculus autofeeding with appropriate feedback messages.
+
+- handlers/connection.md: Contains handlers for connection state changes and disconnect request responses, including state management and appropriate success/failure messages.
+
+- handlers/cooking.md: Contains handlers for the cooking system, including recipe list processing, displaying available recipes, and providing instructions for using the cooking command.
+
+- handlers/deaths.md: Contains handlers for entity death and disappearance events, handling different types of disappearances (out of sight, death, logout, teleport) for various entity types.
+
+- handlers/effects.md: Contains handlers for various visual and sound effects, including level up effects, skill effects, area spells, hat effects, sound effects, and minimap indicators.
+
+- handlers/elemental.md: Contains handlers for elemental information updates, creating or updating elemental actors with data from server packets.
+
+- handlers/emblems.md: Contains a stub handler for character emblem updates, currently only logging debug information with a TODO comment indicating incomplete implementation.
+
+- handlers/equipment.md: Contains handlers for equipment-related operations, including item equipping and unequipping for both regular equipment and equipment switch functionality.
+
+- handlers/experience.md: Contains handlers for experience point notifications, handling both base and job experience from battle and quest sources with appropriate formatting.
+
+- handlers/gm.md: Contains handlers for Game Master interactions, including silence status changes and account name request responses with appropriate notification messages.
+
+- handlers/guild.md: Contains comprehensive handlers for guild-related functionality, including member management, position settings, alliances, notices, storage logs, and emblem handling.
+
+- handlers/homunculus.md: Contains handlers for homunculus-related functionality, including property calculation, feeding, state management, and property updates with appropriate state transitions and messages.
+
+- handlers/instance.md: Contains handlers for instance dungeon functionality, including window start, queue notifications, join notifications, and leave notifications with appropriate status messages.
+
+- handlers/inventory.md: Contains handlers for inventory-related operations, including item addition/removal, stackable and non-stackable item management, cart operations, rental item expiration, and favorite item status.
+
+- handlers/item_merge.md: Contains handlers for the item merging system, including merge list processing and merge result handling with appropriate success/failure messages and inventory updates.
+- handlers/items.md: Contains handlers for item-related operations, specifically item usage notifications with appropriate inventory updates and messages.
+
+- handlers/items_list.md: Contains handlers for managing item lists across different container types (inventory, cart, storage), including initialization, processing of stackable and non-stackable items, and finalization.
+
+- handlers/mail.md: Contains comprehensive handlers for the mail system, including sending, receiving, reading, deleting mail, and managing attachments with appropriate success/failure messages and formatted displays.
+
+- handlers/map.md: Contains handlers for map-related operations, including map changes, server changes, cell type changes, and property updates with appropriate state management and hooks.
+
+- handlers/marriage.md: Contains handlers for marriage-related notifications, specifically divorce notifications with appropriate messages.
+- handlers/memo.md: Contains handlers for memo (save point) operations, processing success/failure results with appropriate messages and hooks.
+
+- handlers/mercenary.md: Contains handlers for mercenary-related functionality, including initialization and removal with appropriate property management and configuration adjustments.
+
+- handlers/messaging.md: Contains comprehensive handlers for various messaging systems, including private messages, system messages, chat, broadcasts, whispers, and the Rodex mail system with appropriate formatting and hooks.
+
+- handlers/minimap.md: Contains handlers for minimap-related functionality, including indicator processing with actor references and color management, with a placeholder for reconstruction functionality.
+
+- handlers/misc.md: Contains miscellaneous handlers that don't fit elsewhere, including online user count notifications, remaining time information, and placeholder functions.
+- handlers/monster_info.md: Contains handlers for monster information, specifically the monster sense skill result handler that displays formatted monster statistics including level, size, race, defenses, and elemental properties.
+
+- handlers/movement.md: Contains handlers for character and actor movement, including movement interruption, teleport failures, high jumps, and character movement with appropriate position tracking and state management.
+
+- handlers/mvp.md: Contains handlers for MVP (Most Valuable Player) related notifications, including player MVP status, other player MVP status, and MVP item rewards with appropriate messages.
+
+- handlers/navigation.md: Contains handlers for the navigation system, processing server navigation requests for monster hunting and location navigation with appropriate hooks and messages.
+
+- handlers/npc.md: Contains comprehensive handlers for NPC interactions, including dialog management, text/number input, menu responses, chat messages, and image display with appropriate state tracking and hooks.
+- handlers/party.md: Contains extensive handlers for party-related functionality, including member management, invitation handling, chat messages, experience settings, HP updates, and location tracking with appropriate data structures and messages.
+
+- handlers/pc_cafe.md: Contains handlers for PC cafe point system, currently only implementing debug logging for point notifications with a TODO comment indicating incomplete implementation.
+
+- handlers/pets.md: Contains handlers for pet-related functionality, including pet information updates, feeding, evolution, emotion display, capture results, and egg hatching with appropriate data structure management.
+
+- handlers/portals.md: Contains handlers for warp portal functionality, specifically the warp portal list handler that processes memo points, updates save map configuration, and displays formatted portal lists.
+
+- handlers/pvp.md: Contains handlers for PvP (Player vs Player) functionality, specifically the rank update handler that tracks and displays the player's current PvP ranking.
+- handlers/quests.md: Contains comprehensive handlers for the quest system, including quest list management, mission tracking, progress updates, and quest activation/deletion with appropriate hooks and messages.
+
+- handlers/ranking.md: Contains handlers for various ranking systems, including top 10 rankings for blacksmiths, alchemists, taekwon fighters, and PK players, as well as ranking points updates with appropriate formatting and display.
+
+- handlers/refine.md: Contains handlers for item refining and upgrading, including refinable item listing, refine/craft results, and weapon upgrade results with appropriate success/failure messages.
+
+- handlers/rental.md: Contains handlers for item rental functionality, specifically the rental time notification handler that displays remaining rental time for items.
+
+- handlers/repair.md: Contains handlers for item repair functionality, including repair item listing and repair results with appropriate success/failure messages and inventory management.
+- handlers/reputation.md: Contains handlers for the reputation system, specifically the reputation information handler that processes and stores reputation data in the global reputation list.
+
+- handlers/roulette.md: Contains handlers for the roulette game system, including window opening/updating, rewards information, and item reward notifications with appropriate data structure management and messages.
+
+- handlers/script.md: Contains handlers for NPC script messages, processing message content and NPC identification with appropriate hooks and debug messages.
+
+- handlers/search_store.md: Contains handlers for the item search store system, including search results processing, position tracking, failure handling, and store opening with appropriate data structure management.
+
+- handlers/shop.md: Contains comprehensive handlers for various shop systems, including NPC shops, player vending, cash shops, and market systems with appropriate item listing, purchase/sale handling, and result notifications.
+- handlers/skills.md: Contains extensive handlers for skill-related functionality, including skill casting, cooldowns, failures, autospell management, and gospel buff effects with appropriate state tracking and hooks.
+
+- handlers/social.md: Contains comprehensive handlers for social interactions, including chat rooms, friends list, emotions, marriage notifications, and ignore player functionality with appropriate data structure management.
+
+- handlers/stats.md: Contains handlers for character statistics, including stat point allocation, status information updates, and parameter changes for both base and derived stats with appropriate hooks.
+
+- handlers/status.md: Contains handlers for character status effects, including status activation and resurrection with appropriate state management and messages.
+
+- handlers/storage.md: Contains handlers for storage-related functionality, including item addition/removal, password management, and storage opening/closing with appropriate data structure management.
+- handlers/system.md: Contains handlers for system-level functionality, specifically the network state transition handler that manages game state changes based on network version.
+
+- handlers/system_misc.md: Contains miscellaneous system handlers, including client input permission, inventory expansion, item preview, server ping, and Star Gladiator map confirmation with appropriate messages.
+
+- handlers/taekwon.md: Contains handlers for Taekwon class-specific functionality, including mission rank updates and special packet handling for celestial/hate target registration with appropriate messages.
+
+- handlers/trade.md: Contains comprehensive handlers for the player trading system, including trade requests, item addition, finalization, completion, and cancellation with appropriate data structure management.
+
+- handlers/transportation.md: Contains handlers for transportation systems, specifically the private airship usage handler with appropriate success/failure messages.
+- handlers/ui.md: Contains extensive handlers for user interface elements, including attendance system, stylist, refine UI, progress bars, hotkeys, and map loading with appropriate state management and messages.
+
+- handlers/vending.md: Contains handlers for the vending system, including store setup results, vender discovery, and vender removal with appropriate data structure management and hooks.
+
+
+
+
+
+
+
+
+
+
+
+# Step 3: Recommended Go Structure
+
+Based on the review of the files, here's a recommended structure that better follows Go best practices:
+
+## Principles Applied
+1. Organize packages around functionality, not types
+2. Use short, concise, and descriptive package names
+3. Ensure each package has a single, well-defined purpose
+4. Avoid deeply nested package hierarchies
+5. Follow Go's standard library conventions
+
+## Recommended Structure
+
+```
+network/
+├── receive/
+│   ├── core/           # Core network functionality (replaces common/)
+│   │   ├── parse.go    # Network parsing functionality
+│   │   └── account.go  # Account-related core functionality
+│   ├── security/       # Security-related functionality
+│   │   ├── login.go    # Login and authentication
+│   │   ├── pin.go      # PIN code handling
+│   │   └── anticheat.go # Anti-cheat systems
+│   ├── game/           # Game feature handlers (replaces handlers/)
+│   │   ├── actor/      # Actor-related functionality
+│   │   │   ├── player.go
+│   │   │   ├── monster.go
+│   │   │   └── npc.go
+│   │   ├── item/       # Item-related functionality
+│   │   │   ├── inventory.go
+│   │   │   ├── storage.go
+│   │   │   └── equipment.go
+│   │   ├── social/     # Social features
+│   │   │   ├── chat.go
+│   │   │   ├── guild.go
+│   │   │   ├── party.go
+│   │   │   └── friends.go
+│   │   ├── economy/    # Economic features
+│   │   │   ├── shop.go
+│   │   │   ├── vending.go
+│   │   │   ├── auction.go
+│   │   │   └── banking.go
+│   │   └── world/      # World interaction
+│   │       ├── map.go
+│   │       ├── movement.go
+│   │       └── npc.go
+│   └── types/          # Shared types and constants
+│       ├── constants.go
+│       └── packets.go
+└── send/               # For sending packets (future implementation)
+```
+
+## Key Improvements
+
+1. **Logical Grouping**: The structure groups related functionality together, making it easier to navigate and understand the codebase.
+
+2. **Reduced File Count**: Instead of having 70+ separate files, related handlers are consolidated into logical files based on functionality.
+
+3. **Better Dependency Management**: The structure makes dependencies clearer and reduces circular dependencies.
+
+4. **Go Idioms**: Follows Go's convention of organizing by functionality rather than by type.
+
+5. **Scalability**: The structure can easily accommodate new features without becoming unwieldy.
+
+6. **Testability**: The organization makes it easier to write focused tests for each component.
+
+## Migration Strategy
+
+1. Start by creating the new directory structure
+2. Move the homunculus constants from common/constants.md to game/actor/homunculus.go
+3. Consolidate the account-related functionality from various files into core/account.go
+4. Move character-related functionality from security/login.md to game/actor/player.go
+5. Group related handlers into their respective files based on functionality
+6. Ensure each file has a clear, single responsibility
+
+This structure will provide a solid foundation for implementing the Receive module in Go while following best practices.
+
+# Receive Migrations
+Format Example:
+```
+[ ] source_file.md:some_method_name:line_number - destination_file.md
+[ ] reputation.md:repair_weapon:56 - items.md
+```
+
+## Common Directory
+
+[ ] common/constants.md:HO_PRE_INIT:5 - handlers/homunculus.md
+[ ] common/constants.md:HO_RELATIONSHIP_CHANGED:6 - handlers/homunculus.md
+[ ] common/constants.md:HO_FULLNESS_CHANGED:7 - handlers/homunculus.md
+[ ] common/constants.md:HO_ACCESSORY_CHANGED:8 - handlers/homunculus.md
+[ ] common/constants.md:HO_HEADTYPE_CHANGED:9 - handlers/homunculus.md
+
+## Security Directory
+
+[ ] security/pin.md:queryLoginPinCode:26 - common/account.md
+[ ] security/pin.md:queryAndSaveLoginPinCode:35 - common/account.md
+
+## Handlers Directory
+
+[ ] handlers/account.md:account_id:3 - common/account.md
+
+[ ] handlers/actors.md:received_characters_blockSize:83 - security/login.md
+[ ] handlers/actors.md:received_characters_unpackString:90 - security/login.md
+
+[ ] handlers/character.md:char_delete2_result:2 - security/login.md
+[ ] handlers/character.md:char_delete2_accept_result:16 - security/login.md
+[ ] handlers/character.md:char_delete2_cancel_result:33 - security/login.md
+
+[ ] handlers/characters.md:switch_character:4 - security/login.md
+[ ] handlers/characters.md:received_character_ID_and_Map:17 - security/login.md
+[ ] handlers/characters.md:character_name:43 - security/login.md
+[ ] handlers/characters.md:character_deletion_failed:51 - security/login.md
+[ ] handlers/characters.md:character_deletion_successful:62 - security/login.md
+[ ] handlers/characters.md:show_eq:77 - security/login.md
+
+[ ] handlers/connection.md:change_to_constate25:4 - common/connection.md
+
+[ ] handlers/deaths.md:actor_died_or_disappeared:2 - handlers/actors.md
+
+[ ] handlers/effects.md:minimap_indicator:90 - handlers/minimap.md
+
+[ ] handlers/emblems.md:char_emblem_update:4 - handlers/guild.md
+
+[ ] handlers/inventory.md:cart_off:14 - handlers/cart.md
+
+[ ] handlers/items_list.md:item_list_start:42 - handlers/inventory.md (inventory part)
+[ ] handlers/items_list.md:item_list_start:42 - handlers/cart.md (cart part)
+[ ] handlers/items_list.md:item_list_start:42 - handlers/storage.md (storage part)
+
+[ ] handlers/items_list.md:item_list_stackable:29 - handlers/inventory.md (inventory part)
+[ ] handlers/items_list.md:item_list_stackable:29 - handlers/cart.md (cart part)
+[ ] handlers/items_list.md:item_list_stackable:29 - handlers/storage.md (storage part)
+
+[ ] handlers/items_list.md:item_list_nonstackable:14 - handlers/inventory.md (inventory part)
+[ ] handlers/items_list.md:item_list_nonstackable:14 - handlers/cart.md (cart part)
+[ ] handlers/items_list.md:item_list_nonstackable:14 - handlers/storage.md (storage part)
+
+[ ] handlers/items_list.md:item_list_end:4 - handlers/inventory.md (inventory part)
+[ ] handlers/items_list.md:item_list_end:4 - handlers/cart.md (cart part)
+[ ] handlers/items_list.md:item_list_end:4 - handlers/storage.md (storage part)
+
+[ ] handlers/movement.md:actor_action:80 - handlers/actors.md
+[ ] handlers/movement.md:actor_display_compatibility:100 - handlers/actors.md
+
+[ ] handlers/script.md:show_script:2 - handlers/npc.md
+
+[ ] handlers/social.md:actor_info:278 - handlers/actors.md
+
+[ ] handlers/system.md:changeToInGameState:2 - common/connection.md
+
+[ ] handlers/ui.md:map_loaded:150 - handlers/map.md
