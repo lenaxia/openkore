@@ -188,63 +188,241 @@
      - Create reconnection policies
      - Build proxy configuration
 
-3. **network/handlers/base_handlers.go**
-   - Source: Handler methods from `Network/Receive/ServerType0.pm`
-   - Dependencies: network/protocol/parser.go, network/packets/definitions.go
-   - Purpose: Implement handlers for common packet types
+3. **network/receive/core/parse.go**
+   - Source: Core parsing functionality from `Network/PacketParser.pm`
+   - Dependencies: network/protocol/parser.go
+   - Purpose: Implement core packet parsing functionality
    - Tasks:
-     - Create handler interface
-     - Implement common handlers
-     - Build handler registration
+     - Create parsing framework
+     - Implement packet validation
+     - Build packet processing pipeline
 
-4. **network/handlers/login_handlers.go**
-   - Source: Login-related handlers from `Network/Receive/ServerType0.pm`
-   - Dependencies: network/handlers/base_handlers.go
-   - Purpose: Handle login-related packets
+4. **network/receive/core/account.go**
+   - Source: Account-related core functionality from `Network/Receive/ServerType0.pm`
+   - Dependencies: network/receive/core/parse.go
+   - Purpose: Handle account-related core functionality
    - Tasks:
-     - Implement account server handlers
-     - Create login server handlers
-     - Build authentication handlers
+     - Implement account ID handling
+     - Create session management
+     - Build account state tracking
 
-5. **network/handlers/character_handlers.go**
-   - Source: Character-related handlers from `Network/Receive/ServerType0.pm`
-   - Dependencies: network/handlers/base_handlers.go
-   - Purpose: Handle character-related packets
+5. **network/receive/security/login.go**
+   - Source: Login and authentication from `Network/Receive/ServerType0.pm`
+   - Dependencies: network/receive/core/account.go
+   - Purpose: Handle login and authentication
    - Tasks:
-     - Implement character selection handlers
-     - Create character creation handlers
-     - Build character information handlers
+     - Implement login packet handling
+     - Create authentication flow
+     - Build session establishment
 
-6. **network/handlers/game_handlers.go**
-   - Source: Game-related handlers from `Network/Receive/ServerType0.pm`
-   - Dependencies: network/handlers/base_handlers.go
-   - Purpose: Handle in-game packets
+6. **network/receive/security/pin.go**
+   - Source: PIN code handling from `Network/Receive/ServerType0.pm`
+   - Dependencies: network/receive/security/login.go
+   - Purpose: Handle PIN code authentication
    - Tasks:
-     - Implement map handlers
-     - Create actor handlers
-     - Build item and inventory handlers
-     - Implement chat handlers
-     - Create skill handlers
+     - Implement PIN code request handling
+     - Create PIN code validation
+     - Build PIN code change functionality
 
-7. **network/servers/server.go**
+7. **network/receive/security/anticheat.go**
+   - Source: Anti-cheat systems from `Network/Receive/ServerType0.pm`
+   - Dependencies: network/receive/core/parse.go
+   - Purpose: Handle anti-cheat systems
+   - Tasks:
+     - Implement GameGuard handling
+     - Create captcha handling
+     - Build other anti-cheat mechanisms
+
+8. **network/receive/game/actor/player.go**
+   - Source: Player-related functionality from `Network/Receive/ServerType0.pm`
+   - Dependencies: network/receive/core/parse.go
+   - Purpose: Handle player-related packets
+   - Tasks:
+     - Implement player appearance handling
+     - Create player movement handling
+     - Build player status handling
+
+9. **network/receive/game/actor/monster.go**
+   - Source: Monster-related functionality from `Network/Receive/ServerType0.pm`
+   - Dependencies: network/receive/core/parse.go
+   - Purpose: Handle monster-related packets
+   - Tasks:
+     - Implement monster appearance handling
+     - Create monster movement handling
+     - Build monster status handling
+
+10. **network/receive/game/actor/npc.go**
+    - Source: NPC-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle NPC-related packets
+    - Tasks:
+      - Implement NPC appearance handling
+      - Create NPC interaction handling
+      - Build NPC dialog handling
+
+11. **network/receive/game/item/inventory.go**
+    - Source: Inventory-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle inventory-related packets
+    - Tasks:
+      - Implement inventory item handling
+      - Create item use handling
+      - Build item movement handling
+
+12. **network/receive/game/item/storage.go**
+    - Source: Storage-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle storage-related packets
+    - Tasks:
+      - Implement storage item handling
+      - Create storage open/close handling
+      - Build item transfer handling
+
+13. **network/receive/game/item/equipment.go**
+    - Source: Equipment-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle equipment-related packets
+    - Tasks:
+      - Implement equipment change handling
+      - Create equipment status handling
+      - Build equipment upgrade handling
+
+14. **network/receive/game/social/chat.go**
+    - Source: Chat-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle chat-related packets
+    - Tasks:
+      - Implement public chat handling
+      - Create private chat handling
+      - Build party/guild chat handling
+
+15. **network/receive/game/social/guild.go**
+    - Source: Guild-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle guild-related packets
+    - Tasks:
+      - Implement guild info handling
+      - Create guild member handling
+      - Build guild action handling
+
+16. **network/receive/game/social/party.go**
+    - Source: Party-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle party-related packets
+    - Tasks:
+      - Implement party info handling
+      - Create party member handling
+      - Build party action handling
+
+17. **network/receive/game/social/friends.go**
+    - Source: Friend-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle friend-related packets
+    - Tasks:
+      - Implement friend list handling
+      - Create friend request handling
+      - Build friend status handling
+
+18. **network/receive/game/economy/shop.go**
+    - Source: Shop-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle shop-related packets
+    - Tasks:
+      - Implement NPC shop handling
+      - Create buy/sell handling
+      - Build shop item handling
+
+19. **network/receive/game/economy/vending.go**
+    - Source: Vending-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle vending-related packets
+    - Tasks:
+      - Implement vending creation handling
+      - Create vending transaction handling
+      - Build vending search handling
+
+20. **network/receive/game/economy/auction.go**
+    - Source: Auction-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle auction-related packets
+    - Tasks:
+      - Implement auction listing handling
+      - Create auction bid handling
+      - Build auction result handling
+
+21. **network/receive/game/economy/banking.go**
+    - Source: Banking-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle banking-related packets
+    - Tasks:
+      - Implement bank open/close handling
+      - Create deposit/withdraw handling
+      - Build transaction result handling
+
+22. **network/receive/game/world/map.go**
+    - Source: Map-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle map-related packets
+    - Tasks:
+      - Implement map change handling
+      - Create map property handling
+      - Build map effect handling
+
+23. **network/receive/game/world/movement.go**
+    - Source: Movement-related functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle movement-related packets
+    - Tasks:
+      - Implement character movement handling
+      - Create teleport handling
+      - Build movement restriction handling
+
+24. **network/receive/game/world/npc.go**
+    - Source: NPC interaction functionality from `Network/Receive/ServerType0.pm`
+    - Dependencies: network/receive/core/parse.go
+    - Purpose: Handle NPC interaction packets
+    - Tasks:
+      - Implement NPC dialog handling
+      - Create NPC menu handling
+      - Build NPC script handling
+
+25. **network/receive/types/constants.go**
+    - Source: Constants from various files
+    - Dependencies: None
+    - Purpose: Define shared constants
+    - Tasks:
+      - Define packet type constants
+      - Create status effect constants
+      - Build other shared constants
+
+26. **network/receive/types/packets.go**
+    - Source: Packet structures from various files
+    - Dependencies: None
+    - Purpose: Define shared packet structures
+    - Tasks:
+      - Define common packet structures
+      - Create packet field types
+      - Build packet utility functions
+
+27. **network/servers/server.go**
    - Source: Server interface concepts from various files
-   - Dependencies: network/handlers/*, network/config/server_config.go
+   - Dependencies: network/receive/*, network/config/server_config.go
    - Purpose: Define server interface
    - Tasks:
      - Create server interface
      - Define server capabilities
      - Implement server events
 
-8. **network/servers/base_server.go**
+28. **network/servers/base_server.go**
    - Source: `Network/Receive/ServerType0.pm`
-   - Dependencies: network/servers/server.go, network/handlers/*
+   - Dependencies: network/servers/server.go, network/receive/*
    - Purpose: Implement base server functionality
    - Tasks:
      - Create base server implementation
      - Implement handler registration
      - Build packet processing pipeline
 
-9. **network/servers/sakray_server.go**
+29. **network/servers/sakray_server.go**
    - Source: `Network/Receive/Sakray.pm`
    - Dependencies: network/servers/base_server.go
    - Purpose: Implement Sakray-specific functionality
@@ -253,7 +431,7 @@
      - Implement Sakray-specific handlers
      - Create Sakray packet mappings
 
-10. **network/servers/factory.go**
+30. **network/servers/factory.go**
     - Source: Server creation logic from `Network/Receive.pm`
     - Dependencies: network/servers/*, network/config/server_config.go
     - Purpose: Create appropriate server implementation based on configuration
@@ -396,7 +574,7 @@ This comprehensive implementation plan covers the entire network stack for OpenK
                   │                                                         │
                   ▼                                                         ▼
 ┌─────────────────────────────────────┐               ┌─────────────────────────────────────────────────────────┐
-│      network/handlers/*.go          │               │            network/packets/*.go                         │
+│      network/receive/*.go           │               │            network/packets/*.go                         │
 │     (Packet Handler Implementation) │               │      (Packet Definitions & Construction)                │
 └─────────────────┬───────────────────┘               └─────────────────────┬───────────────────────────────────┘
                   │                                                         │
@@ -424,6 +602,125 @@ This comprehensive implementation plan covers the entire network stack for OpenK
                   ┌─────────────────────────────────────┐
                   │       utils/crypto/*.go             │
                   │    (Encryption Support)             │
+                  └─────────────────────┬───────────────┘
+                                        │
+                                        ▼
+                  ┌─────────────────────────────────────┐
+                  │             RO Server               │
+                  └─────────────────────────────────────┘
+```
+
+## Updated Architecture Diagram with Detailed Receive Structure
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                              OpenKore Core                                                      │
+└───────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────┘
+                                                        │
+                                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                             network/client.go                                                   │
+└───────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────┘
+                                                        │
+                  ┌────────────────────────────────────┬┴┬────────────────────────────────────────┐
+                  │                                    │ │                                        │
+                  ▼                                    │ │                                        ▼
+┌─────────────────────────────────────┐               │ │               ┌─────────────────────────────────────────┐
+│        network/state/*.go           │               │ │               │         network/config/*.go             │
+└─────────────────┬───────────────────┘               │ │               └─────────────────────┬───────────────────┘
+                  │                                    │ │                                    │
+                  │                                    │ │                                    │
+                  ▼                                    │ │                                    ▼
+┌─────────────────────────────────────┐               │ │               ┌─────────────────────────────────────────┐
+│      network/servers/*.go           │◄──────────────┘ └──────────────►│         network/send/*.go               │
+└─────────────────┬───────────────────┘                                 └─────────────────────┬───────────────────┘
+                  │                                                                           │
+                  ▼                                                                           ▼
+┌─────────────────────────────────────────────────────────────────────┐ ┌─────────────────────────────────────────┐
+│                     network/receive/                                │ │      network/packets/*.go               │
+│  ┌─────────────────────────────────────────────────────────────┐    │ └─────────────────────┬───────────────────┘
+│  │                        core/                                │    │                       │
+│  │  ┌─────────────┐  ┌─────────────┐                          │    │                       │
+│  │  │  parse.go   │  │ account.go  │                          │    │                       │
+│  │  └─────────────┘  └─────────────┘                          │    │                       │
+│  └─────────────────────────────────────────────────────────────┘    │                       │
+│                                                                     │                       │
+│  ┌─────────────────────────────────────────────────────────────┐    │                       │
+│  │                      security/                              │    │                       │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐      │    │                       │
+│  │  │  login.go   │  │   pin.go    │  │  anticheat.go   │      │    │                       │
+│  │  └─────────────┘  └─────────────┘  └─────────────────┘      │    │                       │
+│  └─────────────────────────────────────────────────────────────┘    │                       │
+│                                                                     │                       │
+│  ┌─────────────────────────────────────────────────────────────┐    │                       │
+│  │                        game/                                │    │                       │
+│  │  ┌─────────────────────────────────────────────────────┐    │    │                       │
+│  │  │                      actor/                         │    │    │                       │
+│  │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │    │    │                       │
+│  │  │  │  player.go  │  │ monster.go  │  │   npc.go    │  │    │    │                       │
+│  │  │  └─────────────┘  └─────────────┘  └─────────────┘  │    │    │                       │
+│  │  └─────────────────────────────────────────────────────┘    │    │                       │
+│  │                                                             │    │                       │
+│  │  ┌─────────────────────────────────────────────────────┐    │    │                       │
+│  │  │                      item/                          │    │    │                       │
+│  │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │    │    │                       │
+│  │  │  │inventory.go │  │ storage.go  │  │equipment.go │  │    │    │                       │
+│  │  │  └─────────────┘  └─────────────┘  └─────────────┘  │    │    │                       │
+│  │  └─────────────────────────────────────────────────────┘    │    │                       │
+│  │                                                             │    │                       │
+│  │  ┌─────────────────────────────────────────────────────┐    │    │                       │
+│  │  │                     social/                         │    │    │                       │
+│  │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │    │    │                       │
+│  │  │  │   chat.go   │  │  guild.go   │  │  party.go   │  │    │    │                       │
+│  │  │  └─────────────┘  └─────────────┘  └─────────────┘  │    │    │                       │
+│  │  │  ┌─────────────┐                                    │    │    │                       │
+│  │  │  │ friends.go  │                                    │    │    │                       │
+│  │  │  └─────────────┘                                    │    │    │                       │
+│  │  └─────────────────────────────────────────────────────┘    │    │                       │
+│  │                                                             │    │                       │
+│  │  ┌─────────────────────────────────────────────────────┐    │    │                       │
+│  │  │                    economy/                         │    │    │                       │
+│  │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │    │    │                       │
+│  │  │  │   shop.go   │  │ vending.go  │  │ auction.go  │  │    │    │                       │
+│  │  │  └─────────────┘  └─────────────┘  └─────────────┘  │    │    │                       │
+│  │  │  ┌─────────────┐                                    │    │    │                       │
+│  │  │  │ banking.go  │                                    │    │    │                       │
+│  │  │  └─────────────┘                                    │    │    │                       │
+│  │  └─────────────────────────────────────────────────────┘    │    │                       │
+│  │                                                             │    │                       │
+│  │  ┌─────────────────────────────────────────────────────┐    │    │                       │
+│  │  │                     world/                          │    │    │                       │
+│  │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │    │    │                       │
+│  │  │  │   map.go    │  │ movement.go │  │   npc.go    │  │    │    │                       │
+│  │  │  └─────────────┘  └─────────────┘  └─────────────┘  │    │    │                       │
+│  │  └─────────────────────────────────────────────────────┘    │    │                       │
+│  └─────────────────────────────────────────────────────────────┘    │                       │
+│                                                                     │                       │
+│  ┌─────────────────────────────────────────────────────────────┐    │                       │
+│  │                       types/                                │    │                       │
+│  │  ┌─────────────────┐  ┌─────────────────┐                   │    │                       │
+│  │  │  constants.go   │  │   packets.go    │                   │    │                       │
+│  │  └─────────────────┘  └─────────────────┘                   │    │                       │
+│  └─────────────────────────────────────────────────────────────┘    │                       │
+└─────────────────────────────────────────────────────────────────────┘                       │
+                                                                                              │
+                  ┌─────────────────────────────────────┐                                     │
+                  │      network/protocol/*.go          │◄────────────────────────────────────┘
+                  └─────────────────────┬───────────────┘
+                                        │
+                                        ▼
+                  ┌─────────────────────────────────────┐
+                  │      network/connection/*.go        │
+                  └─────────────────────┬───────────────┘
+                                        │
+                                        ▼
+                  ┌─────────────────────────────────────┐
+                  │        network/proxy/*.go           │
+                  └─────────────────────┬───────────────┘
+                                        │
+                                        ▼
+                  ┌─────────────────────────────────────┐
+                  │       utils/crypto/*.go             │
                   └─────────────────────┬───────────────┘
                                         │
                                         ▼
