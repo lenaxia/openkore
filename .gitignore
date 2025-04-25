@@ -50,3 +50,5 @@ tables/**/monsters.txt
 *.xpm
 *.weight
 .aider*
+
+*.swp
