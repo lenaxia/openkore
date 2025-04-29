@@ -1,0 +1,16 @@
+{
+    "function_name": "hp_sp_changed",
+    "args": {
+        "param1": "value1",
+        "param2": "value2"
+    },
+    "expected_output": "Success",
+    "validation": {
+        "type": "exact_match",
+        "description": "Test for hp_sp_changed function",
+        "requirements": [
+            "Should handle input correctly",
+            "Should produce expected output"
+        ]
+    }
+}

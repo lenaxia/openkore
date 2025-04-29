@@ -1,0 +1,13 @@
+[2025-04-27 17:33:29] Starting Simple Login and Movement Test
+[2025-04-27 17:33:29] Created login test file
+[2025-04-27 17:33:29] ===== Testing Login to Server =====
+[2025-04-27 17:33:29] Using actual Go implementation for server connection
+[2025-04-27 17:33:30] Login test successful
+[2025-04-27 17:33:30] [SIMULATION] ===== Simulating Character Movement =====
+[2025-04-27 17:33:30] [SIMULATION] Current position: (150, 150)
+[2025-04-27 17:33:30] [SIMULATION] Moving character one square right to position (151, 150)
+[2025-04-27 17:33:30] [SIMULATION] Movement packet would be sent to the server
+[2025-04-27 17:33:30] [SIMULATION] Server would acknowledge the movement
+[2025-04-27 17:33:30] [SIMULATION] Character movement successful
+[2025-04-27 17:33:30] ===== Test Completed Successfully =====
+[2025-04-27 17:33:30] Test results have been saved to /home/mikekao/personal/openkore/goKore/network/implementation/verification/simple_login_movement_test.log

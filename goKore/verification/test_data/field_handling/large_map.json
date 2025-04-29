@@ -1,0 +1,29 @@
+{
+    "field_name": "huge_battlefield",
+    "width": 10000,
+    "height": 10000,
+    "cell_types": [0, 1, 2, 3],
+    "actor_count": 1000,
+    "expected_output": "05060708",
+    "validation": {
+        "type": "performance_test",
+        "description": "Test field handling with extremely large maps",
+        "requirements": [
+            "Should handle very large map dimensions",
+            "Should efficiently store and retrieve cell data",
+            "Should support a large number of actors on the map",
+            "Should optimize pathfinding for large distances"
+        ],
+        "performance_criteria": {
+            "initialization_time_ms": 500,
+            "cell_access_time_ms": 0.01,
+            "pathfinding_time_ms": 100,
+            "memory_usage_mb": 50
+        },
+        "edge_cases": [
+            "Should handle coordinates at extreme edges of the map",
+            "Should handle dense clusters of actors in small areas",
+            "Should handle sparse distribution of actors across large areas"
+        ]
+    }
+}

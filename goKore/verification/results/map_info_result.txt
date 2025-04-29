@@ -1,0 +1,2 @@
+Map server: 192.168.5.220:5121
+Map: prontera

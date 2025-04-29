@@ -1,0 +1,6 @@
+[2025-04-27 17:31:20] Starting Full Login Sequence Test with Movement
+[2025-04-27 17:31:21] Created test data file: /home/mikekao/personal/openkore/goKore/network/implementation/verification/test_data/renewal_login.json
+[2025-04-27 17:31:21] ===== Testing Master Login =====
+[2025-04-27 17:31:21] Connecting to renewal server (192.168.5.219:6900)
+[2025-04-27 17:31:21] Master login test failed
+[2025-04-27 17:31:21] Full login sequence test failed at master login stage

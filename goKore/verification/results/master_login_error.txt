@@ -1,0 +1,6 @@
+# command-line-arguments
+./go_test_harness.go:802:9: undefined: testActorHandlingExt
+./go_test_harness.go:807:9: undefined: testFieldHandlingExt
+./go_test_harness.go:812:9: undefined: testEventHooksExt
+./go_test_harness.go:817:9: undefined: testServerConfigExt
+./go_test_harness.go:822:9: undefined: testConnectionManagementExt

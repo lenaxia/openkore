@@ -1,0 +1,16 @@
+{
+    "function_name": "pet_info2",
+    "args": {
+        "param1": "value1",
+        "param2": "value2"
+    },
+    "expected_output": "Success",
+    "validation": {
+        "type": "exact_match",
+        "description": "Test for pet_info2 function",
+        "requirements": [
+            "Should handle input correctly",
+            "Should produce expected output"
+        ]
+    }
+}

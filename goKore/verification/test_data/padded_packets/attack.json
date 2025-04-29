@@ -1,0 +1,19 @@
+{
+    "packet_type": "attack",
+    "account_id": 12345678,
+    "map_sync": 87654321,
+    "sync": 2882400000,
+    "target_id": 98765432,
+    "flag": 0,
+    "expected_output": "89002a383736383837360039383736000000000000000000060000000000000000000700000000000000",
+    "validation": {
+        "type": "anti_cheat",
+        "description": "The padded packet should contain the correct data and be properly padded to prevent packet analysis",
+        "properties": [
+            "Packet should start with the correct packet ID (0x0089)",
+            "Packet should be properly padded to the expected length",
+            "Packet should contain the account ID, map sync, and sync values in the correct positions",
+            "Padding should be random or pseudo-random to prevent pattern analysis"
+        ]
+    }
+}

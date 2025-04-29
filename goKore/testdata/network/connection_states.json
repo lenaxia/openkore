@@ -1,0 +1,34 @@
+{
+  "states": [
+    {
+      "name": "NOT_CONNECTED",
+      "value": 1,
+      "description": "Not connected to anything (next step -> connect to master server)"
+    },
+    {
+      "name": "CONNECTED_TO_MASTER_SERVER",
+      "value": 2,
+      "description": "Connected to master server (next step -> connect to login server)"
+    },
+    {
+      "name": "CONNECTED_TO_LOGIN_SERVER",
+      "value": 3,
+      "description": "Connected to login server (next step -> connect to character server)"
+    },
+    {
+      "name": "CONNECTED_TO_CHAR_SERVER",
+      "value": 4,
+      "description": "Connected to character server (next step -> connect to map server)"
+    },
+    {
+      "name": "IN_GAME",
+      "value": 5,
+      "description": "Connected to map server; ready and functional"
+    },
+    {
+      "name": "IN_GAME_BUT_UNINITIALIZED",
+      "value": -1,
+      "description": "RO client is already logged in the game before OpenKore did (XKore mode)"
+    }
+  ]
+}

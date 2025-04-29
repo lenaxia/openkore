@@ -1,0 +1,26 @@
+{
+    "field_name": "prontera",
+    "width": 200,
+    "height": 200,
+    "expected_output": "05060708",
+    "validation": {
+        "type": "field_management",
+        "description": "The field handling system should correctly process map data",
+        "requirements": [
+            "Field should be created with correct dimensions",
+            "Field cells should be initialized properly",
+            "Field should support adding and removing actors",
+            "Field should provide pathfinding capabilities",
+            "Field should handle boundary checks correctly"
+        ],
+        "boundary_tests": [
+            "Should handle coordinates at field edges",
+            "Should reject coordinates outside field boundaries",
+            "Should handle very large fields efficiently"
+        ],
+        "performance_criteria": {
+            "pathfinding_max_time_ms": 100,
+            "actor_lookup_max_time_ms": 5
+        }
+    }
+}

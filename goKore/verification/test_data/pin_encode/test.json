@@ -1,0 +1,9 @@
+{
+    "seed": 1234567890,
+    "pin": 1234,
+    "expected_output": "2345678901",
+    "validation": {
+        "type": "exact_match",
+        "description": "The encoded PIN should be the seed + PIN with the first digit removed"
+    }
+}

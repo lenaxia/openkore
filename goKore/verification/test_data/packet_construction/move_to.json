@@ -1,0 +1,8 @@
+{
+    "packet_name": "move_to",
+    "server_type": "0",
+    "args": {
+        "x": 150,
+        "y": 75
+    }
+}

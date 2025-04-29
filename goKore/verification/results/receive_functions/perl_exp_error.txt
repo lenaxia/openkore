@@ -1,0 +1,5 @@
+Constant subroutine Network::MessageTokenizer::KNOWN_MESSAGE redefined at /usr/share/perl5/enum.pm line 47.
+Constant subroutine Network::MessageTokenizer::UNKNOWN_MESSAGE redefined at /usr/share/perl5/enum.pm line 47.
+Constant subroutine Network::MessageTokenizer::ACCOUNT_ID redefined at /usr/share/perl5/enum.pm line 47.
+Subroutine callHook redefined at /home/mikekao/personal/openkore/goKore/network/implementation/verification/../../../../src/Plugins.pm line 534.
+Subroutine hasHook redefined at /home/mikekao/personal/openkore/goKore/network/implementation/verification/../../../../src/Plugins.pm line 549.

@@ -1,0 +1,15 @@
+{
+    "message_id": "0089",
+    "crypt_key_1": "0x12345678",
+    "crypt_key_2": "0x87654321",
+    "crypt_key_3": "0xABCDEF01",
+    "expected_output": "0089",
+    "validation": {
+        "type": "round_trip",
+        "description": "The encrypted message ID should be decryptable back to the original message ID",
+        "properties": [
+            "encrypt(decrypt(id)) == id",
+            "decrypt(encrypt(id)) == id"
+        ]
+    }
+}

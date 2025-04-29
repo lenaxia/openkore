@@ -1,0 +1,46 @@
+{
+    "hook_name": "concurrent_events",
+    "event_type": "multi_event",
+    "concurrent_hooks": 100,
+    "event_frequency_ms": 10,
+    "duration_ms": 1000,
+    "expected_output": "Hook processed",
+    "validation": {
+        "type": "concurrency_test",
+        "description": "Test event hook system under high concurrency conditions",
+        "requirements": [
+            "Should handle multiple hooks being registered simultaneously",
+            "Should handle multiple events being triggered simultaneously",
+            "Should maintain correct order of event processing",
+            "Should prevent race conditions in hook execution",
+            "Should handle hooks being added/removed while events are being processed"
+        ],
+        "performance_criteria": {
+            "max_event_processing_time_ms": 5,
+            "max_hook_registration_time_ms": 1,
+            "max_memory_increase_mb": 10
+        },
+        "concurrency_scenarios": [
+            {
+                "scenario": "many_hooks_one_event",
+                "description": "Many hooks registered for a single event type",
+                "expected_behavior": "All hooks should be called in registration order"
+            },
+            {
+                "scenario": "one_hook_many_events",
+                "description": "One hook registered for many event types",
+                "expected_behavior": "Hook should be called for each matching event"
+            },
+            {
+                "scenario": "dynamic_registration",
+                "description": "Hooks being registered and unregistered during event processing",
+                "expected_behavior": "System should maintain consistency and prevent partial updates"
+            },
+            {
+                "scenario": "recursive_events",
+                "description": "Events that trigger other events",
+                "expected_behavior": "System should prevent infinite recursion and handle event chains properly"
+            }
+        ]
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "actor_id": "FFFFFFFF",
+    "actor_type": "player",
+    "name": "ThisIsAVeryLongPlayerNameThatExceedsTheNormalLengthLimitOfMostMMORPGs",
+    "job_id": 65535,
+    "expected_output": "01020304",
+    "validation": {
+        "type": "boundary_test",
+        "description": "Test actor handling with boundary values",
+        "requirements": [
+            "Should handle maximum actor ID values",
+            "Should handle very long actor names",
+            "Should handle maximum job ID values",
+            "Should truncate names that exceed the maximum length",
+            "Should validate input values before processing"
+        ],
+        "error_handling": [
+            "Should not crash with extreme values",
+            "Should log appropriate warnings for boundary values",
+            "Should apply reasonable defaults for out-of-range values"
+        ],
+        "performance_criteria": {
+            "max_processing_time_ms": 50
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "server_type": "custom",
+    "server_name": "CustomServer",
+    "protocol_version": "20180620",
+    "packet_obfuscation": true,
+    "packet_sizes": {
+        "0x0064": 55,
+        "0x0065": 17,
+        "0x0066": 3,
+        "0x0067": 37,
+        "0x0068": 46,
+        "0x0069": 16
+    },
+    "encryption_keys": {
+        "key1": "0x12345678",
+        "key2": "0x87654321",
+        "key3": "0xABCDEF01"
+    },
+    "expected_output": "Config created",
+    "validation": {
+        "type": "compatibility_test",
+        "description": "Test server configuration with custom server types",
+        "requirements": [
+            "Should handle unknown server types gracefully",
+            "Should apply default values for missing configuration",
+            "Should validate packet sizes for consistency",
+            "Should support custom encryption keys",
+            "Should maintain backward compatibility with older server types"
+        ],
+        "compatibility_scenarios": [
+            {
+                "scenario": "old_server",
+                "protocol_version": "20050628",
+                "expected_behavior": "Should use legacy packet structures"
+            },
+            {
+                "scenario": "new_server",
+                "protocol_version": "20220101",
+                "expected_behavior": "Should use modern packet structures"
+            },
+            {
+                "scenario": "custom_server",
+                "protocol_version": "custom",
+                "expected_behavior": "Should use provided packet definitions"
+            }
+        ],
+        "migration_tests": [
+            "Should handle migration from older server types",
+            "Should handle migration to newer server types",
+            "Should preserve custom settings during migration"
+        ]
+    }
+}

@@ -1,0 +1,8 @@
+[2025-04-27 08:42:23] Starting Full Login Sequence Test with Movement
+[2025-04-27 08:42:23] Using actual Go implementation for all steps
+[2025-04-27 08:42:23] Created test data files in /home/mikekao/personal/openkore/goKore/network/implementation/verification/test_data/full_login_sequence
+[2025-04-27 08:42:23] ===== Testing Master Login =====
+[2025-04-27 08:42:23] Using actual Go implementation for master login
+[2025-04-27 08:42:23] Executing master login with actual Go implementation
+[2025-04-27 08:42:23] Master login failed
+[2025-04-27 08:42:23] Full login sequence test failed at master login stage
