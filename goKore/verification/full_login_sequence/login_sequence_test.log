@@ -1,0 +1,42 @@
+===== Full Login Sequence Test =====
+Connecting to login server: 192.168.5.219:6900
+Connected to server
+Connected to login server successfully
+Sending master login packet for user: botijo0
+Waiting for login response...
+Received data: C40AE000A99DED6382841E0028D66943000000000000000000000000000000000000000000000000000000000000013832613064393233663730353137313300C0A80569E91772417468656E61000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Message type: 0
+Message ID: 0AC4
+Extracted account ID: 1676516777
+Extracted session IDs: 2000002, 1131009576
+Extracted gender: 1
+Login successful: account_id=1676516777, gender=1
+Using login server information for character server
+Added server: rAthena (192.168.5.219:6121)
+Login successful: account_id=1676516777, gender=1
+Received server list with 1 servers
+Server 0: rAthena (192.168.5.219:6121) - Users: 0, State: 0
+Disconnected from login server
+Selected server: rAthena (192.168.5.219:6121)
+Connecting to character server: 192.168.5.219:6121
+Connection config: &{Host:192.168.5.219 Port:6121 Timeout:10s RecvTimeout:5s SendTimeout:5s ServerType:0 UseTLS:false TLSVerify:false ProxyHost: ProxyPort:0 ProxyType: ProxyUsername: ProxyPassword:}
+Waiting for connection to establish...
+Connected to character server successfully
+Sending character server login packet
+Creating game_login packet (0x0065)
+Account ID: A99DED63
+Session ID 1: 82841E00
+Session ID 2: 28D66943
+Gender: 1
+Using dynamic values from login server response
+Sending game_login packet (0x0065): 6500A99DED6382841E0028D66943000001
+Packet length: 17 bytes
+Game login packet sent successfully
+Waiting for character list...
+Looking for packet IDs: 006B, 082D, 099D, 0B72, 09A0
+Received data: A99DED636C0000
+Data length: 7 bytes
+Message type: 1
+Message ID: 0000, Length: 13
+Timeout waiting for character list
+Failed to receive character list or timed out

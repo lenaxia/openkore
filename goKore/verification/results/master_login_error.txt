@@ -1,6 +1,12 @@
-# command-line-arguments
-./go_test_harness.go:802:9: undefined: testActorHandlingExt
-./go_test_harness.go:807:9: undefined: testFieldHandlingExt
-./go_test_harness.go:812:9: undefined: testEventHooksExt
-./go_test_harness.go:817:9: undefined: testServerConfigExt
-./go_test_harness.go:822:9: undefined: testConnectionManagementExt
+Starting test_server_connection
+Server type: 0, IP: 192.168.5.219, Port: 6900
+Creating direct connection
+Connecting to server
+Connected to server!
+Sending master login packet
+Login packet sent: 64000100626f74696a6f3000000000000000000000000000000000004d656c6f6e2e373700000000000000000000000000000000003031323334353637383961626364656601000000
+Waiting for server response...
+Received response: 3e08000000000000000000000000000000000000000000000000
+Packet ID: 3E08
+Unknown response packet ID: 3E08
+Connection test completed

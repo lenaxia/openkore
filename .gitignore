@@ -52,3 +52,7 @@ tables/**/monsters.txt
 .aider*
 
 *.swp
+
+goKore-archive
+.gitignore
+goKore/network/send/servers/servertype0.go

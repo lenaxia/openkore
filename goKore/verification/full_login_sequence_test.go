@@ -1,4 +1,4 @@
-package main
+package verification_test
 
 import (
 	"context"
@@ -7,12 +7,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/mikekao/openkore/goKore/network/implementation/network/connection"
-	"github.com/mikekao/openkore/goKore/network/implementation/network/hooks"
-	"github.com/mikekao/openkore/goKore/network/implementation/network/protocol"
-	"github.com/mikekao/openkore/goKore/network/implementation/network/receive/core"
-	"github.com/mikekao/openkore/goKore/network/implementation/network/receive/game/actor"
-	"github.com/mikekao/openkore/goKore/network/implementation/network/receive/security"
+	"github.com/lenaxia/goKore/network/connection"
+	"github.com/lenaxia/goKore/network/hooks"
+	"github.com/lenaxia/goKore/network/protocol"
+	receivecore "github.com/lenaxia/goKore/network/receive/core"
+	receivesecurity "github.com/lenaxia/goKore/network/receive/security"
+	sendcore "github.com/lenaxia/goKore/network/send/core"
+	sendsecurity "github.com/lenaxia/goKore/network/send/security"
+	"github.com/lenaxia/goKore/network/send/servers"
 )
 
 // LoginSequenceTest represents the state for the login sequence test
@@ -20,9 +22,12 @@ type LoginSequenceTest struct {
 	conn         connection.Connection
 	tokenizer    *protocol.Tokenizer
 	hookManager  *hooks.HookManager
-	coreParser   *core.CoreParser
-	loginManager *security.LoginManager
-	actorManager *actor.ActorManager
+	coreParser   *receivecore.CoreParser
+	loginManager *receivesecurity.LoginManager
+
+	// Send components
+	baseSend    *sendcore.BaseSend
+	sendManager *sendsecurity.LoginManager
 
 	// Test state
 	accountID      uint32
@@ -33,6 +38,7 @@ type LoginSequenceTest struct {
 	charServerInfo *ServerInfo
 	charList       []CharacterInfo
 	selectedChar   int
+	charID         uint32
 	mapName        string
 	mapIP          string
 	mapPort        int
@@ -169,6 +175,18 @@ func (t *LoginSequenceTest) setupHooks() {
 		}
 	}, nil)
 
+	// Character ID and Map hooks
+	t.hookManager.AddHook("security/character_id_and_map", func(hookName string, arg interface{}, userData interface{}) {
+		if data, ok := arg.(map[string]interface{}); ok {
+			t.charID = data["char_id"].(uint32)
+			t.mapName = data["map_name"].(string)
+			t.mapIP = data["map_ip"].(string)
+			t.mapPort = data["map_port"].(int)
+			t.Log("Received character ID and map info: char_id=%d, map=%s, ip=%s, port=%d",
+				t.charID, t.mapName, t.mapIP, t.mapPort)
+		}
+	}, nil)
+
 	// Map login hooks
 	t.hookManager.AddHook("game/map_loaded", func(hookName string, arg interface{}, userData interface{}) {
 		if data, ok := arg.(map[string]interface{}); ok {
@@ -208,15 +226,34 @@ func (t *LoginSequenceTest) RunTest() bool {
 	})
 
 	// Create core parser
-	t.coreParser = core.NewCoreParser("ServerType0", t.hookManager)
+	t.coreParser = receivecore.NewCoreParser("ServerType0", t.hookManager)
 
-	// Create login manager
-	t.loginManager = security.NewLoginManager(t.coreParser, t.hookManager)
+	// Create login manager for receive
+	t.loginManager = receivesecurity.NewLoginManager(t.coreParser, t.hookManager)
 	t.loginManager.RegisterHandlers()
 
-	// Create actor manager
-	t.actorManager = actor.NewActorManager(t.coreParser, t.hookManager)
-	t.actorManager.RegisterHandlers()
+	// Create base send implementation
+	t.baseSend = sendcore.NewBaseSend(t.hookManager)
+
+	// Configure base send with ServerType0 packet constructions
+	err := t.baseSend.Configure("ServerType0", servers.ServerType0PacketConstructions())
+	if err != nil {
+		t.Log("Failed to configure base send: %v", err)
+		return false
+	}
+
+	// Set the connection for sending packets
+	t.baseSend.SetConnection(t.conn)
+
+	// Create login manager for send
+	t.sendManager = sendsecurity.NewLoginManager(t.baseSend)
+
+	// Set credentials
+	t.sendManager.SetCredentials("botijo0", "Melon.77")
+
+	// Set version
+	t.sendManager.SetVersion(55)
+	t.sendManager.SetMasterVersion(1)
 
 	// Define packet lengths for the tokenizer
 	packetLengths := make(map[string]protocol.PacketDef)
@@ -237,7 +274,7 @@ func (t *LoginSequenceTest) RunTest() bool {
 
 	// Step 1: Connect to login server
 	t.Log("Connecting to login server: %s:%d", connConfig.Host, connConfig.Port)
-	err := t.conn.Connect()
+	err = t.conn.Connect()
 	if err != nil {
 		t.Log("Failed to connect to login server: %v", err)
 		return false
@@ -255,20 +292,8 @@ func (t *LoginSequenceTest) RunTest() bool {
 	t.Log("Connected to login server successfully")
 
 	// Step 2: Send master login packet
-	username := "botijo0"
-	password := "Melon.77"
-
-	t.Log("Sending master login packet for user: %s", username)
-	packet := []byte{0x64, 0x00} // 0x0064 master_login packet
-	packet = append(packet, make([]byte, 24)...)
-	copy(packet[2:], []byte(username))
-	packet = append(packet, make([]byte, 24)...)
-	copy(packet[26:], []byte(password))
-	packet = append(packet, 0)                   // gender (0=female, 1=male)
-	packet = append(packet, make([]byte, 16)...) // client hash
-	packet = append(packet, 1, 0, 0, 0)          // version
-
-	err = t.conn.Send(packet)
+	t.Log("Sending master login packet for user: botijo0")
+	err = t.sendManager.SendMasterLogin()
 	if err != nil {
 		t.Log("Failed to send login packet: %v", err)
 		return false
@@ -300,6 +325,9 @@ func (t *LoginSequenceTest) RunTest() bool {
 	connConfig.Port = selectedServer.Port
 	t.conn = connection.NewDirectConnection(connConfig)
 
+	// Update the connection in the base send
+	t.baseSend.SetConnection(t.conn)
+
 	t.Log("Connecting to character server: %s:%d", connConfig.Host, connConfig.Port)
 	err = t.conn.Connect()
 	if err != nil {
@@ -319,18 +347,21 @@ func (t *LoginSequenceTest) RunTest() bool {
 
 	// Step 6: Send character server login packet
 	t.Log("Sending character server login packet")
-	packet = []byte{0x65, 0x00} // 0x0065 game_login packet
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[2:], t.accountID)
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[6:], t.sessionID1)
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[10:], t.sessionID2)
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[14:], 0) // unknown
-	packet = append(packet, t.gender)
 
-	err = t.conn.Send(packet)
+	// Set account info in the login manager
+	accountIDBytes := make([]byte, 4)
+	binary.LittleEndian.PutUint32(accountIDBytes, t.accountID)
+
+	sessionID1Bytes := make([]byte, 4)
+	binary.LittleEndian.PutUint32(sessionID1Bytes, t.sessionID1)
+
+	sessionID2Bytes := make([]byte, 4)
+	binary.LittleEndian.PutUint32(sessionID2Bytes, t.sessionID2)
+
+	t.sendManager.SetAccountInfo(accountIDBytes, sessionID1Bytes, sessionID2Bytes, int(t.gender))
+
+	// Send game login packet
+	err = t.sendManager.SendGameLogin()
 	if err != nil {
 		t.Log("Failed to send character server login packet: %v", err)
 		return false
@@ -354,10 +385,7 @@ func (t *LoginSequenceTest) RunTest() bool {
 
 	// Step 9: Send character selection packet
 	t.Log("Sending character selection packet")
-	packet = []byte{0x66, 0x00} // 0x0066 char_select packet
-	packet = append(packet, selectedChar.CharNum)
-
-	err = t.conn.Send(packet)
+	err = t.sendManager.SendCharLogin(int(selectedChar.CharNum))
 	if err != nil {
 		t.Log("Failed to send character selection packet: %v", err)
 		return false
@@ -378,6 +406,9 @@ func (t *LoginSequenceTest) RunTest() bool {
 	connConfig.Port = t.mapPort
 	t.conn = connection.NewDirectConnection(connConfig)
 
+	// Update the connection in the base send
+	t.baseSend.SetConnection(t.conn)
+
 	t.Log("Connecting to map server: %s:%d", connConfig.Host, connConfig.Port)
 	err = t.conn.Connect()
 	if err != nil {
@@ -397,18 +428,16 @@ func (t *LoginSequenceTest) RunTest() bool {
 
 	// Step 13: Send map login packet
 	t.Log("Sending map login packet")
-	packet = []byte{0x72, 0x00} // 0x0072 map_login packet
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[2:], t.accountID)
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[6:], t.charList[t.selectedChar].CharID)
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[10:], t.sessionID1)
-	packet = append(packet, make([]byte, 4)...)
-	binary.LittleEndian.PutUint32(packet[14:], t.sessionID2)
-	packet = append(packet, t.gender)
 
-	err = t.conn.Send(packet)
+	// Update charID in the login manager
+	charIDBytes := make([]byte, 4)
+	binary.LittleEndian.PutUint32(charIDBytes, t.charID)
+
+	// Set the charID in the login manager
+	t.sendManager.SetAccountInfo(accountIDBytes, sessionID1Bytes, sessionID2Bytes, int(t.gender))
+
+	// Send map login packet
+	err = t.sendManager.SendMapLogin()
 	if err != nil {
 		t.Log("Failed to send map login packet: %v", err)
 		return false
@@ -420,7 +449,15 @@ func (t *LoginSequenceTest) RunTest() bool {
 		return false
 	}
 
-	// Step 15: Disconnect from map server
+	// Step 15: Send map loaded packet
+	t.Log("Sending map loaded packet")
+	err = t.sendManager.SendMapLoaded()
+	if err != nil {
+		t.Log("Failed to send map loaded packet: %v", err)
+		return false
+	}
+
+	// Step 16: Disconnect from map server
 	t.conn.Disconnect()
 	t.Log("Disconnected from map server")
 
@@ -597,6 +634,9 @@ func (t *LoginSequenceTest) waitForMapServerInfo() bool {
 						msgID := fmt.Sprintf("%02X%02X", message[1], message[0])
 						t.Log("Message ID: %s", msgID)
 
+						// Process the message
+						t.coreParser.Parse(message)
+
 						// Check for map server info packet
 						if msgID == "0071" {
 							// Extract map server IP and port
@@ -677,19 +717,20 @@ func (t *LoginSequenceTest) waitForMapLoad() bool {
 	}
 }
 
-func main() {
+// RunFullLoginSequenceTest runs the full login sequence test
+func RunFullLoginSequenceTest() bool {
 	test := NewLoginSequenceTest()
 	if test == nil {
 		fmt.Println("Failed to create test")
-		os.Exit(1)
+		return false
 	}
 
 	success := test.RunTest()
 	if success {
 		fmt.Println("Full login sequence test passed!")
-		os.Exit(0)
+		return true
 	} else {
 		fmt.Println("Full login sequence test failed!")
-		os.Exit(1)
+		return false
 	}
 }

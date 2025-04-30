@@ -1,2 +1,2 @@
 Movement successful
-New position: (150, 151)
+New position: (149, 150)

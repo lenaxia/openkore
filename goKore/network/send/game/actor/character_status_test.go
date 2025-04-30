@@ -139,7 +139,7 @@ func TestSendChangeTitle(t *testing.T) {
 // TestSendQuit tests the SendQuit function
 func TestSendQuit(t *testing.T) {
 	mockSend := NewMockSend()
-	mockSend.packetIDs["quit_request"] = "00B2"
+	mockSend.packetIDs["quit_request"] = "00B3" // Use the correct packet ID that doesn't conflict with "restart"
 	charManager := NewCharacterManager(mockSend)
 
 	err := charManager.SendQuit()

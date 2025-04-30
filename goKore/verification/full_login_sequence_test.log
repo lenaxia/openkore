@@ -1,39 +1,7 @@
-[2025-04-26 20:34:30] Starting Full Login Sequence Test
-[2025-04-26 20:34:30] NOTE: This test uses the actual Go implementation where available and simulates missing parts
-[2025-04-26 20:34:30]       The Send implementation (Phase 9) is still in progress, so packet sending is simulated
-[2025-04-26 20:34:30] Created test data file: /home/mikekao/personal/openkore/goKore/network/implementation/verification/test_data/full_login_sequence/renewal_login.json
-[2025-04-26 20:34:30] ===== Testing Master Login =====
-[2025-04-26 20:34:30] Connecting to renewal server (192.168.5.219:6900)
-[2025-04-26 20:34:31] Master login test successful (USING ACTUAL GO IMPLEMENTATION)
-[2025-04-26 20:34:31] [SIMULATION] ===== Simulating Character Server Connection =====
-[2025-04-26 20:34:31] [SIMULATION] This part is simulated because the Send implementation is incomplete
-[2025-04-26 20:34:31] [SIMULATION] Connecting to character server
-[2025-04-26 20:34:31] [SIMULATION] Sending character server login packet
-[2025-04-26 20:34:31] [SIMULATION] Receiving character list
-[2025-04-26 20:34:31] [SIMULATION] Character server connection simulation successful
-[2025-04-26 20:34:31] [SIMULATION] Character list received:
-[2025-04-26 20:34:31] [SIMULATION] ===== Simulating Character Selection =====
-[2025-04-26 20:34:31] [SIMULATION] This part is simulated because the Send implementation is incomplete
-[2025-04-26 20:34:31] [SIMULATION] Selecting character: Botijo
-[2025-04-26 20:34:31] [SIMULATION] Sending character selection packet
-[2025-04-26 20:34:31] [SIMULATION] Receiving map server information
-[2025-04-26 20:34:31] [SIMULATION] Character selection simulation successful
-[2025-04-26 20:34:31] [SIMULATION] Map server information received:
-[2025-04-26 20:34:31] [SIMULATION] ===== Simulating Map Server Connection =====
-[2025-04-26 20:34:31] [SIMULATION] This part is simulated because the Send implementation is incomplete
-[2025-04-26 20:34:31] [SIMULATION] Connecting to map server (192.168.5.220:5121)
-[2025-04-26 20:34:31] [SIMULATION] Sending map login packet
-[2025-04-26 20:34:31] [SIMULATION] Receiving map data
-[2025-04-26 20:34:31] [SIMULATION] Map server connection simulation successful
-[2025-04-26 20:34:31] [SIMULATION] Map data received:
-[2025-04-26 20:34:31] [SIMULATION] ===== Simulating Character Movement =====
-[2025-04-26 20:34:31] [SIMULATION] This part is simulated because the Send implementation is incomplete
-[2025-04-26 20:34:31] [SIMULATION] Current position: (150, 150)
-[2025-04-26 20:34:31] [SIMULATION] Moving character one square down to position (150, 151)
-[2025-04-26 20:34:31] [SIMULATION] Created test data file for movement
-[2025-04-26 20:34:31] [SIMULATION] Sending movement packet to server
-[2025-04-26 20:34:31] [SIMULATION] Received server acknowledgment of movement
-[2025-04-26 20:34:31] [SIMULATION] Character movement simulation successful
-[2025-04-26 20:34:31] [SIMULATION] Movement result:
-[2025-04-26 20:34:31] ===== Full Login Sequence Test Completed Successfully =====
-[2025-04-26 20:34:31] Test results have been saved to /home/mikekao/personal/openkore/goKore/network/implementation/verification/full_login_sequence_test.log
+[2025-04-29 01:16:39] Starting Full Login Sequence Test
+[2025-04-29 01:16:39] This test uses the actual Go implementation for the complete login sequence
+[2025-04-29 01:16:39] Created test data file: /home/mikekao/personal/openkore/goKore/verification/test_data/full_login_sequence/renewal_login.json
+[2025-04-29 01:16:39] ===== Running Full Login Sequence Test =====
+[2025-04-29 01:16:39] Building full_login_sequence_test binary...
+[2025-04-29 01:16:39] Failed to build full_login_sequence_test binary
+[2025-04-29 01:16:39] Full login sequence test failed

@@ -10,37 +10,81 @@ import (
 
 // ChatManager handles chat-related packet handling
 type ChatManager struct {
-	baseParse core.Parser
-	hooks     *hooks.HookManager
-	logger    core.Logger
+	parser      *core.CoreParser
+	hookManager *hooks.HookManager
+	logger      core.Logger
 }
 
 // NewChatManager creates a new chat manager
-func NewChatManager(baseParse core.Parser, hooks *hooks.HookManager, logger core.Logger) *ChatManager {
+func NewChatManager(parser *core.CoreParser, hookManager *hooks.HookManager, logger core.Logger) *ChatManager {
 	return &ChatManager{
-		baseParse: baseParse,
-		hooks:     hooks,
-		logger:    logger,
+		parser:      parser,
+		hookManager: hookManager,
+		logger:      logger,
 	}
 }
 
 // RegisterHandlers registers all chat-related packet handlers
 func (cm *ChatManager) RegisterHandlers() {
-	cm.baseParse.RegisterHandler("self_chat", cm.HandleSelfChat)
-	cm.baseParse.RegisterHandler("private_message", cm.HandlePrivateMessage)
-	cm.baseParse.RegisterHandler("private_message_sent", cm.HandlePrivateMessageSent)
-	cm.baseParse.RegisterHandler("system_chat", cm.HandleSystemChat)
-	cm.baseParse.RegisterHandler("local_broadcast", cm.HandleLocalBroadcast)
-	cm.baseParse.RegisterHandler("chat_created", cm.HandleChatCreated)
-	cm.baseParse.RegisterHandler("chat_info", cm.HandleChatInfo)
-	cm.baseParse.RegisterHandler("chat_users", cm.HandleChatUsers)
-	cm.baseParse.RegisterHandler("chat_join_result", cm.HandleChatJoinResult)
-	cm.baseParse.RegisterHandler("chat_modified", cm.HandleChatModified)
-	cm.baseParse.RegisterHandler("chat_newowner", cm.HandleChatNewowner)
-	cm.baseParse.RegisterHandler("chat_user_join", cm.HandleChatUserJoin)
-	cm.baseParse.RegisterHandler("chat_user_leave", cm.HandleChatUserLeave)
-	cm.baseParse.RegisterHandler("chat_removed", cm.HandleChatRemoved)
-	cm.baseParse.RegisterHandler("whisper_list", cm.HandleWhisperList)
+	// Register self chat handler
+	cm.parser.RegisterHandlerFunc("00E1", "self_chat", "Z*",
+		[]string{"message"}, cm.HandleSelfChat)
+
+	// Register private message handler
+	cm.parser.RegisterHandlerFunc("0097", "private_message", "Z24 Z*",
+		[]string{"sender", "message"}, cm.HandlePrivateMessage)
+
+	// Register private message sent handler
+	cm.parser.RegisterHandlerFunc("00DF", "private_message_sent", "C Z24 Z*",
+		[]string{"type", "recipient", "message"}, cm.HandlePrivateMessageSent)
+
+	// Register system chat handler
+	cm.parser.RegisterHandlerFunc("009A", "system_chat", "Z*",
+		[]string{"message"}, cm.HandleSystemChat)
+
+	// Register local broadcast handler
+	cm.parser.RegisterHandlerFunc("009A", "local_broadcast", "Z* Z6",
+		[]string{"message", "color"}, cm.HandleLocalBroadcast)
+
+	// Register chat created handler
+	cm.parser.RegisterHandlerFunc("00D7", "chat_created", "V Z*",
+		[]string{"chatID", "title"}, cm.HandleChatCreated)
+
+	// Register chat info handler
+	cm.parser.RegisterHandlerFunc("00D7", "chat_info", "V Z* V v C",
+		[]string{"chatID", "title", "ownerID", "limit", "public"}, cm.HandleChatInfo)
+
+	// Register chat users handler
+	cm.parser.RegisterHandlerFunc("00DD", "chat_users", "V Z*",
+		[]string{"chatID", "users"}, cm.HandleChatUsers)
+
+	// Register chat join result handler
+	cm.parser.RegisterHandlerFunc("00DA", "chat_join_result", "C",
+		[]string{"type"}, cm.HandleChatJoinResult)
+
+	// Register chat modified handler
+	cm.parser.RegisterHandlerFunc("00DF", "chat_modified", "V Z* v C",
+		[]string{"chatID", "title", "limit", "public"}, cm.HandleChatModified)
+
+	// Register chat newowner handler
+	cm.parser.RegisterHandlerFunc("00E1", "chat_newowner", "Z24 C",
+		[]string{"user", "type"}, cm.HandleChatNewowner)
+
+	// Register chat user join handler
+	cm.parser.RegisterHandlerFunc("00DC", "chat_user_join", "Z24",
+		[]string{"user"}, cm.HandleChatUserJoin)
+
+	// Register chat user leave handler
+	cm.parser.RegisterHandlerFunc("00DD", "chat_user_leave", "Z24 C",
+		[]string{"user", "flag"}, cm.HandleChatUserLeave)
+
+	// Register chat removed handler
+	cm.parser.RegisterHandlerFunc("00D8", "chat_removed", "V",
+		[]string{"chatID"}, cm.HandleChatRemoved)
+
+	// Register whisper list handler
+	cm.parser.RegisterHandlerFunc("00D9", "whisper_list", "v Z*",
+		[]string{"count", "names"}, cm.HandleWhisperList)
 }
 
 // HandleSelfChat handles the self_chat packet (lines 11383-11406)
@@ -65,7 +109,7 @@ func (cm *ChatManager) HandleSelfChat(args map[string]interface{}) error {
 	cm.logger.Info("[Self] %s: %s", user, content)
 
 	// Call hooks
-	cm.hooks.CallHook("packet_selfChat", map[string]interface{}{
+	cm.hookManager.CallHook("packet_selfChat", map[string]interface{}{
 		"user":    user,
 		"message": content,
 	})
@@ -90,7 +134,7 @@ func (cm *ChatManager) HandlePrivateMessage(args map[string]interface{}) error {
 	cm.logger.Info("[PM From] %s: %s", sender, message)
 
 	// Call hooks
-	cm.hooks.CallHook("packet_privMsg", map[string]interface{}{
+	cm.hookManager.CallHook("packet_privMsg", map[string]interface{}{
 		"user":    sender,
 		"message": message,
 	})
@@ -122,7 +166,7 @@ func (cm *ChatManager) HandlePrivateMessageSent(args map[string]interface{}) err
 		cm.logger.Info("[PM To] %s: %s", recipient, message)
 
 		// Call hooks
-		cm.hooks.CallHook("packet_sentPM", map[string]interface{}{
+		cm.hookManager.CallHook("packet_sentPM", map[string]interface{}{
 			"user":    recipient,
 			"message": message,
 		})
@@ -164,7 +208,7 @@ func (cm *ChatManager) HandleSystemChat(args map[string]interface{}) error {
 	}
 
 	// Call hooks
-	cm.hooks.CallHook("packet_sysMsg", map[string]interface{}{
+	cm.hookManager.CallHook("packet_sysMsg", map[string]interface{}{
 		"message": message,
 	})
 
@@ -188,7 +232,7 @@ func (cm *ChatManager) HandleLocalBroadcast(args map[string]interface{}) error {
 	cm.logger.Info("[Local Broadcast] %s", message)
 
 	// Call hooks
-	cm.hooks.CallHook("packet_localBroadcast", map[string]interface{}{
+	cm.hookManager.CallHook("packet_localBroadcast", map[string]interface{}{
 		"message": message,
 		"color":   color,
 	})
@@ -213,7 +257,7 @@ func (cm *ChatManager) HandleChatCreated(args map[string]interface{}) error {
 	cm.logger.Info("Chat room created: %s (ID: %d)", title, chatID)
 
 	// Call hooks
-	cm.hooks.CallHook("chat_created", map[string]interface{}{
+	cm.hookManager.CallHook("chat_created", map[string]interface{}{
 		"chatID": chatID,
 		"title":  title,
 	})
@@ -259,7 +303,7 @@ func (cm *ChatManager) HandleChatInfo(args map[string]interface{}) error {
 		title, chatID, ownerID, limit, publicStr)
 
 	// Call hooks
-	cm.hooks.CallHook("packet_chatinfo", map[string]interface{}{
+	cm.hookManager.CallHook("packet_chatinfo", map[string]interface{}{
 		"chatID":  chatID,
 		"title":   title,
 		"ownerID": ownerID,
@@ -298,7 +342,7 @@ func (cm *ChatManager) HandleChatUsers(args map[string]interface{}) error {
 	}
 
 	// Call hooks
-	cm.hooks.CallHook("chat_joined", map[string]interface{}{
+	cm.hookManager.CallHook("chat_joined", map[string]interface{}{
 		"chatID": chatID,
 		"users":  users,
 	})
@@ -362,7 +406,7 @@ func (cm *ChatManager) HandleChatModified(args map[string]interface{}) error {
 		title, chatID, limit, publicStr)
 
 	// Call hooks
-	cm.hooks.CallHook("chat_modified", map[string]interface{}{
+	cm.hookManager.CallHook("chat_modified", map[string]interface{}{
 		"chatID": chatID,
 		"title":  title,
 		"limit":  limit,
@@ -444,7 +488,7 @@ func (cm *ChatManager) HandleChatRemoved(args map[string]interface{}) error {
 	cm.logger.Info("Chat room removed (ID: %d)", chatID)
 
 	// Call hooks
-	cm.hooks.CallHook("chat_removed", map[string]interface{}{
+	cm.hookManager.CallHook("chat_removed", map[string]interface{}{
 		"chatID": chatID,
 	})
 

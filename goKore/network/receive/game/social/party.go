@@ -9,37 +9,104 @@ import (
 
 // PartyManager handles party-related packet handling
 type PartyManager struct {
-	baseParse core.Parser
-	hooks     *hooks.HookManager
-	logger    core.Logger
+	parser      *core.CoreParser
+	hookManager *hooks.HookManager
+	logger      core.Logger
 }
 
 // NewPartyManager creates a new party manager
-func NewPartyManager(baseParse core.Parser, hooks *hooks.HookManager, logger core.Logger) *PartyManager {
+func NewPartyManager(parser *core.CoreParser, hookManager *hooks.HookManager, logger core.Logger) *PartyManager {
 	return &PartyManager{
-		baseParse: baseParse,
-		hooks:     hooks,
-		logger:    logger,
+		parser:      parser,
+		hookManager: hookManager,
+		logger:      logger,
 	}
 }
 
 // RegisterHandlers registers all party-related packet handlers
 func (pm *PartyManager) RegisterHandlers() {
-	pm.baseParse.RegisterHandler("party_chat", pm.HandlePartyChat)
-	pm.baseParse.RegisterHandler("party_exp", pm.HandlePartyExp)
-	pm.baseParse.RegisterHandler("party_leader", pm.HandlePartyLeader)
-	pm.baseParse.RegisterHandler("party_hp_info", pm.HandlePartyHpInfo)
-	pm.baseParse.RegisterHandler("party_invite", pm.HandlePartyInvite)
-	pm.baseParse.RegisterHandler("party_invite_result", pm.HandlePartyInviteResult)
-	pm.baseParse.RegisterHandler("party_location", pm.HandlePartyLocation)
-	pm.baseParse.RegisterHandler("party_organize_result", pm.HandlePartyOrganizeResult)
-	pm.baseParse.RegisterHandler("party_show_picker", pm.HandlePartyShowPicker)
-	pm.baseParse.RegisterHandler("party_users_info", pm.HandlePartyUsersInfo)
-	pm.baseParse.RegisterHandler("party_dead", pm.HandlePartyDead)
-	pm.baseParse.RegisterHandler("partylv_info", pm.HandlePartyLvInfo)
-	pm.baseParse.RegisterHandler("party_join", pm.HandlePartyJoin)
-	pm.baseParse.RegisterHandler("party_allow_invite", pm.HandlePartyAllowInvite)
-	pm.baseParse.RegisterHandler("party_leave", pm.HandlePartyLeave)
+	// Register party_join handlers for different packet versions
+	// 0104 - DEFAULT OLD PACKET
+	pm.parser.RegisterHandlerFunc("0104", "party_join", "V C v3 Z24 Z24 Z16",
+		[]string{"ID", "role", "x", "y", "type", "name", "user", "map"}, pm.HandlePartyJoin)
+
+	// 01E9 - PACKETVER >= 2015
+	pm.parser.RegisterHandlerFunc("01E9", "party_join", "V C v3 Z24 Z24 Z16 v C2",
+		[]string{"ID", "role", "x", "y", "type", "name", "user", "map", "lv", "item_pickup", "item_share"}, pm.HandlePartyJoin)
+
+	// 0A43 - PACKETVER >= 2016
+	pm.parser.RegisterHandlerFunc("0A43", "party_join", "V C v v3 Z24 Z24 Z16 C2",
+		[]string{"ID", "role", "jobID", "lv", "x", "y", "type", "name", "user", "map", "item_pickup", "item_share"}, pm.HandlePartyJoin)
+
+	// 0AE4 - PACKETVER >= 2017
+	pm.parser.RegisterHandlerFunc("0AE4", "party_join", "V V C v v3 Z24 Z24 Z16 C2",
+		[]string{"ID", "charID", "role", "jobID", "lv", "x", "y", "type", "name", "user", "map", "item_pickup", "item_share"}, pm.HandlePartyJoin)
+
+	// Register party_allow_invite handler
+	pm.parser.RegisterHandlerFunc("02C7", "party_allow_invite", "C",
+		[]string{"type"}, pm.HandlePartyAllowInvite)
+
+	// Register party_chat handler
+	pm.parser.RegisterHandlerFunc("0109", "party_chat", "v Z*",
+		[]string{"len", "message"}, pm.HandlePartyChat)
+
+	// Register party_exp handler
+	pm.parser.RegisterHandlerFunc("0101", "party_exp", "C",
+		[]string{"type"}, pm.HandlePartyExp)
+
+	// Register party_exp handler (extended version)
+	pm.parser.RegisterHandlerFunc("07D8", "party_exp", "C C C",
+		[]string{"type", "itemPickup", "itemDivision"}, pm.HandlePartyExp)
+
+	// Register party_leader handler
+	pm.parser.RegisterHandlerFunc("07FC", "party_leader", "V V",
+		[]string{"old", "new"}, pm.HandlePartyLeader)
+
+	// Register party_hp_info handler
+	pm.parser.RegisterHandlerFunc("0106", "party_hp_info", "V v2",
+		[]string{"ID", "hp", "hp_max"}, pm.HandlePartyHpInfo)
+
+	// Register party_invite handlers
+	pm.parser.RegisterHandlerFunc("00FE", "party_invite", "V Z24",
+		[]string{"ID", "name"}, pm.HandlePartyInvite)
+
+	pm.parser.RegisterHandlerFunc("02C6", "party_invite", "V Z24",
+		[]string{"ID", "name"}, pm.HandlePartyInvite)
+
+	// Register other party handlers
+	pm.parser.RegisterHandlerFunc("00FC", "party_invite_result", "C Z24",
+		[]string{"result", "name"}, pm.HandlePartyInviteResult)
+
+	pm.parser.RegisterHandlerFunc("01EB", "party_location", "V v2",
+		[]string{"ID", "x", "y"}, pm.HandlePartyLocation)
+
+	pm.parser.RegisterHandlerFunc("00FA", "party_organize_result", "C",
+		[]string{"fail"}, pm.HandlePartyOrganizeResult)
+
+	pm.parser.RegisterHandlerFunc("02B8", "party_show_picker", "V v3 C2 a8 v C2 a16 C",
+		[]string{"sourceID", "nameID", "identified", "broken", "upgrade", "cards", "itemName"}, pm.HandlePartyShowPicker)
+
+	// Register party_users_info handlers for different packet versions
+	// 00FB - DEFAULT [OLD]
+	pm.parser.RegisterHandlerFunc("00FB", "party_users_info", "Z24 x2 Z*",
+		[]string{"party_name", "playerInfo"}, pm.HandlePartyUsersInfo)
+
+	// 0A44 - PACKETVER >= 20151007
+	pm.parser.RegisterHandlerFunc("0A44", "party_users_info", "Z24 x2 Z*",
+		[]string{"party_name", "playerInfo"}, pm.HandlePartyUsersInfo)
+
+	// 0AE5 - PACKETVER >= 20171207
+	pm.parser.RegisterHandlerFunc("0AE5", "party_users_info", "Z24 x2 Z*",
+		[]string{"party_name", "playerInfo"}, pm.HandlePartyUsersInfo)
+
+	pm.parser.RegisterHandlerFunc("0AB2", "party_dead", "V C",
+		[]string{"ID", "isDead"}, pm.HandlePartyDead)
+
+	pm.parser.RegisterHandlerFunc("0A43", "partylv_info", "V v v",
+		[]string{"ID", "job", "level"}, pm.HandlePartyLvInfo)
+
+	pm.parser.RegisterHandlerFunc("0105", "party_leave", "V C",
+		[]string{"ID", "reason"}, pm.HandlePartyLeave)
 }
 
 // HandlePartyChat handles the party_chat packet (lines 8233-8256)
@@ -59,7 +126,7 @@ func (pm *PartyManager) HandlePartyChat(args map[string]interface{}) error {
 	pm.logger.Info("[Party] %s: %s", user, message)
 
 	// Call hooks
-	pm.hooks.CallHook("packet_partyMsg", map[string]interface{}{
+	pm.hookManager.CallHook("packet_partyMsg", map[string]interface{}{
 		"user":    user,
 		"message": message,
 	})
@@ -169,7 +236,7 @@ func (pm *PartyManager) HandlePartyInvite(args map[string]interface{}) error {
 	pm.logger.Info("Party invitation from: %s", partyName)
 
 	// Call hooks
-	pm.hooks.CallHook("party_invite", map[string]interface{}{
+	pm.hookManager.CallHook("party_invite", map[string]interface{}{
 		"partyName": partyName,
 	})
 
@@ -321,7 +388,7 @@ func (pm *PartyManager) HandlePartyUsersInfo(args map[string]interface{}) error 
 	}
 
 	// Call hooks
-	pm.hooks.CallHook("party_users_info_ready", nil)
+	pm.hookManager.CallHook("party_users_info_ready", nil)
 
 	return nil
 }
@@ -412,7 +479,7 @@ func (pm *PartyManager) HandlePartyJoin(args map[string]interface{}) error {
 
 	// Call hooks
 	if isPlayer {
-		pm.hooks.CallHook("packet_partyJoin", map[string]interface{}{
+		pm.hookManager.CallHook("packet_partyJoin", map[string]interface{}{
 			"partyName": partyName,
 		})
 	}

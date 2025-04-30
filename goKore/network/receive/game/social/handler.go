@@ -15,12 +15,12 @@ type Handler struct {
 }
 
 // NewHandler creates a new social handler
-func NewHandler(baseParse core.Parser, hooks *hooks.HookManager, logger core.Logger) *Handler {
+func NewHandler(parser *core.CoreParser, hookManager *hooks.HookManager, logger core.Logger) *Handler {
 	return &Handler{
-		chatManager:   NewChatManager(baseParse, hooks, logger),
-		partyManager:  NewPartyManager(baseParse, hooks, logger),
-		friendManager: NewFriendManager(baseParse, hooks, logger),
-		guildManager:  NewGuildManager(baseParse, hooks, logger),
+		chatManager:   NewChatManager(parser, hookManager, logger),
+		partyManager:  NewPartyManager(parser, hookManager, logger),
+		friendManager: NewFriendManager(parser, hookManager, logger),
+		guildManager:  NewGuildManager(parser, hookManager, logger),
 		logger:        logger,
 	}
 }
