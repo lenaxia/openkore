@@ -1,6 +1,7 @@
 package servers
 
 import (
+	"os"
 	"testing"
 
 	"github.com/lenaxia/goKore/network/common"
@@ -20,6 +21,24 @@ func setupTestBaseSend() *core.BaseSend {
 			Name:       "login_request",
 			Format:     "v a24 a24 C",
 			FieldNames: []string{"version", "username", "password", "clienttype"},
+		},
+		"00E8": {
+			ID:         "00E8",
+			Name:       "party_organize",
+			Format:     "Z24 C C",
+			FieldNames: []string{"name", "share1", "share2"},
+		},
+		"0155": {
+			ID:         "0155",
+			Name:       "guild_member_positions",
+			Format:     "v a*",
+			FieldNames: []string{"len", "positions"},
+		},
+		"02AF": {
+			ID:         "02AF",
+			Name:       "message_id_encryption_initialized",
+			Format:     "",
+			FieldNames: []string{},
 		},
 		// Add more packet constructions as needed for server-specific tests
 	}
@@ -52,4 +71,64 @@ func TestServerType0Integration(t *testing.T) {
 
 	// In a real implementation with actual handlers, we would test them here
 	// For now, we just make sure the setup works without errors
+}
+
+// TestShuffle tests the shuffle method
+func TestShuffle(t *testing.T) {
+	// Create a configured BaseSend
+	baseSend := setupTestBaseSend()
+
+	// Register handlers for the packets we want to test
+	baseSend.RegisterHandler("login_request", func(args map[string]interface{}) ([]byte, error) {
+		return baseSend.Reconstruct("0064", args)
+	})
+	baseSend.RegisterHandler("guild_member_positions", func(args map[string]interface{}) ([]byte, error) {
+		return baseSend.Reconstruct("0155", args)
+	})
+
+	// Create a temporary shuffle.txt file
+	tempFile, err := os.CreateTemp("", "shuffle.txt")
+	if err != nil {
+		t.Fatalf("Failed to create temp file: %v", err)
+	}
+	defer os.Remove(tempFile.Name())
+
+	// Write test data to the file
+	testData := "0064 0065\n0155 0156\n"
+	if _, err := tempFile.Write([]byte(testData)); err != nil {
+		t.Fatalf("Failed to write to temp file: %v", err)
+	}
+	tempFile.Close()
+
+	// Call the shuffle method
+	err = Shuffle(baseSend, tempFile.Name())
+	if err != nil {
+		t.Fatalf("Shuffle failed: %v", err)
+	}
+
+	// Test with non-existent file
+	err = Shuffle(baseSend, "non_existent_file.txt")
+	if err == nil {
+		t.Error("Expected error when shuffling with non-existent file, got nil")
+	}
+
+	// Test with invalid file format
+	tempFile2, err := os.CreateTemp("", "invalid_shuffle.txt")
+	if err != nil {
+		t.Fatalf("Failed to create temp file: %v", err)
+	}
+	defer os.Remove(tempFile2.Name())
+
+	// Write invalid data to the file
+	invalidData := "0064\n0155\n"
+	if _, err := tempFile2.Write([]byte(invalidData)); err != nil {
+		t.Fatalf("Failed to write to temp file: %v", err)
+	}
+	tempFile2.Close()
+
+	// Call the shuffle method with invalid file
+	err = Shuffle(baseSend, tempFile2.Name())
+	if err == nil {
+		t.Error("Expected error when shuffling with invalid file format, got nil")
+	}
 }

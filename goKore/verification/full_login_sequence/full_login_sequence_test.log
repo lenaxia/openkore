@@ -1,7 +1,0 @@
-[2025-04-29 23:47:25] Starting Full Login Sequence Test
-[2025-04-29 23:47:25] This test uses the actual Go implementation for the complete login sequence
-[2025-04-29 23:47:25] Created test data file: /home/mikekao/personal/openkore/goKore/verification/full_login_sequence/test_data/renewal_login.json
-[2025-04-29 23:47:25] ===== Running Full Login Sequence Test =====
-[2025-04-29 23:47:25] Building full login sequence test binary...
-[2025-04-29 23:47:25] Failed to build full login sequence test binary
-[2025-04-29 23:47:25] Full login sequence test failed

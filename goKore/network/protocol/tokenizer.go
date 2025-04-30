@@ -26,8 +26,8 @@ var (
 	ErrInvalidPacket    = errors.New("invalid packet")
 )
 
-// PacketDef contains information about packet structure
-type PacketDef struct {
+// PacketLengthDef contains information about packet structure
+type PacketLengthDef struct {
 	Length    int  // Fixed length or -1 for variable length
 	HasLength bool // Whether packet has length field
 }
@@ -35,12 +35,12 @@ type PacketDef struct {
 // Tokenizer handles breaking byte streams into discrete packets
 type Tokenizer struct {
 	buffer               []byte
-	packetDefs           map[string]PacketDef
+	packetDefs           map[string]PacketLengthDef
 	nextMightBeAccountID bool
 }
 
 // NewTokenizer creates a new message tokenizer
-func NewTokenizer(packetDefs map[string]PacketDef) *Tokenizer {
+func NewTokenizer(packetDefs map[string]PacketLengthDef) *Tokenizer {
 	return &Tokenizer{
 		buffer:     make([]byte, 0),
 		packetDefs: packetDefs,

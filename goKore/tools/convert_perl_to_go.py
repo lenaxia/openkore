@@ -6,12 +6,12 @@ This script converts packet definitions from Perl format to Go format.
 
 Purpose:
     The script extracts packet definitions from the original Perl files:
-    - src/Network/Send/ServerType0.pm
-    - src/Network/Receive/ServerType0.pm
+    - src/Network/Send/ServerTypeX.pm
+    - src/Network/Receive/ServerTypeX.pm
     
     And converts them to Go format, creating separate output files:
-    - goKore/network/send/servers/servertype0.send.go
-    - goKore/network/send/servers/servertype0.receive.go
+    - goKore/network/send/servers/servertypeX.go
+    - goKore/network/receive/servers/servertypeX.go
     
     The Perl format looks like:
     'XXXX' => ['packet_name', 'format_string', [qw(field1 field2 ...)]]
@@ -25,17 +25,23 @@ Purpose:
     }
 
 Usage:
-    python3 convert_perl_to_go.py
+    python3 convert_perl_to_go.py [--server-type SERVERTYPE]
+
+Arguments:
+    --server-type SERVERTYPE  Server type to convert (default: ServerType0)
+                             This will look for src/Network/Send/SERVERTYPE.pm and
+                             src/Network/Receive/SERVERTYPE.pm
 
 Output:
     Creates two files with packet definitions in Go format:
-    - servertype0.send.go - Send packets
-    - servertype0.receive.go - Receive packets
+    - goKore/network/send/servers/SERVERTYPE_LOWERCASE.go - Send packets
+    - goKore/network/receive/servers/SERVERTYPE_LOWERCASE.go - Receive packets
 """
 
 import re
 import os
 import sys
+import argparse
 
 def extract_packets_from_send_file(file_path):
     """Extract packet definitions from the Send Perl file."""
@@ -148,26 +154,49 @@ func ServerType0PacketConstructions() map[string]common.PacketConstruction {
     print(f"Conversion complete. Output written to {output_file}")
 
 def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Convert Perl packet definitions to Go format')
+    parser.add_argument('--server-type', default="ServerType0",
+                        help='Server type to convert (e.g., ServerType0, ServerType1)')
+    args = parser.parse_args()
+    
+    # Extract server type and create lowercase version for file names
+    server_type = args.server_type
+    server_type_lower = server_type.lower()
+    
     # File paths
-    send_file = "src/Network/Send/ServerType0.pm"
-    receive_file = "src/Network/Receive/ServerType0.pm"
-    send_output_file = "goKore/network/send/servers/servertype0.send.go"
-    receive_output_file = "goKore/network/receive/servers/servertype0.receive.go"
+    send_file = f"src/Network/Send/{server_type}.pm"
+    receive_file = f"src/Network/Receive/{server_type}.pm"
+    send_output_file = f"goKore/network/send/servers/{server_type_lower}.go"
+    receive_output_file = f"goKore/network/receive/servers/{server_type_lower}.go"
+    
+    # Check if input files exist
+    if not os.path.exists(send_file):
+        print(f"Error: Send file not found: {send_file}")
+        return
+    
+    if not os.path.exists(receive_file):
+        print(f"Error: Receive file not found: {receive_file}")
+        return
     
     # Extract packets from both files
-    print("Extracting packets from Send file...")
+    print(f"Extracting packets from Send file: {send_file}")
     send_packets = extract_packets_from_send_file(send_file)
     print(f"Found {len(send_packets)} packet definitions in the Send file.")
     
-    print("Extracting packets from Receive file...")
+    print(f"Extracting packets from Receive file: {receive_file}")
     receive_packets = extract_packets_from_receive_file(receive_file)
     print(f"Found {len(receive_packets)} packet definitions in the Receive file.")
     
+    # Create output directories if they don't exist
+    os.makedirs(os.path.dirname(send_output_file), exist_ok=True)
+    os.makedirs(os.path.dirname(receive_output_file), exist_ok=True)
+    
     # Convert to Go format and write to files
-    print("Converting Send packets to Go format...")
+    print(f"Converting Send packets to Go format: {send_output_file}")
     convert_to_go_format(send_packets, send_output_file)
     
-    print("Converting Receive packets to Go format...")
+    print(f"Converting Receive packets to Go format: {receive_output_file}")
     convert_to_go_format(receive_packets, receive_output_file)
     
     print("Done!")

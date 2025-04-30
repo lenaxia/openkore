@@ -18,7 +18,15 @@ Purpose:
     Receive directions, and this script helps identify those cases.
 
 Usage:
-    python3 compare_send_receive.py
+    python3 compare_send_receive.py [--send SEND_FILE] [--receive RECEIVE_FILE] [--server-type SERVERTYPE]
+
+Arguments:
+    --send SEND_FILE         Path to the Send Go file
+    --receive RECEIVE_FILE   Path to the Receive Go file
+    --server-type SERVERTYPE Server type to compare (e.g., servertype0, servertype1)
+                            This will look for:
+                            - goKore/network/send/servers/SERVERTYPE.go
+                            - goKore/network/receive/servers/SERVERTYPE.go
 
 Output:
     Prints a comparison report showing:
@@ -30,6 +38,7 @@ Output:
 
 import re
 import os
+import argparse
 
 def extract_packet_ids(file_path):
     """Extract packet IDs from a Go file."""
@@ -109,15 +118,43 @@ def compare_packets(send_file, receive_file):
     }
 
 def main():
-    # File paths
-    send_file = "goKore/network/send/servers/servertype0.send.go"
-    receive_file = "goKore/network/send/servers/servertype0.receive.go"
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Compare Send and Receive packet definitions')
+    parser.add_argument('--send', help='Path to the Send Go file')
+    parser.add_argument('--receive', help='Path to the Receive Go file')
+    parser.add_argument('--server-type', help='Server type to compare (e.g., servertype0, servertype1)')
+    args = parser.parse_args()
+    
+    # Determine file paths based on arguments
+    if args.server_type:
+        server_type = args.server_type
+        send_file = f"goKore/network/send/servers/{server_type}.go"
+        receive_file = f"goKore/network/receive/servers/{server_type}.go"
+    elif args.send and args.receive:
+        send_file = args.send
+        receive_file = args.receive
+    else:
+        # Default paths
+        send_file = "goKore/network/send/servers/servertype0.go"
+        receive_file = "goKore/network/receive/servers/servertype0.go"
+    
+    # Check if files exist
+    if not os.path.exists(send_file):
+        print(f"Error: Send file not found: {send_file}")
+        return
+    
+    if not os.path.exists(receive_file):
+        print(f"Error: Receive file not found: {receive_file}")
+        return
+    
+    print(f"Comparing Send file: {send_file}")
+    print(f"With Receive file: {receive_file}")
     
     # Compare packets
     result = compare_packets(send_file, receive_file)
     
     # Print results
-    print("Comparison Results:")
+    print("\nComparison Results:")
     print("-------------------")
     print(f"Send-only packet IDs: {len(result['send_only'])}")
     print(f"Receive-only packet IDs: {len(result['receive_only'])}")

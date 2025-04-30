@@ -1,9 +1,0 @@
-Starting test_pin_encode
-Seed: 1234567890, PIN: 1234
-Creating direct connection
-Adding version property to connection
-Creating send object using Network::PacketParser->create
-Send object created: Network::Send::ServerType0
-Encoding PIN
-PIN encoded successfully
-2345678901

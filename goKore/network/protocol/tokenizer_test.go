@@ -130,7 +130,7 @@ func TestTokenizerNextMessageMightBeAccountID(t *testing.T) {
 
 func TestTokenizerReadNext(t *testing.T) {
 	// Create packet definitions for testing
-	packetDefs := map[string]PacketDef{
+	packetDefs := map[string]PacketLengthDef{
 		"0102": {Length: 6, HasLength: false}, // Fixed length packet
 		"0304": {Length: -1, HasLength: true}, // Variable length packet
 		"0506": {Length: 0, HasLength: false}, // Invalid packet definition
@@ -230,7 +230,7 @@ func TestTokenizerReadNext(t *testing.T) {
 
 func TestVariableLengthPacketWithDifferentSizes(t *testing.T) {
 	// Create packet definitions for testing
-	packetDefs := map[string]PacketDef{
+	packetDefs := map[string]PacketLengthDef{
 		"0304": {Length: -1, HasLength: true}, // Variable length packet
 	}
 

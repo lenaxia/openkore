@@ -1,8 +1,0 @@
-{
-    "connection_type": "proxy",
-    "server_ip": "127.0.0.1",
-    "server_port": 6900,
-    "proxy_type": "http",
-    "proxy_host": "localhost",
-    "proxy_port": 8080
-}

@@ -2,8 +2,7 @@
 """
 Packet Keys Comparison Tool
 
-This script compares packet keys between the original servertype0.go file and the
-converted servertype0.5.go file to ensure all packets were properly converted.
+This script compares packet keys between two Go files to ensure all packets were properly converted.
 
 Purpose:
     After converting packet definitions from one format to another using convert_packet_format.py,
@@ -11,7 +10,11 @@ Purpose:
     It helps identify any missing or extra packet keys that might have occurred during conversion.
 
 Usage:
-    python3 compare_packet_keys.py
+    python3 compare_packet_keys.py [--original ORIGINAL_FILE] [--new NEW_FILE]
+
+Arguments:
+    --original ORIGINAL_FILE  Path to the original Go file (default: ../network/send/servers/servertype0.go)
+    --new NEW_FILE            Path to the new Go file (default: ../network/send/servers/servertype0.5.go)
 
 Output:
     Prints a comparison report showing:
@@ -23,6 +26,7 @@ Output:
 
 import re
 import os
+import argparse
 
 def extract_keys_from_original_file(file_path):
     """Extract packet keys from the original servertype0.go file."""
@@ -70,16 +74,24 @@ def compare_keys(original_keys, new_keys):
     return missing_keys, extra_keys
 
 def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Compare packet keys between two Go files')
+    parser.add_argument('--original', default="../network/send/servers/servertype0.go",
+                        help='Path to the original Go file')
+    parser.add_argument('--new', default="../network/send/servers/servertype0.5.go",
+                        help='Path to the new Go file')
+    args = parser.parse_args()
+    
     # File paths
-    original_file = "../network/send/servers/servertype0.go"
-    new_file = "../network/send/servers/servertype0.5.go"
+    original_file = args.original
+    new_file = args.new
     
     # Extract keys from both files
-    print("Extracting keys from original file...")
+    print(f"Extracting keys from original file: {original_file}")
     original_keys = extract_keys_from_original_file(original_file)
     print(f"Found {len(original_keys)} unique packet keys in the original file.")
     
-    print("Extracting keys from new file...")
+    print(f"Extracting keys from new file: {new_file}")
     new_keys = extract_keys_from_new_file(new_file)
     print(f"Found {len(new_keys)} unique packet keys in the new file.")
     

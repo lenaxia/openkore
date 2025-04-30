@@ -1,0 +1,138 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam sequenceArrowThickness 2
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 200
+skinparam wrapWidth 200
+
+title Ragnarok Online Login Sequence
+
+participant "Client" as Client
+participant "Account Server" as AccountServer
+participant "Character Server" as CharServer
+participant "Map Server" as MapServer
+
+== Account Server Login ==
+
+Client -[#E6F7FF]> AccountServer: 0064: Account Server Login
+AccountServer -[#E6F7FF]> Client: 0AC4: Account Info With Server Info
+Client -[#E6FFE6]> CharacterServer: 0065: Character Server Login
+CharacterServer -[#F7E6FF]> Client: 082D: Received characters from Game Login Server
+CharacterServer -[#F7E6FF]> Client: 006B: Received characters from Game Login Server
+CharacterServer -[#E6F7FF]> Client: 09A0: Received characters from Game Login Server
+Client -[#E6FFE6]> CharacterServer: 09A1: Character Received Sync
+Client -[#E6FFE6]> CharacterServer: 09A1: Character Received Sync
+Client -[#E6FFE6]> CharacterServer: 09A1: Character Received Sync
+CharacterServer -[#E6FFF7]> Client: 020D: Char Ban List
+CharacterServer -[#FFE6F7]> Client: 08B9: PinCode Request
+CharacterServer -[#F7FFE6]> Client: 099D: Received characters Info from Game Login Server
+CharacterServer -[#F7FFE6]> Client: 099D: Received characters Info from Game Login Server
+CharacterServer -[#F7FFE6]> Client: 099D: Received characters Info from Game Login Server
+Client -[#FFE6E6]> CharacterServer: 0066: Char Login
+CharacterServer -[#E6FFE6]> Client: 0AC5: Received character ID and Map IP from Game Login Server
+Client -[#F7FFE6]> MapServer: 0436: Map Login
+MapServer -[#FFF7E6]> Client: 0283: Account ID
+MapServer -[#E6FFE6]> Client: 0B18: Inventory expansion result
+MapServer -[#FFE6E6]> Client: 02EB: Enter Map
+Client -[#FFE6F7]> MapServer: 007D: Map Loaded
+Client -[#FFE6F7]> MapServer: 0360: Sync
+Client -[#FFE6E6]> MapServer: 014F: Guild Query Page
+Client -[#E6FFE6]> MapServer: 0447: Request Blocking Player Cancel
+MapServer -[#FFE6F7]> Client: 0201: Friend List
+MapServer -[#E6FFE6]> Client: 008E: Public message by yourself
+MapServer -[#E6FFE6]> Client: 008E: Public message by yourself
+MapServer -[#FFE6E6]> Client: 0091: Map Changed
+Client -[#FFE6F7]> MapServer: 007D: Map Loaded
+Client -[#E6FFE6]> MapServer: 0447: Request Blocking Player Cancel
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#E6F7FF]> Client: 013A: Attack Range
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6E6]> Client: 09E7: Rodex Unread Mails
+MapServer -[#FFF7E6]> Client: 0A24: Achievement Update
+MapServer -[#E6FFF7]> Client: 0A23: Achievement List
+MapServer -[#F7E6FF]> Client: 0ADE: Overweight Percent
+MapServer -[#F7E6FF]> Client: 01D7: Weapon / Shield Display
+MapServer -[#F7E6FF]> Client: 01D7: Weapon / Shield Display
+MapServer -[#E6FFF7]> Client: 0B08: Item List Start
+MapServer -[#FFF7E6]> Client: 0B09: Item List Stackable
+MapServer -[#F7FFE6]> Client: 0B0A: Item List Non-Stackable (Equips)
+MapServer -[#E6F7FF]> Client: 0B0B: Item List End
+MapServer -[#F7FFE6]> Client: 0A9B: Switch Equip System Log
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#FFF7E6]> Client: 099B: Map Property
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#F7FFE6]> Client: 010F: Skills List
+MapServer -[#F7E6FF]> Client: 0B20: Hotkey List
+MapServer -[#F7E6FF]> Client: 0B20: Hotkey List
+MapServer -[#FFE6E6]> Client: 0ACB: Your Status Info
+MapServer -[#FFE6E6]> Client: 0ACB: Your Status Info
+MapServer -[#FFE6E6]> Client: 0ACB: Your Status Info
+MapServer -[#FFE6E6]> Client: 0ACB: Your Status Info
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#E6FFF7]> Client: 00BD: Your Status Info (Calculated)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6FFE6]> Client: 0141: Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)
+MapServer -[#E6F7FF]> Client: 013A: Attack Range
+MapServer -[#FFE6F7]> Client: 00B0: Your Status Info
+MapServer -[#F7FFE6]> Client: 02C9: Party Allow Invite
+MapServer -[#E6FFE6]> Client: 02DA: Show Equipment Window Flag (You)
+MapServer -[#E6F7FF]> Client: 02D9: Show Equipment Window Flag (other)
+MapServer -[#E6F7FF]> Client: 02D9: Show Equipment Window Flag (other)
+MapServer -[#E6F7FF]> Client: 02D9: Show Equipment Window Flag (other)
+MapServer -[#E6FFF7]> Client: 007F: Received Sync
+MapServer -[#F7E6FF]> Client: 09FD: actor_display (actor moved)
+MapServer -[#FFE6E6]> Client: 0B1B: Load confirm
+MapServer -[#FFE6E6]> Client: 0B1B: Load confirm
+MapServer -[#F7E6FF]> Client: 09FD: actor_display (actor moved)
+Client -[#FFF7E6]> MapServer: 0368: Actor Get Info
+MapServer -[#FFE6F7]> Client: 0ADF: Actor Get Info (Name)
+Client -[#F7E6FF]> MapServer: 035F: Character Move
+MapServer -[#FFE6E6]> Client: 07FB: Skill Cast
+MapServer -[#FFF7E6]> Client: 00C0: Emotion
+MapServer -[#FFE6E6]> Client: 07FB: Skill Cast
+MapServer -[#FFF7E6]> Client: 00C0: Emotion
+MapServer -[#F7FFE6]> Client: 0087: You Move
+Client -[#F7E6FF]> MapServer: 035F: Character Move
+MapServer -[#F7FFE6]> Client: 0087: You Move
+Client -[#F7E6FF]> MapServer: 035F: Character Move
+MapServer -[#FFE6F7]> Client: 09FF: actor_display (actor exists)
+MapServer -[#F7FFE6]> Client: 0087: You Move
+Client -[#F7E6FF]> MapServer: 035F: Character Move
+
+@enduml

@@ -1,8 +1,0 @@
-{
-    "packet_name": "use_item",
-    "server_type": "0",
-    "args": {
-        "index": 10,
-        "sourceID": 12345678
-    }
-}

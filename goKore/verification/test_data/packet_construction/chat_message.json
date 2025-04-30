@@ -1,7 +1,0 @@
-{
-    "packet_name": "chat_message",
-    "server_type": "0",
-    "args": {
-        "message": "Hello, world!"
-    }
-}

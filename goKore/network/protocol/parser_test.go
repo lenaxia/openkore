@@ -216,7 +216,7 @@ func TestReconstructByHandlerName(t *testing.T) {
 // TestProcessPackets tests processing multiple packets from a tokenizer
 func TestProcessPackets(t *testing.T) {
 	parser := NewPacketParser()
-	tokenizer := NewTokenizer(map[string]PacketDef{
+	tokenizer := NewTokenizer(map[string]PacketLengthDef{
 		"0102": {Length: 7, HasLength: false},
 		"0304": {Length: 5, HasLength: false},
 	})

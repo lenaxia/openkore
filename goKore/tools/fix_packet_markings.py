@@ -1,7 +1,30 @@
 #!/usr/bin/env python3
+"""
+Packet Markings Fixer
+
+This script fixes packet markings in the packets file based on the implementation status in the Go file.
+
+Purpose:
+    The script reads a Go file containing packet implementations and a packets file with packet definitions.
+    It updates the packet markings in the packets file to reflect whether each packet is implemented or not.
+    
+    Packet markings in the packets file look like:
+    [X] '0064' => ['packet_name', ...] - Implemented packet
+    [ ] '0065' => ['packet_name', ...] - Not implemented packet
+    
+    The script changes [ ] to [X] for implemented packets and [X] to [ ] for not implemented packets.
+
+Usage:
+    python3 fix_packet_markings.py [--packets PACKETS_FILE] [--go GO_FILE]
+
+Arguments:
+    --packets PACKETS_FILE  Path to the packets file (default: network/send/servers/servertype0.packets)
+    --go GO_FILE           Path to the Go file (default: network/send/servers/servertype0.go)
+"""
 
 import re
 import os
+import argparse
 
 def extract_packets_from_go_file(file_path):
     """Extract packet codes from the Go file."""
@@ -76,23 +99,51 @@ def fix_packet_markings(packets_file_path, go_file_path):
     print(f"Found {already_correct} packets already correctly marked")
     print(f"Total packets processed: {fixed_to_implemented + fixed_to_not_implemented + already_correct}")
 
-if __name__ == "__main__":
-    packets_file_path = "network/send/servers/servertype0.packets"
-    go_file_path = "network/send/servers/servertype0.go"
-    
-    fix_packet_markings(packets_file_path, go_file_path)
-    
-    # Special case for C350 packet
+def handle_special_cases(packets_file_path):
+    """Handle special cases for packet markings."""
     with open(packets_file_path, 'r') as f:
         lines = f.readlines()
     
+    modified = False
     for i, line in enumerate(lines):
-        if "# 'C350'" in line:
+        if "# 'C350'" in line and "[ ]" in line:
             lines[i] = line.replace("[ ]", "[X]")
-            print(f"Fixed C350 packet marking")
+            print(f"Fixed C350 packet marking (special case)")
+            modified = True
             break
     
-    with open(packets_file_path, 'w') as f:
-        f.writelines(lines)
+    if modified:
+        with open(packets_file_path, 'w') as f:
+            f.writelines(lines)
+
+def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Fix packet markings in the packets file')
+    parser.add_argument('--packets', default="network/send/servers/servertype0.packets",
+                        help='Path to the packets file')
+    parser.add_argument('--go', default="network/send/servers/servertype0.go",
+                        help='Path to the Go file')
+    args = parser.parse_args()
+    
+    packets_file_path = args.packets
+    go_file_path = args.go
+    
+    # Check if files exist
+    if not os.path.exists(packets_file_path):
+        print(f"Error: Packets file not found: {packets_file_path}")
+        return
+    
+    if not os.path.exists(go_file_path):
+        print(f"Error: Go file not found: {go_file_path}")
+        return
+    
+    # Fix packet markings
+    fix_packet_markings(packets_file_path, go_file_path)
+    
+    # Handle special cases
+    handle_special_cases(packets_file_path)
     
     print(f"Packet markings fixed in {packets_file_path}")
+
+if __name__ == "__main__":
+    main()

@@ -273,7 +273,7 @@ func TestProcessBuffer(t *testing.T) {
 	parser.RegisterHandler(packetID, handlerName, format, paramNames, handler)
 
 	// Create a tokenizer with packet definitions
-	tokenizer := protocol.NewTokenizer(map[string]protocol.PacketDef{
+	tokenizer := protocol.NewTokenizer(map[string]protocol.PacketLengthDef{
 		packetID: {Length: 7, HasLength: false},
 	})
 

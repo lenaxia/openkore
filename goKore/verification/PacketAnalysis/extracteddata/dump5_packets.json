@@ -1,0 +1,7094 @@
+{
+  "file_name": "DUMP5",
+  "packet_count": 137,
+  "packets": [
+    {
+      "direction": "sent",
+      "packet_id": "0064",
+      "description": "Account Server Login",
+      "size": 55,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "64",
+            "00",
+            "1C",
+            "00",
+            "00",
+            "00",
+            "62",
+            "6F",
+            "74",
+            "69",
+            "6A",
+            "6F",
+            "31",
+            "32",
+            "33",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "ZAAcAAAAYm90aWpvMTIzAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "4D",
+            "65"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAABNZQ=="
+        },
+        {
+          "hex_bytes": [
+            "6C",
+            "6F",
+            "6E",
+            "2E",
+            "37",
+            "37",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "bG9uLjc3AAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": null,
+      "server_type": "Account Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0AC4",
+      "description": "Account Info With Server Info",
+      "size": 224,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "C4",
+            "0A",
+            "E0",
+            "00",
+            "B2",
+            "59",
+            "B5",
+            "1A",
+            "FD",
+            "84",
+            "1E",
+            "00",
+            "9E",
+            "0D",
+            "9A",
+            "E5"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "xArgALJZtRr9hB4Ang2a5Q=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "01",
+            "35"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAABNQ=="
+        },
+        {
+          "hex_bytes": [
+            "39",
+            "62",
+            "34",
+            "30",
+            "36",
+            "36",
+            "65",
+            "35",
+            "62",
+            "33",
+            "62",
+            "63",
+            "34",
+            "33",
+            "39",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "OWI0MDY2ZTViM2JjNDM5AA=="
+        },
+        {
+          "hex_bytes": [
+            "C0",
+            "A8",
+            "05",
+            "69",
+            "E9",
+            "17",
+            "72",
+            "41",
+            "74",
+            "68",
+            "65",
+            "6E",
+            "61",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "wKgFaekXckF0aGVuYQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_9": "128>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_11": "160>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_12": "176>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_13": "192>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_14": "208>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_15": "---------- Account Info ----------",
+        "info_16": "Account ID: 2000125    FD 84 1E 00",
+        "info_17": "Sex:        Boy",
+        "info_18": "Session ID: 448092594  B2 59 B5 1A",
+        "info_19": "SessionID2: 3852078494 9E 0D 9A E5"
+      },
+      "server_type": "Account Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0065",
+      "description": "Character Server Login",
+      "size": 17,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "65",
+            "00",
+            "FD",
+            "84",
+            "1E",
+            "00",
+            "B2",
+            "59",
+            "B5",
+            "1A",
+            "9E",
+            "0D",
+            "9A",
+            "E5",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "ZQD9hB4Aslm1Gp4NmuUAAA=="
+        }
+      ],
+      "parsed_data": null,
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "082D",
+      "description": "Received characters from Game Login Server",
+      "size": 29,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "2D",
+            "08",
+            "1D",
+            "00",
+            "0F",
+            "00",
+            "00",
+            "09",
+            "0F",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "LQgdAA8AAAkPAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      006B - Received characters from Game Login Server [182 bytes]   2025.04.30 17:01:02",
+        "info_5": "0>  6B 00 B6 00 0F 0F 0F 00    00 00 00 00 00 00 00 00    k...............",
+        "info_6": "16>  00 00 00 00 00 00 00 00    00 00 00 6D 4A 02 00 00    ...........mJ...",
+        "info_7": "32>  00 00 00 00 00 00 00 4E    E7 0D 00 00 00 00 00 00    .......N........",
+        "info_8": "48>  00 00 00 32 00 00 00 00    00 00 00 00 00 00 00 00    ...2............",
+        "info_9": "64>  00 00 00 00 00 00 00 00    00 00 00 00 00 52 4A 00    .............RJ.",
+        "info_10": "80>  00 52 4A 00 00 49 0D 49    0D 96 00 0E 00 00 00 00    .RJ..I.I........",
+        "info_11": "96>  00 00 00 42 00 00 00 00    00 00 00 00 00 00 00 04    ...B............",
+        "info_12": "112>  00 02 00 62 6F 74 69 6A    6F 31 32 33 00 00 00 00    ...botijo123....",
+        "info_13": "128>  00 00 00 00 00 00 00 00    00 00 00 54 58 58 52 56    ...........TXXRV",
+        "info_14": "144>  61 01 04 01 00 67 65 66    5F 66 69 6C 64 30 37 2E    a....gef_fild07.",
+        "info_15": "160>  67 61 74 00 00 00 00 00    00 00 00 00 00 00 00 00    gat.............",
+        "info_16": "176>  00 00 00 00 00 01                                     ......",
+        "info_17": "Received characters from Character Server"
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "006B",
+      "description": "Received characters from Game Login Server",
+      "size": 182,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "6B",
+            "00",
+            "B6",
+            "00",
+            "0F",
+            "0F",
+            "0F",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "awC2AA8PDwAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "6D",
+            "4A",
+            "02",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAABtSgIAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "4E",
+            "E7",
+            "0D",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAE7nDQAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "32",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAMgAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "52",
+            "4A",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAFJKAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "52",
+            "4A",
+            "00",
+            "00",
+            "49",
+            "0D",
+            "49",
+            "0D",
+            "96",
+            "00",
+            "0E",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AFJKAABJDUkNlgAOAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "42",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "04"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAQgAAAAAAAAAAAAAABA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 02 00 62 6F 74 69 6A    6F 31 32 33 00 00 00 00    ...botijo123....",
+        "info_9": "128>  00 00 00 00 00 00 00 00    00 00 00 54 58 58 52 56    ...........TXXRV",
+        "info_10": "144>  61 01 04 01 00 67 65 66    5F 66 69 6C 64 30 37 2E    a....gef_fild07.",
+        "info_11": "160>  67 61 74 00 00 00 00 00    00 00 00 00 00 00 00 00    gat.............",
+        "info_12": "176>  00 00 00 00 00 01                                     ......",
+        "info_13": "Received characters from Character Server"
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09A0",
+      "description": "Received characters from Game Login Server",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [],
+      "parsed_data": {
+        "info": ">> Sent packet: 09A1  [Character Received Sync] [2 bytes]   2025.04.30 17:01:02",
+        "info_4": "0>  A1 09                                                 .."
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "09A1",
+      "description": "Character Received Sync",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "09A1",
+      "description": "Character Received Sync",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "09A1",
+      "description": "Character Received Sync",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "020D",
+      "description": "Char Ban List",
+      "size": 4,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      08B9 - PinCode Request [12 bytes]   2025.04.30 17:01:02",
+        "info_4": "0>  B9 08 01 9E 00 00 FD 84    1E 00 00 00                ............",
+        "info_5": "PIN code is correct."
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "08B9",
+      "description": "PinCode Request",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "B9",
+            "08",
+            "01",
+            "9E",
+            "00",
+            "00",
+            "FD",
+            "84",
+            "1E",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "uQgBngAA/YQeAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "PIN code is correct."
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "099D",
+      "description": "Received characters Info from Game Login Server",
+      "size": 159,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "9D",
+            "09",
+            "9F",
+            "00",
+            "6D",
+            "4A",
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "nQmfAG1KAgAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "4E",
+            "E7",
+            "0D",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "32",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "TucNAAAAAAAAAAAAMgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "52",
+            "4A",
+            "00",
+            "00",
+            "52",
+            "4A",
+            "00",
+            "00",
+            "49",
+            "0D"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAUkoAAFJKAABJDQ=="
+        },
+        {
+          "hex_bytes": [
+            "49",
+            "0D",
+            "96",
+            "00",
+            "0E",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "42",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "SQ2WAA4AAAAAAAAAQgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "04",
+            "00",
+            "02",
+            "00",
+            "62",
+            "6F",
+            "74",
+            "69"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAEAAIAYm90aQ=="
+        },
+        {
+          "hex_bytes": [
+            "6A",
+            "6F",
+            "31",
+            "32",
+            "33",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "am8xMjMAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 54 58 58 52    56 61 01 04 01 00 67 65    ....TXXRVa....ge",
+        "info_9": "128>  66 5F 66 69 6C 64 30 37    2E 67 61 74 00 00 00 00    f_fild07.gat....",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 01       ...............",
+        "info_11": "Received characters from Character Server"
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "099D",
+      "description": "Received characters Info from Game Login Server",
+      "size": 159,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "9D",
+            "09",
+            "9F",
+            "00",
+            "6D",
+            "4A",
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "nQmfAG1KAgAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "4E",
+            "E7",
+            "0D",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "32",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "TucNAAAAAAAAAAAAMgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "52",
+            "4A",
+            "00",
+            "00",
+            "52",
+            "4A",
+            "00",
+            "00",
+            "49",
+            "0D"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAUkoAAFJKAABJDQ=="
+        },
+        {
+          "hex_bytes": [
+            "49",
+            "0D",
+            "96",
+            "00",
+            "0E",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "42",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "SQ2WAA4AAAAAAAAAQgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "04",
+            "00",
+            "02",
+            "00",
+            "62",
+            "6F",
+            "74",
+            "69"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAEAAIAYm90aQ=="
+        },
+        {
+          "hex_bytes": [
+            "6A",
+            "6F",
+            "31",
+            "32",
+            "33",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "am8xMjMAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 54 58 58 52    56 61 01 04 01 00 67 65    ....TXXRVa....ge",
+        "info_9": "128>  66 5F 66 69 6C 64 30 37    2E 67 61 74 00 00 00 00    f_fild07.gat....",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 01       ...............",
+        "info_11": "Received characters from Character Server"
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "099D",
+      "description": "Received characters Info from Game Login Server",
+      "size": 159,
+      "timestamp": "2025.04.30 17:01:02",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "9D",
+            "09",
+            "9F",
+            "00",
+            "6D",
+            "4A",
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "nQmfAG1KAgAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "4E",
+            "E7",
+            "0D",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "32",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "TucNAAAAAAAAAAAAMgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "52",
+            "4A",
+            "00",
+            "00",
+            "52",
+            "4A",
+            "00",
+            "00",
+            "49",
+            "0D"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAUkoAAFJKAABJDQ=="
+        },
+        {
+          "hex_bytes": [
+            "49",
+            "0D",
+            "96",
+            "00",
+            "0E",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "42",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "SQ2WAA4AAAAAAAAAQgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "04",
+            "00",
+            "02",
+            "00",
+            "62",
+            "6F",
+            "74",
+            "69"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAEAAIAYm90aQ=="
+        },
+        {
+          "hex_bytes": [
+            "6A",
+            "6F",
+            "31",
+            "32",
+            "33",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "am8xMjMAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 54 58 58 52    56 61 01 04 01 00 67 65    ....TXXRVa....ge",
+        "info_9": "128>  66 5F 66 69 6C 64 30 37    2E 67 61 74 00 00 00 00    f_fild07.gat....",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 01       ...............",
+        "info_11": "Received characters from Character Server",
+        "info_12": "------------------------------- Character List --------------------------------",
+        "info_13": "Slot 1: botijo123 (Crusader, Boy, level 66/50, Geffen Field)",
+        "info_14": "-------------------------------------------------------------------------------"
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0066",
+      "description": "Char Login",
+      "size": 3,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0AC5",
+      "description": "Received character ID and Map IP from Game Login Server",
+      "size": 156,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "C5",
+            "0A",
+            "6D",
+            "4A",
+            "02",
+            "00",
+            "67",
+            "65",
+            "66",
+            "5F",
+            "66",
+            "69",
+            "6C",
+            "64",
+            "30",
+            "37"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "xQptSgIAZ2VmX2ZpbGQwNw=="
+        },
+        {
+          "hex_bytes": [
+            "2E",
+            "67",
+            "61",
+            "74",
+            "00",
+            "00",
+            "C0",
+            "A8",
+            "05",
+            "69",
+            "01",
+            "14",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "LmdhdAAAwKgFaQEUAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_9": "128>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00                ............",
+        "info_11": "Received character ID and Map IP from Character Server",
+        "info_12": "----------Game Info----------",
+        "info_13": "Char ID: 6D 4A 02 00 (150125)",
+        "info_14": "MAP Name: gef_fild07.gat",
+        "info_15": "MAP IP: 192.168.5.219",
+        "info_16": "MAP Port: 5121",
+        "info_17": "-----------------------------",
+        "info_18": "Closing connection to Character Server",
+        "info_19": "Disconnecting (192.168.5.219:6121)...disconnected",
+        "info_20": "Connecting to Map Server...",
+        "info_21": "Connecting (192.168.5.219:5121)... connected"
+      },
+      "server_type": "Character Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0436",
+      "description": "Map Login",
+      "size": 19,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "36",
+            "04",
+            "FD",
+            "84",
+            "1E",
+            "00",
+            "6D",
+            "4A",
+            "02",
+            "00",
+            "B2",
+            "59",
+            "B5",
+            "1A",
+            "4D",
+            "60"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "NgT9hB4AbUoCALJZtRpNYA=="
+        }
+      ],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0283",
+      "description": "Account ID",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      0B18 - Inventory expansion result [4 bytes]   2025.04.30 17:01:04",
+        "info_4": "0>  18 0B 00 00                                           ....",
+        "info_5": "You have successfully expanded the possession limit."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B18",
+      "description": "Inventory expansion result",
+      "size": 4,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "You have successfully expanded the possession limit."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "02EB",
+      "description": "Enter Map",
+      "size": 13,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "EB",
+            "02",
+            "45",
+            "44",
+            "A3",
+            "02",
+            "50",
+            "CB",
+            "D0",
+            "05",
+            "05",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "6wJFRKMCUMvQBQUAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 007D  [Map Loaded] [2 bytes]   2025.04.30 17:01:04",
+        "info_4": "0>  7D 00                                                 }."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "007D",
+      "description": "Map Loaded",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0360",
+      "description": "Sync",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "014F",
+      "description": "Guild Query Page",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0447",
+      "description": "Request Blocking Player Cancel",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0201",
+      "description": "Friend List",
+      "size": 4,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      008E - Public message by yourself [72 bytes]   2025.04.30 17:01:04",
+        "info_4": "0>  8E 00 48 00 72 41 74 68    65 6E 61 20 56 65 72 73    ..H.rAthena Vers",
+        "info_5": "16>  69 6F 6E 20 47 69 74 20    48 61 73 68 3A 20 20 37    ion Git Hash:  7",
+        "info_6": "32>  35 63 33 66 64 31 66 63    33 61 30 64 64 30 64 63    5c3fd1fc3a0dd0dc",
+        "info_7": "48>  36 31 66 39 30 64 35 38    36 34 62 62 34 34 61 61    61f90d5864bb44aa",
+        "info_8": "64>  39 61 31 65 31 39 32 00                               9a1e192.",
+        "info_9": "rAthena Version Git Hash:  75c3fd1fc3a0dd0dc61f90d5864bb44aa9a1e192"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "008E",
+      "description": "Public message by yourself",
+      "size": 72,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "8E",
+            "00",
+            "48",
+            "00",
+            "72",
+            "41",
+            "74",
+            "68",
+            "65",
+            "6E",
+            "61",
+            "20",
+            "56",
+            "65",
+            "72",
+            "73"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "jgBIAHJBdGhlbmEgVmVycw=="
+        },
+        {
+          "hex_bytes": [
+            "69",
+            "6F",
+            "6E",
+            "20",
+            "47",
+            "69",
+            "74",
+            "20",
+            "48",
+            "61",
+            "73",
+            "68",
+            "3A",
+            "20",
+            "20",
+            "37"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "aW9uIEdpdCBIYXNoOiAgNw=="
+        },
+        {
+          "hex_bytes": [
+            "35",
+            "63",
+            "33",
+            "66",
+            "64",
+            "31",
+            "66",
+            "63",
+            "33",
+            "61",
+            "30",
+            "64",
+            "64",
+            "30",
+            "64",
+            "63"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "NWMzZmQxZmMzYTBkZDBkYw=="
+        },
+        {
+          "hex_bytes": [
+            "36",
+            "31",
+            "66",
+            "39",
+            "30",
+            "64",
+            "35",
+            "38",
+            "36",
+            "34",
+            "62",
+            "62",
+            "34",
+            "34",
+            "61",
+            "61"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "NjFmOTBkNTg2NGJiNDRhYQ=="
+        }
+      ],
+      "parsed_data": {
+        "info": "rAthena Version Git Hash:  75c3fd1fc3a0dd0dc61f90d5864bb44aa9a1e192"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "008E",
+      "description": "Public message by yourself",
+      "size": 64,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "8E",
+            "00",
+            "40",
+            "00",
+            "57",
+            "65",
+            "6C",
+            "63",
+            "6F",
+            "6D",
+            "65",
+            "20",
+            "74",
+            "6F",
+            "20",
+            "72"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "jgBAAFdlbGNvbWUgdG8gcg=="
+        },
+        {
+          "hex_bytes": [
+            "41",
+            "74",
+            "68",
+            "65",
+            "6E",
+            "61",
+            "21",
+            "20",
+            "45",
+            "6E",
+            "6A",
+            "6F",
+            "79",
+            "21",
+            "20",
+            "50"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QXRoZW5hISBFbmpveSEgUA=="
+        },
+        {
+          "hex_bytes": [
+            "6C",
+            "65",
+            "61",
+            "73",
+            "65",
+            "20",
+            "72",
+            "65",
+            "70",
+            "6F",
+            "72",
+            "74",
+            "20",
+            "61",
+            "6E",
+            "79"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "bGVhc2UgcmVwb3J0IGFueQ=="
+        },
+        {
+          "hex_bytes": [
+            "20",
+            "62",
+            "75",
+            "67",
+            "73",
+            "20",
+            "79",
+            "6F",
+            "75",
+            "20",
+            "66",
+            "69",
+            "6E",
+            "64",
+            "2E",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "IGJ1Z3MgeW91IGZpbmQuAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Welcome to rAthena! Enjoy! Please report any bugs you find."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0091",
+      "description": "Map Changed",
+      "size": 22,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "91",
+            "00",
+            "67",
+            "65",
+            "66",
+            "5F",
+            "66",
+            "69",
+            "6C",
+            "64",
+            "30",
+            "37",
+            "2E",
+            "67",
+            "61",
+            "74"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "kQBnZWZfZmlsZDA3LmdhdA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Map Change: gef_fild07.gat (323, 189)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "007D",
+      "description": "Map Loaded",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0447",
+      "description": "Request Blocking Player Cancel",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:04",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 05 00 9C 1E 00 00                               ........"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 07 00 6A 02 00 00                               ....j..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 0D 00 00 00 54 00    00 00 0B 00 00 00          A.....T......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "0D",
+            "00",
+            "00",
+            "00",
+            "54",
+            "00",
+            "00",
+            "00",
+            "0B",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQENAAAAVAAAAAsAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 0E 00 00 00 58 00    00 00 06 00 00 00          A.....X......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "0E",
+            "00",
+            "00",
+            "00",
+            "58",
+            "00",
+            "00",
+            "00",
+            "06",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQEOAAAAWAAAAAYAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 0F 00 00 00 58 00    00 00 0B 00 00 00          A.....X......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "0F",
+            "00",
+            "00",
+            "00",
+            "58",
+            "00",
+            "00",
+            "00",
+            "0B",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQEPAAAAWAAAAAsAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 10 00 00 00 52 00    00 00 0A 00 00 00          A.....R......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "10",
+            "00",
+            "00",
+            "00",
+            "52",
+            "00",
+            "00",
+            "00",
+            "0A",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQEQAAAAUgAAAAoAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 11 00 00 00 56 00    00 00 07 00 00 00          A.....V......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "11",
+            "00",
+            "00",
+            "00",
+            "56",
+            "00",
+            "00",
+            "00",
+            "07",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQERAAAAVgAAAAcAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 12 00 00 00 61 00    00 00 09 00 00 00          A.....a......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "12",
+            "00",
+            "00",
+            "00",
+            "61",
+            "00",
+            "00",
+            "00",
+            "09",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQESAAAAYQAAAAkAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 31 00 71 01 00 00                               ..1.q..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 32 00 19 01 00 00                               ..2....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 35 00 18 01 00 00                               ..5....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 29 00 A5 00 00 00                               ..)....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2D 00 65 00 00 00                               ..-.e..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2E 00 59 00 00 00                               ....Y..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2A 00 C8 00 00 00                               ..*....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2E 00 59 00 00 00                               ....Y..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2D 00 65 00 00 00                               ..-.e..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 33 00 0B 00 00 00                               ..3....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 34 00 21 00 00 00                               ..4.!..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2C 00 CF 00 00 00                               ..,....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2B 00 00 00 00 00                               ..+....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 30 00 00 00 00 00                               ..0....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 2F 00 92 00 00 00                               ../....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      013A - Attack Range [4 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  3A 01 01 00                                           :..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "013A",
+      "description": "Attack Range",
+      "size": 4,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 06 00 9C 1E 00 00                               ........"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 08 00 6A 02 00 00                               ....j..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 05 00 9C 1E 00 00                               ........"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 07 00 6A 02 00 00                               ....j..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 18 00 36 10 00 00                               ....6..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      09E7 - Rodex Unread Mails [3 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  E7 09 00                                              ...",
+        "info_5": "You have new unread rodex mails."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09E7",
+      "description": "Rodex Unread Mails",
+      "size": 3,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "You have new unread rodex mails."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "12",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAoAAAAAAAAAAAAAEgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "43",
+            "0D",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "Qw0DAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Job Level Master!' (200003) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "1E",
+            "00",
+            "00",
+            "00",
+            "01",
+            "00",
+            "0C",
+            "00",
+            "00",
+            "00",
+            "1F",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAoeAAAAAQAMAAAAHwAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "81",
+            "A9",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "gakDAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Reach Achievement Lv 1' (240001) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "28",
+            "00",
+            "00",
+            "00",
+            "01",
+            "00",
+            "16",
+            "00",
+            "00",
+            "00",
+            "1F",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAooAAAAAQAWAAAAHwAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "81",
+            "A9",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "gakDAAEAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50",
+            "57",
+            "12"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAFBXEg=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Reach Achievement Lv 1' (240001) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "28",
+            "00",
+            "00",
+            "00",
+            "01",
+            "00",
+            "16",
+            "00",
+            "00",
+            "00",
+            "1F",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAooAAAAAQAWAAAAHwAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "43",
+            "0D",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "Qw0DAAEAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50",
+            "57",
+            "12"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAFBXEg=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Job Level Master!' (200003) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "28",
+            "00",
+            "00",
+            "00",
+            "01",
+            "00",
+            "16",
+            "00",
+            "00",
+            "00",
+            "1F",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAooAAAAAQAWAAAAHwAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "80",
+            "A9",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "gKkDAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'First Login after the introduction of Achievement Tasks' (240000) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "32",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAoyAAAAAgABAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "82",
+            "A9",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "gqkDAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Reach Achievement Lv 2' (240002) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "3C",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "0B",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAo8AAAAAgALAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "82",
+            "A9",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "gqkDAAEAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50",
+            "57",
+            "12"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAFBXEg=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Reach Achievement Lv 2' (240002) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "3C",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "0B",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAo8AAAAAgALAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "80",
+            "A9",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "gKkDAAEAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50",
+            "57",
+            "12"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAFBXEg=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'First Login after the introduction of Achievement Tasks' (240000) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "3C",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "0B",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JAo8AAAAAgALAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "56",
+            "0D",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "Vg0DAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Lucky Max' (200022) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "46",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "15",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JApGAAAAAgAVAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "56",
+            "0D",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "Vg0DAAEAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50",
+            "57",
+            "12"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAFBXEg=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Lucky Max' (200022) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "46",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "15",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JApGAAAAAgAVAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "48",
+            "0D",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "SA0DAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Veteran Adventurer! (2)' (200008) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "5F",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "2E",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JApfAAAAAgAuAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "48",
+            "0D",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "SA0DAAEAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50",
+            "57",
+            "12"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAFBXEg=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement 'Veteran Adventurer! (2)' (200008) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A24",
+      "description": "Achievement Update",
+      "size": 66,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "24",
+            "0A",
+            "5F",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "2E",
+            "00",
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "JApfAAAAAgAuAAAAMQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Achievement '' (0) added or updated."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A23",
+      "description": "Achievement List",
+      "size": 322,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "23",
+            "0A",
+            "42",
+            "01",
+            "06",
+            "00",
+            "00",
+            "00",
+            "5F",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "2E",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "IwpCAQYAAABfAAAAAgAuAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "31",
+            "00",
+            "00",
+            "00",
+            "48",
+            "0D",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAxAAAASA0DAAEAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "50",
+            "57",
+            "12",
+            "68",
+            "00",
+            "56",
+            "0D",
+            "03",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAUFcSaABWDQMAAQAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 00 50 57 12    68 00 82 A9 03 00 01 00    .....PW.h.......",
+        "info_9": "128>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_11": "160>  00 00 00 00 00 00 00 50    57 12 68 00 80 A9 03 00    .......PW.h.....",
+        "info_12": "176>  01 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_13": "192>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_14": "208>  00 00 00 00 00 00 00 00    00 50 57 12 68 00 81 A9    .........PW.h...",
+        "info_15": "224>  03 00 01 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_16": "240>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_17": "256>  00 00 00 00 00 00 00 00    00 00 00 50 57 12 68 00    ...........PW.h.",
+        "info_18": "272>  43 0D 03 00 01 00 00 00    00 00 00 00 00 00 00 00    C...............",
+        "info_19": "288>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_20": "304>  00 00 00 00 00 00 00 00    00 00 00 00 00 50 57 12    .............PW.",
+        "info_21": "320>  68 00                                                 h.",
+        "info_22": "Achievement 'Veteran Adventurer! (2)' (200008) added.",
+        "info_23": "Achievement 'Lucky Max' (200022) added.",
+        "info_24": "Achievement 'Reach Achievement Lv 2' (240002) added.",
+        "info_25": "Achievement 'First Login after the introduction of Achievement Tasks' (240000) added.",
+        "info_26": "Achievement 'Reach Achievement Lv 1' (240001) added.",
+        "info_27": "Achievement 'Job Level Master!' (200003) added."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0ADE",
+      "description": "Overweight Percent",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      01D7 - Weapon / Shield Display [15 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  D7 01 FD 84 1E 00 02 73    04 00 00 42 08 00 00       .......s...B..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "01D7",
+      "description": "Weapon / Shield Display",
+      "size": 15,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "D7",
+            "01",
+            "FD",
+            "84",
+            "1E",
+            "00",
+            "02",
+            "73",
+            "04",
+            "00",
+            "00",
+            "42",
+            "08",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "1wH9hB4AAnMEAABCCAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      01D7 - Weapon / Shield Display [15 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  D7 01 FD 84 1E 00 07 02    00 00 00 00 00 00 00       ..............."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "01D7",
+      "description": "Weapon / Shield Display",
+      "size": 15,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "D7",
+            "01",
+            "FD",
+            "84",
+            "1E",
+            "00",
+            "07",
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "1wH9hB4ABwIAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0B08 - Item List Start [6 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  08 0B 06 00 00 00                                     ......"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B08",
+      "description": "Item List Start",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      0B09 - Item List Stackable [73 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  09 0B 49 00 00 02 00 CD    02 00 00 03 96 00 00 00    ..I.............",
+        "info_5": "16>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_6": "32>  00 00 00 00 00 00 01 0A    00 0F 32 00 00 02 32 00    ..........2...2.",
+        "info_7": "48>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_8": "64>  00 00 00 00 00 00 00 00    01                         ........."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B09",
+      "description": "Item List Stackable",
+      "size": 73,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "09",
+            "0B",
+            "49",
+            "00",
+            "00",
+            "02",
+            "00",
+            "CD",
+            "02",
+            "00",
+            "00",
+            "03",
+            "96",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "CQtJAAACAM0CAAADlgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "01",
+            "0A",
+            "00",
+            "0F",
+            "32",
+            "00",
+            "00",
+            "02",
+            "32",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAQoADzIAAAIyAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "01"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAB"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0B0A - Item List Non-Stackable (Equips) [474 bytes]   2025.04.30 17:01:05",
+        "info_8": "0>  0A 0B DA 01 00 03 00 73    04 00 00 05 02 00 00 00    .......s........",
+        "info_9": "16>  02 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_10": "32>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_11": "48>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_12": "64>  00 00 00 00 00 00 00 01    04 00 42 08 00 00 04 20    ..........B....",
+        "info_13": "80>  00 00 00 20 00 00 00 00    00 00 00 00 00 00 00 00    ... ............",
+        "info_14": "96>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_15": "112>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_16": "128>  00 00 00 00 00 00 00 00    00 00 01 05 00 41 09 00    .............A..",
+        "info_17": "144>  00 04 10 00 00 00 10 00    00 00 00 00 00 00 00 00    ................",
+        "info_18": "160>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_19": "176>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_20": "192>  00 00 00 00 00 00 00 00    00 00 00 00 00 01 06 00    ................",
+        "info_21": "208>  7C 09 00 00 04 40 00 00    00 40 00 00 00 00 00 00    |....@...@......",
+        "info_22": "224>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_23": "240>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_24": "256>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_25": "272>  01 07 00 E5 09 00 00 04    04 00 00 00 04 00 00 00    ................",
+        "info_26": "288>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_27": "304>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_28": "320>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_29": "336>  00 00 00 01 08 00 D5 0A    00 00 04 88 00 00 00 80    ................",
+        "info_30": "352>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_31": "368>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_32": "384>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_33": "400>  00 00 00 00 00 00 01 09    00 D5 0A 00 00 04 88 00    ................",
+        "info_34": "416>  00 00 08 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_35": "432>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_36": "448>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_37": "464>  00 00 00 00 00 00 00 00    00 01                      .........."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B0A",
+      "description": "Item List Non-Stackable (Equips)",
+      "size": 474,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "0A",
+            "0B",
+            "DA",
+            "01",
+            "00",
+            "03",
+            "00",
+            "73",
+            "04",
+            "00",
+            "00",
+            "05",
+            "02",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "CgvaAQADAHMEAAAFAgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AgAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "01",
+            "04",
+            "00",
+            "42",
+            "08",
+            "00",
+            "00",
+            "04",
+            "20"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAEEAEIIAAAEIA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "20",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAIAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_9": "128>  00 00 00 00 00 00 00 00    00 00 01 05 00 41 09 00    .............A..",
+        "info_10": "144>  00 04 10 00 00 00 10 00    00 00 00 00 00 00 00 00    ................",
+        "info_11": "160>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_12": "176>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_13": "192>  00 00 00 00 00 00 00 00    00 00 00 00 00 01 06 00    ................",
+        "info_14": "208>  7C 09 00 00 04 40 00 00    00 40 00 00 00 00 00 00    |....@...@......",
+        "info_15": "224>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_16": "240>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_17": "256>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_18": "272>  01 07 00 E5 09 00 00 04    04 00 00 00 04 00 00 00    ................",
+        "info_19": "288>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_20": "304>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_21": "320>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_22": "336>  00 00 00 01 08 00 D5 0A    00 00 04 88 00 00 00 80    ................",
+        "info_23": "352>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_24": "368>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_25": "384>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_26": "400>  00 00 00 00 00 00 01 09    00 D5 0A 00 00 04 88 00    ................",
+        "info_27": "416>  00 00 08 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_28": "432>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_29": "448>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_30": "464>  00 00 00 00 00 00 00 00    00 01                      .........."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B0B",
+      "description": "Item List End",
+      "size": 4,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      0A9B - Switch Equip System Log [4 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  9B 0A 04 00                                           ...."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0A9B",
+      "description": "Switch Equip System Log",
+      "size": 4,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 18 00 36 10 00 00                               ....6..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 19 00 D0 CF 00 00                               ........"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      099B - Map Property [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  9B 09 00 00 00 06 00 00                               ........"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "099B",
+      "description": "Map Property",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      09FF - actor_display (actor exists) [108 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  FF 09 6C 00 06 29 D5 8E    06 00 00 00 00 C8 00 00    ..l..)..........",
+        "info_5": "16>  00 00 00 00 00 00 00 47    00 00 00 00 00 00 00 00    .......G........",
+        "info_6": "32>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_7": "48>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 50    ...............P",
+        "info_8": "64>  8C 13 00 00 00 00 00 00    00 FF FF FF FF FF FF FF    ................",
+        "info_9": "80>  FF 00 00 00 56 61 6C 65    72 69 61 00 00 00 00 00    ....Valeria.....",
+        "info_10": "96>  00 00 00 00 00 00 00 00    00 00 00 00                ............",
+        "info_11": "NPC Exists: Valeria (322, 193) (ID 110023977) - (0)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09FF",
+      "description": "actor_display (actor exists)",
+      "size": 108,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FF",
+            "09",
+            "6C",
+            "00",
+            "06",
+            "29",
+            "D5",
+            "8E",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "C8",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wlsAAYp1Y4GAAAAAMgAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "47",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAEcAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAUA=="
+        },
+        {
+          "hex_bytes": [
+            "8C",
+            "13",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "jBMAAAAAAAAA/////////w=="
+        },
+        {
+          "hex_bytes": [
+            "FF",
+            "00",
+            "00",
+            "00",
+            "56",
+            "61",
+            "6C",
+            "65",
+            "72",
+            "69",
+            "61",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wAAAFZhbGVyaWEAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "NPC Exists: Valeria (322, 193) (ID 110023977) - (0)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09FF",
+      "description": "actor_display (actor exists)",
+      "size": 108,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FF",
+            "09",
+            "6C",
+            "00",
+            "05",
+            "69",
+            "03",
+            "8F",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "90",
+            "01",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wlsAAVpA48GAAAAAJABAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "EA",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAOoDAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "51"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAUQ=="
+        },
+        {
+          "hex_bytes": [
+            "8B",
+            "60",
+            "00",
+            "00",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "i2AAAAABAAAA/////////w=="
+        },
+        {
+          "hex_bytes": [
+            "FF",
+            "00",
+            "00",
+            "00",
+            "50",
+            "6F",
+            "72",
+            "69",
+            "6E",
+            "67",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wAAAFBvcmluZwAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      09FF - actor_display (actor exists) [108 bytes]   2025.04.30 17:01:05",
+        "info_10": "0>  FF 09 6C 00 05 05 03 8F    06 00 00 00 00 E8 03 00    ..l.............",
+        "info_11": "16>  00 00 00 00 00 00 00 F0    03 00 00 00 00 00 00 00    ................",
+        "info_12": "32>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_13": "48>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 52    ...............R",
+        "info_14": "64>  8B 90 00 00 00 04 00 00    00 FF FF FF FF FF FF FF    ................",
+        "info_15": "80>  FF 00 00 00 50 75 70 61    00 00 00 00 00 00 00 00    ....Pupa........",
+        "info_16": "96>  00 00 00 00 00 00 00 00    00 00 00 00                ............"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09FF",
+      "description": "actor_display (actor exists)",
+      "size": 108,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FF",
+            "09",
+            "6C",
+            "00",
+            "05",
+            "05",
+            "03",
+            "8F",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "E8",
+            "03",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wlsAAUFA48GAAAAAOgDAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "F0",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAPADAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "52"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAUg=="
+        },
+        {
+          "hex_bytes": [
+            "8B",
+            "90",
+            "00",
+            "00",
+            "00",
+            "04",
+            "00",
+            "00",
+            "00",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "i5AAAAAEAAAA/////////w=="
+        },
+        {
+          "hex_bytes": [
+            "FF",
+            "00",
+            "00",
+            "00",
+            "50",
+            "75",
+            "70",
+            "61",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wAAAFB1cGEAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      09FF - actor_display (actor exists) [108 bytes]   2025.04.30 17:01:05",
+        "info_10": "0>  FF 09 6C 00 05 5D 03 8F    06 00 00 00 00 E8 03 00    ..l..]..........",
+        "info_11": "16>  00 00 00 00 00 00 00 F0    03 00 00 00 00 00 00 00    ................",
+        "info_12": "32>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_13": "48>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 54    ...............T",
+        "info_14": "64>  0B 80 00 00 00 04 00 00    00 FF FF FF FF FF FF FF    ................",
+        "info_15": "80>  FF 00 00 00 50 75 70 61    00 00 00 00 00 00 00 00    ....Pupa........",
+        "info_16": "96>  00 00 00 00 00 00 00 00    00 00 00 00                ............"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09FF",
+      "description": "actor_display (actor exists)",
+      "size": 108,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FF",
+            "09",
+            "6C",
+            "00",
+            "05",
+            "5D",
+            "03",
+            "8F",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "E8",
+            "03",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wlsAAVdA48GAAAAAOgDAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "F0",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAPADAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "54"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAVA=="
+        },
+        {
+          "hex_bytes": [
+            "0B",
+            "80",
+            "00",
+            "00",
+            "00",
+            "04",
+            "00",
+            "00",
+            "00",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "C4AAAAAEAAAA/////////w=="
+        },
+        {
+          "hex_bytes": [
+            "FF",
+            "00",
+            "00",
+            "00",
+            "50",
+            "75",
+            "70",
+            "61",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wAAAFB1cGEAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      010F - Skills List [966 bytes]   2025.04.30 17:01:05",
+        "info_10": "0>  0F 01 C6 03 01 00 00 00    00 00 09 00 00 00 00 00    ................",
+        "info_11": "16>  4E 56 5F 42 41 53 49 43    00 00 00 00 00 00 00 00    NV_BASIC........",
+        "info_12": "32>  00 00 00 00 00 00 00 00    00 02 00 00 00 00 00 0A    ................",
+        "info_13": "48>  00 00 00 00 00 53 4D 5F    53 57 4F 52 44 00 00 00    .....SM_SWORD...",
+        "info_14": "64>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 03 00    ................",
+        "info_15": "80>  00 00 00 00 0A 00 00 00    00 00 53 4D 5F 54 57 4F    ..........SM_TWO",
+        "info_16": "96>  48 41 4E 44 00 00 00 00    00 00 00 00 00 00 00 00    HAND............",
+        "info_17": "112>  00 00 00 04 00 00 00 00    00 0A 00 00 00 00 00 53    ...............S",
+        "info_18": "128>  4D 5F 52 45 43 4F 56 45    52 59 00 00 00 00 00 00    M_RECOVERY......",
+        "info_19": "144>  00 00 00 00 00 00 00 00    05 00 01 00 00 00 0A 00    ................",
+        "info_20": "160>  0F 00 01 00 53 4D 5F 42    41 53 48 00 00 00 00 00    ....SM_BASH.....",
+        "info_21": "176>  00 00 00 00 00 00 00 00    00 00 00 00 00 06 00 01    ................",
+        "info_22": "192>  00 00 00 0A 00 0D 00 09    00 53 4D 5F 50 52 4F 56    .........SM_PROV",
+        "info_23": "208>  4F 4B 45 00 00 00 00 00    00 00 00 00 00 00 00 00    OKE.............",
+        "info_24": "224>  00 00 07 00 04 00 00 00    0A 00 1E 00 00 00 53 4D    ..............SM",
+        "info_25": "240>  5F 4D 41 47 4E 55 4D 00    00 00 00 00 00 00 00 00    _MAGNUM.........",
+        "info_26": "256>  00 00 00 00 00 00 00 08    00 04 00 00 00 0A 00 0A    ................",
+        "info_27": "272>  00 00 00 53 4D 5F 45 4E    44 55 52 45 00 00 00 00    ...SM_ENDURE....",
+        "info_28": "288>  00 00 00 00 00 00 00 00    00 00 00 00 16 00 00 00    ................",
+        "info_29": "304>  00 00 0A 00 00 00 00 00    41 4C 5F 44 50 00 00 00    ........AL_DP...",
+        "info_30": "320>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_31": "336>  00 17 00 00 00 00 00 0A    00 00 00 00 00 41 4C 5F    .............AL_",
+        "info_32": "352>  44 45 4D 4F 4E 42 41 4E    45 00 00 00 00 00 00 00    DEMONBANE.......",
+        "info_33": "368>  00 00 00 00 00 00 1C 00    10 00 00 00 0A 00 28 00    ..............(.",
+        "info_34": "384>  09 00 41 4C 5F 48 45 41    4C 00 00 00 00 00 00 00    ..AL_HEAL.......",
+        "info_35": "400>  00 00 00 00 00 00 00 00    00 00 00 23 00 10 00 00    ...........#....",
+        "info_36": "416>  00 01 00 0F 00 09 00 41    4C 5F 43 55 52 45 00 00    .......AL_CURE..",
+        "info_37": "432>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_38": "448>  37 00 00 00 00 00 0A 00    00 00 00 00 4B 4E 5F 53    7...........KN_S",
+        "info_39": "464>  50 45 41 52 4D 41 53 54    45 52 59 00 00 00 00 00    PEARMASTERY.....",
+        "info_40": "480>  00 00 00 00 00 3F 00 00    00 00 00 01 00 00 00 00    .....?..........",
+        "info_41": "496>  00 4B 4E 5F 52 49 44 49    4E 47 00 00 00 00 00 00    .KN_RIDING......",
+        "info_42": "512>  00 00 00 00 00 00 00 00    00 00 40 00 00 00 00 00    ..........@.....",
+        "info_43": "528>  05 00 00 00 00 00 4B 4E    5F 43 41 56 41 4C 49 45    ......KN_CAVALIE",
+        "info_44": "544>  52 4D 41 53 54 45 52 59    00 00 00 00 00 00 00 F8    RMASTERY........",
+        "info_45": "560>  00 00 00 00 00 0A 00 00    00 00 00 43 52 5F 54 52    ...........CR_TR",
+        "info_46": "576>  55 53 54 00 00 00 00 00    00 00 00 00 00 00 00 00    UST.............",
+        "info_47": "592>  00 00 00 00 F9 00 04 00    00 00 0A 00 1E 00 00 00    ................",
+        "info_48": "608>  43 52 5F 41 55 54 4F 47    55 41 52 44 00 00 00 00    CR_AUTOGUARD....",
+        "info_49": "624>  00 00 00 00 00 00 00 00    00 FA 00 01 00 00 00 05    ................",
+        "info_50": "640>  00 0A 00 03 00 43 52 5F    53 48 49 45 4C 44 43 48    .....CR_SHIELDCH",
+        "info_51": "656>  41 52 47 45 00 00 00 00    00 00 00 00 00 00 FB 00    ARGE............",
+        "info_52": "672>  01 00 00 00 05 00 0C 00    0B 00 43 52 5F 53 48 49    ..........CR_SHI",
+        "info_53": "688>  45 4C 44 42 4F 4F 4D 45    52 41 4E 47 00 00 00 00    ELDBOOMERANG....",
+        "info_54": "704>  00 00 00 FC 00 04 00 00    00 0A 00 50 00 00 00 43    ...........P...C",
+        "info_55": "720>  52 5F 52 45 46 4C 45 43    54 53 48 49 45 4C 44 00    R_REFLECTSHIELD.",
+        "info_56": "736>  00 00 00 00 00 00 00 00    FD 00 01 00 00 00 0A 00    ................",
+        "info_57": "752>  14 00 02 00 43 52 5F 48    4F 4C 59 43 52 4F 53 53    ....CR_HOLYCROSS",
+        "info_58": "768>  00 00 00 00 00 00 00 00    00 00 00 00 00 FE 00 04    ................",
+        "info_59": "784>  00 00 00 0A 00 64 00 09    00 43 52 5F 47 52 41 4E    .....d...CR_GRAN",
+        "info_60": "800>  44 43 52 4F 53 53 00 00    00 00 00 00 00 00 00 00    DCROSS..........",
+        "info_61": "816>  00 00 FF 00 10 00 00 00    05 00 19 00 0B 00 43 52    ..............CR",
+        "info_62": "832>  5F 44 45 56 4F 54 49 4F    4E 00 00 00 00 00 00 00    _DEVOTION.......",
+        "info_63": "848>  00 00 00 00 00 00 00 00    01 10 00 00 00 05 00 1E    ................",
+        "info_64": "864>  00 09 00 43 52 5F 50 52    4F 56 49 44 45 4E 43 45    ...CR_PROVIDENCE",
+        "info_65": "880>  00 00 00 00 00 00 00 00    00 00 00 00 01 01 04 00    ................",
+        "info_66": "896>  00 00 05 00 1E 00 00 00    43 52 5F 44 45 46 45 4E    ........CR_DEFEN",
+        "info_67": "912>  44 45 52 00 00 00 00 00    00 00 00 00 00 00 00 00    DER.............",
+        "info_68": "928>  00 02 01 04 00 00 00 0A    00 3C 00 00 00 43 52 5F    .........<...CR_",
+        "info_69": "944>  53 50 45 41 52 51 55 49    43 4B 45 4E 00 00 00 00    SPEARQUICKEN....",
+        "info_70": "960>  00 00 00 00 00 00                                     ......"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "010F",
+      "description": "Skills List",
+      "size": 966,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "0F",
+            "01",
+            "C6",
+            "03",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "09",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "DwHGAwEAAAAAAAkAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "4E",
+            "56",
+            "5F",
+            "42",
+            "41",
+            "53",
+            "49",
+            "43",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "TlZfQkFTSUMAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "0A"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAgAAAAAACg=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "53",
+            "4D",
+            "5F",
+            "53",
+            "57",
+            "4F",
+            "52",
+            "44",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAABTTV9TV09SRAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "03",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAADAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "0A",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "53",
+            "4D",
+            "5F",
+            "54",
+            "57",
+            "4F"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAoAAAAAAFNNX1RXTw=="
+        },
+        {
+          "hex_bytes": [
+            "48",
+            "41",
+            "4E",
+            "44",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "SEFORAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 04 00 00 00 00    00 0A 00 00 00 00 00 53    ...............S",
+        "info_9": "128>  4D 5F 52 45 43 4F 56 45    52 59 00 00 00 00 00 00    M_RECOVERY......",
+        "info_10": "144>  00 00 00 00 00 00 00 00    05 00 01 00 00 00 0A 00    ................",
+        "info_11": "160>  0F 00 01 00 53 4D 5F 42    41 53 48 00 00 00 00 00    ....SM_BASH.....",
+        "info_12": "176>  00 00 00 00 00 00 00 00    00 00 00 00 00 06 00 01    ................",
+        "info_13": "192>  00 00 00 0A 00 0D 00 09    00 53 4D 5F 50 52 4F 56    .........SM_PROV",
+        "info_14": "208>  4F 4B 45 00 00 00 00 00    00 00 00 00 00 00 00 00    OKE.............",
+        "info_15": "224>  00 00 07 00 04 00 00 00    0A 00 1E 00 00 00 53 4D    ..............SM",
+        "info_16": "240>  5F 4D 41 47 4E 55 4D 00    00 00 00 00 00 00 00 00    _MAGNUM.........",
+        "info_17": "256>  00 00 00 00 00 00 00 08    00 04 00 00 00 0A 00 0A    ................",
+        "info_18": "272>  00 00 00 53 4D 5F 45 4E    44 55 52 45 00 00 00 00    ...SM_ENDURE....",
+        "info_19": "288>  00 00 00 00 00 00 00 00    00 00 00 00 16 00 00 00    ................",
+        "info_20": "304>  00 00 0A 00 00 00 00 00    41 4C 5F 44 50 00 00 00    ........AL_DP...",
+        "info_21": "320>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_22": "336>  00 17 00 00 00 00 00 0A    00 00 00 00 00 41 4C 5F    .............AL_",
+        "info_23": "352>  44 45 4D 4F 4E 42 41 4E    45 00 00 00 00 00 00 00    DEMONBANE.......",
+        "info_24": "368>  00 00 00 00 00 00 1C 00    10 00 00 00 0A 00 28 00    ..............(.",
+        "info_25": "384>  09 00 41 4C 5F 48 45 41    4C 00 00 00 00 00 00 00    ..AL_HEAL.......",
+        "info_26": "400>  00 00 00 00 00 00 00 00    00 00 00 23 00 10 00 00    ...........#....",
+        "info_27": "416>  00 01 00 0F 00 09 00 41    4C 5F 43 55 52 45 00 00    .......AL_CURE..",
+        "info_28": "432>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_29": "448>  37 00 00 00 00 00 0A 00    00 00 00 00 4B 4E 5F 53    7...........KN_S",
+        "info_30": "464>  50 45 41 52 4D 41 53 54    45 52 59 00 00 00 00 00    PEARMASTERY.....",
+        "info_31": "480>  00 00 00 00 00 3F 00 00    00 00 00 01 00 00 00 00    .....?..........",
+        "info_32": "496>  00 4B 4E 5F 52 49 44 49    4E 47 00 00 00 00 00 00    .KN_RIDING......",
+        "info_33": "512>  00 00 00 00 00 00 00 00    00 00 40 00 00 00 00 00    ..........@.....",
+        "info_34": "528>  05 00 00 00 00 00 4B 4E    5F 43 41 56 41 4C 49 45    ......KN_CAVALIE",
+        "info_35": "544>  52 4D 41 53 54 45 52 59    00 00 00 00 00 00 00 F8    RMASTERY........",
+        "info_36": "560>  00 00 00 00 00 0A 00 00    00 00 00 43 52 5F 54 52    ...........CR_TR",
+        "info_37": "576>  55 53 54 00 00 00 00 00    00 00 00 00 00 00 00 00    UST.............",
+        "info_38": "592>  00 00 00 00 F9 00 04 00    00 00 0A 00 1E 00 00 00    ................",
+        "info_39": "608>  43 52 5F 41 55 54 4F 47    55 41 52 44 00 00 00 00    CR_AUTOGUARD....",
+        "info_40": "624>  00 00 00 00 00 00 00 00    00 FA 00 01 00 00 00 05    ................",
+        "info_41": "640>  00 0A 00 03 00 43 52 5F    53 48 49 45 4C 44 43 48    .....CR_SHIELDCH",
+        "info_42": "656>  41 52 47 45 00 00 00 00    00 00 00 00 00 00 FB 00    ARGE............",
+        "info_43": "672>  01 00 00 00 05 00 0C 00    0B 00 43 52 5F 53 48 49    ..........CR_SHI",
+        "info_44": "688>  45 4C 44 42 4F 4F 4D 45    52 41 4E 47 00 00 00 00    ELDBOOMERANG....",
+        "info_45": "704>  00 00 00 FC 00 04 00 00    00 0A 00 50 00 00 00 43    ...........P...C",
+        "info_46": "720>  52 5F 52 45 46 4C 45 43    54 53 48 49 45 4C 44 00    R_REFLECTSHIELD.",
+        "info_47": "736>  00 00 00 00 00 00 00 00    FD 00 01 00 00 00 0A 00    ................",
+        "info_48": "752>  14 00 02 00 43 52 5F 48    4F 4C 59 43 52 4F 53 53    ....CR_HOLYCROSS",
+        "info_49": "768>  00 00 00 00 00 00 00 00    00 00 00 00 00 FE 00 04    ................",
+        "info_50": "784>  00 00 00 0A 00 64 00 09    00 43 52 5F 47 52 41 4E    .....d...CR_GRAN",
+        "info_51": "800>  44 43 52 4F 53 53 00 00    00 00 00 00 00 00 00 00    DCROSS..........",
+        "info_52": "816>  00 00 FF 00 10 00 00 00    05 00 19 00 0B 00 43 52    ..............CR",
+        "info_53": "832>  5F 44 45 56 4F 54 49 4F    4E 00 00 00 00 00 00 00    _DEVOTION.......",
+        "info_54": "848>  00 00 00 00 00 00 00 00    01 10 00 00 00 05 00 1E    ................",
+        "info_55": "864>  00 09 00 43 52 5F 50 52    4F 56 49 44 45 4E 43 45    ...CR_PROVIDENCE",
+        "info_56": "880>  00 00 00 00 00 00 00 00    00 00 00 00 01 01 04 00    ................",
+        "info_57": "896>  00 00 05 00 1E 00 00 00    43 52 5F 44 45 46 45 4E    ........CR_DEFEN",
+        "info_58": "912>  44 45 52 00 00 00 00 00    00 00 00 00 00 00 00 00    DER.............",
+        "info_59": "928>  00 02 01 04 00 00 00 0A    00 3C 00 00 00 43 52 5F    .........<...CR_",
+        "info_60": "944>  53 50 45 41 52 51 55 49    43 4B 45 4E 00 00 00 00    SPEARQUICKEN....",
+        "info_61": "960>  00 00 00 00 00 00                                     ......"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B20",
+      "description": "Hotkey List",
+      "size": 271,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "20",
+            "0B",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "IAsAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_9": "128>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_11": "160>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_12": "176>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_13": "192>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_14": "208>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_15": "224>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_16": "240>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_17": "256>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00       ..............."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B20",
+      "description": "Hotkey List",
+      "size": 271,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "20",
+            "0B",
+            "00",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "IAsAAQAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "112>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_9": "128>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_10": "144>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_11": "160>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_12": "176>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_13": "192>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_14": "208>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_15": "224>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_16": "240>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_17": "256>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00       ..............."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0ACB",
+      "description": "Your Status Info",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "CB",
+            "0A",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "ywoBAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0ACB - Your Status Info [12 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  CB 0A 16 00 EB 19 01 00    00 00 00 00                ............"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0ACB",
+      "description": "Your Status Info",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "CB",
+            "0A",
+            "16",
+            "00",
+            "EB",
+            "19",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "ywoWAOsZAQAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0ACB - Your Status Info [12 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  CB 0A 02 00 00 00 00 00    00 00 00 00                ............",
+        "info_5": "You have gained 0/0 (0.00%/0.00%) Exp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0ACB",
+      "description": "Your Status Info",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "CB",
+            "0A",
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "ywoCAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "You have gained 0/0 (0.00%/0.00%) Exp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0ACB",
+      "description": "Your Status Info",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "CB",
+            "0A",
+            "17",
+            "00",
+            "FF",
+            "C9",
+            "9A",
+            "3B",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "ywoXAP/JmjsAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 0C 00 00 00 00 00                               ........"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00BD - Your Status Info (Calculated) [44 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  BD 00 00 00 54 0A 58 0A    58 0A 52 0A 56 0A 61 0B    ....T.X.X.R.V.a.",
+        "info_5": "16>  A5 00 C8 00 00 00 CF 00    65 00 59 00 92 00 00 00    ........e.Y.....",
+        "info_6": "32>  71 01 19 01 0B 00 21 00    18 01 00 00                q.....!....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00BD",
+      "description": "Your Status Info (Calculated)",
+      "size": 44,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "BD",
+            "00",
+            "00",
+            "00",
+            "54",
+            "0A",
+            "58",
+            "0A",
+            "58",
+            "0A",
+            "52",
+            "0A",
+            "56",
+            "0A",
+            "61",
+            "0B"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "vQAAAFQKWApYClIKVgphCw=="
+        },
+        {
+          "hex_bytes": [
+            "A5",
+            "00",
+            "C8",
+            "00",
+            "00",
+            "00",
+            "CF",
+            "00",
+            "65",
+            "00",
+            "59",
+            "00",
+            "92",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "pQDIAAAAzwBlAFkAkgAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "71",
+            "01",
+            "19",
+            "01",
+            "0B",
+            "00",
+            "21",
+            "00",
+            "18",
+            "01",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "cQEZAQsAIQAYAQAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_6": "0>  41 01 0D 00 00 00 54 00    00 00 0B 00 00 00          A.....T......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "0D",
+            "00",
+            "00",
+            "00",
+            "54",
+            "00",
+            "00",
+            "00",
+            "0B",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQENAAAAVAAAAAsAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 0E 00 00 00 58 00    00 00 06 00 00 00          A.....X......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "0E",
+            "00",
+            "00",
+            "00",
+            "58",
+            "00",
+            "00",
+            "00",
+            "06",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQEOAAAAWAAAAAYAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 0F 00 00 00 58 00    00 00 0B 00 00 00          A.....X......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "0F",
+            "00",
+            "00",
+            "00",
+            "58",
+            "00",
+            "00",
+            "00",
+            "0B",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQEPAAAAWAAAAAsAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 10 00 00 00 52 00    00 00 0A 00 00 00          A.....R......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "10",
+            "00",
+            "00",
+            "00",
+            "52",
+            "00",
+            "00",
+            "00",
+            "0A",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQEQAAAAUgAAAAoAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 11 00 00 00 56 00    00 00 07 00 00 00          A.....V......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "11",
+            "00",
+            "00",
+            "00",
+            "56",
+            "00",
+            "00",
+            "00",
+            "07",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQERAAAAVgAAAAcAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0141 - Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus) [14 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  41 01 12 00 00 00 61 00    00 00 09 00 00 00          A.....a......."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0141",
+      "description": "Your Status Changed (Str, Agi, Vit, Int, Dex, Luk, Bonus)",
+      "size": 14,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "41",
+            "01",
+            "12",
+            "00",
+            "00",
+            "00",
+            "61",
+            "00",
+            "00",
+            "00",
+            "09",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "QQESAAAAYQAAAAkAAAA="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      013A - Attack Range [4 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  3A 01 01 00                                           :..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "013A",
+      "description": "Attack Range",
+      "size": 4,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      00B0 - Your Status Info [8 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  B0 00 35 00 18 01 00 00                               ..5....."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00B0",
+      "description": "Your Status Info",
+      "size": 8,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "<< Received packet:      02C9 - Party Allow Invite [3 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  C9 02 00                                              ...",
+        "info_5": "Allowed other player invite to Party"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "02C9",
+      "description": "Party Allow Invite",
+      "size": 3,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "Allowed other player invite to Party"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "02DA",
+      "description": "Show Equipment Window Flag (You)",
+      "size": 3,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "Your Equipment information is now not open to the public."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "02D9",
+      "description": "Show Equipment Window Flag (other)",
+      "size": 10,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "D9",
+            "02",
+            "02",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "2QICAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Pet automatic feeding is OFF. (Ragexe Client Feature)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "02D9",
+      "description": "Show Equipment Window Flag (other)",
+      "size": 10,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "D9",
+            "02",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "2QIBAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Not Allowed being summoned by skills: Urgent Call, Marriage Skills, etc."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "02D9",
+      "description": "Show Equipment Window Flag (other)",
+      "size": 10,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "D9",
+            "02",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "2QIDAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "Homunculus automatic feeding is OFF. (Ragexe Client Feature)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0B1B",
+      "description": "Load confirm",
+      "size": 2,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": {
+        "info": ">> Sent packet: 0368  [Actor Get Info] [6 bytes]   2025.04.30 17:01:05",
+        "info_4": "0>  68 03 29 D5 8E 06                                     h.)..."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0368",
+      "description": "Actor Get Info",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0368",
+      "description": "Actor Get Info",
+      "size": 6,
+      "timestamp": "2025.04.30 17:01:05",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0ADF",
+      "description": "Actor Get Info (Name)",
+      "size": 58,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "DF",
+            "0A",
+            "29",
+            "D5",
+            "8E",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "56",
+            "61",
+            "6C",
+            "65",
+            "72",
+            "69"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "3wop1Y4GAAAAAFZhbGVyaQ=="
+        },
+        {
+          "hex_bytes": [
+            "61",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "YQAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0ADF - Actor Get Info (Name) [58 bytes]   2025.04.30 17:01:06",
+        "info_7": "0>  DF 0A 69 03 8F 06 00 00    00 00 50 6F 72 69 6E 67    ..i.......Poring",
+        "info_8": "16>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_9": "32>  00 00 00 00 00 00 00 00    00 00 00 00 00 00 00 00    ................",
+        "info_10": "48>  00 00 00 00 00 00 00 00    00 00                      .........."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0ADF",
+      "description": "Actor Get Info (Name)",
+      "size": 58,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "DF",
+            "0A",
+            "69",
+            "03",
+            "8F",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50",
+            "6F",
+            "72",
+            "69",
+            "6E",
+            "67"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "3wppA48GAAAAAFBvcmluZw=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAA=="
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 035F  [Character Move] [5 bytes]   2025.04.30 17:01:06",
+        "info_7": "0>  5F 03 51 4B 70                                        _.QKp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "035F",
+      "description": "Character Move",
+      "size": 5,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0087",
+      "description": "You Move",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "87",
+            "00",
+            "66",
+            "48",
+            "A3",
+            "02",
+            "50",
+            "CB",
+            "D5",
+            "14",
+            "B7",
+            "88"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "hwBmSKMCUMvVFLeI"
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 035F  [Character Move] [5 bytes]   2025.04.30 17:01:06",
+        "info_4": "0>  5F 03 51 4B 70                                        _.QKp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "035F",
+      "description": "Character Move",
+      "size": 5,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0087",
+      "description": "You Move",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "87",
+            "00",
+            "4B",
+            "49",
+            "A3",
+            "02",
+            "51",
+            "0B",
+            "C5",
+            "14",
+            "B7",
+            "88"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "hwBLSaMCUQvFFLeI"
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 035F  [Character Move] [5 bytes]   2025.04.30 17:01:06",
+        "info_4": "0>  5F 03 51 4B 70                                        _.QKp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "035F",
+      "description": "Character Move",
+      "size": 5,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09FF",
+      "description": "actor_display (actor exists)",
+      "size": 108,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FF",
+            "09",
+            "6C",
+            "00",
+            "06",
+            "2A",
+            "D2",
+            "8E",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "C8",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wlsAAYq0o4GAAAAAMgAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "2D",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAC0AAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "54"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAVA=="
+        },
+        {
+          "hex_bytes": [
+            "CB",
+            "B0",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "y7AAAAAAAAAA/////////w=="
+        },
+        {
+          "hex_bytes": [
+            "FF",
+            "00",
+            "00",
+            "00",
+            "67",
+            "65",
+            "66",
+            "30",
+            "32",
+            "35",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wAAAGdlZjAyNQAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "Portal Exists: gef_fild07 -> geffen (339, 187) - (0)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0087",
+      "description": "You Move",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "87",
+            "00",
+            "1D",
+            "4A",
+            "A3",
+            "02",
+            "51",
+            "4B",
+            "B5",
+            "14",
+            "B7",
+            "88"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "hwAdSqMCUUu1FLeI"
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 035F  [Character Move] [5 bytes]   2025.04.30 17:01:06",
+        "info_4": "0>  5F 03 51 4B 70                                        _.QKp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "035F",
+      "description": "Character Move",
+      "size": 5,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0087",
+      "description": "You Move",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "87",
+            "00",
+            "BA",
+            "4A",
+            "A3",
+            "02",
+            "51",
+            "4B",
+            "A5",
+            "14",
+            "B7",
+            "88"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "hwC6SqMCUUulFLeI"
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 035F  [Character Move] [5 bytes]   2025.04.30 17:01:06",
+        "info_4": "0>  5F 03 51 4B 70                                        _.QKp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "035F",
+      "description": "Character Move",
+      "size": 5,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "09FF",
+      "description": "actor_display (actor exists)",
+      "size": 108,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FF",
+            "09",
+            "6C",
+            "00",
+            "05",
+            "7F",
+            "03",
+            "8F",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "90",
+            "01",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wlsAAV/A48GAAAAAJABAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "EF",
+            "03",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAO8DAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "50"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAAAAAAUA=="
+        },
+        {
+          "hex_bytes": [
+            "CA",
+            "B0",
+            "00",
+            "00",
+            "00",
+            "06",
+            "00",
+            "00",
+            "00",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF",
+            "FF"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "yrAAAAAGAAAA/////////w=="
+        },
+        {
+          "hex_bytes": [
+            "FF",
+            "00",
+            "00",
+            "00",
+            "46",
+            "61",
+            "62",
+            "72",
+            "65",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "/wAAAEZhYnJlAAAAAAAAAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "<< Received packet:      0087 - You Move [12 bytes]   2025.04.30 17:01:06",
+        "info_10": "0>  87 00 54 4B A3 02 51 4B    95 14 B7 88                ..TK..QK...."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0087",
+      "description": "You Move",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "87",
+            "00",
+            "54",
+            "4B",
+            "A3",
+            "02",
+            "51",
+            "4B",
+            "95",
+            "14",
+            "B7",
+            "88"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "hwBUS6MCUUuVFLeI"
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 035F  [Character Move] [5 bytes]   2025.04.30 17:01:06",
+        "info_4": "0>  5F 03 51 4B 70                                        _.QKp"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "035F",
+      "description": "Character Move",
+      "size": 5,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0087",
+      "description": "You Move",
+      "size": 12,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "87",
+            "00",
+            "EA",
+            "4B",
+            "A3",
+            "02",
+            "51",
+            "4B",
+            "85",
+            "14",
+            "B7",
+            "88"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "hwDqS6MCUUuFFLeI"
+        }
+      ],
+      "parsed_data": {
+        "info": ">> Sent packet: 0437  [Character Move] [7 bytes]   2025.04.30 17:01:06",
+        "info_4": "0>  37 04 69 03 8F 06 07                                  7.i...."
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "sent",
+      "packet_id": "0437",
+      "description": "Character Move",
+      "size": 7,
+      "timestamp": "2025.04.30 17:01:06",
+      "raw_data": [],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "07FB",
+      "description": "Skill Cast",
+      "size": 25,
+      "timestamp": "2025.04.30 17:01:07",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FB",
+            "07",
+            "05",
+            "03",
+            "8F",
+            "06",
+            "05",
+            "03",
+            "8F",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "C5",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "+wcFA48GBQOPBgAAAADFAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "Monster Pupa (1) is casting Emotion on itself (Delay: 0ms)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00C0",
+      "description": "Emotion",
+      "size": 7,
+      "timestamp": "2025.04.30 17:01:07",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "[dist=5.4] Monster Pupa (1): *Sweat*"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "07FB",
+      "description": "Skill Cast",
+      "size": 25,
+      "timestamp": "2025.04.30 17:01:07",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "FB",
+            "07",
+            "5D",
+            "03",
+            "8F",
+            "06",
+            "5D",
+            "03",
+            "8F",
+            "06",
+            "00",
+            "00",
+            "00",
+            "00",
+            "C5",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "+wddA48GXQOPBgAAAADFAA=="
+        },
+        {
+          "hex_bytes": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "AAAAAAAAAAAA"
+        }
+      ],
+      "parsed_data": {
+        "info": "Monster Pupa (2) is casting Emotion on itself (Delay: 0ms)"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "00C0",
+      "description": "Emotion",
+      "size": 7,
+      "timestamp": "2025.04.30 17:01:07",
+      "raw_data": [],
+      "parsed_data": {
+        "info": "[dist=11.0] Monster Pupa (2): *Sweat*"
+      },
+      "server_type": "Map Server"
+    },
+    {
+      "direction": "received",
+      "packet_id": "0088",
+      "description": "Actor Position",
+      "size": 10,
+      "timestamp": "2025.04.30 17:01:07",
+      "raw_data": [
+        {
+          "hex_bytes": [
+            "88",
+            "00",
+            "FD",
+            "84",
+            "1E",
+            "00",
+            "45",
+            "01",
+            "B7",
+            "00"
+          ],
+          "ascii_representation": "",
+          "binary_base64": "iAD9hB4ARQG3AA=="
+        }
+      ],
+      "parsed_data": null,
+      "server_type": "Map Server"
+    }
+  ]
+}

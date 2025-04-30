@@ -42,8 +42,27 @@ type ServerConfig struct {
 	SendPacketKeys  []int                  `json:"send_packet_keys"`
 	PacketKeys      []int                  `json:"packet_keys"`
 	PacketObfuscate bool                   `json:"packet_obfuscate"`
+	TableFolders    []string               `json:"table_folders"`
 	ServerTables    map[string]string      `json:"server_tables"`
 	CustomFields    map[string]interface{} `json:"custom_fields"`
+}
+
+// ParseTableFolders parses a semicolon-delimited string of table folders
+func (c *ServerConfig) ParseTableFolders(foldersStr string) {
+	if foldersStr == "" {
+		c.TableFolders = []string{}
+		return
+	}
+
+	// Split by semicolon
+	folders := strings.Split(foldersStr, ";")
+
+	// Trim whitespace from each folder
+	for i, folder := range folders {
+		folders[i] = strings.TrimSpace(folder)
+	}
+
+	c.TableFolders = folders
 }
 
 // ServerConfigManager manages server configurations
@@ -56,6 +75,47 @@ func NewServerConfigManager() *ServerConfigManager {
 	return &ServerConfigManager{
 		configs: make(map[string]*ServerConfig),
 	}
+}
+
+// UnmarshalJSON implements the json.Unmarshaler interface for ServerConfig
+func (c *ServerConfig) UnmarshalJSON(data []byte) error {
+	// Create a temporary type to avoid infinite recursion
+	type ServerConfigAlias ServerConfig
+
+	// First, try to unmarshal normally
+	alias := &struct {
+		*ServerConfigAlias
+		TableFolders    interface{} `json:"table_folders"`
+		AddTableFolders string      `json:"addTableFolders"`
+	}{
+		ServerConfigAlias: (*ServerConfigAlias)(c),
+	}
+
+	if err := json.Unmarshal(data, alias); err != nil {
+		return err
+	}
+
+	// Handle table_folders field based on its type
+	switch v := alias.TableFolders.(type) {
+	case string:
+		// If it's a string, parse it
+		c.ParseTableFolders(v)
+	case []interface{}:
+		// If it's an array, convert to []string
+		c.TableFolders = make([]string, len(v))
+		for i, item := range v {
+			if str, ok := item.(string); ok {
+				c.TableFolders[i] = str
+			}
+		}
+	}
+
+	// Handle legacy addTableFolders field if table_folders is empty
+	if len(c.TableFolders) == 0 && alias.AddTableFolders != "" {
+		c.ParseTableFolders(alias.AddTableFolders)
+	}
+
+	return nil
 }
 
 // LoadServerConfig loads a server configuration from a file
@@ -200,6 +260,7 @@ func (m *ServerConfigManager) CreateDefaultServerConfig(name string) *ServerConf
 		SendPacketKeys:  []int{},
 		PacketKeys:      []int{},
 		PacketObfuscate: false,
+		TableFolders:    []string{},
 		ServerTables:    make(map[string]string),
 		CustomFields:    make(map[string]interface{}),
 	}

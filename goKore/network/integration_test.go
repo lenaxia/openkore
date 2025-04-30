@@ -35,8 +35,8 @@ func TestNetworkStackIntegration(t *testing.T) {
 	packetDB.AddPacketDefinition(testPacket)
 
 	// Create a tokenizer with packet definitions
-	packetDefs := make(map[string]protocol.PacketDef)
-	packetDefs["0001"] = protocol.PacketDef{Length: 9, HasLength: false} // 2 bytes header + 2 bytes param1 + 1 byte param2 + 4 bytes param3
+	packetDefs := make(map[string]protocol.PacketLengthDef)
+	packetDefs["0001"] = protocol.PacketLengthDef{Length: 9, HasLength: false} // 2 bytes header + 2 bytes param1 + 1 byte param2 + 4 bytes param3
 
 	// Create a parser
 	parser := protocol.NewPacketParser()

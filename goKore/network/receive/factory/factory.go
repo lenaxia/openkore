@@ -55,7 +55,6 @@ func (rf *ReceiveFactory) RegisterDefaultServerTypes() {
 	rf.RegisterServerType("ServerType0", servers.ServerType0PacketDefs)
 
 	// Register other server types
-	rf.RegisterServerType("ServerType1", servers.ServerType1PacketDefs)
 	rf.RegisterServerType("ServerTypeSakray", servers.SakrayPacketDefs)
 }
 

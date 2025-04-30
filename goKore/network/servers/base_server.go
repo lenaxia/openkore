@@ -75,7 +75,7 @@ func NewBaseServer(baseConfig *BaseServerConfig) (*BaseServer, error) {
 	hookManager := hooks.NewHookManager()
 
 	// Create a new tokenizer with empty packet definitions (will be populated later)
-	tokenizer := protocol.NewTokenizer(make(map[string]protocol.PacketDef))
+	tokenizer := protocol.NewTokenizer(make(map[string]protocol.PacketLengthDef))
 
 	// Create a new parser
 	parser := core.NewCoreParser(baseConfig.Type.String(), hookManager)

@@ -7,43 +7,6 @@ import (
 	"github.com/lenaxia/goKore/network/receive/core"
 )
 
-// MockLogger is a simple mock implementation of the Logger interface
-type MockLogger struct {
-	debugMessages   []string
-	infoMessages    []string
-	warningMessages []string
-	errorMessages   []string
-}
-
-func NewMockLogger() *MockLogger {
-	return &MockLogger{
-		debugMessages:   []string{},
-		infoMessages:    []string{},
-		warningMessages: []string{},
-		errorMessages:   []string{},
-	}
-}
-
-func (m *MockLogger) Debug(format string, args ...interface{}) {
-	m.debugMessages = append(m.debugMessages, format)
-}
-
-func (m *MockLogger) Info(format string, args ...interface{}) {
-	m.infoMessages = append(m.infoMessages, format)
-}
-
-func (m *MockLogger) Warning(format string, args ...interface{}) {
-	m.warningMessages = append(m.warningMessages, format)
-}
-
-func (m *MockLogger) Error(format string, args ...interface{}) {
-	m.errorMessages = append(m.errorMessages, format)
-}
-
-func (m *MockLogger) Success(format string, args ...interface{}) {
-	// Not used in these tests
-}
-
 // TestNpcStoreBegin tests the HandleNpcStoreBegin method
 func TestNpcStoreBegin(t *testing.T) {
 	// Create mocks
@@ -650,160 +613,6 @@ func TestShopSkill(t *testing.T) {
 	if len(mockLogger.infoMessages) != 1 {
 		t.Errorf("Expected 1 info message, got %d", len(mockLogger.infoMessages))
 	}
-	
-	// TestOpenStoreStatus tests the HandleOpenStoreStatus method
-	func TestOpenStoreStatus(t *testing.T) {
-		// Create mocks
-		mockParser := core.NewCoreParser("ServerType0", nil)
-		mockLogger := NewMockLogger()
-		hookManager := hooks.NewHookManager()
-	
-		// Create shop manager
-		shopManager := NewShopManager(mockParser, hookManager, mockLogger)
-	
-		// Track hook calls
-		successHookCalled := false
-		failHookCalled := false
-		hookManager.AddHook("open_store_success", func(hookName string, data interface{}, userData interface{}) {
-			successHookCalled = true
-		}, nil)
-		hookManager.AddHook("open_store_fail", func(hookName string, data interface{}, userData interface{}) {
-			failHookCalled = true
-		}, nil)
-	
-		// Test open store status (success)
-		args := map[string]interface{}{
-			"flag": uint8(0),
-		}
-	
-		err := shopManager.HandleOpenStoreStatus(args)
-	
-		// Verify no error occurred
-		if err != nil {
-			t.Errorf("Expected no error, got %v", err)
-		}
-	
-		// Verify info message was created
-		if len(mockLogger.infoMessages) != 1 {
-			t.Errorf("Expected 1 info message, got %d", len(mockLogger.infoMessages))
-		}
-	
-		// Verify success hook was called
-		if !successHookCalled {
-			t.Errorf("Expected open_store_success hook to be called")
-		}
-	
-		// Test open store status (failure)
-		args = map[string]interface{}{
-			"flag": uint8(1),
-		}
-	
-		err = shopManager.HandleOpenStoreStatus(args)
-	
-		// Verify no error occurred
-		if err != nil {
-			t.Errorf("Expected no error, got %v", err)
-		}
-	
-		// Verify error message was created
-		if len(mockLogger.errorMessages) != 1 {
-			t.Errorf("Expected 1 error message, got %d", len(mockLogger.errorMessages))
-		}
-	
-		// Verify fail hook was called
-		if !failHookCalled {
-			t.Errorf("Expected open_store_fail hook to be called")
-		}
-	
-		// Test with invalid parameters
-		invalidArgs := map[string]interface{}{
-			"flag": "invalid", // Invalid type
-		}
-	
-		err = shopManager.HandleOpenStoreStatus(invalidArgs)
-	
-		// Verify error occurred
-		if err == nil {
-			t.Errorf("Expected error for invalid parameters, got nil")
-		}
-	}
-	
-	// TestOpenStoreStatus tests the HandleOpenStoreStatus method
-	func TestOpenStoreStatus(t *testing.T) {
-		// Create mocks
-		mockParser := core.NewCoreParser("ServerType0", nil)
-		mockLogger := NewMockLogger()
-		hookManager := hooks.NewHookManager()
-	
-		// Create shop manager
-		shopManager := NewShopManager(mockParser, hookManager, mockLogger)
-	
-		// Track hook calls
-		successHookCalled := false
-		failHookCalled := false
-		hookManager.AddHook("open_store_success", func(hookName string, data interface{}, userData interface{}) {
-			successHookCalled = true
-		}, nil)
-		hookManager.AddHook("open_store_fail", func(hookName string, data interface{}, userData interface{}) {
-			failHookCalled = true
-		}, nil)
-	
-		// Test open store status (success)
-		args := map[string]interface{}{
-			"flag": uint8(0),
-		}
-	
-		err := shopManager.HandleOpenStoreStatus(args)
-	
-		// Verify no error occurred
-		if err != nil {
-			t.Errorf("Expected no error, got %v", err)
-		}
-	
-		// Verify info message was created
-		if len(mockLogger.infoMessages) != 1 {
-			t.Errorf("Expected 1 info message, got %d", len(mockLogger.infoMessages))
-		}
-	
-		// Verify success hook was called
-		if !successHookCalled {
-			t.Errorf("Expected open_store_success hook to be called")
-		}
-	
-		// Test open store status (failure)
-		args = map[string]interface{}{
-			"flag": uint8(1),
-		}
-	
-		err = shopManager.HandleOpenStoreStatus(args)
-	
-		// Verify no error occurred
-		if err != nil {
-			t.Errorf("Expected no error, got %v", err)
-		}
-	
-		// Verify error message was created
-		if len(mockLogger.errorMessages) != 1 {
-			t.Errorf("Expected 1 error message, got %d", len(mockLogger.errorMessages))
-		}
-	
-		// Verify fail hook was called
-		if !failHookCalled {
-			t.Errorf("Expected open_store_fail hook to be called")
-		}
-	
-		// Test with invalid parameters
-		invalidArgs := map[string]interface{}{
-			"flag": "invalid", // Invalid type
-		}
-	
-		err = shopManager.HandleOpenStoreStatus(invalidArgs)
-	
-		// Verify error occurred
-		if err == nil {
-			t.Errorf("Expected error for invalid parameters, got nil")
-		}
-	}
 
 	// Test with invalid parameters
 	invalidArgs := map[string]interface{}{
@@ -811,6 +620,160 @@ func TestShopSkill(t *testing.T) {
 	}
 
 	err = shopManager.HandleShopSkill(invalidArgs)
+
+	// Verify error occurred
+	if err == nil {
+		t.Errorf("Expected error for invalid parameters, got nil")
+	}
+}
+
+// TestOpenStoreStatus tests the HandleOpenStoreStatus method
+func TestOpenStoreStatus(t *testing.T) {
+	// Create mocks
+	mockParser := core.NewCoreParser("ServerType0", nil)
+	mockLogger := NewMockLogger()
+	hookManager := hooks.NewHookManager()
+
+	// Create shop manager
+	shopManager := NewShopManager(mockParser, hookManager, mockLogger)
+
+	// Track hook calls
+	successHookCalled := false
+	failHookCalled := false
+	hookManager.AddHook("open_store_success", func(hookName string, data interface{}, userData interface{}) {
+		successHookCalled = true
+	}, nil)
+	hookManager.AddHook("open_store_fail", func(hookName string, data interface{}, userData interface{}) {
+		failHookCalled = true
+	}, nil)
+
+	// Test open store status (success)
+	args := map[string]interface{}{
+		"flag": uint8(0),
+	}
+
+	err := shopManager.HandleOpenStoreStatus(args)
+
+	// Verify no error occurred
+	if err != nil {
+		t.Errorf("Expected no error, got %v", err)
+	}
+
+	// Verify info message was created
+	if len(mockLogger.infoMessages) != 1 {
+		t.Errorf("Expected 1 info message, got %d", len(mockLogger.infoMessages))
+	}
+
+	// Verify success hook was called
+	if !successHookCalled {
+		t.Errorf("Expected open_store_success hook to be called")
+	}
+
+	// Test open store status (failure)
+	args = map[string]interface{}{
+		"flag": uint8(1),
+	}
+
+	err = shopManager.HandleOpenStoreStatus(args)
+
+	// Verify no error occurred
+	if err != nil {
+		t.Errorf("Expected no error, got %v", err)
+	}
+
+	// Verify error message was created
+	if len(mockLogger.errorMessages) != 1 {
+		t.Errorf("Expected 1 error message, got %d", len(mockLogger.errorMessages))
+	}
+
+	// Verify fail hook was called
+	if !failHookCalled {
+		t.Errorf("Expected open_store_fail hook to be called")
+	}
+
+	// Test with invalid parameters
+	invalidArgs := map[string]interface{}{
+		"flag": "invalid", // Invalid type
+	}
+
+	err = shopManager.HandleOpenStoreStatus(invalidArgs)
+
+	// Verify error occurred
+	if err == nil {
+		t.Errorf("Expected error for invalid parameters, got nil")
+	}
+}
+
+// TestOpenStoreStatus2 tests another aspect of the HandleOpenStoreStatus method
+func TestOpenStoreStatus2(t *testing.T) {
+	// Create mocks
+	mockParser := core.NewCoreParser("ServerType0", nil)
+	mockLogger := NewMockLogger()
+	hookManager := hooks.NewHookManager()
+
+	// Create shop manager
+	shopManager := NewShopManager(mockParser, hookManager, mockLogger)
+
+	// Track hook calls
+	successHookCalled := false
+	failHookCalled := false
+	hookManager.AddHook("open_store_success", func(hookName string, data interface{}, userData interface{}) {
+		successHookCalled = true
+	}, nil)
+	hookManager.AddHook("open_store_fail", func(hookName string, data interface{}, userData interface{}) {
+		failHookCalled = true
+	}, nil)
+
+	// Test open store status (success)
+	args := map[string]interface{}{
+		"flag": uint8(0),
+	}
+
+	err := shopManager.HandleOpenStoreStatus(args)
+
+	// Verify no error occurred
+	if err != nil {
+		t.Errorf("Expected no error, got %v", err)
+	}
+
+	// Verify info message was created
+	if len(mockLogger.infoMessages) != 1 {
+		t.Errorf("Expected 1 info message, got %d", len(mockLogger.infoMessages))
+	}
+
+	// Verify success hook was called
+	if !successHookCalled {
+		t.Errorf("Expected open_store_success hook to be called")
+	}
+
+	// Test open store status (failure)
+	args = map[string]interface{}{
+		"flag": uint8(1),
+	}
+
+	err = shopManager.HandleOpenStoreStatus(args)
+
+	// Verify no error occurred
+	if err != nil {
+		t.Errorf("Expected no error, got %v", err)
+	}
+
+	// Verify error message was created
+	if len(mockLogger.errorMessages) != 1 {
+		t.Errorf("Expected 1 error message, got %d", len(mockLogger.errorMessages))
+	}
+
+	// Verify fail hook was called
+	if !failHookCalled {
+		t.Errorf("Expected open_store_fail hook to be called")
+	}
+
+	// Test with invalid parameters
+	invalidArgs := map[string]interface{}{
+		"flag": "invalid", // Invalid type
+	}
+
+	err = shopManager.HandleOpenStoreStatus(invalidArgs)
 
 	// Verify error occurred
 	if err == nil {
@@ -966,8 +929,8 @@ func TestShopSoldLong(t *testing.T) {
 	}
 }
 
-// TestOpenStoreStatus tests the HandleOpenStoreStatus method
-func TestOpenStoreStatus(t *testing.T) {
+// TestOpenStoreStatus3 tests another aspect of the HandleOpenStoreStatus method
+func TestOpenStoreStatus3(t *testing.T) {
 	// Create mocks
 	mockParser := core.NewCoreParser("ServerType0", nil)
 	mockLogger := NewMockLogger()

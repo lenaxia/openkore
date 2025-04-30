@@ -27,19 +27,36 @@ Purpose:
     The script converts all packet definitions to Format 2 for consistency.
 
 Usage:
-    python3 convert_packet_format.py
+    python3 convert_packet_format.py [--input INPUT_FILE] [--output OUTPUT_FILE]
+
+Arguments:
+    --input INPUT_FILE   Path to the input Go file (default: ../network/send/servers/servertype0.go)
+    --output OUTPUT_FILE Path to the output Go file (default: ../network/send/servers/servertype0.5.go)
 
 Output:
-    Creates a new file servertype0.5.go with all packet definitions in Format 2.
+    Creates a new file with all packet definitions in Format 2.
 """
 
 import re
 import os
+import argparse
 
 def main():
-    # Path to the input and output files
-    input_file = "../network/send/servers/servertype0.go"
-    output_file = "../network/send/servers/servertype0.5.go"
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Convert packet definitions from one format to another')
+    parser.add_argument('--input', default="../network/send/servers/servertype0.go",
+                        help='Path to the input Go file')
+    parser.add_argument('--output', default="../network/send/servers/servertype0.5.go",
+                        help='Path to the output Go file')
+    args = parser.parse_args()
+    
+    input_file = args.input
+    output_file = args.output
+    
+    # Check if input file exists
+    if not os.path.exists(input_file):
+        print(f"Error: Input file not found: {input_file}")
+        return
     
     # Read the input file
     with open(input_file, 'r') as f:

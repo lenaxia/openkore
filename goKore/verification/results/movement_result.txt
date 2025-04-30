@@ -1,2 +1,0 @@
-Movement successful
-New position: (149, 150)
