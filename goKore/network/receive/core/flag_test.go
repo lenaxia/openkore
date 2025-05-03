@@ -12,7 +12,8 @@ func TestHandleFlag(t *testing.T) {
 
 	// Create a character manager
 	parser := NewCoreParser("ServerType0", hookManager)
-	charManager := NewCharacterManager(parser)
+	logger := NewMockLogger()
+	charManager := NewCharacterManager(parser, hookManager, logger)
 
 	// Register a hook to capture the flag event
 	var flagCalled bool

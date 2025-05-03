@@ -4,39 +4,7 @@ import (
 	"testing"
 )
 
-// MockPacketSender implements the PacketSender interface for testing
-type MockPacketSender struct {
-	lastPacketName string
-	lastFields     map[string]interface{}
-}
-
-func (m *MockPacketSender) Send(packetName string, fields map[string]interface{}) ([]byte, error) {
-	m.lastPacketName = packetName
-	m.lastFields = fields
-	return []byte{}, nil
-}
-
-func (m *MockPacketSender) GetCashShopManager() interface{} {
-	return "CashShopManager"
-}
-
-func (m *MockPacketSender) GetMiscManager() interface{} {
-	return "MiscManager"
-}
-
-func (m *MockPacketSender) GetInfoChatManager() interface{} {
-	return "InfoChatManager"
-}
-
-// MockPacketHandler implements the PacketHandler interface for testing
-type MockPacketHandler struct {
-	lastPacket []byte
-}
-
-func (m *MockPacketHandler) Handle(packet []byte) error {
-	m.lastPacket = packet
-	return nil
-}
+// MockErrorNetwork, MockErrorPacketSender, and MockErrorPacketHandler are now defined in mock_types_test.go
 
 // TestNetworkManager tests the NetworkManager implementation
 func TestNetworkManager(t *testing.T) {
@@ -122,69 +90,6 @@ func TestNetworkManager(t *testing.T) {
 	if mockNetwork.connected {
 		t.Error("Network should not be connected after Disconnect()")
 	}
-}
-
-// MockErrorNetwork implements NetworkInterface for testing error cases
-type MockErrorNetwork struct {
-	MockNetwork
-	shouldFailConnect    bool
-	shouldFailDisconnect bool
-	shouldFailSend       bool
-	shouldFailReceive    bool
-}
-
-func (m *MockErrorNetwork) Connect() error {
-	if m.shouldFailConnect {
-		return ErrTimeout
-	}
-	return m.MockNetwork.Connect()
-}
-
-func (m *MockErrorNetwork) Disconnect() error {
-	if m.shouldFailDisconnect {
-		return ErrConnectionClosed
-	}
-	return m.MockNetwork.Disconnect()
-}
-
-func (m *MockErrorNetwork) Send(data []byte) error {
-	if m.shouldFailSend {
-		return ErrPacketTooLarge
-	}
-	return m.MockNetwork.Send(data)
-}
-
-func (m *MockErrorNetwork) Receive() ([]byte, error) {
-	if m.shouldFailReceive {
-		return nil, ErrInvalidPacket
-	}
-	return m.MockNetwork.Receive()
-}
-
-// MockErrorPacketSender implements the PacketSender interface for testing error cases
-type MockErrorPacketSender struct {
-	MockPacketSender
-	shouldFailSend bool
-}
-
-func (m *MockErrorPacketSender) Send(packetName string, fields map[string]interface{}) ([]byte, error) {
-	if m.shouldFailSend {
-		return nil, ErrInvalidPacket
-	}
-	return m.MockPacketSender.Send(packetName, fields)
-}
-
-// MockErrorPacketHandler implements the PacketHandler interface for testing error cases
-type MockErrorPacketHandler struct {
-	MockPacketHandler
-	shouldFailHandle bool
-}
-
-func (m *MockErrorPacketHandler) Handle(packet []byte) error {
-	if m.shouldFailHandle {
-		return ErrInvalidPacket
-	}
-	return m.MockPacketHandler.Handle(packet)
 }
 
 // TestNetworkManagerHappyPath tests the NetworkManager implementation with multiple happy paths
@@ -314,7 +219,7 @@ func TestNetworkManagerUnhappyPath(t *testing.T) {
 		manager := NewNetworkManager(mockNetwork, mockSender, mockHandler)
 
 		// Connect first
-		mockNetwork.MockNetwork.Connect()
+		mockNetwork.Connect()
 
 		err := manager.Disconnect()
 		if err != ErrConnectionClosed {
@@ -331,7 +236,7 @@ func TestNetworkManagerUnhappyPath(t *testing.T) {
 		manager := NewNetworkManager(mockNetwork, mockSender, mockHandler)
 
 		// Connect first
-		mockNetwork.MockNetwork.Connect()
+		mockNetwork.Connect()
 
 		// This should still succeed because we're using the packet sender
 		_, err := manager.Send("test_packet", nil)
@@ -486,5 +391,21 @@ func TestNetworkManagerEdgeCases(t *testing.T) {
 		if mockHandler.lastPacket != nil {
 			t.Errorf("Expected nil packet, got %v", mockHandler.lastPacket)
 		}
+	}
+}
+
+// TestGetNetworkInterface tests the GetNetworkInterface method
+func TestGetNetworkInterface(t *testing.T) {
+	// Create mock implementations
+	mockNetwork := &MockNetwork{}
+	mockSender := &MockPacketSender{}
+	mockHandler := &MockPacketHandler{}
+
+	// Create network manager
+	manager := NewNetworkManager(mockNetwork, mockSender, mockHandler)
+
+	// Test accessing NetworkInterface field
+	if manager.NetworkInterface != mockNetwork {
+		t.Errorf("Expected NetworkInterface field to be the mock network interface, got %v", manager.NetworkInterface)
 	}
 }

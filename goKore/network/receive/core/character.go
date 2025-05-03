@@ -7,6 +7,8 @@ import (
 	"math"
 	"sync"
 	"time"
+
+	"github.com/lenaxia/goKore/network/hooks"
 )
 
 // Position represents a 2D position in the game world
@@ -22,6 +24,8 @@ type CharacterManager struct {
 	guildMembers []GuildMember
 	actors       map[uint32]*Actor
 	reputations  []Reputation // List of reputation entries
+	hookManager  *hooks.HookManager
+	logger       Logger
 }
 
 // Actor represents a character or NPC in the game
@@ -74,13 +78,81 @@ type GuildMember struct {
 }
 
 // NewCharacterManager creates a new character manager
-func NewCharacterManager(parser *CoreParser) *CharacterManager {
+func NewCharacterManager(parser *CoreParser, hookManager *hooks.HookManager, logger Logger) *CharacterManager {
 	return &CharacterManager{
 		parser:       parser,
 		guildMembers: make([]GuildMember, 0),
 		actors:       make(map[uint32]*Actor),
 		reputations:  make([]Reputation, 0),
+		hookManager:  hookManager,
+		logger:       logger,
 	}
+}
+
+// handleCharacterBanList handles the character_ban_list packet
+func (m *CharacterManager) handleCharacterBanList(args map[string]interface{}) error {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
+
+	// Log the event
+	if m.logger != nil {
+		m.logger.Debug("Handling character ban list")
+	}
+
+	// Extract character list data
+	var charList []byte
+	if charListData, ok := args["charList"].([]byte); ok {
+		charList = charListData
+	} else {
+		return errors.New("invalid charList data")
+	}
+
+	// Check if we have enough data
+	if len(charList) < 1 {
+		return errors.New("charList data too short")
+	}
+
+	// Get number of entries
+	numEntries := int(charList[0])
+
+	// Check if we have enough data for all entries
+	if len(charList) < 1+numEntries*24 {
+		return errors.New("charList data too short for specified number of entries")
+	}
+
+	// Extract character names
+	banList := make([]string, 0, numEntries)
+	for i := 0; i < numEntries; i++ {
+		start := 1 + i*24
+		end := start + 24
+
+		// Extract character name (null-terminated string)
+		nameBytes := charList[start:end]
+
+		// Find null terminator
+		nullPos := 0
+		for j := 0; j < len(nameBytes); j++ {
+			if nameBytes[j] == 0 {
+				nullPos = j
+				break
+			}
+		}
+
+		// Convert to string
+		if nullPos > 0 {
+			name := string(nameBytes[:nullPos])
+			banList = append(banList, name)
+		}
+	}
+
+	// Call hook if needed
+	if m.hookManager != nil {
+		m.hookManager.CallHook("character.ban_list", map[string]interface{}{
+			"ban_list": banList,
+		})
+	}
+
+	return nil
 }
 
 // RegisterHandlers registers character-related packet handlers
@@ -128,15 +200,15 @@ func (m *CharacterManager) RegisterHandlers() {
 		[]string{"percent"},
 		m.handleOverweightPercent)
 
-	// Register handler for character ban list
-	m.parser.RegisterHandlerFunc("0267", "character_ban_list", "b",
-		[]string{"charList"},
-		m.handleCharacterBanList)
-
 	// Register handler for flag
 	m.parser.RegisterHandlerFunc("0A89", "flag", "",
 		[]string{},
 		m.handleFlag)
+
+	// Register handler for character ban list
+	m.parser.RegisterHandlerFunc("020D", "character_ban_list", "b",
+		[]string{"charList"},
+		m.handleCharacterBanList)
 }
 
 // handleCharacterName handles the character_name packet

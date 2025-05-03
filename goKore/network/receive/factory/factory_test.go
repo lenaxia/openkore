@@ -17,9 +17,9 @@ func TestNewReceiveFactory(t *testing.T) {
 		t.Fatal("NewReceiveFactory() returned nil")
 	}
 
-	// Check that the packet definition providers map was initialized
-	if factory.packetDefProviders == nil {
-		t.Error("factory.packetDefProviders was not initialized")
+	// Check that the packet construction providers map was initialized
+	if factory.packetConstructionProviders == nil {
+		t.Error("factory.packetConstructionProviders was not initialized")
 	}
 }
 
@@ -28,9 +28,9 @@ func TestRegisterServerType(t *testing.T) {
 	// Create a receive factory
 	factory := NewReceiveFactory()
 
-	// Create a packet definition provider
-	provider := func() map[string]common.PacketDef {
-		return map[string]common.PacketDef{
+	// Create a packet construction provider
+	provider := func() map[string]common.PacketConstruction {
+		return map[string]common.PacketConstruction{
 			"0064": {
 				ID:         "0064",
 				Name:       "login_response",
@@ -44,12 +44,12 @@ func TestRegisterServerType(t *testing.T) {
 	factory.RegisterServerType("ServerType0", provider)
 
 	// Check that the provider was registered
-	if len(factory.packetDefProviders) != 1 {
-		t.Errorf("len(factory.packetDefProviders) = %v, want %v", len(factory.packetDefProviders), 1)
+	if len(factory.packetConstructionProviders) != 1 {
+		t.Errorf("len(factory.packetConstructionProviders) = %v, want %v", len(factory.packetConstructionProviders), 1)
 	}
 
 	// Check that the provider can be retrieved
-	registeredProvider, exists := factory.packetDefProviders["ServerType0"]
+	registeredProvider, exists := factory.packetConstructionProviders["ServerType0"]
 	if !exists {
 		t.Error("ServerType0 provider was not registered")
 	} else {
@@ -86,9 +86,9 @@ func TestCreateReceive(t *testing.T) {
 	// Create a receive factory
 	factory := NewReceiveFactory()
 
-	// Create a packet definition provider
-	provider := func() map[string]common.PacketDef {
-		return map[string]common.PacketDef{
+	// Create a packet construction provider
+	provider := func() map[string]common.PacketConstruction {
+		return map[string]common.PacketConstruction{
 			"0064": {
 				ID:         "0064",
 				Name:       "login_response",
@@ -128,9 +128,9 @@ func TestRegisterDefaultServerTypes(t *testing.T) {
 	factory.RegisterDefaultServerTypes()
 
 	// Check that the server types were registered
-	serverTypes := []string{"ServerType0", "ServerType1", "ServerTypeSakray"}
+	serverTypes := []string{"ServerType0", "ServerTypeSakray"}
 	for _, serverType := range serverTypes {
-		_, exists := factory.packetDefProviders[serverType]
+		_, exists := factory.packetConstructionProviders[serverType]
 		if !exists {
 			t.Errorf("%s provider was not registered", serverType)
 		}

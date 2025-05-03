@@ -18,7 +18,7 @@ type Receive interface {
 	Process(packet []byte) error
 
 	// Configure configures the receive component with server-specific packet definitions
-	Configure(serverType string, packetDefs map[string]common.PacketDef) error
+	Configure(serverType string, packetDefs map[string]common.PacketConstruction) error
 
 	// GetPacketID returns the packet ID for a given packet name
 	GetPacketID(name string) (string, bool)

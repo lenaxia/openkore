@@ -45,7 +45,7 @@ func TestBaseReceiveConfigure(t *testing.T) {
 	baseReceive := NewBaseReceive(hookManager)
 
 	// Create packet definitions
-	packetDefs := map[string]common.PacketDef{
+	packetDefs := map[string]common.PacketConstruction{
 		"0064": {
 			ID:         "0064",
 			Name:       "login_response",
@@ -124,7 +124,7 @@ func TestBaseReceiveProcess(t *testing.T) {
 	baseReceive := NewBaseReceive(hookManager)
 
 	// Create packet definitions
-	packetDefs := map[string]common.PacketDef{
+	packetDefs := map[string]common.PacketConstruction{
 		"0064": {
 			ID:         "0064",
 			Name:       "login_response",
@@ -173,7 +173,7 @@ func TestBaseReceiveProcessUnknownPacket(t *testing.T) {
 	baseReceive := NewBaseReceive(hookManager)
 
 	// Create packet definitions
-	packetDefs := map[string]common.PacketDef{
+	packetDefs := map[string]common.PacketConstruction{
 		"0064": {
 			ID:         "0064",
 			Name:       "login_response",
@@ -211,7 +211,7 @@ func TestBaseReceiveProcessNoHandler(t *testing.T) {
 	baseReceive := NewBaseReceive(hookManager)
 
 	// Create packet definitions
-	packetDefs := map[string]common.PacketDef{
+	packetDefs := map[string]common.PacketConstruction{
 		"0064": {
 			ID:         "0064",
 			Name:       "login_response",

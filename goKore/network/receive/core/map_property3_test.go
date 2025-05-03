@@ -12,7 +12,8 @@ func TestHandleMapProperty3(t *testing.T) {
 	t.Run("PvPMapType", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -55,7 +56,8 @@ func TestHandleMapProperty3(t *testing.T) {
 	t.Run("GvGMapType", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -98,7 +100,8 @@ func TestHandleMapProperty3(t *testing.T) {
 	t.Run("BattlegroundMapType", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -141,7 +144,8 @@ func TestHandleMapProperty3(t *testing.T) {
 	t.Run("NormalMapType", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -175,7 +179,8 @@ func TestHandleMapProperty3(t *testing.T) {
 	t.Run("MissingType", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)

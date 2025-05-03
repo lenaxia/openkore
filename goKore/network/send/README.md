@@ -1,173 +1,118 @@
-# Send Component Alignment
+# Send Package
 
-This directory contains the implementation of the Send component alignment according to the hybrid architecture approach. The Send component is responsible for constructing and sending packets to the server.
+This package provides functionality for sending packets to the server in the goKore network stack.
 
-## Architecture Overview
+## Overview
 
-The Send component has been aligned with the Receive component to provide a consistent architecture across both sides of the network implementation. The key components of this architecture are:
+The send package consists of:
 
-1. **Packet Definition System**: A shared system for defining packet structures, formats, and field names.
-2. **Configurable Send Component**: A configurable Send interface that can be adapted to different server types.
-3. **Factory for Send Components**: A factory that creates and configures Send implementations based on server type.
-4. **Domain-Organized Packet Constructions**: Packet constructions organized by domain (login, movement, chat, etc.).
+1. A central registry for managing all handler registrations
+2. Core functionality for sending packets
+3. Handlers for different types of packets (login, game, server-specific)
+4. A unified registration pattern for standardizing handler registration
 
-## Directory Structure
+## HandlerRegistry
 
-```
-send/
-├── core/                  # Core Send implementation
-│   ├── base_send.go       # Base Send implementation
-│   ├── base_send_new.go   # New aligned Send implementation
-│   └── send.go            # Send interface definition
-├── factory/               # Factory for creating Send implementations
-│   ├── factory.go         # Original factory implementation
-│   └── factory_new.go     # New aligned factory implementation
-├── game/                  # Game-related packet constructions
-│   ├── login/             # Login-related packet constructions
-│   ├── movement/          # Movement-related packet constructions
-│   ├── chat/              # Chat-related packet constructions
-│   └── item/              # Item-related packet constructions
-├── servers/               # Server-specific packet constructions
-│   ├── sakray/            # Sakray server-specific packet constructions
-│   └── ...                # Other server types
-├── types/                 # Type definitions
-│   └── send.go            # Send interface definition
-└── integration.go         # Integration example
-```
+The `HandlerRegistry` is the central component that manages all handler registrations. It provides methods for registering different types of handlers:
 
-## Key Components
+- `RegisterAllHandlers`: Registers all handlers
+- `registerLoginHandlers`: Registers login-related handlers
+- `registerGameHandlers`: Registers game-related handlers
+- `registerServerHandlers`: Registers server-specific handlers
 
-### Packet Definition
+## Current Registration Status
 
-Packet definitions are shared between Send and Receive components through the `common` package:
+Currently, most handlers are registered through the `game.RegisterHandlers` function in the `handlers/game` package. This function registers handlers for:
 
-```go
-// PacketDef defines the structure of a packet for receiving
-type PacketDef struct {
-    ID         string
-    Name       string
-    Format     string
-    FieldNames []string
-}
+- Character-related packets
+- Pet-related packets
+- Mercenary-related packets
+- Battle-related packets
+- Marriage-related packets
+- Auction-related packets
+- Buying store-related packets
+- UI-related packets
+- Deal-related packets
+- Ranking-related packets
+- GM-related packets
+- Macro-related packets
+- Captcha-related packets
+- Card-related packets
+- Cash shop-related packets
+- Miscellaneous packets
 
-// PacketConstruction defines how to construct a packet for sending
-type PacketConstruction struct {
-    ID         string
-    Name       string
-    Format     string
-    FieldNames []string
-}
-```
+However, many of these registrations are just placeholders and don't actually register any handlers. The actual handlers are implemented in the corresponding packages in the `game/` directory, but they don't have registration functions.
 
-### Send Interface
+Only the `card` package has been migrated to the unified registration pattern, which provides a more standardized way of registering handlers.
 
-The Send interface defines the contract for Send implementations:
+## Usage
+
+### Creating a HandlerRegistry
 
 ```go
-// Send defines the interface for packet construction and sending
-type Send interface {
-    // RegisterHandler registers a handler for a specific packet
-    RegisterHandler(packetName string, handler SendHandler)
+// Create a BaseSend instance
+baseSend := core.NewBaseSend(hookManager)
 
-    // ConstructPacket constructs a packet from a packet name and arguments
-    ConstructPacket(packetName string, args map[string]interface{}) ([]byte, error)
+// Create a logger
+logger := // your logger implementation
 
-    // SendPacket constructs and sends a packet
-    SendPacket(packetName string, args map[string]interface{}) error
-
-    // SendToServer sends a raw packet to the server
-    SendToServer(packet []byte) error
-
-    // Configure configures the send component with server-specific packet constructions
-    Configure(serverType string, packetConstructions map[string]PacketConstruction) error
-}
+// Create a HandlerRegistry
+registry := NewHandlerRegistry(baseSend, hookManager, logger)
 ```
 
-### BaseSend Implementation
-
-The BaseSend implementation provides the core functionality for sending packets:
+### Registering Handlers
 
 ```go
-// BaseSend implements the Send interface
-type BaseSend struct {
-    conn               interface{}
-    hookManager        *hooks.HookManager
-    serverType         string
-    handlers           map[string]SendHandler
-    packetConstructions map[string]PacketConstruction
-    packetLUT          map[string]string
-    // ...
-}
+// Register all handlers
+registry.RegisterAllHandlers()
 ```
 
-### SendFactory
-
-The SendFactory creates and configures Send implementations based on server type:
+### Configuring Server Type
 
 ```go
-// SendFactory creates and configures Send implementations
-type SendFactory struct {
-    packetConstructionProviders map[string]PacketConstructionProvider
-    hookManager                 *hooks.HookManager
-}
-```
+// Get packet definitions
+packetDefs := registry.GetPacketDefinitions()
 
-### Domain-Specific Packet Constructions
-
-Packet constructions are organized by domain to improve maintainability:
-
-```go
-// Login-related packet constructions
-func GetLoginPacketConstructions() map[string]PacketConstruction {
-    return map[string]PacketConstruction{
-        "0064": {
-            ID:         "0064",
-            Name:       "login_request",
-            Format:     "v a24 a24 C",
-            FieldNames: []string{"version", "username", "password", "clienttype"},
-        },
-        // ...
-    }
-}
-```
-
-## Usage Example
-
-```go
-// Create a hook manager
-hookManager := hooks.NewHookManager()
-
-// Create a send factory
-factory := NewSendFactory(hookManager)
-
-// Register server types
-factory.RegisterDefaultServerTypes()
-
-// Create a send implementation for a specific server type
-send, err := factory.CreateSend("ServerType0")
-if err != nil {
-    // Handle error
-}
-
-// Use the send implementation
-err = send.SendPacket("login_request", map[string]interface{}{
-    "version":    1,
-    "username":   "user",
-    "password":   "pass",
-    "clienttype": 0,
-})
+// Configure server type
+err := registry.ConfigureServerType("ServerType0", packetDefs)
 if err != nil {
     // Handle error
 }
 ```
 
-## Alignment with Receive Side
+## Unified Registration Pattern
 
-The Send component has been aligned with the Receive component to provide a consistent architecture:
+The send package is transitioning to a unified registration pattern for standardizing how handlers are registered across different packages. This pattern consists of:
 
-1. **Shared Packet Definitions**: Both components use the same packet definition structure.
-2. **Configurable Components**: Both components can be configured for different server types.
-3. **Factory Pattern**: Both components use a factory to create and configure implementations.
-4. **Domain Organization**: Both components organize handlers by domain.
+1. A `register.go` file that exposes standard registration functions:
+   - `RegisterWithSend`: Registers all handlers with the send component
+   - `GetPacketDefinitions`: Returns packet definitions for this package
 
-This alignment improves maintainability, reduces duplication, and provides a consistent architecture across both sides of the network implementation.
+2. A package-specific implementation file that contains the actual handler logic:
+   - `Manager`: Handles packet sending
+   - `RegisterHandlers`: Registers all handlers
+   - Handler functions for each packet type
+
+### Migrated Packages
+
+The following packages have been migrated to the unified pattern:
+
+- `card`: Card-related functionality
+
+### Legacy Packages
+
+Most packages still use the legacy registration pattern or don't have registration functions at all.
+
+See [LEGACY_PACKAGES.md](LEGACY_PACKAGES.md) for a list of packages that need to be migrated to the unified pattern.
+
+## Migration Guide
+
+See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for instructions on how to migrate packages to the unified pattern.
+
+## Template Package
+
+A template package is available in `game/template` to help with creating new packages that follow the unified pattern. See [game/template/README.md](game/template/README.md) for more information.
+
+## Example
+
+An example of how to use the registry is available in the `examples/registry_usage` directory.

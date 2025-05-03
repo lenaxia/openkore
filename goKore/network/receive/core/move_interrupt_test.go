@@ -10,7 +10,9 @@ import (
 
 func TestHandleMoveInterrupt(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.InGame)
@@ -44,7 +46,9 @@ func TestHandleMoveInterrupt(t *testing.T) {
 // Test with invalid arguments
 func TestHandleMoveInterruptInvalidArgs(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.InGame)

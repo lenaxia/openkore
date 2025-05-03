@@ -10,7 +10,9 @@ import (
 
 func TestNewAccountManager(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	if manager == nil {
 		t.Fatal("NewAccountManager() returned nil")
@@ -35,7 +37,9 @@ func TestNewAccountManager(t *testing.T) {
 
 func TestRegisterHandlers(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Register handlers
 	manager.RegisterHandlers()
@@ -59,7 +63,9 @@ func TestRegisterHandlers(t *testing.T) {
 
 func TestSetGetAccountID(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set account ID
 	accountID := uint32(12345)
@@ -83,7 +89,9 @@ func TestSetGetAccountID(t *testing.T) {
 
 func TestSetGetCharID(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set character ID
 	charID := uint32(67890)
@@ -107,7 +115,9 @@ func TestSetGetCharID(t *testing.T) {
 
 func TestSetGetState(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set state
 	manager.SetState(AccountStateLoggedIn)
@@ -127,7 +137,9 @@ func TestSetGetState(t *testing.T) {
 
 func TestSetGetNetworkState(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test all network states
 	testCases := []struct {
@@ -161,7 +173,9 @@ func TestSetGetNetworkState(t *testing.T) {
 
 func TestIsLoggedIn(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test not logged in states
 	notLoggedInStates := []AccountState{
@@ -194,7 +208,9 @@ func TestIsLoggedIn(t *testing.T) {
 
 func TestIsInGame(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test not in game states
 	notInGameStates := []AccountState{
@@ -221,7 +237,9 @@ func TestIsInGame(t *testing.T) {
 
 func TestResetSession(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set some session data
 	manager.SetAccountID(12345)
@@ -246,7 +264,9 @@ func TestResetSession(t *testing.T) {
 
 func TestUpdateLastPacketTime(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Get initial last packet time
 	initialTime := manager.GetSession().LastPacketTime
@@ -266,7 +286,9 @@ func TestUpdateLastPacketTime(t *testing.T) {
 
 func TestIsSessionExpired(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Session should not be expired initially
 	if manager.IsSessionExpired(1 * time.Second) {
@@ -284,7 +306,9 @@ func TestIsSessionExpired(t *testing.T) {
 
 func TestHandleAccountServerInfo(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Create test packet arguments
 	args := map[string]interface{}{
@@ -321,7 +345,9 @@ func TestHandleAccountServerInfo(t *testing.T) {
 
 func TestHandleReceivedCharactersInfo(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Create test packet arguments
 	args := map[string]interface{}{
@@ -354,7 +380,9 @@ func TestHandleReceivedCharactersInfo(t *testing.T) {
 
 func TestHandleLoginError(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetState(AccountStateLoggingIn)
@@ -374,7 +402,9 @@ func TestHandleLoginError(t *testing.T) {
 
 func TestHandleCharacterCreationSuccessful(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetState(AccountStateLoggedIn)
@@ -394,7 +424,9 @@ func TestHandleCharacterCreationSuccessful(t *testing.T) {
 
 func TestHandleReceivedCharacterIDAndMap(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Create test packet arguments
 	args := map[string]interface{}{
@@ -423,7 +455,9 @@ func TestHandleReceivedCharacterIDAndMap(t *testing.T) {
 
 func TestHandleMapLoaded(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetState(AccountStateSelectingChar)

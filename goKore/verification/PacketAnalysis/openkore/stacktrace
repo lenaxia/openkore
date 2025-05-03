@@ -1,0 +1,217 @@
+# Full Login Sequence in OpenKore with ServerType0 Customization
+
+Based on my analysis of the OpenKore codebase, here's a comprehensive stack trace of the methods involved in a successful login attempt, including how the ServerType0 customization is applied to the login process.
+
+## ServerType0 Customization Overview
+
+The ServerType0 classes (Network::Send::ServerType0 and Network::Receive::ServerType0) provide the foundation for packet handling in OpenKore. They define:
+
+1. **Packet Structures**: Each packet has a defined structure with specific fields and data types
+2. **Multiple Protocol Versions**: Support for different server versions with varying packet formats
+3. **Packet Shuffling**: Ability to remap packet IDs via shuffle.txt to handle servers that change packet IDs
+4. **Server Type Inheritance**: Other server types inherit from ServerType0 and override specific packets
+
+This customization system allows OpenKore to adapt to different Ragnarok Online server implementations while maintaining a consistent internal API.
+
+## 1. Connection Initialization
+
+### Network::DirectConnection->checkConnection()
+- **File**: `src/Network/DirectConnection.pm`
+- **Description**: Initializes connection and creates server-specific packet handlers
+- **ServerType0 Role**: The server type is used to create appropriate packet parser and message sender
+
+```perl
+$packetParser = Network::Receive->create($wrapper, $masterServer->{serverType});
+$messageSender = Network::Send->create($wrapper, $masterServer->{serverType});
+```
+
+During this initialization:
+- The appropriate ServerType class is loaded based on the server configuration
+- Packet definitions are loaded from the ServerType class
+- The `shuffle` method may be called to remap packet IDs based on shuffle.txt
+
+## 2. Master Server Login
+
+### Network::Send->sendMasterLogin()
+- **File**: `src/Network/Send.pm`
+- **Description**: Sends login credentials to the master server
+- **ServerType0 Role**: Provides multiple packet formats for different server versions
+
+ServerType0 defines several master_login packet formats:
+- `0064`: Basic login packet (username, password, master_version)
+- `01DD`: Secure login with salted MD5 password
+- `01FA`: Extended secure login with client info
+- `02B0`: Login with Rijndael encryption
+- `0987`: Login with MD5 hex password
+- `0AAC`: Login with hex password
+- `0ACF`: Login with game code and flag
+- `0A76`: Login with Rijndael encryption and different field lengths
+
+The system selects the appropriate packet format based on the server configuration:
+
+```perl
+if ($masterServer->{masterLogin_packet} eq '' || 
+    $self->{packet_list}{$masterServer->{masterLogin_packet}} &&
+    $self->{packet_list}{$masterServer->{masterLogin_packet}}[0] eq 'master_login')
+{
+    // Use the configured packet format
+} else {
+    // Use default format
+}
+```
+
+## 3. Master Server Response
+
+### Network::Receive::ServerType0->account_server_info()
+- **File**: `src/Network/Receive/ServerType0.pm`
+- **Description**: Processes the server's response to login attempt
+- **ServerType0 Role**: Defines packet structure for account_server_info (0069)
+
+ServerType0 defines multiple account_server_info packet formats:
+- Standard format: `'0069' => ['account_server_info', 'v a4 a4 a4 a4 a26 C a*', [qw(len sessionID accountID sessionID2 lastLoginIP lastLoginTime accountSex serverInfo)]]`
+- Extended format: `'0276' => ['account_server_info', 'v a4 a4 a4 a4 Z26 C V a*', [qw(len sessionID accountID sessionID2 lastLoginIP lastLoginTime accountSex iAccountSID serverInfo)]]`
+
+The system automatically selects the correct format based on the packet ID received from the server.
+
+## 4. Character Server Connection
+
+### Network::Send->sendGameLogin()
+- **File**: `src/Network/Send.pm`
+- **Description**: Sends login information to the character server
+- **ServerType0 Role**: Provides packet format for game_login (0065)
+
+ServerType0 defines multiple game_login packet formats:
+- Basic format: `'0065' => ['game_login', 'a4 a4 a4 v C', [qw(accountID sessionID sessionID2 userLevel accountSex)]]`
+- Extended format: `'0275' => ['game_login', 'a4 a4 a4 v C Z16 V', [qw(accountID sessionID sessionID2 userLevel accountSex mac iAccountSID)]]`
+
+## 5. Character Server Response
+
+### Network::Receive::ServerType0->received_characters_info()
+- **File**: `src/Network/Receive/ServerType0.pm`
+- **Description**: Processes character list from server
+- **ServerType0 Role**: Defines packet structure for received_characters_info (006B)
+
+ServerType0 defines the received_characters_info packet format:
+`'006B' => ['received_characters_info', 'v C3 x20 a*', [qw(len total_slot premium_start_slot premium_end_slot charInfo)]]`
+
+### Network::Receive::ServerType0->received_characters()
+- **File**: `src/Network/Receive/ServerType0.pm`
+- **Description**: Processes detailed character information
+- **ServerType0 Role**: Defines packet structure for received_characters (0072)
+
+ServerType0 defines the received_characters packet format:
+`'0072' => ['received_characters', 'v a*', [qw(len charInfo)]]`
+
+The `received_characters_blockSize` and `received_characters_unpackString` methods handle different character block formats based on server version.
+
+## 6. Character Selection
+
+### Network::Send->sendCharLogin()
+- **File**: `src/Network/Send.pm`
+- **Description**: Sends character selection to the server
+- **ServerType0 Role**: Provides packet format for char_login (0066)
+
+ServerType0 defines the char_login packet format:
+`'0066' => ['char_login', 'C', [qw(slot)]]`
+
+## 7. Map Server Connection
+
+### Network::Send->sendMapLogin()
+- **File**: `src/Network/Send.pm`
+- **Description**: Sends login information to the map server
+- **ServerType0 Role**: Provides multiple packet formats for map_login
+
+ServerType0 defines multiple map_login packet formats:
+- Basic format: `'0072' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]]`
+- Extended format: `'0436' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]]`
+
+## 8. Map Server Response
+
+### Network::Receive::ServerType0->map_loaded()
+- **File**: `src/Network/Receive/ServerType0.pm`
+- **Description**: Processes map server's confirmation that the map is loaded
+- **ServerType0 Role**: Defines packet structure for map_loaded (0073)
+
+ServerType0 defines the map_loaded packet format:
+`'0073' => ['map_loaded', 'V a3 C2', [qw(syncMapSync coords xSize ySize)]]`
+
+### Network::Send->sendMapLoaded()
+- **File**: `src/Network/Send.pm`
+- **Description**: Confirms to the server that the client has loaded the map
+- **ServerType0 Role**: Provides packet format for map_loaded (007D)
+
+ServerType0 defines the map_loaded packet format:
+`'007D' => ['map_loaded']`
+
+## Packet Shuffling Mechanism
+
+The `shuffle` method in ServerType0 allows for packet remapping:
+
+```perl
+sub shuffle {
+    my ($self) = @_;
+    
+    my %shuffle;
+    my $load_shuffle = Settings::addTableFile('shuffle.txt', loader => [\&FileParsers::parseDataFile2, \%shuffle], mustExist => 0);
+    Settings::loadByHandle($load_shuffle);
+    Settings::removeFile($load_shuffle);
+    
+    # Build the list of changes
+    my $new = {};
+    foreach (sort keys %shuffle) {
+        next if !$self->{packet_list}->{$_};
+        next if $self->{packet_lut}->{$handler} && $self->{packet_lut}->{$handler} ne $_;
+        $new->{$shuffle{$_}} = $self->{packet_list}->{$_};
+    }
+    
+    # Patch!
+    $self->{packet_list}->{$_} = $new->{$_} foreach keys %$new;
+    $self->{packet_lut}->{$new->{$_}->[0]} = $_ foreach keys %$new;
+}
+```
+
+This allows OpenKore to adapt to servers that change packet IDs to prevent botting by remapping the packet IDs according to the shuffle.txt configuration file.
+
+## Server Type Inheritance
+
+Different server types can inherit from ServerType0 and override specific packet definitions:
+
+```perl
+package Network::Send::ServerType1;
+use base qw(Network::Send::ServerType0);
+
+sub new {
+    my $class = shift;
+    my $self = $class->SUPER::new(@_);
+    
+    my %packets = (
+        # Override specific packets
+        '0072' => ['map_login', 'a4 a4 a4 V C', [qw(accountID charID sessionID tick sex)]],
+    );
+    
+    $self->{packet_list}{$_} = $packets{$_} for keys %packets;
+    return $self;
+}
+```
+
+This inheritance mechanism allows OpenKore to support many different server types while minimizing code duplication.
+
+## Dynamic Packet Selection
+
+The system dynamically selects the appropriate packet structure based on the server type and version:
+
+```perl
+$msg = $self->reconstruct({
+    switch => 'master_login',
+    version => $version || $self->version,
+    master_version => $master_version,
+    username => $username,
+    password => $password,
+    game_code => '0011',
+    flag => 'G000',
+});
+```
+
+The `reconstruct` method looks up the appropriate packet format in the packet_lut table, which may have been customized by the shuffle mechanism or server type overrides.
+
+This flexible architecture allows OpenKore to adapt to different server implementations while maintaining a consistent internal API for the login process.

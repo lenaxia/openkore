@@ -62,49 +62,7 @@ func TestErrorDefinitions(t *testing.T) {
 	}
 }
 
-// MockNetwork implements NetworkInterface for testing
-type MockNetwork struct {
-	connected bool
-	state     int
-}
-
-func (m *MockNetwork) Connect() error {
-	m.connected = true
-	m.state = ConnectedToMasterServer
-	return nil
-}
-
-func (m *MockNetwork) Disconnect() error {
-	m.connected = false
-	m.state = NotConnected
-	return nil
-}
-
-func (m *MockNetwork) IsConnected() bool {
-	return m.connected
-}
-
-func (m *MockNetwork) GetState() int {
-	return m.state
-}
-
-func (m *MockNetwork) SetState(state int) {
-	m.state = state
-}
-
-func (m *MockNetwork) Send(data []byte) error {
-	if !m.connected {
-		return ErrNotConnected
-	}
-	return nil
-}
-
-func (m *MockNetwork) Receive() ([]byte, error) {
-	if !m.connected {
-		return nil, ErrNotConnected
-	}
-	return []byte{}, nil
-}
+// MockNetwork is defined in mock_types_test.go
 
 // TestNetworkInterface verifies that the NetworkInterface can be implemented
 func TestNetworkInterface(t *testing.T) {

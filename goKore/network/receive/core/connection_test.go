@@ -10,7 +10,9 @@ import (
 
 func TestHandleConnectionRefused(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.ConnectedToLoginServer)
@@ -40,7 +42,9 @@ func TestHandleConnectionRefused(t *testing.T) {
 
 func TestHandleMapLoadError(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.ConnectedToCharServer)
@@ -70,7 +74,9 @@ func TestHandleMapLoadError(t *testing.T) {
 
 func TestHandleReceivedSync(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.InGame)
@@ -100,7 +106,9 @@ func TestHandleReceivedSync(t *testing.T) {
 
 func TestHandleActorMovementInterrupted(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.InGame)
@@ -132,7 +140,9 @@ func TestHandleActorMovementInterrupted(t *testing.T) {
 
 func TestHandleMapChange(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.InGame)
@@ -167,7 +177,9 @@ func TestHandleMapChange(t *testing.T) {
 
 func TestHandleMapChanged(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.InGame)
@@ -203,7 +215,9 @@ func TestHandleMapChanged(t *testing.T) {
 
 func TestHandleQuitResponse(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test case 1: Successful disconnect (fail = 0)
 	t.Run("SuccessfulDisconnect", func(t *testing.T) {
@@ -264,7 +278,9 @@ func TestHandleQuitResponse(t *testing.T) {
 
 func TestHandleSwitchCharacter(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test case 1: Valid switch character request (result = 1)
 	t.Run("ValidSwitchCharacter", func(t *testing.T) {
@@ -369,7 +385,9 @@ func TestHandleSwitchCharacter(t *testing.T) {
 
 func TestHandleCharacterDeletionSuccessful(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test case 1: Character deletion with selected index
 	t.Run("DeletionWithSelectedIndex", func(t *testing.T) {
@@ -483,7 +501,9 @@ func TestHandleCharacterDeletionSuccessful(t *testing.T) {
 
 func TestHandleCharacterDeletionFailed(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.ConnectedToCharServer)
@@ -534,7 +554,9 @@ func TestHandleCharacterDeletionFailed(t *testing.T) {
 
 func TestHandleCharDelete2Result(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test case 1: Successful deletion request
 	t.Run("SuccessfulDeletionRequest", func(t *testing.T) {
@@ -655,7 +677,9 @@ func TestHandleCharDelete2Result(t *testing.T) {
 
 func TestHandleCharDelete2AcceptResult(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test case 1: Successful deletion acceptance
 	t.Run("SuccessfulDeletionAcceptance", func(t *testing.T) {
@@ -771,7 +795,9 @@ func TestHandleCharDelete2AcceptResult(t *testing.T) {
 
 func TestHandleCharDelete2CancelResult(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Test case 1: Successful deletion cancellation
 	t.Run("SuccessfulDeletionCancellation", func(t *testing.T) {
@@ -904,7 +930,9 @@ func TestHandleCharDelete2CancelResult(t *testing.T) {
 
 func TestHandleSyncRequestEx(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(network.InGame)

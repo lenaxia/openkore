@@ -1,0 +1,29 @@
+package tests
+
+// TestData contains test data for character_ban_list tests
+var TestData = struct {
+	// EmptyList is a packet with 0 entries
+	// Format: v (len=0) + a* (empty)
+	EmptyList []byte
+
+	// TwoEntries is a packet with 2 entries
+	// Format: v (len=2) + a* (2 character names, each 24 bytes)
+	TwoEntries []byte
+
+	// ExpectedNames contains the expected character names from TwoEntries
+	ExpectedNames []string
+}{
+	EmptyList: []byte{
+		0x00, 0x00, // len = 0 (unsigned short, little endian)
+	},
+	TwoEntries: []byte{
+		0x02, 0x00, // len = 2 (unsigned short, little endian)
+		// First character name: "TestChar1" + padding
+		0x54, 0x65, 0x73, 0x74, 0x43, 0x68, 0x61, 0x72, 0x31, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		// Second character name: "TestChar2" + padding
+		0x54, 0x65, 0x73, 0x74, 0x43, 0x68, 0x61, 0x72, 0x32, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	},
+	ExpectedNames: []string{"TestChar1", "TestChar2"},
+}

@@ -2,11 +2,15 @@ package core
 
 import (
 	"testing"
+
+	"github.com/lenaxia/goKore/network/hooks"
 )
 
 func TestOverweightPercent(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	// Create a test actor
 	actorID := uint32(12345)

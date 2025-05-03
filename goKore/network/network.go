@@ -77,7 +77,8 @@ type NetworkInterface interface {
 }
 
 // StateChangeCallback is called when connection state changes
-type StateChangeCallback func(oldState, newState int)
+// This is defined as a type alias to func(oldState, newState int) to ensure compatibility with other packages
+type StateChangeCallback = func(oldState, newState int)
 
 // PacketHandler defines the interface for packet handling
 type PacketHandler interface {
@@ -109,7 +110,7 @@ type NetworkManager struct {
 	stateChangeCallback StateChangeCallback
 
 	// Network interface
-	networkInterface NetworkInterface
+	NetworkInterface NetworkInterface
 
 	// Packet sender
 	packetSender PacketSender
@@ -133,7 +134,7 @@ func NewNetworkManager(networkInterface NetworkInterface, packetSender PacketSen
 
 	return &NetworkManager{
 		state:            NotConnected,
-		networkInterface: networkInterface,
+		NetworkInterface: networkInterface,
 		packetSender:     packetSender,
 		packetHandler:    packetHandler,
 	}
@@ -146,17 +147,17 @@ func (nm *NetworkManager) SetStateChangeCallback(callback StateChangeCallback) {
 
 // Connect establishes a connection to the server
 func (nm *NetworkManager) Connect() error {
-	return nm.networkInterface.Connect()
+	return nm.NetworkInterface.Connect()
 }
 
 // Disconnect terminates the connection to the server
 func (nm *NetworkManager) Disconnect() error {
-	return nm.networkInterface.Disconnect()
+	return nm.NetworkInterface.Disconnect()
 }
 
 // IsConnected checks if there is an active connection
 func (nm *NetworkManager) IsConnected() bool {
-	return nm.networkInterface.IsConnected()
+	return nm.NetworkInterface.IsConnected()
 }
 
 // GetState returns the current connection state
@@ -173,7 +174,7 @@ func (nm *NetworkManager) SetState(state int) {
 		nm.stateChangeCallback(oldState, state)
 	}
 
-	nm.networkInterface.SetState(state)
+	nm.NetworkInterface.SetState(state)
 }
 
 // Send constructs and sends a packet with the given name and fields

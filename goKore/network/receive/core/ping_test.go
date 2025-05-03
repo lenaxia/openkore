@@ -9,7 +9,9 @@ import (
 func TestHandlePing(t *testing.T) {
 	// Create a new account manager
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewAccountManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewAccountManager(parser, hookManager, logger)
 
 	// Set initial state
 	manager.SetNetworkState(1) // Some network state

@@ -2,11 +2,15 @@ package core
 
 import (
 	"testing"
+
+	"github.com/lenaxia/goKore/network/hooks"
 )
 
 func TestReputeInfo(t *testing.T) {
 	parser := NewCoreParser("ServerType0", nil)
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	// Test case 1: Single reputation entry
 	t.Run("SingleReputationEntry", func(t *testing.T) {

@@ -150,12 +150,12 @@ if err != nil {
 1. Create a new packet definition provider function:
 
 ```go
-func NewServerTypePacketDefs() map[string]common.PacketDef {
+func NewServerTypePacketDefs() map[string]common.PacketConstruction {
     // Start with base definitions
     defs := ServerType0PacketDefs()
 
     // Override or add specific packet definitions
-    defs["0069"] = common.PacketDef{
+    defs["0069"] = common.PacketConstruction{
         ID:         "0069",
         Name:       "account_server_info",
         Format:     "v a4 a4 a4 a4 a26 C a* v v",

@@ -1,0 +1,1384 @@
+{
+    "methods": {
+      "sendDealReply": {
+        "code": "sub sendDealReply {\n\tmy ($self, $action) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'deal_reply',\n\n\t\t# Action values:\n\t\t# 0: Char is too far\n\t\t# 1: Character does not exist\n\t\t# 2: Trade failed\n\t\t# 3: Accept\n\t\t# 4: Cancel\n\t\t#\n\t\t# Weird enough, the client should only send 3/4\n\t\t# and the server is the one that can reply 0~2 - technologyguild, Dec 2009\n\t\taction => $action,\n\t}));\n\n\tdebug \"Sent Deal Reply (Action: $action)\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$action"
+        ],
+        "param_types": [
+          "unknown"
+        ]
+      },
+      "parse_actor_move": {
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "coords"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "code": "sub parse_actor_move {\n\tmy ($self, $args) = @_;\n\tmakeCoordsDir($args, $args->{coords});\n}"
+      },
+      "parse_pet_evolution": {
+        "code": "sub parse_pet_evolution {\n\tmy ($self, $args) = @_;\n\t@{$args->{items}} = map {{ itemIndex => unpack('v', $_), amount => unpack('x2 v', $_) }} unpack '(a4)*', $args->{itemInfo};\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "items",
+          "itemInfo"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "reconstruct_shop_open": {
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "vendingInfo",
+          "items"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "code": "sub reconstruct_shop_open {\n\tmy ($self, $args) = @_;\n\n\t$args->{vendingInfo} = pack \"(a*)*\", map { pack \"a2 v V\", $_->{ID}, $_->{amount}, $_->{price} } @{$args->{items}};\n}"
+      },
+      "sendSync": {
+        "code": "sub sendSync {\n\tmy ($self, $initialSync) = @_;\n\t# XKore mode 1 lets the client take care of syncing.\n\treturn if ($self->{net}->version == 1);\n\n\t$self->sendToServer($self->reconstruct({switch => 'sync'}));\n\tdebug \"Sent Sync\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$initialSync"
+        ],
+        "param_types": [
+          "unknown"
+        ]
+      },
+      "reconstruct_merge_item_request": {
+        "code": "sub reconstruct_merge_item_request {\n\tmy ($self, $args) = @_;\n\t$args->{itemList} = pack '(a2)*', map { $_->{ID} } @{$args->{items}};\n}",
+        "args_keys": [
+          "itemList",
+          "items"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "sendTokenToServer": {
+        "param_types": [
+          "string",
+          "string",
+          "unknown",
+          "numeric",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$username",
+          "$password",
+          "$master_version",
+          "$version",
+          "$token",
+          "$length",
+          "$otp_ip",
+          "$otp_port"
+        ],
+        "code": "sub sendTokenToServer {\n\tmy ($self, $username, $password, $master_version, $version, $token, $length, $otp_ip, $otp_port) = @_;\n\tmy $len =  $length + 92;\n\n\tmy $password_rijndael = $self->encrypt_password($password);\n\tmy $ip = '192.168.0.14';\n\tmy $mac = '20CF3095572A';\n\tmy $mac_hyphen_separated = join '-', $mac =~ /(..)/g;\n\n\t$net->serverDisconnect();\n\t$net->serverConnect($otp_ip, $otp_port);# OTP - One Time Password\n\n\tmy $msg = $self->reconstruct({\n\t\tswitch => 'token_login',\n\t\tlen => $len, # size of packet\n\t\tversion => $version || $self->version,\n\t\tmaster_version => $master_version,\n\t\tusername => $username,\n\t\tpassword => $password,\n\t\tpassword_rijndael => $password_rijndael,\n\t\tmac => $mac_hyphen_separated,\n\t\tip => $ip,\n\t\ttoken => $token,\n\t});\n\n\t$self->sendToServer($msg);\n\n\tdebug \"Sent sendTokenLogin\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendBuyBulkMarket": {
+        "param_types": [
+          "reference"
+        ],
+        "parameters": [
+          "$self",
+          "$r_array"
+        ],
+        "code": "sub sendBuyBulkMarket {\n\tmy ($self, $r_array) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'buy_bulk_market',\n\t\titems => \\@{$r_array},\n\t}));\n\n\tdebug(\"Sent bulk buy market: $_->{itemID} x $_->{amount}\\n\", \"sendPacket\", 2) foreach (@{$r_array});\n}"
+      },
+      "sendAddStatusPoint": {
+        "code": "sub sendAddStatusPoint {\n    my ($self, $ID,$Amount) = @_;\n    $self->sendToServer($self->reconstruct({\n        switch => 'send_add_status_point',\n        statusID => $ID,\n        Amount => '1',\n    }));\n}",
+        "param_types": [
+          "numeric_id",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$ID",
+          "$Amount"
+        ]
+      },
+      "sendGMChangeEffectState": {
+        "code": "sub sendGMChangeEffectState {\n\tmy ($self, $effect_state) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'gm_change_effect_state',\n\t\teffect_state => $effect_state\n\t}));\n\n\tdebug \"Sent GM Hide.\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$effect_state"
+        ]
+      },
+      "reconstruct_pet_evolution": {
+        "code": "sub reconstruct_pet_evolution {\n\tmy ($self, $args) = @_;\n\t$args->{itemInfo} = pack '(a4)*', map { pack 'v2', @{$_}{qw(itemIndex amount)} } @{$args->{items}};\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "itemInfo",
+          "items"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "sendPartyBookingRegister": {
+        "code": "sub sendPartyBookingRegister {\n\tmy ($self, $level, $MapID, @jobList) = @_;\n\n\t$self->sendToServer($self->reconstruct({switch => 'booking_register', level => $level, MapID => $MapID,\n\t\t\t\t\t\tjob0 => @jobList[0], job1 => @jobList[1], job2 => @jobList[2],\n\t\t\t\t\t\tjob3 => @jobList[3], job4 => @jobList[4], job5 => @jobList[5]}));\n\n\tdebug \"Sent Booking Register\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$level",
+          "$MapID",
+          "@jobList"
+        ],
+        "param_types": [
+          "numeric",
+          "unknown",
+          "unknown"
+        ]
+      },
+      "reconstruct_char_delete2_accept": {
+        "args_keys": [
+          "charID",
+          "code"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_char_delete2_accept {\n\tmy ($self, $args) = @_;\n\tdebug \"Sent sendCharDelete2Accept. CharID: $args->{charID}, Code: $args->{code}\\n\", \"sendPacket\", 2;\n}"
+      },
+      "reconstruct_game_login": {
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "userLevel",
+          "iAccountSID",
+          "mac"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "code": "sub reconstruct_game_login {\n\tmy ($self, $args) = @_;\n\t$args->{userLevel} = 0 unless exists $args->{userLevel};\n\t($args->{iAccountSID}) = $masterServer->{ip} =~ /\\d+\\.\\d+\\.\\d+\\.(\\d+)/ unless exists $args->{iAccountSID};\n\n\tif (exists $args->{mac}) {\n\t\tmy $key = pack('C16', (0x06, 0xA9, 0x21, 0x40, 0x36, 0xB8, 0xA1, 0x5B, 0x51, 0x2E, 0x03, 0xD5, 0x34, 0x12, 0x00, 0x06));\n\t\tmy $chain = pack('C16', (0x3D, 0xAF, 0xBA, 0x42, 0x9D, 0x9E, 0xB4, 0x30, 0xB4, 0x22, 0xDA, 0x80, 0x2C, 0x9F, 0xAC, 0x41));\n\t\tmy $mac = $config{macAddress} || \"F2ADCC03771E\";\n\t\t$mac = uc($mac);\n\t\tmy $in = pack('a16', $mac);\n\n\t\tmy $rijndael = Utils::Rijndael->new;\n\t\t$rijndael->MakeKey($key, $chain, 16, 16);\n\t\t$args->{mac} = $rijndael->Encrypt($in, undef, 16, 0);\n\t}\n}"
+      },
+      "sendMercenaryCommand": {
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$command"
+        ],
+        "code": "sub sendMercenaryCommand {\n\tmy ($self, $command) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'mercenary_command',\n\n\t\t# 0x0 => COMMAND_REQ_NONE\n\t\t# 0x1 => COMMAND_REQ_PROPERTY\n\t\t# 0x2 => COMMAND_REQ_DELETE\n\t\tflag => $command\n\t}));\n\n\tdebug \"Sent Mercenary Command $command\", \"sendPacket\", 2;\n}"
+      },
+      "reconstruct_public_chat": {
+        "code": "sub reconstruct_public_chat {\n\tmy ($self, $args) = @_;\n\t$self->reconstructChat($args);\n}",
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "sendBuyBulk": {
+        "param_types": [
+          "reference"
+        ],
+        "parameters": [
+          "$self",
+          "$r_array"
+        ],
+        "code": "sub sendBuyBulk {\n\tmy ($self, $r_array) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'buy_bulk',\n\t\titems => \\@{$r_array},\n\t}));\n\n\tdebug(\"Sent bulk buy: $_->{itemID} x $_->{amount}\\n\", \"sendPacket\", 2) foreach (@{$r_array});\n}"
+      },
+      "reconstruct_guild_chat": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_guild_chat {\n\tmy ($self, $args) = @_;\n\t$self->reconstructChat($args);\n}"
+      },
+      "reconstruct_buy_bulk_buyer": {
+        "code": "sub reconstruct_buy_bulk_buyer {\n    my ($self, $args) = @_;\n\tmy $packet_size = $self->{buy_bulk_buyer_size} || '(a6)*';\n\tmy $packet_unpack = $self->{buy_bulk_buyer_size_unpack} || 'a2 v2';\n\t$args->{itemInfo} = pack($packet_size, map { pack $packet_unpack, @{$_}{qw(ID itemID amount)} } @{$args->{items}});\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "itemInfo",
+          "items"
+        ]
+      },
+      "sendOpenUIRequest": {
+        "parameters": [
+          "$self",
+          "$UIType"
+        ],
+        "param_types": [
+          "unknown"
+        ],
+        "code": "sub sendOpenUIRequest {\n\tmy ($self, $UIType) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'open_ui_request',\n\t\tUIType => $UIType,\n\t}));\n\n\tdebug \"Sent Open UI Request (\".$UIType.\")\\n\", \"sendPacket\";\n}"
+      },
+      "reconstruct_cash_shop_buy": {
+        "code": "sub reconstruct_cash_shop_buy {\n\tmy ($self, $args) = @_;\n\n\t$args->{buy_info} = pack '(a*)*', map { pack 'V V v', $_->{nameID}, $_->{amount}, $_->{tab} } @{$args->{items}};\n\t# Some older clients (prior to 2013, I don't know the exact date) use 'v3' instead of 'V2 v' - lututui\n\t# $args->{buy_info} = pack '(a*)*', map { pack 'v v v', $_->{nameID}, $_->{amount}, $_->{tab} } @{$args->{items}};\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "buy_info",
+          "items"
+        ]
+      },
+      "parse_buy_bulk_vender": {
+        "code": "sub parse_buy_bulk_vender {\n\tmy ($self, $args) = @_;\n\t@{$args->{items}} = map {{ amount => unpack('v', $_), itemIndex => unpack('x2 v', $_) }} unpack '(a4)*', $args->{itemInfo};\n}",
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "items",
+          "itemInfo"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "sendMakeItemRequest": {
+        "param_types": [
+          "string",
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$nameID",
+          "$material_nameID1",
+          "$material_nameID2",
+          "$material_nameID3"
+        ],
+        "code": "sub sendMakeItemRequest {\n\tmy ($self, $nameID, $material_nameID1, $material_nameID2, $material_nameID3) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'make_item_request',\n\t\tnameID => $nameID,\n\t\tmaterial_nameID1 => $material_nameID1,\n\t\tmaterial_nameID2 => $material_nameID2,\n\t\tmaterial_nameID3 => $material_nameID3,\n\t}));\n  debug \"Sent Make Item Request.\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendReplySyncRequestEx": {
+        "code": "sub sendReplySyncRequestEx {\n\tmy ($self, $SyncID) = @_;\n\t# Packing New Message and Dispatching\n\n\t$self->sendToServer(pack(\"v\", $SyncID));\n\t# Debug Log\n\t# print \"Dispatching Sync Ex Reply : 0x\" . $pid . \"\\n\";\n\t# Debug Log\n\tdebug \"Sent Reply Sync Request Ex\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$SyncID"
+        ]
+      },
+      "encryptMessageID": {
+        "code": "sub encryptMessageID {\n\tmy ($self, $r_message) = @_;\n\tmy $messageID = unpack(\"v\", $$r_message);\n\tmy $messageID2 = uc(unpack(\"H2\", substr($$r_message, 1, 1))) . uc(unpack(\"H2\", substr($$r_message, 0, 1)));\n\n\tif ($self->{encryption}->{crypt_key_3}) {\n\t\tif (sprintf(\"%04X\",$messageID) eq $self->{packet_lut}{map_login}) {\n\t\t\t$self->{encryption}->{crypt_key} = $self->{encryption}->{crypt_key_1};\n\t\t} elsif ($self->{net}->getState() != Network::IN_GAME) {\n\t\t\t# Turn off keys\n\t\t\t$self->{encryption}->{crypt_key} = 0; return;\n\t\t}\n\n\t\t# Checking if Encryption is Activated\n\t\tif ($self->{encryption}->{crypt_key} > 0) {\n\t\t\t# Saving Last Informations for Debug Log\n\t\t\tmy $oldMID = $messageID;\n\t\t\tmy $oldKey = ($self->{encryption}->{crypt_key} >> 16) & 0x7FFF;\n\n\t\t\t# Calculating the Encryption Key\n\t\t\t$self->{encryption}->{crypt_key} = ($self->{encryption}->{crypt_key} * $self->{encryption}->{crypt_key_3} + $self->{encryption}->{crypt_key_2}) & 0xFFFFFFFF;\n\n\t\t\t# Xoring the Message ID\n\t\t\t$messageID = ($messageID ^ (($self->{encryption}->{crypt_key} >> 16) & 0x7FFF)) & 0xFFFF;\n\t\t\t$$r_message = pack(\"v\", $messageID) . substr($$r_message, 2);\n\n\t\t\t# Debug Log\n\t\t\tdebug (sprintf(\"Encrypted MID : [%04X]->[%04X] / KEY : [0x%04X]->[0x%04X]\\n\", $oldMID, $messageID, $oldKey, ($self->{encryption}->{crypt_key} >> 16) & 0x7FFF), \"sendPacket\", 0) if ($config{debugPacket_sent} || ($config{'debugPacket_include_dumpMethod'} && !existsInList($config{debugPacket_exclude}, $messageID2) && existsInList($config{'debugPacket_include'}, $messageID2)));\n\t\t}\n\t} else {\n\t\tuse bytes;\n\t\tif ($self->{net}->getState() != Network::IN_GAME) {\n\t\t\t$enc_val1 = 0;\n\t\t\t$enc_val2 = 0;\n\t\t\treturn;\n\t\t}\n\n\t\tmy $messageID = unpack(\"v\", $$r_message);\n\t\tif ($enc_val1 != 0 && $enc_val2 != 0) {\n\t\t\t# Prepare encryption\n\t\t\t$enc_val1 = ((0x000343FD * $enc_val1) + $enc_val2)& 0xFFFFFFFF;\n\t\t\tdebug (sprintf(\"enc_val1 = %x\", $enc_val1) . \"\\n\", \"sendPacket\", 2);\n\t\t\t# Encrypt message ID\n\t\t\t$messageID = ($messageID ^ (($enc_val1 >> 16) & 0x7FFF)) & 0xFFFF;\n\t\t\t$$r_message = pack(\"v\", $messageID) . substr($$r_message, 2);\n\t\t}\n\t}\n}",
+        "param_types": [
+          "reference"
+        ],
+        "parameters": [
+          "$self",
+          "$r_message"
+        ]
+      },
+      "parse_public_chat": {
+        "code": "sub parse_public_chat {\n\tmy ($self, $args) = @_;\n\t$self->parseChat($args);\n}",
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "reconstruct_character_move": {
+        "code": "sub reconstruct_character_move {\n\tmy ($self, $args) = @_;\n\n\t$args->{no_padding} = exists $args->{no_padding} ? $args->{no_padding} : $masterServer->{serverType} == 0;\n\n\t$args->{coords} = getCoordString(@{$args}{qw(x y)}, $args->{no_padding});\n}",
+        "args_keys": [
+          "no_padding",
+          "coords"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "sendItemListWindowSelected": {
+        "code": "sub sendItemListWindowSelected {\n\tmy ($self, $num, $type, $act, $items) = @_;\n\tmy $len = ($num * 4) + 12;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'item_list_window_selected',\n\t\tlen => $len,\n\t\ttype => $type,\n\t\tact => $act,\n\t\titems => $items,\n\t}));\n\tif ($act == 1) {\n\t\tdebug \"Selected \".(scalar @{$items}).\" items: \".(join ', ', map {\"\".$_->{amount}.\" x \".$_->{itemName}.\" (binID:\".$_->{itemIndex}.\")\"} @{$items}).\"\\n\", \"sendPacket\";\n\t} else {\n\t\tdebug \"Selected items were canceled.\\n\", \"sendPacket\";\n\t}\n\tundef $skillExchangeItem;\n}",
+        "param_types": [
+          "numeric",
+          "numeric",
+          "unknown",
+          "items_array"
+        ],
+        "parameters": [
+          "$self",
+          "$num",
+          "$type",
+          "$act",
+          "$items"
+        ]
+      },
+      "sendBuyBulkBuyer": {
+        "param_types": [
+          "numeric_id",
+          "reference",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$buyerID",
+          "$r_array",
+          "$buyingStoreID"
+        ],
+        "code": "sub sendBuyBulkBuyer {\n    my ($self, $buyerID, $r_array, $buyingStoreID) = @_;\n\n\tmy $len = 12 + (scalar @{$r_array} * 8);\n\n    $self->sendToServer($self->reconstruct({\n        switch => 'buy_bulk_buyer',\n\t\tlen => $len,\n        buyerID => $buyerID,\n        buyingStoreID => $buyingStoreID,\n        items => $r_array,\n    }));\n}"
+      },
+      "sendSearchStoreSelect": {
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "accountID",
+          "storeID",
+          "nameID"
+        ],
+        "code": "sub sendSearchStoreSelect {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'search_store_select',\n\t\taccountID => $args->{accountID},\n\t\tstoreID => $args->{storeID},\n\t\tnameID => $args->{nameID},\n\t}));\n\n\tdebug \"Sent search store select request\\n\", \"sendPacket\", 2;\n}"
+      },
+      "parse_character_move": {
+        "code": "sub parse_character_move {\n\tmy ($self, $args) = @_;\n\tmakeCoordsDir($args, $args->{coords});\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "coords"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "sendSearchStoreRequestNextPage": {
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "code": "sub sendSearchStoreRequestNextPage {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({switch => 'search_store_request_next_page'}));\n\n\tdebug \"Sent search store next page request\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendGuildMemberKick": {
+        "code": "sub sendGuildMemberKick {\n\tmy ($self, $guildID, $accountID, $charID, $reason) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'guild_kick',\n\t\tguildID => $guildID,\n\t\tcharID => $charID,\n\t\taccountID => $accountID,\n\t\treason => stringToBytes($reason),\n\t}));\n\n\tdebug \"Sent Guild Kick: \".getHex($charID).\"\\n\", \"sendPacket\";\n}",
+        "parameters": [
+          "$self",
+          "$guildID",
+          "$accountID",
+          "$charID",
+          "$reason"
+        ],
+        "param_types": [
+          "numeric_id",
+          "numeric_id",
+          "numeric_id",
+          "unknown"
+        ]
+      },
+      "sendInventoryExpansionRequest": {
+        "code": "sub sendInventoryExpansionRequest {\n\tmy ($self, $args) = @_;\n\t$self->sendToServer($self->reconstruct({ switch => 'inventory_expansion_request' }));\n}",
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "sendSearchStoreSearch": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "type",
+          "max_price",
+          "min_price",
+          "item_list",
+          "card_list"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub sendSearchStoreSearch {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'search_store_info',\n\t\ttype => $args->{type},\n\t\tmax_price => $args->{max_price},\n\t\tmin_price => $args->{min_price},\n\t\titem_list => \\@{$args->{item_list}},\n\t\tcard_list => \\@{$args->{card_list}},\n\t}));\n\n\tdebug \"Sent search store search\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendGuildLeave": {
+        "code": "sub sendGuildLeave {\n\tmy ($self, $reason, $guildID, $charID) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'guild_leave',\n\t\tguildID => $guildID,\n\t\taccountID => $accountID,\n\t\tcharID => $charID,\n\t\treason => stringToBytes($reason),\n\t}));\n\n\tdebug \"Sent Guild Leave: $reason\\n\", \"sendPacket\";\n}",
+        "param_types": [
+          "unknown",
+          "numeric_id",
+          "numeric_id"
+        ],
+        "parameters": [
+          "$self",
+          "$reason",
+          "$guildID",
+          "$charID"
+        ]
+      },
+      "sendAuctionItemSearch": {
+        "parameters": [
+          "$self",
+          "$type",
+          "$price",
+          "$search_string",
+          "$page"
+        ],
+        "param_types": [
+          "numeric",
+          "unknown",
+          "unknown",
+          "numeric"
+        ],
+        "code": "sub sendAuctionItemSearch {\n\tmy ($self, $type, $price, $search_string, $page) = @_;\n\t$page ||= 1;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'auction_search',\n\t\tprice => $price,\n\t\tsearch_string => stringToBytes($search_string),\n\t\tpage => $page,\n\n\t\t# type\n\t\t# 0 => armor\n\t\t# 1 => weapon\n\t\t# 2 => card\n\t\t# 3 => misc\n\t\t# 4 => name\n\t\t# 5 => auction id\n\t\ttype => $type,\n\t}));\n\n\tdebug \"Sent Auction Item Search.\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendCashBuy": {
+        "code": "sub sendCashBuy {\n\tmy ($self, $kafra_points, $items) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'cash_shop_buy',\n\t\tkafra_points => $kafra_points,\n\t\tcount => scalar @{$items},\n\t\titems => $items,\n\t}));\n\n\tdebug \"Requesting cash shop buy\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown",
+          "items_array"
+        ],
+        "parameters": [
+          "$self",
+          "$kafra_points",
+          "$items"
+        ]
+      },
+      "sendGuildSetAlly": {
+        "parameters": [
+          "$self",
+          "$targetAID",
+          "$myAID",
+          "$charID"
+        ],
+        "param_types": [
+          "unknown",
+          "unknown",
+          "numeric_id"
+        ],
+        "code": "sub sendGuildSetAlly {\n\tmy ($self, $targetAID, $myAID, $charID) = @_;\n\n\t# this packet is for guildmaster asking to set alliance with another guildmaster\n\t# the other sub for sendGuildAlly are responses to this sub\n\t# kept the parameters open, but everything except $targetAID could be replaced with Global variables\n\t# unless you plan to mess around with the alliance packet, no exploits though, I tried ;-)\n\t# -zdivpsa\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'guild_alliance_request',\n\t\ttargetAccountID => $targetAID,\n\t\taccountID => $myAID,\n\t\tcharID => $charID,\n\t}));\n\n\tdebug \"Sent Guild Alliance Request\\n\", \"sendPacket\", 2;\n}"
+      },
+      "parse_master_login": {
+        "code": "sub parse_master_login {\n\tmy ($self, $args) = @_;\n\n\tif (exists $args->{password_md5_hex}) {\n\t\t$args->{password_md5} = pack 'H*', $args->{password_md5_hex};\n\t}\n\n\tif (exists $args->{password_rijndael}) {\n\t\tmy $key = pack('C24', (6, 169, 33, 64, 54, 184, 161, 91, 81, 46, 3, 213, 52, 18, 0, 6, 61, 175, 186, 66, 157, 158, 180, 48));\n\t\tmy $chain = pack('C24', (61, 175, 186, 66, 157, 158, 180, 48, 180, 34, 218, 128, 44, 159, 172, 65, 1, 2, 4, 8, 16, 32, 128));\n\t\tmy $in = pack('a24', $args->{password_rijndael});\n\t\tmy $rijndael = Utils::Rijndael->new;\n\t\t$rijndael->MakeKey($key, $chain, 24, 24);\n\t\t$args->{password} = unpack(\"Z24\", $rijndael->Decrypt($in, undef, 24, 0));\n\t}\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "password_md5_hex",
+          "password_md5",
+          "password_rijndael",
+          "password"
+        ]
+      },
+      "sendCaptchaPreviewRequest": {
+        "parameters": [
+          "$self",
+          "$captcha_key"
+        ],
+        "param_types": [
+          "unknown"
+        ],
+        "code": "sub sendCaptchaPreviewRequest {\n\tmy ($self, $captcha_key) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'captcha_preview_request',\n\t\tcaptcha_key => $captcha_key,\n\t}));\n}"
+      },
+      "sendPing": {
+        "code": "sub sendPing {\n\tmy ($self, $args) = @_;\n\t$self->sendToServer($self->reconstruct({ switch => 'ping' }));\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "reconstruct_mail_send": {
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "body",
+          "body_len"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "code": "sub reconstruct_mail_send {\n\tmy ($self, $args) = @_;\n\n\t$args->{body} = pack \"Z\" . $args->{body_len}, stringToBytes($args->{body});\n}"
+      },
+      "sendStylistChange": {
+        "code": "sub sendStylistChange {\n\tmy ($self, $hair_color, $hair_style, $cloth_color, $head_top, $head_mid, $head_bottom ) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'stylist_change',\n\t\thair_color => $hair_color,\n\t\thair_style => $hair_style,\n\t\tcloth_color => $cloth_color,\n\t\thead_top => $head_top,\n\t\thead_mid => $head_mid,\n\t\thead_bottom => $head_bottom\n\t}));\n}",
+        "parameters": [
+          "$self",
+          "$hair_color",
+          "$hair_style",
+          "$cloth_color",
+          "$head_top",
+          "$head_mid",
+          "$head_bottom "
+        ],
+        "param_types": [
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown"
+        ]
+      },
+      "sendCashShopBuy": {
+        "param_types": [
+          "numeric",
+          "items_array"
+        ],
+        "parameters": [
+          "$self",
+          "$points",
+          "$items"
+        ],
+        "code": "sub sendCashShopBuy {\n\tmy ($self, $points, $items) = @_;\n\n\tif (scalar @{$items}) {\n\t\tdebug sprintf(\"Sent buying request from cashshop for %d items.\\n\", scalar @{$items}), \"sendPacket\", 2;\n\t\tforeach my $item (@{$items}) {\n\t\t\t$self->sendToServer($self->reconstruct({\n\t\t\t\tswitch => 'cash_dealer_buy',\n\t\t\t\titemid => $item->{itemID},\n\t\t\t\tamount => $item->{amount},\n\t\t\t\tkafra_points => $points,\n\t\t\t}));\n\t\t}\n\t}\n}"
+      },
+      "sendBuyBulkOpenShop": {
+        "code": "sub sendBuyBulkOpenShop {\n\tmy ($self, $limitZeny, $result, $storeName, @items) = @_;\n\n\tmy $len = 89 + (($#items + 1) * 8);\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'buy_bulk_openShop',\n\t\tlen => $len,\n\t\tlimitZeny => $limitZeny,\n\t\tresult => $result,\n\t\tstoreName => $storeName,\n\t\titems => @items,\n\t}));\n\n\tdebug \"Sent Buyer openShop Request\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$limitZeny",
+          "$result",
+          "$storeName",
+          "@items"
+        ],
+        "param_types": [
+          "numeric",
+          "unknown",
+          "unknown",
+          "items_array"
+        ]
+      },
+      "sendAchievementGetReward": {
+        "parameters": [
+          "$self",
+          "$achievementID"
+        ],
+        "param_types": [
+          "unknown"
+        ],
+        "code": "sub sendAchievementGetReward {\n\tmy ($self, $achievementID) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'achievement_get_reward',\n\t\tachievementID => $achievementID,\n\t}));\n}"
+      },
+      "sendMasterLogin": {
+        "code": "sub sendMasterLogin {\n\tmy ($self, $username, $password, $master_version, $version) = @_;\n\tmy $msg;\n\n\tif (\n\t\t$masterServer->{masterLogin_packet} eq ''\n\t\t# TODO a way to select any packet, handled globally, something like \"packet_<handler> <switch>\"?\n\t\tor $self->{packet_list}{$masterServer->{masterLogin_packet}}\n\t\t&& $self->{packet_list}{$masterServer->{masterLogin_packet}}[0] eq 'master_login'\n\t\t&& ($self->{packet_lut}{master_login} = $masterServer->{masterLogin_packet})\n\t) {\n\t\t$self->sendClientMD5Hash() unless $masterServer->{clientHash} eq ''; # this is a hack, just for testing purposes, it should be moved to the login algo later on\n\n\t\t$msg = $self->reconstruct({\n\t\t\tswitch => 'master_login',\n\t\t\tversion => $version || $self->version,\n\t\t\tmaster_version => $master_version,\n\t\t\tusername => $username,\n\t\t\tpassword => $password,\n\t\t\tgame_code => '0011', # kRO Ragnarok game code\n\t\t\tflag => 'G000', # Maybe this say that we are connecting from client\n\t\t});\n\t} else {\n\t\t$msg = pack(\"v1 V\", hex($masterServer->{masterLogin_packet}) || 0x64, $version || $self->version) .\n\t\t\tpack(\"a24\", $username) .\n\t\t\tpack(\"a24\", $password) .\n\t\t\tpack(\"C*\", $master_version);\n\t}\n\n\t$self->sendToServer($msg);\n\tdebug \"Sent sendMasterLogin\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "string",
+          "string",
+          "unknown",
+          "numeric"
+        ],
+        "parameters": [
+          "$self",
+          "$username",
+          "$password",
+          "$master_version",
+          "$version"
+        ]
+      },
+      "sendSkillSelect": {
+        "code": "sub sendSkillSelect {\n\tmy ($self, $skillID, $why) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'skill_select',\n\t\tskillID => $skillID,\n\t\twhy => $why,\n\t}));\n\tdebug sprintf(\"Sent Skill Select (skillID: %d, why: %d)\", $skillID, $why), 'sendPacket', 2;\n}",
+        "parameters": [
+          "$self",
+          "$skillID",
+          "$why"
+        ],
+        "param_types": [
+          "numeric_id",
+          "unknown"
+        ]
+      },
+      "reconstruct_item_list_window_selected": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "itemInfo",
+          "items"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_item_list_window_selected {\n\tmy ($self, $args) = @_;\n\t$args->{itemInfo} = pack '(a4)*', map { pack 'v2', @{$_}{qw(itemIndex amount)} } @{$args->{items}};\n}"
+      },
+      "sendBuyBulkVender": {
+        "code": "sub sendBuyBulkVender {\n\tmy ($self, $venderID, $r_array, $venderCID) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'buy_bulk_vender',\n\t\tvenderID => $venderID,\n\t\tvenderCID => $venderCID,\n\t\titems => $r_array,\n\t}));\n\tdebug \"Sent bulk buy vender: \".(join ', ', map {\"$_->{itemIndex} x $_->{amount}\"} @$r_array).\"\\n\", \"sendPacket\";\n}",
+        "parameters": [
+          "$self",
+          "$venderID",
+          "$r_array",
+          "$venderCID"
+        ],
+        "param_types": [
+          "numeric_id",
+          "reference",
+          "unknown"
+        ]
+      },
+      "sendReqCashTabCode": {
+        "code": "sub sendReqCashTabCode {\n\tmy ($self, $tabID) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'req_cash_tabcode',\n\t\tID => $tabID,\n\t}));\n}",
+        "parameters": [
+          "$self",
+          "$tabID"
+        ],
+        "param_types": [
+          "unknown"
+        ]
+      },
+      "sendCardMerge": {
+        "code": "sub sendCardMerge {\n\tmy ($self, $cardID, $itemID) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'card_merge',\n\t\tcardID => $cardID,\n\t\titemID => $itemID,\n\t}));\n\n\tdebug \"Sent Card Merge: \" . getHex($cardID) . \", \" . getHex($itemID) . \"\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$cardID",
+          "$itemID"
+        ],
+        "param_types": [
+          "unknown",
+          "numeric_id"
+        ]
+      },
+      "sendRepairItem": {
+        "args_keys": [
+          "index",
+          "nameID",
+          "upgrade",
+          "cards"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub sendRepairItem {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'repair_item',\n\t\tindex => $args->{index},\n\t\tnameID => $args->{nameID},\n\t\tupgrade => $args->{upgrade},\n\t\tcards => $args->{cards},\n\t}));\n\tdebug (\"Sent repair item index: \".$args->{index}.\"\\n\", \"sendPacket\", 2);\n}"
+      },
+      "sendRefineUIRefine": {
+        "param_types": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$itemIndex",
+          "$materialNameID",
+          "$useCatalyst"
+        ],
+        "code": "sub sendRefineUIRefine {\n\tmy ($self, $itemIndex, $materialNameID, $useCatalyst) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'refineui_refine',\n\t\tindex => $itemIndex,\n\t\tcatalyst => $materialNameID,\n\t\tbless => $useCatalyst,\n\t}));\n\tdebug \"Refining using RefineUI\\n\", \"sendPacket\";\n}"
+      },
+      "sendPartyBookingUpdate": {
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "@jobList"
+        ],
+        "code": "sub sendPartyBookingUpdate {\n\tmy ($self, @jobList) = @_;\n\n\t$self->sendToServer($self->reconstruct({switch => 'booking_update', job0 => @jobList[0],\n\t\t\t\t\t\tjob1 => @jobList[1], job2 => @jobList[2], job3 => @jobList[3],\n\t\t\t\t\t\tjob4 => @jobList[4], job5 => @jobList[5]}));\n\n\tdebug \"Sent Booking Update\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendAuctionCreate": {
+        "code": "sub sendAuctionCreate {\n\tmy ($self, $now_price, $max_price, $delete_time) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'auction_create',\n\t\tnow_price => $now_price,\n\t\tmax_price => $max_price,\n\t\tdelete_time => $delete_time,\n\t}));\n\n\tdebug \"Sent Auction Create.\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$now_price",
+          "$max_price",
+          "$delete_time"
+        ]
+      },
+      "parse_party_chat": {
+        "code": "sub parse_party_chat {\n\tmy ($self, $args) = @_;\n\t$self->parseChat($args);\n}",
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "sendAuctionBuy": {
+        "parameters": [
+          "$self",
+          "$ID",
+          "$price"
+        ],
+        "param_types": [
+          "numeric_id",
+          "unknown"
+        ],
+        "code": "sub sendAuctionBuy {\n\tmy ($self, $ID, $price) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'auction_buy',\n\t\tID => $ID,\n\t\tprice => $price,\n\t}));\n\n\tdebug \"Sent Auction Buy.\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendMemorialDungeonCommand": {
+        "code": "sub sendMemorialDungeonCommand {\n\tmy ($self, $command) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'memorial_dungeon_command',\n\t\tcommand => $command,\n\t}));\n\n\tdebug \"Sent Memorial Dungeon Command\\n\", \"sendPacket\";\n}",
+        "parameters": [
+          "$self",
+          "$command"
+        ],
+        "param_types": [
+          "unknown"
+        ]
+      },
+      "sendSkillUseLocInfo": {
+        "code": "sub sendSkillUseLocInfo {\n\tmy ($self, $ID, $lvl, $x, $y, $moreinfo) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'skill_use_location_text',\n\t\tlvl => $lvl,\n\t\tID => $ID,\n\t\tx => $x,\n\t\ty => $y,\n\t\tinfo => $moreinfo\n\t}));\n\n\tdebug \"Skill Use on Location: $ID, ($x, $y)\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$ID",
+          "$lvl",
+          "$x",
+          "$y",
+          "$moreinfo"
+        ],
+        "param_types": [
+          "numeric_id",
+          "numeric",
+          "coordinate",
+          "coordinate",
+          "unknown"
+        ]
+      },
+      "sendNoviceDoriDori": {
+        "code": "sub sendNoviceDoriDori {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({switch => 'novice_dori_dori'}));\n\n\tdebug \"Sent Novice Dori Dori\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "reconstruct_client_hash": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "code",
+          "hash",
+          "type"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_client_hash {\n\tmy ($self, $args) = @_;\n\n\tif (defined $args->{code}) {\n\t\t# FIXME there's packet switch in that code. How to handle it correctly?\n\t\tmy $code = $args->{code};\n\t\t$code =~ s/^02 04 //;\n\n\t\t$args->{hash} = pack 'C*', map hex, split / /, $code;\n\n\t} elsif ($args->{type}) {\n\t\tif ($args->{type} == 1) {\n\t\t\t$args->{hash} = pack('C*', 0x7B, 0x8A, 0xA8, 0x90, 0x2F, 0xD8, 0xE8, 0x30, 0xF8, 0xA5, 0x25, 0x7A, 0x0D, 0x3B, 0xCE, 0x52);\n\t\t} elsif ($args->{type} == 2) {\n\t\t\t$args->{hash} = pack('C*', 0x27, 0x6A, 0x2C, 0xCE, 0xAF, 0x88, 0x01, 0x87, 0xCB, 0xB1, 0xFC, 0xD5, 0x90, 0xC4, 0xED, 0xD2);\n\t\t} elsif ($args->{type} == 3) {\n\t\t\t$args->{hash} = pack('C*', 0x42, 0x00, 0xB0, 0xCA, 0x10, 0x49, 0x3D, 0x89, 0x49, 0x42, 0x82, 0x57, 0xB1, 0x68, 0x5B, 0x85);\n\t\t} elsif ($args->{type} == 4) {\n\t\t\t$args->{hash} = pack('C*', 0x22, 0x37, 0xD7, 0xFC, 0x8E, 0x9B, 0x05, 0x79, 0x60, 0xAE, 0x02, 0x33, 0x6D, 0x0D, 0x82, 0xC6);\n\t\t} elsif ($args->{type} == 5) {\n\t\t\t$args->{hash} = pack('C*', 0xc7, 0x0A, 0x94, 0xC2, 0x7A, 0xCC, 0x38, 0x9A, 0x47, 0xF5, 0x54, 0x39, 0x7C, 0xA4, 0xD0, 0x39);\n\t\t}\n\t}\n}"
+      },
+      "sendQuestState": {
+        "code": "sub sendQuestState {\n    my ($self, $questID,$state) = @_;\n    $self->sendToServer($self->reconstruct({\n        switch => 'send_quest_state',\n        questID => $questID,\n        state => $state, #TODO:[active=0x00],[inactive=0x01]\n    }));\n\tdebug \"Sent Quest State.\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$questID",
+          "$state"
+        ]
+      },
+      "sendStoragePassword": {
+        "param_types": [
+          "unknown",
+          "numeric"
+        ],
+        "parameters": [
+          "$self",
+          "$pass",
+          "$type"
+        ],
+        "code": "sub sendStoragePassword {\n\tmy ($self, $pass, $type) = @_;\n\n\t# $pass -> 16 byte packed hex data\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'storage_password',\n\t\ttype => $type,\n\t\tpass => $pass,\n\t}));\n}"
+      },
+      "reconstruct_sell_bulk": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "sellInfo",
+          "items"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_sell_bulk {\n\tmy ($self, $args) = @_;\n\n\t$args->{sellInfo} = pack \"(a*)*\", map { pack \"a2 v\", $_->{ID}, $_->{amount} } @{$args->{items}};\n}"
+      },
+      "reconstruct_buy_bulk": {
+        "code": "sub reconstruct_buy_bulk {\n\tmy ($self, $args) = @_;\n\tmy $pack = $self->{send_buy_bulk_pack} || \"v2\";\n\n\t$args->{buyInfo} = pack \"(a*)*\", map { pack $pack, $_->{amount}, $_->{itemID} } @{$args->{items}};\n}",
+        "args_keys": [
+          "buyInfo",
+          "items"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "sendCharLogin": {
+        "code": "sub sendCharLogin {\n\tmy ($self, $char) = @_;\n\t$self->sendToServer($self->reconstruct({switch => 'char_login', slot => $char}));\n\tdebug \"Sent sendCharLogin\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$char"
+        ]
+      },
+      "reconstruct_private_message": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "privMsg",
+          "privMsgUser"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_private_message {\n\tmy ($self, $args) = @_;\n\t$args->{privMsg} = '|00' . $args->{privMsg} if $masterServer->{chatLangCode};\n\t$args->{privMsg} = stringToBytes($args->{privMsg});\n\t$args->{privMsgUser} = stringToBytes($args->{privMsgUser});\n}"
+      },
+      "sendCaptchaAnswer": {
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$answer"
+        ],
+        "code": "sub sendCaptchaAnswer {\n\tmy ($self, $answer) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'captcha_answer',\n\t\taccountID => $accountID,\n\t\tanswer => $answer,\n\n\t\t# Strangely, this packet has fixed length (dec 32, or hex 0x20) but has it padded into it - lututui\n\t\tlen => (exists $rpackets{'07E7'}{length}) ? $rpackets{'07E7'}{length} : 32,\n\t}));\n}"
+      },
+      "sendRefineUISelect": {
+        "parameters": [
+          "$self",
+          "$itemIndex"
+        ],
+        "param_types": [
+          "unknown"
+        ],
+        "code": "sub sendRefineUISelect {\n\tmy ($self, $itemIndex) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'refineui_select',\n\t\tindex => $itemIndex,\n\t}));\n\tdebug \"Checking item for RefineUI\\n\", \"sendPacket\";\n}"
+      },
+      "sendSellBulk": {
+        "code": "sub sendSellBulk {\n\tmy ($self, $r_array) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'sell_bulk',\n\t\titems => \\@{$r_array},\n\t}));\n\n\tdebug(\"Sent bulk sell: \" . getHex($_->{ID}) . \" x $_->{amount}\\n\", \"sendPacket\", 2) foreach (@{$r_array});\n}",
+        "param_types": [
+          "reference"
+        ],
+        "parameters": [
+          "$self",
+          "$r_array"
+        ]
+      },
+      "reconstruct_buy_bulk_market": {
+        "args_keys": [
+          "buyInfo",
+          "items"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_buy_bulk_market {\n\tmy ($self, $args) = @_;\n\tmy $pack = $self->{send_buy_bulk_market_pack} || \"v V\";\n\n\t$args->{buyInfo} = pack \"(a*)*\", map { pack $pack, $_->{itemID}, $_->{amount} } @{$args->{items}};\n}"
+      },
+      "sendMacroDetectorAnswer": {
+        "code": "sub sendMacroDetectorAnswer {\n\tmy ($self, $answer) = @_;\n\n\tmy $answer_bytes = stringToBytes($answer);\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'macro_detector_answer',\n\t\tanswer => $answer_bytes,\n\t}));\n}",
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$answer"
+        ]
+      },
+      "reconstruct_party_chat": {
+        "code": "sub reconstruct_party_chat {\n\tmy ($self, $args) = @_;\n\t$self->reconstructChat($args);\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "parse_guild_chat": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub parse_guild_chat {\n\tmy ($self, $args) = @_;\n\t$self->parseChat($args);\n}"
+      },
+      "sendPartyBookingReqSearch": {
+        "parameters": [
+          "$self",
+          "$level",
+          "$MapID",
+          "$job",
+          "$LastIndex",
+          "$ResultCount"
+        ],
+        "param_types": [
+          "numeric",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "code": "sub sendPartyBookingReqSearch {\n\tmy ($self, $level, $MapID, $job, $LastIndex, $ResultCount) = @_;\n\n\t$job = \"65535\" if ($job == 0); # job null = 65535\n\t$ResultCount = \"10\" if ($ResultCount == 0); # ResultCount defaut = 10\n\n\t$self->sendToServer($self->reconstruct({switch => 'booking_search', level => $level, MapID => $MapID, job => $job, LastIndex => $LastIndex, ResultCount => $ResultCount}));\n\tdebug \"Sent Booking Search\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendHomunculusCommand": {
+        "param_types": [
+          "unknown",
+          "numeric"
+        ],
+        "parameters": [
+          "$self",
+          "$command",
+          "$type"
+        ],
+        "code": "sub sendHomunculusCommand {\n\tmy ($self, $command, $type) = @_; # $type is ignored, $command can be 0:get stats, 1:feed or 2:fire\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'homunculus_command',\n\t\tcommandType => $type,\n\t\tcommandID => $command,\n\t}));\n\tdebug \"Sent Homunculus Command $command\", \"sendPacket\", 2;\n}"
+      },
+      "sendTalkResponse": {
+        "code": "sub sendTalkResponse {\n\tmy ($self, $ID, $response) = @_;\n\tdelete $talk{msg};\n\tdelete $talk{image};\n\t$self->sendToServer($self->reconstruct({switch => 'npc_talk_response', ID => $ID, response => $response}));\n\tdebug \"Sent talk respond: \".getHex($ID).\", $response\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "numeric_id",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$ID",
+          "$response"
+        ]
+      },
+      "sendMergeItemCancel": {
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub sendMergeItemCancel {\n\tmy ($self, $args) = @_;\n\t$self->sendToServer($self->reconstruct({ switch => 'merge_item_cancel' }));\n\tdebug \"Cancel Merge item\\n\", \"sendPacket\";\n\t$mergeItemList = {};\n}"
+      },
+      "sendInventoryExpansionRejected": {
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "code": "sub sendInventoryExpansionRejected {\n\tmy ($self, $args) = @_;\n\t$self->sendToServer($self->reconstruct({ switch => 'inventory_expansion_rejected' }));\n}"
+      },
+      "sendLook": {
+        "param_types": [
+          "string",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$body",
+          "$head"
+        ],
+        "code": "sub sendLook {\n\tmy ($self, $body, $head) = @_;\n\t$self->sendToServer($self->reconstruct({switch => 'actor_look_at', body => $body, head => $head}));\n\tdebug \"Sent look: $body $head\\n\", \"sendPacket\", 2;\n\t@{$char->{look}}{qw(body head)} = ($body, $head);\n}"
+      },
+      "sendOpenShop": {
+        "code": "sub sendOpenShop {\n\tmy ($self, $title, $items) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'shop_open',\n\t\ttitle => stringToBytes($title),\n\t\tresult => 1,\n\t\titems => $items,\n\t}));\n}",
+        "parameters": [
+          "$self",
+          "$title",
+          "$items"
+        ],
+        "param_types": [
+          "string",
+          "items_array"
+        ]
+      },
+      "reconstruct_actor_move": {
+        "code": "sub reconstruct_actor_move {\n\tmy ($self, $args) = @_;\n\n\t$args->{no_padding} = exists $args->{no_padding} ? $args->{no_padding} : !($masterServer->{serverType} > 0);\n\n\t$args->{coords} = getCoordString(@{$args}{qw(x y)}, $args->{no_padding});\n}",
+        "args_keys": [
+          "no_padding",
+          "coords"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "reconstruct_search_store_info": {
+        "code": "sub reconstruct_search_store_info {\n\tmy ($self, $args) = @_;\n\n\t$args->{item_count} = scalar(@{$args->{item_list}});\n\t$args->{card_count} = scalar(@{$args->{card_list}});\n\n\tmy @id_list = (@{$args->{item_list}}, @{$args->{card_list}});\n\n\t$args->{item_card_list} = pack \"(a*)*\", map { pack \"v\", $_ } @id_list;\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "item_count",
+          "item_list",
+          "card_count",
+          "card_list",
+          "item_card_list"
+        ]
+      },
+      "sendBankingWithdraw": {
+        "code": "sub sendBankingWithdraw {\n\tmy ($self, $accountID , $zeny) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'banking_withdraw_request',\n\t\taccountID => $accountID,\n\t\tzeny => $zeny,\n\t}));\n}",
+        "parameters": [
+          "$self",
+          "$accountID",
+          "$zeny"
+        ],
+        "param_types": [
+          "numeric_id",
+          "unknown"
+        ]
+      },
+      "sendPetEvolution": {
+        "parameters": [
+          "$self",
+          "$peteggid",
+          "$r_array"
+        ],
+        "param_types": [
+          "unknown",
+          "reference"
+        ],
+        "code": "sub sendPetEvolution {\n\tmy ($self, $peteggid, $r_array) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'pet_evolution',\n\t\tID => $peteggid,\n\t\titems => $r_array,\n\t}));\n}"
+      },
+      "reconstruct_buy_bulk_openShop": {
+        "code": "sub reconstruct_buy_bulk_openShop {\n\tmy ($self, $args) = @_;\n\tmy $packet_size = $self->{buy_bulk_openShop_size} || '(a8)*';\n\tmy $packet_unpack = $self->{buy_bulk_openShop_size_unpack} || 'v2 V';\n\t$args->{itemInfo} = pack $packet_size, map { pack $packet_unpack, @{$_}{qw(nameID amount price)} } @{$args->{items}};\n}",
+        "args_keys": [
+          "itemInfo",
+          "items"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "reconstruct_master_login": {
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "ip",
+          "mac",
+          "mac_hyphen_separated",
+          "isGravityID",
+          "password",
+          "password_md5",
+          "password_md5_hex",
+          "password_rijndael"
+        ],
+        "code": "sub reconstruct_master_login {\n\tmy ($self, $args) = @_;\n\n\t$args->{ip} = '192.168.0.2' unless exists $args->{ip}; # gibberish\n\tunless (exists $args->{mac}) {\n\t    $args->{mac} = $config{macAddress} || '111111111111'; # gibberish\n\t    $args->{mac} = uc($args->{mac});\n\t    $args->{mac_hyphen_separated} = join '-', $args->{mac} =~ /(..)/g;\n\t}\n\t$args->{isGravityID} = 0 unless exists $args->{isGravityID};\n\n\tif (exists $args->{password}) {\n\t\tfor (Digest::MD5->new) {\n\t\t\t$_->add($args->{password});\n\t\t\t$args->{password_md5} = $_->clone->digest;\n\t\t\t$args->{password_md5_hex} = $_->hexdigest;\n\t\t}\n\n\t\tmy $key = pack('C24', (6, 169, 33, 64, 54, 184, 161, 91, 81, 46, 3, 213, 52, 18, 0, 6, 61, 175, 186, 66, 157, 158, 180, 48));\n\t\tmy $chain = pack('C24', (61, 175, 186, 66, 157, 158, 180, 48, 180, 34, 218, 128, 44, 159, 172, 65, 1, 2, 4, 8, 16, 32, 128));\n\t\tmy $in = pack('a24', $args->{password});\n\t\tmy $rijndael = Utils::Rijndael->new;\n\t\t$rijndael->MakeKey($key, $chain, 24, 24);\n\t\t$args->{password_rijndael} = $rijndael->Encrypt($in, undef, 24, 0);\n\t}\n}"
+      },
+      "sendMapLogin": {
+        "code": "sub sendMapLogin {\n\tmy ($self, $accountID, $charID, $sessionID, $sex) = @_;\n\tmy $msg;\n\t$sex = 0 if ($sex > 1 || $sex < 0); # Sex can only be 0 (female) or 1 (male)\n\n\tif ($self->{serverType} == 0 || $self->{serverType} == 17 || $self->{serverType} == 18 || $self->{serverType} == 19 ||\n\t\t$self->{serverType} == 20 || $self->{serverType} == 21 || $self->{serverType} == 22) {\n\n\t\t$msg = $self->reconstruct({\n\t\t\tswitch => 'map_login',\n\t\t\taccountID => $accountID,\n\t\t\tcharID => $charID,\n\t\t\tsessionID => $sessionID,\n\t\t\ttick => getTickCount,\n\t\t\tsex => $sex,\n\t\t});\n\n\t} else { #oRO and pRO\n\t\tmy $key;\n\n\t\t$key = pack(\"C*\", 0xFA, 0x12, 0, 0x50, 0x83);\n\t\t$msg = pack(\"C*\", 0x72, 0, 0, 0, 0) .\n\t\t\t$accountID .\n\t\t\t$key .\n\t\t\t$charID .\n\t\t\tpack(\"C*\", 0xFF, 0xFF) .\n\t\t\t$sessionID .\n\t\t\tpack(\"V\", getTickCount()) .\n\t\t\tpack(\"C\", $sex);\n\t}\n\n\t$self->sendToServer($msg);\n\tdebug \"Sent sendMapLogin\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "numeric_id",
+          "numeric_id",
+          "unknown",
+          "numeric"
+        ],
+        "parameters": [
+          "$self",
+          "$accountID",
+          "$charID",
+          "$sessionID",
+          "$sex"
+        ]
+      },
+      "sendRaw": {
+        "parameters": [
+          "$self",
+          "$raw"
+        ],
+        "param_types": [
+          "unknown"
+        ],
+        "code": "sub sendRaw {\n\tmy ($self, $raw) = @_;\n\tmy $msg;\n\tmy @raw = split / /, $raw;\n\tforeach (@raw) {\n\t\t$msg .= pack(\"C\", hex($_));\n\t}\n\t$self->sendToServer($msg);\n\tdebug \"Sent Raw Packet: @raw\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendPartyOption": {
+        "param_types": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$exp",
+          "$itemPickup",
+          "$itemDivision"
+        ],
+        "code": "sub sendPartyOption {\n\tmy ($self, $exp, $itemPickup, $itemDivision) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'party_setting',\n\t\texp => $exp,\n\t\titemPickup => $itemPickup,\n\t\titemDivision => $itemDivision,\n\t}));\n\tdebug \"Sent Party Option\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendChangeDress": {
+        "code": "sub sendChangeDress {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({switch => 'change_dress'}));\n\n\tdebug \"Sent Change Dress\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "import": {
+        "code": "sub import {\n\t# This code is for backward compatibility reasons, so that you can still\n\t# write:\n\t#  sendFoo(\\$remote_socket, args);\n\n\tmy ($package) = caller;\n\t# This is necessary for some weird reason.\n\treturn if ($package =~ /^Network::Send/);\n\n\tpackage Network::Send::Compatibility;\n\trequire Exporter;\n\tour @ISA = qw(Exporter);\n\trequire Network::Send::ServerType0;\n\tno strict 'refs';\n\n\tour @EXPORT_OK;\n\t@EXPORT_OK = ();\n\n\tmy $class = shift;\n\tif (@_) {\n\t\t@EXPORT_OK = @_;\n\t} else {\n\t\t@EXPORT_OK = grep {/^send/} keys(%{Network::Send::ServerType0::});\n\t}\n\n\tforeach my $symbol (@EXPORT_OK) {\n\t\t*{$symbol} = sub {\n\t\t\tmy $remote_socket = shift;\n\t\t\tmy $func = $Globals::messageSender->can($symbol);\n\t\t\tif (!$func) {\n\t\t\t\tdie \"No such function: $symbol\";\n\t\t\t} else {\n\t\t\t\treturn $func->($Globals::messageSender, @_);\n\t\t\t}\n\t\t};\n\t}\n\tNetwork::Send::Compatibility->export_to_level(1, undef, @EXPORT_OK);\n}",
+        "param_types": null,
+        "parameters": null
+      },
+      "reconstruct_sync": {
+        "args_keys": [
+          "time"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "param_types": [
+          "args_hash"
+        ],
+        "code": "sub reconstruct_sync {\n\tmy ($self, $args) = @_;\n\t$args->{time} = getTickCount;\n}"
+      },
+      "sendMasterSecureLogin": {
+        "parameters": [
+          "$self",
+          "$username",
+          "$password",
+          "$salt",
+          "$version",
+          "$master_version",
+          "$type",
+          "$account"
+        ],
+        "param_types": [
+          "string",
+          "string",
+          "string",
+          "numeric",
+          "unknown",
+          "numeric",
+          "unknown"
+        ],
+        "code": "sub sendMasterSecureLogin {\n\tmy ($self, $username, $password, $salt, $version, $master_version, $type, $account) = @_;\n\n\t$self->{packet_lut}{master_login} ||= $type < 3 ? '01DD' : '01FA';\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'master_login',\n\t\tversion => $version || $self->version,\n\t\tmaster_version => $master_version,\n\t\tusername => $username,\n\t\tpassword_salted_md5 => $self->secureLoginHash($password, $salt, $type),\n\t\tclientInfo => $account > 0 ? $account - 1 : 0,\n\t}));\n}"
+      },
+      "sendAdoptReply": {
+        "code": "sub sendAdoptReply {\n\tmy ($self, $parentID1, $parentID2, $result) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'adopt_reply_request',\n\t\tparentID1 => $parentID1,\n\t\tparentID2 => $parentID2,\n\t\tresult => $result\n\t}));\n\n\tdebug \"Sent Adoption Reply.\\n\", \"sendPacket\", 2;\n}",
+        "parameters": [
+          "$self",
+          "$parentID1",
+          "$parentID2",
+          "$result"
+        ],
+        "param_types": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ]
+      },
+      "sendMergeItemRequest": {
+        "code": "sub sendMergeItemRequest {\n\tmy ($self, $num, $items) = @_;\n\t#my $len = ($num * 4) + 12;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'merge_item_request',\n\t\t#len => $len,\n\t\titems => $items,\n\t}));\n\tdebug \"Sent merge item request: \".(join ', ', map { $_->{info}->{binID}.\" x \".$_->{info}->{amount} } @$items).\"\\n\", \"sendPacket\";\n}",
+        "parameters": [
+          "$self",
+          "$num",
+          "$items"
+        ],
+        "param_types": [
+          "numeric",
+          "items_array"
+        ]
+      },
+      "sendCardMergeRequest": {
+        "code": "sub sendCardMergeRequest {\n\tmy ($self, $cardID) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'card_merge_request',\n\t\tcardID => $cardID,\n\t}));\n\n\tdebug \"Sent Card Merge Request: \" . getHex($cardID) . \"\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$cardID"
+        ]
+      },
+      "sendSearchStoreClose": {
+        "code": "sub sendSearchStoreClose {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({switch => 'search_store_close'}));\n\n\t$universalCatalog{open} = 0;\n\n\tdebug \"Sent search store close\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "sendGameLogin": {
+        "param_types": [
+          "numeric_id",
+          "unknown",
+          "unknown",
+          "numeric"
+        ],
+        "parameters": [
+          "$self",
+          "$accountID",
+          "$sessionID",
+          "$sessionID2",
+          "$sex"
+        ],
+        "code": "sub sendGameLogin {\n\tmy ($self, $accountID, $sessionID, $sessionID2, $sex) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'game_login',\n\t\taccountID => $accountID,\n\t\tsessionID => $sessionID,\n\t\tsessionID2 => $sessionID2,\n\t\tmac => '111111111111',\n\t\taccountSex => $sex,\n\t}));\n\tdebug \"Sent sendGameLogin\\n\", \"sendPacket\", 2;\n}"
+      },
+      "sendGuildBreak": {
+        "code": "sub sendGuildBreak {\n\tmy ($self, $guildName) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'guild_break',\n\t\tguildName => stringToBytes($guildName),\n\t}));\n\n\tdebug \"Sent Guild Break: $guildName\\n\", \"sendPacket\", 2;\n}",
+        "param_types": [
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$guildName"
+        ]
+      },
+      "sendBankingDeposit": {
+        "param_types": [
+          "numeric_id",
+          "unknown"
+        ],
+        "parameters": [
+          "$self",
+          "$accountID",
+          "$zeny"
+        ],
+        "code": "sub sendBankingDeposit {\n\tmy ($self, $accountID , $zeny) = @_;\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'banking_deposit_request',\n\t\taccountID => $accountID,\n\t\tzeny => $zeny,\n\t}));\n}"
+      },
+      "reconstruct_storage_password": {
+        "code": "sub reconstruct_storage_password {\n\tmy ($self, $args) = @_;\n\n\tmy $aux = pack \"H*\", \"EC62E539BB6BBC811A60C06FACCB7EC8\";\n\n\t# $type == 2 -> change password\n\t# $type == 3 -> check password\n\n\tif ($args->{type} == 3) {\n\t\t$args->{data} = pack '(a*)*', $args->{pass}, $aux;\n\t} elsif ($args->{type} == 2) {\n\t\t$args->{data} = pack '(a*)*', $aux, $args->{pass};\n\t} else {\n\t\tArgumentException->throw(\"The 'type' argument has invalid value ($args->{type}).\");\n\t}\n}",
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "type",
+          "data",
+          "pass"
+        ],
+        "param_types": [
+          "args_hash"
+        ]
+      },
+      "reconstruct_buy_bulk_vender": {
+        "code": "sub reconstruct_buy_bulk_vender {\n\tmy ($self, $args) = @_;\n\t# ITEM index. There were any other indexes expected to be in item buying packet?\n\t$args->{itemInfo} = pack '(a4)*', map { pack 'v2', @{$_}{qw(amount itemIndex)} } @{$args->{items}};\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "itemInfo",
+          "items"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "sendHotKeyChange": {
+        "code": "sub sendHotKeyChange {\n\tmy ($self, $args) = @_;\n\n\t$self->sendToServer($self->reconstruct({\n\t\tswitch => 'hotkey_change',\n\t\tidx => $args->{idx},\n\t\ttype => $args->{type},\n\t\tid => $args->{id},\n\t\tlvl => $args->{lvl},\n\t}));\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "args_keys": [
+          "idx",
+          "type",
+          "id",
+          "lvl"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ]
+      },
+      "parse_private_message": {
+        "code": "sub parse_private_message {\n\tmy ($self, $args) = @_;\n\t$args->{privMsg} = bytesToString($args->{privMsg});\n\tMisc::stripLanguageCode(\\$args->{privMsg});\n\t$args->{privMsgUser} = bytesToString($args->{privMsgUser});\n}",
+        "param_types": [
+          "args_hash"
+        ],
+        "parameters": [
+          "$self",
+          "$args"
+        ],
+        "args_keys": [
+          "privMsg",
+          "privMsgUser"
+        ]
+      }
+    }
+  }

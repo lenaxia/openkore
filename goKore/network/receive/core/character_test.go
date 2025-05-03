@@ -8,7 +8,9 @@ import (
 
 func TestNewCharacterManager(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	if manager == nil {
 		t.Fatal("NewCharacterManager() returned nil")
@@ -28,7 +30,9 @@ func TestRegisterCharacterHandlers(t *testing.T) {
 	t.Skip("Skipping TestRegisterCharacterHandlers")
 
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	// Register handlers
 	manager.RegisterHandlers()
@@ -42,7 +46,9 @@ func TestRegisterCharacterHandlers(t *testing.T) {
 
 func TestAddGetGuildMember(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	// Add a guild member
 	charID := uint32(12345)
@@ -100,7 +106,9 @@ func TestAddGetGuildMember(t *testing.T) {
 
 func TestHandleCharacterStatus(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	// Test case 1: Update level and opt3 (packet 028A)
 	t.Run("UpdateLevelAndOpt3", func(t *testing.T) {
@@ -176,7 +184,9 @@ func TestHandleCharacterStatus(t *testing.T) {
 
 func TestHandleCharacterName(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	// Add a guild member
 	charID := uint32(12345)

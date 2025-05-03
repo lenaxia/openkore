@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/lenaxia/goKore/network"
+	"github.com/lenaxia/goKore/network/hooks"
 )
 
 // Errors
@@ -114,10 +115,12 @@ type AccountManager struct {
 	networkState     int
 	syncExReplyTable map[string]string // Maps sync request packet IDs to their reply IDs
 	xkore            string            // XKore setting (0, 1, or 3)
+	hookManager      *hooks.HookManager
+	logger           Logger
 }
 
 // NewAccountManager creates a new account manager
-func NewAccountManager(parser *CoreParser) *AccountManager {
+func NewAccountManager(parser *CoreParser, hookManager *hooks.HookManager, logger Logger) *AccountManager {
 	now := time.Now()
 	return &AccountManager{
 		parser: parser,
@@ -129,6 +132,8 @@ func NewAccountManager(parser *CoreParser) *AccountManager {
 		networkState:     network.NotConnected,
 		syncExReplyTable: make(map[string]string),
 		xkore:            "0", // Default to 0 (not XKore)
+		hookManager:      hookManager,
+		logger:           logger,
 	}
 }
 
@@ -415,26 +420,49 @@ func (m *AccountManager) handleAccountServerInfo(args map[string]interface{}) er
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
+	// Log the event
+	if m.logger != nil {
+		m.logger.Info("Received account server info")
+	}
+
 	// Extract session IDs and account ID
-	if sessionID, ok := args["sessionID"].([]byte); ok {
+	var sessionID, sessionID2 []byte
+	var accountID uint32
+	var accountSex byte
+
+	if sessionIDBytes, ok := args["sessionID"].([]byte); ok {
+		sessionID = sessionIDBytes
 		m.session.SessionID = sessionID
 	}
 
-	if sessionID2, ok := args["sessionID2"].([]byte); ok {
+	if sessionID2Bytes, ok := args["sessionID2"].([]byte); ok {
+		sessionID2 = sessionID2Bytes
 		m.session.SessionID2 = sessionID2
 	}
 
-	if accountID, ok := args["accountID"].([]byte); ok && len(accountID) >= 4 {
-		m.session.AccountID = uint32(accountID[0]) | uint32(accountID[1])<<8 | uint32(accountID[2])<<16 | uint32(accountID[3])<<24
+	if accountIDBytes, ok := args["accountID"].([]byte); ok && len(accountIDBytes) >= 4 {
+		accountID = uint32(accountIDBytes[0]) | uint32(accountIDBytes[1])<<8 | uint32(accountIDBytes[2])<<16 | uint32(accountIDBytes[3])<<24
+		m.session.AccountID = accountID
 	}
 
-	if accountSex, ok := args["accountSex"].(byte); ok {
+	if accountSexVal, ok := args["accountSex"].(byte); ok {
+		accountSex = accountSexVal
 		m.session.Sex = accountSex
 	}
 
 	// Update state
 	m.session.State = AccountStateLoggedIn
 	m.session.LastPacketTime = time.Now()
+
+	// Call hook if needed
+	if m.hookManager != nil {
+		m.hookManager.CallHook("account_info_received", map[string]interface{}{
+			"sessionID":  sessionID,
+			"sessionID2": sessionID2,
+			"accountID":  accountID,
+			"accountSex": accountSex,
+		})
+	}
 
 	return nil
 }
@@ -444,22 +472,41 @@ func (m *AccountManager) handleReceivedCharactersInfo(args map[string]interface{
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
+	// Log the event
+	if m.logger != nil {
+		m.logger.Info("Received characters info from Character Server")
+	}
+
 	// Extract character slots information
-	if totalSlot, ok := args["total_slot"].(byte); ok {
-		m.session.CharacterSlots = int(totalSlot)
+	var totalSlot, premiumStartSlot, premiumEndSlot int
+
+	if totalSlotVal, ok := args["total_slot"].(byte); ok {
+		totalSlot = int(totalSlotVal)
+		m.session.CharacterSlots = totalSlot
 	}
 
-	if premiumStartSlot, ok := args["premium_start_slot"].(byte); ok {
-		m.session.PremiumStartSlot = int(premiumStartSlot)
+	if premiumStartSlotVal, ok := args["premium_start_slot"].(byte); ok {
+		premiumStartSlot = int(premiumStartSlotVal)
+		m.session.PremiumStartSlot = premiumStartSlot
 	}
 
-	if premiumEndSlot, ok := args["premium_end_slot"].(byte); ok {
-		m.session.PremiumEndSlot = int(premiumEndSlot)
+	if premiumEndSlotVal, ok := args["premium_end_slot"].(byte); ok {
+		premiumEndSlot = int(premiumEndSlotVal)
+		m.session.PremiumEndSlot = premiumEndSlot
 	}
 
 	// Update state
 	m.session.State = AccountStateSelectingChar
 	m.session.LastPacketTime = time.Now()
+
+	// Call hook if needed
+	if m.hookManager != nil {
+		m.hookManager.CallHook("core/account/received_characters_info", map[string]interface{}{
+			"total_slot":         totalSlot,
+			"premium_start_slot": premiumStartSlot,
+			"premium_end_slot":   premiumEndSlot,
+		})
+	}
 
 	return nil
 }
@@ -469,9 +516,19 @@ func (m *AccountManager) handleLoginError(args map[string]interface{}) error {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
+	// Log the event
+	if m.logger != nil {
+		m.logger.Error("Login error from game login server")
+	}
+
 	// Reset session on login error
 	m.session.State = AccountStateLoggedOut
 	m.session.LastPacketTime = time.Now()
+
+	// Call hook if needed
+	if m.hookManager != nil {
+		m.hookManager.CallHook("core/account/login_error", map[string]interface{}{})
+	}
 
 	return nil
 }
@@ -481,9 +538,27 @@ func (m *AccountManager) handleCharacterCreationSuccessful(args map[string]inter
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
+	// Log the event
+	if m.logger != nil {
+		m.logger.Info("Character creation successful")
+	}
+
+	// Extract character info if available
+	var charInfo []byte
+	if charInfoBytes, ok := args["charInfo"].([]byte); ok {
+		charInfo = charInfoBytes
+	}
+
 	// Update state
 	m.session.State = AccountStateSelectingChar
 	m.session.LastPacketTime = time.Now()
+
+	// Call hook if needed
+	if m.hookManager != nil {
+		m.hookManager.CallHook("core/account/character_creation_successful", map[string]interface{}{
+			"charInfo": charInfo,
+		})
+	}
 
 	return nil
 }
@@ -493,18 +568,49 @@ func (m *AccountManager) handleReceivedCharacterIDAndMap(args map[string]interfa
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
-	// Extract character ID and map name
-	if charID, ok := args["charID"].([]byte); ok && len(charID) >= 4 {
-		m.session.CharID = uint32(charID[0]) | uint32(charID[1])<<8 | uint32(charID[2])<<16 | uint32(charID[3])<<24
+	// Log the event
+	if m.logger != nil {
+		m.logger.Info("Received character ID and Map IP from Character Server")
 	}
 
-	if mapName, ok := args["mapName"].(string); ok {
+	// Extract character ID and map name
+	var charID uint32
+	if charIDBytes, ok := args["charID"].([]byte); ok && len(charIDBytes) >= 4 {
+		charID = uint32(charIDBytes[0]) | uint32(charIDBytes[1])<<8 | uint32(charIDBytes[2])<<16 | uint32(charIDBytes[3])<<24
+		m.session.CharID = charID
+	}
+
+	var mapName string
+	if mapNameStr, ok := args["mapName"].(string); ok {
+		mapName = mapNameStr
 		m.session.MapName = mapName
+	}
+
+	// Extract map IP and port
+	var mapIP string
+	var mapPort uint16
+
+	if mapIPBytes, ok := args["mapIP"].([]byte); ok && len(mapIPBytes) >= 4 {
+		mapIP = fmt.Sprintf("%d.%d.%d.%d", mapIPBytes[0], mapIPBytes[1], mapIPBytes[2], mapIPBytes[3])
+	}
+
+	if mapPortVal, ok := args["mapPort"].(uint16); ok {
+		mapPort = mapPortVal
 	}
 
 	// Update state
 	m.session.State = AccountStateInGame
 	m.session.LastPacketTime = time.Now()
+
+	// Call hook if needed
+	if m.hookManager != nil {
+		m.hookManager.CallHook("character_map_info_received", map[string]interface{}{
+			"charID":  charID,
+			"mapName": mapName,
+			"mapIP":   mapIP,
+			"mapPort": mapPort,
+		})
+	}
 
 	return nil
 }
@@ -514,9 +620,44 @@ func (m *AccountManager) handleMapLoaded(args map[string]interface{}) error {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
+	// Log the event
+	if m.logger != nil {
+		m.logger.Info("Map loaded, now in game")
+	}
+
+	// Extract map coordinates
+	var coords []byte
+	if coordsBytes, ok := args["coords"].([]byte); ok && len(coordsBytes) >= 3 {
+		coords = coordsBytes
+	}
+
+	var xSize, ySize byte
+	if xSizeVal, ok := args["xSize"].(byte); ok {
+		xSize = xSizeVal
+	}
+	if ySizeVal, ok := args["ySize"].(byte); ok {
+		ySize = ySizeVal
+	}
+
+	// Extract sync map sync value
+	var syncMapSync uint32
+	if syncVal, ok := args["syncMapSync"].(uint32); ok {
+		syncMapSync = syncVal
+	}
+
 	// Update state
 	m.session.State = AccountStateInGame
 	m.session.LastPacketTime = time.Now()
+
+	// Call hook if needed
+	if m.hookManager != nil {
+		m.hookManager.CallHook("map_loaded", map[string]interface{}{
+			"syncMapSync": syncMapSync,
+			"coords":      coords,
+			"xSize":       xSize,
+			"ySize":       ySize,
+		})
+	}
 
 	return nil
 }

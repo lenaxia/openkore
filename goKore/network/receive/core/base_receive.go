@@ -9,7 +9,7 @@ import (
 // BaseReceive implements the Receive interface using the CoreParser
 type BaseReceive struct {
 	serverType  string
-	packetDefs  map[string]common.PacketDef
+	packetDefs  map[string]common.PacketConstruction
 	coreParser  *CoreParser
 	hookManager *hooks.HookManager
 }
@@ -17,7 +17,7 @@ type BaseReceive struct {
 // NewBaseReceive creates a new BaseReceive instance
 func NewBaseReceive(hookManager *hooks.HookManager) *BaseReceive {
 	return &BaseReceive{
-		packetDefs:  make(map[string]common.PacketDef),
+		packetDefs:  make(map[string]common.PacketConstruction),
 		coreParser:  NewCoreParser("", hookManager),
 		hookManager: hookManager,
 	}
@@ -40,7 +40,7 @@ func (br *BaseReceive) Process(packet []byte) error {
 }
 
 // Configure configures the receive component with server-specific packet definitions
-func (br *BaseReceive) Configure(serverType string, packetDefs map[string]common.PacketDef) error {
+func (br *BaseReceive) Configure(serverType string, packetDefs map[string]common.PacketConstruction) error {
 	br.serverType = serverType
 	br.packetDefs = packetDefs
 	br.coreParser.serverType = serverType

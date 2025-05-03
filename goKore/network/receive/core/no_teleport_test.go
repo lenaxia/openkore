@@ -12,7 +12,8 @@ func TestHandleNoTeleport(t *testing.T) {
 	t.Run("UnavailableAreaToTeleport", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -63,7 +64,8 @@ func TestHandleNoTeleport(t *testing.T) {
 	t.Run("UnavailableAreaToMemo", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -115,7 +117,8 @@ func TestHandleNoTeleport(t *testing.T) {
 	t.Run("UnknownFailCode", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -157,7 +160,8 @@ func TestHandleNoTeleport(t *testing.T) {
 	t.Run("MissingFailCode", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)

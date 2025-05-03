@@ -357,14 +357,9 @@ func (m *MockHookManager) Unregister(hookName string, callback func(string, inte
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
-	if callbacks, ok := m.hooks[hookName]; ok {
-		for i, cb := range callbacks {
-			if &cb == &callback {
-				m.hooks[hookName] = append(callbacks[:i], callbacks[i+1:]...)
-				break
-			}
-		}
-	}
+	// For the mock implementation, just remove all callbacks for the hook
+	// since we can't compare function values in Go
+	delete(m.hooks, hookName)
 }
 
 // CallHook calls a hook

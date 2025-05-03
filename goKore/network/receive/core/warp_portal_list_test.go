@@ -12,7 +12,8 @@ func TestHandleWarpPortalList(t *testing.T) {
 	t.Run("TeleportSkill", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -97,7 +98,8 @@ func TestHandleWarpPortalList(t *testing.T) {
 	t.Run("ButterflyWing", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -182,7 +184,8 @@ func TestHandleWarpPortalList(t *testing.T) {
 	t.Run("EmptyMemoFields", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -234,7 +237,8 @@ func TestHandleWarpPortalList(t *testing.T) {
 	t.Run("MissingType", func(t *testing.T) {
 		hookManager := hooks.NewHookManager()
 		parser := NewCoreParser("ServerType0", hookManager)
-		manager := NewAccountManager(parser)
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)

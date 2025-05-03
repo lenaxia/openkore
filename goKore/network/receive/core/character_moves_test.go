@@ -9,7 +9,9 @@ import (
 
 func TestCharacterMoves(t *testing.T) {
 	parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-	manager := NewCharacterManager(parser)
+	hookManager := hooks.NewHookManager()
+	logger := NewMockLogger()
+	manager := NewCharacterManager(parser, hookManager, logger)
 
 	// Extend the Actor struct to include position information
 	// This should be done in the actual implementation

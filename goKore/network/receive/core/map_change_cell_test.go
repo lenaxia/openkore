@@ -11,7 +11,9 @@ func TestHandleMapChangeCell(t *testing.T) {
 	// Test case 1: Happy path - valid map cell change
 	t.Run("ValidMapCellChange", func(t *testing.T) {
 		parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-		manager := NewAccountManager(parser)
+		hookManager := hooks.NewHookManager()
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -49,7 +51,9 @@ func TestHandleMapChangeCell(t *testing.T) {
 	// Test case 2: Happy path - map cell change on different map
 	t.Run("MapCellChangeOnDifferentMap", func(t *testing.T) {
 		parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-		manager := NewAccountManager(parser)
+		hookManager := hooks.NewHookManager()
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -88,7 +92,9 @@ func TestHandleMapChangeCell(t *testing.T) {
 	// Test case 3: Unhappy path - missing coordinates
 	t.Run("MissingCoordinates", func(t *testing.T) {
 		parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-		manager := NewAccountManager(parser)
+		hookManager := hooks.NewHookManager()
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)
@@ -110,7 +116,9 @@ func TestHandleMapChangeCell(t *testing.T) {
 	// Test case 4: Unhappy path - missing map name
 	t.Run("MissingMapName", func(t *testing.T) {
 		parser := NewCoreParser("ServerType0", hooks.NewHookManager())
-		manager := NewAccountManager(parser)
+		hookManager := hooks.NewHookManager()
+		logger := NewMockLogger()
+		manager := NewAccountManager(parser, hookManager, logger)
 
 		// Set initial state
 		manager.SetNetworkState(network.InGame)

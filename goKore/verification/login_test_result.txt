@@ -1,4 +1,0 @@
-Connecting to server: 192.168.5.219:6900
-Connected to server successfully
-Data sent successfully
-Failed to receive data: EOF
