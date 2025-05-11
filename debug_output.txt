@@ -1,0 +1,1860 @@
+Processing src/Network/Receive.pm...
+GAP: Between use unknown_use and comment (lines 123-136, 14 lines)
+GAP: Between use unknown_use and comment (lines 139-223, 85 lines)
+GAP: Between use unknown_use and comment (lines 226-454, 229 lines)
+GAP: Between use unknown_use and comment (lines 457-467, 11 lines)
+GAP: Between use unknown_use and comment (lines 470-473, 4 lines)
+GAP: Between use unknown_use and comment (lines 476-481, 6 lines)
+GAP: Between use unknown_use and comment (lines 484-487, 4 lines)
+GAP: Between use unknown_use and unknown_use (lines 490-499, 10 lines)
+GAP: Between use unknown_use and comment (lines 501-512, 12 lines)
+GAP: Between use unknown_use and comment (lines 515-522, 8 lines)
+GAP: Between use unknown_use and unknown_use (lines 525-530, 6 lines)
+GAP: Between use unknown_use and comment (lines 533-539, 7 lines)
+GAP: Between use unknown_use and unknown_use (lines 542-546, 5 lines)
+GAP: Between use unknown_use and comment (lines 548-552, 5 lines)
+GAP: Between use unknown_use and comment (lines 555-561, 7 lines)
+GAP: Between stat_info and comment (lines 1642-1669, 28 lines)
+GAP: Between stats_added and comment (lines 1733-1739, 7 lines)
+Found 1818 constructs and 445 subroutines in src/Network/Receive.pm
+Found comment reference comment at line 2
+Found comment reference comment at line 4
+Found comment reference comment at line 5
+Found comment reference comment at line 6
+Found comment reference comment at line 7
+Found comment reference comment at line 8
+Found comment reference comment at line 9
+Found comment reference comment at line 12
+Found comment reference comment at line 14
+Found comment reference comment at line 15
+Found comment reference comment at line 16
+Found comment reference comment at line 18
+Found comment reference comment at line 19
+Unknown construct at line 20: Network::Receive;
+Unknown use statement at line 22: strict;
+Unknown use statement at line 23: Time::HiRes qw(time);
+Unknown use statement at line 24: Exporter;
+Unknown use statement at line 25: Network::PacketParser; # import
+Unknown use statement at line 26: base qw(Network::PacketParser);
+Unknown use statement at line 27: utf8;
+Unknown use statement at line 28: Carp::Assert;
+Unknown use statement at line 29: Utils::Assert;
+Unknown use statement at line 30: Scalar::Util;
+Unknown use statement at line 31: Socket qw(inet_aton inet_ntoa);
+Unknown use statement at line 32: Compress::Zlib;
+Unknown use statement at line 34: AI;
+Unknown use statement at line 35: Globals;
+Unknown use statement at line 36: Field;
+Unknown use statement at line 38: Log qw(message warning error debug);
+Unknown use statement at line 39: FileParsers qw(updateMonsterLUT updateNPCLUT);
+Unknown use statement at line 40: I18N qw(bytesToString stringToBytes);
+Unknown use statement at line 41: Interface;
+Unknown use statement at line 42: Network;
+Unknown use statement at line 43: Network::MessageTokenizer;
+Unknown use statement at line 44: Misc;
+Unknown use statement at line 45: Plugins;
+Unknown use statement at line 46: Skill;
+Unknown use statement at line 47: Utils;
+Unknown use statement at line 48: Utils::Exceptions;
+Unknown use statement at line 49: Utils::Crypton;
+Unknown use statement at line 50: Translation;
+Unknown use statement at line 51: Actor::Slave::Homunculus;
+Unknown use statement at line 52: Actor::Slave::Mercenary;
+Unknown use statement at line 53: Actor::Slave::Unknown;
+Unknown our declaration at line 55: %EXPORT_TAGS = (
+Unknown construct at line 0: 
+Unknown our declaration at line 112: @EXPORT = (
+Unknown construct at line 0: 
+Found comment reference comment at line 121
+Unknown use statement at line 122: constant {
+Found comment reference comment at line 137
+Unknown use statement at line 138: constant {
+Found comment reference comment at line 224
+Unknown use statement at line 225: constant {
+Found comment reference comment at line 455
+Unknown use statement at line 456: constant {
+Found comment reference comment at line 468
+Unknown use statement at line 469: constant {
+Found comment reference comment at line 474
+Unknown use statement at line 475: constant {
+Found comment reference comment at line 482
+Unknown use statement at line 483: constant {
+Found comment reference comment at line 488
+Unknown use statement at line 489: constant {
+Unknown use statement at line 500: constant {
+Found comment reference comment at line 513
+Unknown use statement at line 514: constant {
+Found comment reference comment at line 523
+Unknown use statement at line 524: constant {
+Unknown use statement at line 532: constant {
+Found comment reference comment at line 540
+Unknown use statement at line 541: constant {
+Unknown use statement at line 547: constant {
+Found comment reference comment at line 553
+Unknown use statement at line 554: constant {
+Found comment reference comment at line 562
+Found comment reference comment at line 563
+Found comment reference comment at line 564
+Found comment reference comment at line 565
+Found comment reference comment at line 566
+Found comment reference comment at line 567
+Found comment reference comment at line 568
+Found comment reference comment at line 569
+Found comment reference comment at line 570
+Found comment reference comment at line 571
+Found sub exp at line 572
+Found comment reference comment at line 609
+Found sub parse at line 610
+Found comment reference comment at line 633
+Found comment reference comment at line 634
+Found comment reference comment at line 635
+Found comment reference comment at line 637
+Found sub queryLoginPinCode at line 638
+Found comment reference comment at line 658
+Found comment reference comment at line 659
+Found comment reference comment at line 661
+Found sub queryAndSaveLoginPinCode at line 662
+Found sub changeToInGameState at line 673
+Found comment reference comment at line 697
+Found comment reference comment at line 698
+Found comment reference comment at line 699
+Found sub received_characters_blockSize at line 700
+Found comment reference comment at line 710
+Found sub received_characters_unpackString at line 711
+Found sub received_characters_slots_info at line 811
+Found comment reference comment at line 838
+Found comment reference comment at line 839
+Found comment reference comment at line 840
+Found sub received_characters at line 841
+Found comment reference comment at line 917
+Found comment reference comment at line 918
+Found comment reference comment at line 919
+Found sub sync_received_characters at line 920
+Found sub reconstruct_received_characters at line 935
+Found sub reconstruct_received_characters_info at line 942
+Found comment reference comment at line 949
+Found comment reference comment at line 950
+Found comment reference comment at line 951
+Found sub character_creation_successful at line 952
+Found comment reference comment at line 991
+Found comment reference comment at line 992
+Found comment reference comment at line 993
+Found comment reference comment at line 994
+Found comment reference comment at line 995
+Found comment reference comment at line 996
+Found comment reference comment at line 997
+Found comment reference comment at line 998
+Found sub character_creation_failed at line 999
+Found comment reference comment at line 1023
+Found comment reference comment at line 1024
+Found comment reference comment at line 1025
+Found comment reference comment at line 1026
+Found sub received_characters_info at line 1027
+Found sub parse_account_server_info at line 1048
+Found sub reconstruct_account_server_info at line 1109
+Found sub account_server_info at line 1156
+Found sub connection_refused at line 1227
+Found comment reference comment at line 1233
+Found comment reference comment at line 1234
+Found comment reference comment at line 1235
+Found comment reference comment at line 1236
+Found sub map_loaded at line 1237
+Found comment reference comment at line 1289
+Found comment reference comment at line 1290
+Found comment reference comment at line 1291
+Found comment reference comment at line 1292
+Found comment reference comment at line 1293
+Found comment reference comment at line 1294
+Found comment reference comment at line 1295
+Found comment reference comment at line 1296
+Found sub map_load_error at line 1297
+Unknown our declaration at line 1330: %stat_info_handlers = (
+Unknown construct at line 0: 
+Found comment reference comment at line 1608
+Found comment reference comment at line 1609
+Found comment reference comment at line 1610
+Found comment reference comment at line 1611
+Found comment reference comment at line 1612
+Found comment reference comment at line 1613
+Found comment reference comment at line 1615
+Found comment reference comment at line 1616
+Found comment reference comment at line 1618
+Found comment reference comment at line 1619
+Found comment reference comment at line 1621
+Found comment reference comment at line 1622
+Found sub stat_info at line 1623
+Found comment reference comment at line 1670
+Found comment reference comment at line 1671
+Found comment reference comment at line 1672
+Found comment reference comment at line 1673
+Found comment reference comment at line 1674
+Found comment reference comment at line 1675
+Found sub stats_added at line 1676
+Found comment reference comment at line 1740
+Found comment reference comment at line 1741
+Found comment reference comment at line 1742
+Found sub stats_info at line 1743
+Found comment reference comment at line 1792
+Found comGAP: Between stat_info2 and comment (lines 1823-1825, 3 lines)
+GAP: Between # comment and actor_display_compatibility (lines 1829-1832, 4 lines)
+ment reference comment at line 1793
+Found sub stat_info2 at line 1794
+Found comment reference comment at line 1826
+Found comment reference comment at line 1827
+Found comment reference comment at line 1828
+Found sub actor_display_compatibility at line 1833
+Found comment reference comment at line 1841
+Found sub actor_display at line 1842
+Found comment reference comment at line 2399
+Found comment reference comment at line 2400
+Found comment reference comment at line 2401
+Found comment reference comment at line 2402
+Found comment reference comment at line 2403
+Found comment reference comment at line 2404
+Found comment reference comment at line 2405
+Found comment reference comment at line 2406
+Found sub actor_died_or_disappeared at line 2407
+Found sub actor_action at line 2588
+Found sub actor_info at line 2712
+Found comment reference comment at line 2806
+Found comment reference comment at line 2807
+Found comment reference comment at line 2808
+Found comment reference comment at line 2809
+Found comment reference comment at line 2810
+Found comment reference comment at line 2811
+Found comment reference comment at line 2812
+Found comment reference comment at line 2813
+Found comment reference comment at line 2814
+Found comment reference comment at line 2815
+Found comment reference comment at line 2816
+Found comment reference comment at line 2817
+Found comment reference comment at line 2818
+Found sub unit_levelup at line 2819
+Unknown use statement at line 2846: constant QTYPE => (
+Unknown construct at line 0: 
+Found sub parse_minimap_indicator at line 2853
+Found sub account_payment_info at line 2867
+Found comment reference comment at line 2887
+Found sub reconstruct_minimap_indicator at line 2888
+Found comment reference comment at line 2891
+Found comment reference comment at line 2892
+Found comment reference comment at line 2893
+Found comment reference comment at line 2894
+Found comment reference comment at line 2895
+Found comment reference comment at line 2896
+Found sub homunculus_property at line 2897
+Found sub enforce_homun_state at line 2927
+Found sub homunculus_state_handler at line 2938
+Unknown use statement at line 3004: constant {
+Found comment reference comment at line 3012
+Found comment reference comment at line 3013
+Found comment reference comment at line 3014
+Found comment reference comment at line 3015
+Found comment reference comment at line 3016
+Found comment reference comment at line 3017
+Found comment reference comment at line 3018
+Found comment reference comment at line 3019
+Found comment reference comment at line 3020
+Found comment reference comment at line 3021
+Found sub homunculus_info at line 3022
+Found comment reference comment at line 3057
+Found comment reference comment at line 3058
+Found comment reference comment at line 3060
+Found comment reference comment at line 3061
+Found comment reference comment at line 3063
+Found comment reference comment at line 3064
+Found comment reference comment at line 3065
+Found comment reference comment at line 3066
+Found comment reference comment at line 3067
+Found comment reference comment at line 3068
+Found comment reference comment at line 3070
+Found sub minimap_indicator at line 3071
+Found comment reference comment at line 3101
+Found sub parse_npc_image at line 3102
+Found sub reconstruct_npc_image at line 3108
+Found comment reference comment at line 3114
+Found comment reference comment at line 3115
+Found comment reference comment at line 3116
+Found sub npc_image at line 3117
+Found comment reference comment at line 3135
+Found comment reference comment at line 3136
+Found sub local_broadcast at line 3137
+Found sub parse_sage_autospell at line 3150
+Found sub reconstruct_sage_autospell at line 3160
+Found comment reference comment at line 3169
+Found comment reference comment at line 3170
+Found comment reference comment at line 3171
+Found comment reference comment at line 3173
+Found sub sage_autospell at line 3174
+Found comment reference comment at line 3208
+Found comment reference comment at line 3209
+Found comment reference comment at line 3210
+Found comment reference comment at line 3211
+Found comment reference comment at line 3212
+Found comment reference comment at line 3213
+Found comment reference comment at line 3214
+Found comment reference comment at line 3215
+Found sub show_eq at line 3216
+Found comment reference comment at line 3283
+Found comment reference comment at line 3284
+Found comment reference comment at line 3285
+Found comment reference comment at line 3286
+Found sub misc_config at line 3287
+Found comment reference comment at line 3323
+Found comment reference comment at line 3324
+Found comment reference comment at line 3325
+Found comment reference comment at line 3326
+Found comment reference comment at line 3327
+Found comment reference comment at line 3328
+Found comment reference comment at line 3329
+Found comment reference comment at line 3330
+Found comment reference comment at line 3331
+Found comment reference comment at line 3332
+Found sub misc_config_reply at line 3333
+Found sub show_eq_msg_self at line 3365
+Found sub show_script at line 3375
+Found comment reference comment at line 3389
+Found comment reference comment at line 3390
+Found sub skill_post_delay at line 3391
+Found comment reference comment at line 3400
+Found comment reference comment at line 3401
+Found comment reference comment at line 3402
+Found sub skill_post_delaylist at line 3403
+Found comment reference comment at line 3432
+Found comment reference comment at line 3433
+Found comment reference comment at line 3434
+Found comment reference comment at line 3435
+Found comment reference comment at line 3436
+Found comment reference comment at line 3437
+Found comment reference comment at line 3438
+Found comment reference comment at line 3439
+Found comment reference comment at line 3440
+Found comment reference comment at line 3441
+Found comment reference comment at line 3442
+Found comment reference comment at line 3443
+Found comment reference comment at line 3444
+Found comment reference comment at line 3445
+Found comment reference comment at line 3446
+Found sub gospel_buff_aligned at line 3447
+Found comment reference comment at line 3476
+Found comment reference comment at line 3477
+Found comment reference comment at line 3478
+Found comment reference comment at line 3479
+Found comment reference comment at line 3480
+Found comment reference comment at line 3481
+Found sub system_chat at line 3482
+Found sub warp_portal_list at line 3521
+Found comment reference comment at line 3561
+Found sub char_delete2_result at line 3562
+Found comment reference comment at line 3585
+Found sub char_delete2_accept_result at line 3586
+Found comment reference comment at line 3635
+Found sub char_delete2_cancel_result at line 3636
+Found comment reference comment at line 3652
+Found sub arrow_equipped at line 3653
+Found comment reference comment at line 3672
+Found comment reference comment at line 3673
+Found comment reference comment at line 3674
+Found comment reference comment at line 3675
+Found comment reference comment at line 3676
+Found comment reference comment at line 3677
+Found comment reference comment at line 3678
+Found sub inventory_item_added at line 3679
+Found comment reference comment at line 3755
+Found sub inventory_item_removed at line 3756
+Found comment reference comment at line 3788
+Found sub rental_expired at line 3789
+Found comment reference comment at line 3803
+Found sub cart_off at line 3804
+Found comment reference comment at line 3809
+Found sub shop_skill at line 3810
+Found comment reference comment at line 3818
+Found sub shop_sold at line 3820
+Found sub shop_sold_long at line 3861
+Found comment reference comment at line 3907
+Found sub vending_start at line 3908
+Found sub vender_items_list at line 3942
+Found comment reference comment at line 3993
+Found comment reference comment at line 3994
+Found comment reference comment at line 3995
+Found comment reference comment at line 3996
+Found comment reference comment at line 3997
+Found comment reference comment at line 3998
+Found sub revolving_entity at line 3999
+Found comment reference comment at line 4046
+Found comment reference comment at line 4047
+Found comment reference comment at line 4048
+Found comment reference comment at line 4049
+Found sub monster_typechange at line 4050
+Found comment reference comment at line 4071
+Found comment reference comment at line 4072
+Found sub monster_hp_info at line 4073
+Found comment reference comment at line 4084
+Found comment reference comment at line 4085
+Found sub monster_hp_info_tiny at line 4086
+Found comment reference comment at line 4097
+Found comment reference comment at line 4099
+Found sub account_id at line 4100
+Found comment reference comment at line 4109
+Found comment reference comment at line 4111
+Found sub marriage_partner_name at line 4112
+Found sub login_pin_code_request at line 4118
+Found sub login_pin_new_code_result at line 4198
+Found sub actor_status_active at line 4220
+Found sub map_property3 at line 4242
+Found sub area_spell at line 4268
+Found sub area_spell_multiple2 at line 4316
+Found sub area_spell_multiple3 at line 4364
+Found sub sync_request_ex at line 4413
+Found sub cash_shop_list at line 4443
+Found sub cash_shop_open_result at line 4483
+Found sub cash_shop_buy_result at line 4493
+Found sub sprite_change at line 4528
+Found sub progress_bar at line 4576
+Found sub progress_bar_stop at line 4590
+Found comment reference comment at line 4595
+Found comment reference comment at line 4596
+Found comment reference comment at line 4597
+Found comment reference comment at line 4598
+Found sub quest_all_list at line 4599
+Found comment reference comment at line 4696
+Found comment reference comment at line 4697
+Found sub quest_all_mission at line 4698
+Found comment reference comment at line 4756
+Found comment reference comment at line 4757
+Found comment reference comment at line 4758
+Found sub quest_add at line 4759
+Found comment reference comment at line 4825
+Found comment reference comment at line 4826
+Found sub quest_update_mission_hunt at line 4827
+Found comment reference comment at line 4927
+Found sub quest_delete at line 4928
+Found comment reference comment at line 4936
+Found sub quest_active at line 4937
+Found comment reference comment at line 4950
+Found sub parse_npc_chat at line 4951
+Found sub npc_chat at line 4957
+Found comment reference comment at line 4999
+Found sub makable_item_list at line 5000
+Found sub storage_opened at line 5021
+Found sub storage_closed at line 5026
+Found sub storage_items_stackable at line 5040
+Found sub storage_items_nonstackable at line 5062
+Found sub storage_item_added at line 5077
+Found sub storage_item_removed at line 5108
+Found sub cart_items_stackable at line 5120
+Found sub cart_items_nonstackable at line 5133
+Found sub cart_item_added at line 5146
+Found sub cart_item_removed at line 5176
+Found comment reference comment at line 5188
+Found comment reference comment at line 5189
+Found sub cart_info at line 5190
+Found sub cart_add_failed at line 5196
+Found sub inventory_items_stackable at line 5210
+Found sub item_list_start at line 5232
+Found sub item_list_stackable at line 5249
+Found sub item_list_nonstackable at line 5291
+Found sub item_list_end at line 5341
+Found sub login_error at line 5356
+Found sub login_error_game_login_server at line 5454
+Found sub character_deletion_successful at line 5463
+Found sub character_deletion_failed at line 5483
+Found comment reference comment at line 5494
+Found comment reference comment at line 5495
+Found sub character_moves at line 5496
+Found sub character_name at line 5533
+Found sub character_status at line 5551
+Found comment reference comment at line 5569
+Found comment reference comment at line 5570
+Found sub whisper_list at line 5571
+Found comment reference comment at line 5579
+Found comment reference comment at line 5580
+Found comment reference comment at line 5581
+Found comment reference comment at line 5582
+Found comment reference comment at line 5583
+Found comment reference comment at line 5584
+Found sub chat_created at line 5585
+Found comment reference comment at line 5597
+Found comment reference comment at line 5598
+Found comment reference comment at line 5599
+Found comment reference comment at line 5600
+Found comment reference comment at line 5601
+Found comment reference comment at line 5602
+Found comment reference comment at line 5603
+Found sub chat_info at line 5604
+Found comment reference comment at line 5631
+Found comment reference comment at line 5632
+Found comment reference comment at line 5633
+Found comment reference comment at line 5634
+Found comment reference comment at line 5635
+Found sub chat_users at line 5636
+Found comment reference comment at line 5668
+Found comment reference comment at line 5669
+Found comment reference comment at line 5670
+Found comment reference comment at line 5671
+Found comment reference comment at line 5672
+Found comment reference comment at line 5673
+Found comment reference comment at line 5674
+Found comment reference comment at line 5675
+Found comment reference comment at line 5676
+Found comment reference comment at line 5677
+Found comment reference comment at line 5678
+Found sub chat_join_result at line 5679
+Found comment reference comment at line 5703
+Found comment reference comment at line 5704
+Found comment reference comment at line 5705
+Found comment reference comment at line 5706
+Found comment reference comment at line 5707
+Found comment reference comment at line 5708
+Found comment reference comment at line 5709
+Found sub chat_modified at line 5710
+Found comment reference comment at line 5741
+Found comment reference comment at line 5742
+Found comment reference comment at line 5743
+Found comment reference comment at line 5744
+Found comment reference comment at line 5745
+Found sub chat_newowner at line 5746
+Found comment reference comment at line 5773
+Found comment reference comment at line 5774
+Found sub chat_user_join at line 5775
+Found comment reference comment at line 5787
+Found comment reference comment at line 5788
+Found comment reference comment at line 5789
+Found comment reference comment at line 5790
+Found comment reference comment at line 5791
+Found sub chat_user_leave at line 5792
+Found comment reference comment at line 5811
+Found comment reference comment at line 5812
+Found sub chat_removed at line 5813
+Found sub deal_add_other at line 5825
+Found sub deal_begin at line 5846
+Found sub deal_cancelled at line 5882
+Found sub deal_complete at line 5890
+Found sub deal_finalize at line 5898
+Found sub deal_request at line 5913
+Found sub devotion at line 5929
+Found sub egg_list at line 5948
+Found sub emoticon at line 5961
+Found comment reference comment at line 6026
+Found comment reference comment at line 6027
+Found comment reference comment at line 6028
+Found comment reference comment at line 6029
+Found comment reference comment at line 6030
+Found comment reference comment at line 6031
+Found comment reference comment at line 6032
+Found comment reference comment at line 6033
+Found comment reference comment at line 6034
+Found comment reference comment at line 6035
+Found comment reference comment at line 6036
+Found comment reference comment at line 6037
+Found comment reference comment at line 6038
+Found comment reference comment at line 6039
+Found comment reference comment at line 6040
+Found comment reference comment at line 6041
+Found comment reference comment at line 6042
+Found comment reference comment at line 6043
+Found comment reference comment at line 6044
+Found comment reference comment at line 6045
+Found comment reference comment at line 6046
+Found comment reference comment at line 6047
+Found comment reference comment at line 6048
+Found comment reference comment at line 6049
+Found comment reference comment at line 6050
+Found comment reference comment at line 6051
+Found comment reference comment at line 6052
+Found comment reference comment at line 6053
+Found comment reference comment at line 6054
+Found comment reference comment at line 6055
+Found comment reference comment at line 6056
+Found comment reference comment at line 6057
+Found comment reference comment at line 6058
+Found comment reference comment at line 6059
+Found sub errors at line 6060
+Found comment reference comment at line 6140
+Found comment reference comment at line 6141
+Found comment reference comment at line 6142
+Found sub friend_list at line 6143
+Found comment reference comment at line 6165
+Found comment reference comment at line 6166
+Found comment reference comment at line 6167
+Found comment reference comment at line 6168
+Found comment reference comment at line 6169
+Found comment reference comment at line 6170
+Found sub friend_logon at line 6171
+Found comment reference comment at line 6192
+Found comment reference comment at line 6193
+Found sub friend_request at line 6194
+Found comment reference comment at line 6210
+Found comment reference comment at line 6211
+Found sub friend_removed at line 6212
+Found comment reference comment at line 6228
+Found comment reference comment at line 6229
+Found comment reference comment at line 6230
+Found comment reference comment at line 6231
+Found comment reference comment at line 6232
+Found comment reference comment at line 6233
+Found comment reference comment at line 6234
+Found sub friend_response at line 6235
+Found comment reference comment at line 6260
+Found comment reference comment at line 6261
+Found comment reference comment at line 6262
+Found comment reference comment at line 6263
+Found comment reference comment at line 6264
+Found sub homunculus_food at line 6265
+Found comment reference comment at line 6280
+Found sub slave_calcproperty_handler at line 6281
+Found sub EAC_key at line 6293
+Found sub gameguard_grant at line 6300
+Found sub gameguard_request at line 6318
+Found comment reference comment at line 6328
+Found comment reference comment at line 6329
+Found sub guild_allies_enemy_list at line 6330
+Found comment reference comment at line 6359
+Found comment reference comment at line 6360
+Found sub guild_ally_request at line 6361
+Found comment reference comment at line 6373
+Found comment reference comment at line 6374
+Found comment reference comment at line 6375
+Found comment reference comment at line 6376
+Found comment reference comment at line 6377
+Found sub guild_broken at line 6378
+Found comment reference comment at line 6396
+Found comment reference comment at line 6397
+Found comment reference comment at line 6398
+Found comment reference comment at line 6399
+Found comment reference comment at line 6400
+Found comment reference comment at line 6401
+Found comment reference comment at line 6402
+Found sub guild_create_result at line 6403
+Found comment reference comment at line 6419
+Found comment reference comment at line 6420
+Found comment reference comment at line 6421
+Found comment reference comment at line 6422
+Found comment reference comment at line 6423
+Found sub guild_info at line 6424
+Found comment reference comment at line 6435
+Found comment reference comment at line 6436
+Found comment reference comment at line 6437
+Found comment reference comment at line 6438
+Found comment reference comment at line 6439
+Found comment reference comment at line 6440
+Found comment reference comment at line 6441
+Found sub guild_members_list at line 6442
+Found comment reference comment at line 6480
+Found comment reference comment at line 6481
+Found comment reference comment at line 6482
+Found comment reference comment at line 6483
+Found comment reference comment at line 6484
+Found comment reference comment at line 6485
+Found comment reference comment at line 6486
+Found sub guild_invite_result at line 6487
+Found comment reference comment at line 6505
+Found comment reference comment at line 6506
+Found sub guild_location at line 6507
+Found comment reference comment at line 6524
+Found comment reference comment at line 6525
+Found comment reference comment at line 6526
+Found sub guild_leave at line 6527
+Found comment reference comment at line 6547
+Found comment reference comment at line 6548
+Found comment reference comment at line 6549
+Found comment reference comment at line 6550
+Found sub guild_expulsion at line 6551
+Found comment reference comment at line 6571
+Found comment reference comment at line 6572
+Found comment reference comment at line 6573
+Found comment reference comment at line 6574
+Found comment reference comment at line 6575
+Found comment reference comment at line 6576
+Found comment reference comment at line 6577
+Found sub guild_member_online_status at line 6578
+Found comment reference comment at line 6593
+Found comment reference comment at line 6594
+Found sub guild_update_member_position at line 6595
+Found comment reference comment at line 6617
+Found comment reference comment at line 6618
+Found sub guild_members_title_list at line 6619
+Found comment reference comment at line 6632
+Found comment reference comment at line 6633
+Found comment reference comment at line 6634
+Found comment reference comment at line 6635
+Found comment reference comment at line 6636
+Found sub guild_name at line 6637
+Found comment reference comment at line 6668
+Found comment reference comment at line 6669
+Found sub guild_request at line 6670
+Found comment reference comment at line 6682
+Found comment reference comment at line 6683
+Found comment reference comment at line 6684
+Found comment reference comment at line 6685
+Found comment reference comment at line 6686
+Found comment reference comment at line 6687
+Found comment reference comment at line 6688
+Found comment reference comment at line 6689
+Found comment reference comment at line 6690
+Found comment reference comment at line 6691
+Found sub guild_master_member at line 6692
+Found comment reference comment at line 6705
+Found comment reference comment at line 6706
+Found comment reference comment at line 6707
+Found comment reference comment at line 6708
+Found comment reference comment at line 6709
+Found comment reference comment at line 6710
+Found comment reference comment at line 6711
+Found comment reference comment at line 6712
+Found comment reference comment at line 6713
+Found sub guild_alliance at line 6714
+Found comment reference comment at line 6731
+Found comment reference comment at line 6732
+Found comment reference comment at line 6733
+Found comment reference comment at line 6734
+Found comment reference comment at line 6735
+Found comment reference comment at line 6736
+Found comment reference comment at line 6737
+Found sub guild_member_setting_list at line 6738
+Found comment reference comment at line 6753
+Found comment reference comment at line 6754
+Found comment reference comment at line 6755
+Found sub guild_skills_list at line 6756
+Found comment reference comment at line 6775
+Found comment reference comment at line 6776
+Found comment reference comment at line 6777
+Found comment reference comment at line 6778
+Found comment reference comment at line 6779
+Found sub guild_expulsion_list at line 6780
+Found comment reference comment at line 6809
+Found comment reference comment at line 6810
+Found sub guild_member_map_change at line 6811
+Found comment reference comment at line 6824
+Found comment reference comment at line 6825
+Found comment reference comment at line 6826
+Found sub guild_member_add at line 6827
+Found comment reference comment at line 6842
+Found comment reference comment at line 6843
+Found sub guild_notice at line 6844
+Found comment reference comment at line 6859
+Found comment reference comment at line 6860
+Found sub misc_effect at line 6861
+Found comment reference comment at line 6871
+Found comment reference comment at line 6872
+Found comment reference comment at line 6873
+Found comment reference comment at line 6874
+Found comment reference comment at line 6875
+Found comment reference comment at line 6876
+Found comment reference comment at line 6877
+Found comment reference comment at line 6878
+Found comment reference comment at line 6879
+Found comment reference comment at line 6880
+Found comment reference comment at line 6881
+Found sub sound_effect at line 6882
+Found comment reference comment at line 6898
+Found comment reference comment at line 6899
+Found sub identify_list at line 6900
+Found comment reference comment at line 6917
+Found comment reference comment at line 6918
+Found sub identify at line 6919
+Found comment reference comment at line 6932
+Found sub ignore_all_result at line 6933
+Found comment reference comment at line 6945
+Found sub ignore_player_result at line 6946
+Found sub item_used at line 6957
+Found sub married at line 7004
+Found comment reference comment at line 7011
+Found comment reference comment at line 7012
+Found comment reference comment at line 7013
+Found comment reference comment at line 7014
+Found sub item_appeared at line 7015
+Found sub item_exists at line 7054
+Found comment reference comment at line 7086
+Found comment reference comment at line 7087
+Found sub item_disappeared at line 7088
+Found sub item_upgrade at line 7121
+Found comment reference comment at line 7133
+Found sub high_jump at line 7134
+Found sub hp_sp_changed at line 7157
+Found comment reference comment at line 7172
+Found comment reference comment at line 7173
+Found comment reference comment at line 7174
+Found comment reference comment at line 7175
+Found comment reference comment at line 7176
+Found comment reference comment at line 7177
+Found comment reference comment at line 7178
+Found comment reference comment at line 7179
+Found sub map_change at line 7180
+Found comment reference comment at line 7245
+Found comment reference comment at line 7246
+Found comment reference comment at line 7247
+Found sub map_changed at line 7248
+Found comment reference comment at line 7363
+Found comment reference comment at line 7364
+Found comment reference comment at line 7365
+Found comment reference comment at line 7366
+Found sub parse_hat_effect at line 7367
+Found comment reference comment at line 7373
+Found comment reference comment at line 7374
+Found sub hat_effect at line 7375
+Found comment reference comment at line 7408
+Found comment reference comment at line 7409
+Found sub npc_talk at line 7410
+Found comment reference comment at line 7453
+Found comment reference comment at line 7454
+Found sub npc_talk_close at line 7455
+Found comment reference comment at line 7476
+Found comment reference comment at line 7477
+Found sub npc_talk_continue at line 7478
+Found comment reference comment at line 7487
+Found comment reference comment at line 7488
+Found sub npc_talk_number at line 7489
+Found comment reference comment at line 7499
+Found comment reference comment at line 7500
+Found sub npc_talk_responses at line 7501
+Found comment reference comment at line 7559
+Found comment reference comment at line 7560
+Found sub npc_talk_text at line 7561
+Found comment reference comment at line 7571
+Found comment reference comment at line 7572
+Found sub npc_store_begin at line 7573
+Found comment reference comment at line 7583
+Found comment reference comment at line 7584
+Found comment reference comment at line 7585
+Found comment reference comment at line 7586
+Found comment reference comment at line 7587
+Found sub npc_store_info at line 7588
+Found comment reference comment at line 7635
+Found comment reference comment at line 7636
+Found sub npc_sell_list at line 7637
+Found sub npc_clear_dialog at line 7665
+Found comment reference comment at line 7671
+Found comment reference comment at line 7672
+Found comment reference comment at line 7673
+Found comment reference comment at line 7674
+Found comment reference comment at line 7675
+Found comment reference comment at line 7676
+Found comment reference comment at line 7677
+Found comment reference comment at line 7678
+Found comment reference comment at line 7679
+Found comment reference comment at line 7680
+Found sub buy_result at line 7681
+Found comment reference comment at line 7706
+Found comment reference comment at line 7707
+Found comment reference comment at line 7708
+Found comment reference comment at line 7709
+Found sub npc_market_info at line 7710
+Found comment reference comment at line 7753
+Found comment reference comment at line 7754
+Found comment reference comment at line 7755
+Found comment reference comment at line 7756
+Found comment reference comment at line 7757
+Found comment reference comment at line 7758
+Found comment reference comment at line 7759
+Found comment reference comment at line 7760
+Found comment reference comment at line 7761
+Found comment reference comment at line 7762
+Found sub npc_market_purchase_result at line 7763
+Found sub deal_add_you at line 7828
+Found sub skill_exchange_item at line 7864
+Found comment reference comment at line 7882
+Found comment reference comment at line 7883
+Found comment reference comment at line 7884
+Found sub refineui_opened at line 7885
+Found comment reference comment at line 7891
+Found comment reference comment at line 7892
+Found comment reference comment at line 7893
+Found comment reference comment at line 7894
+Found sub refineui_info at line 7895
+Found sub refine_status at line 7938
+Found sub character_ban_list at line 7945
+Found sub flag at line 7950
+Found sub offline_clone_found at line 7954
+Found sub offline_clone_lost at line 7994
+Found sub remain_time_info at line 8017
+Found sub received_login_token at line 8022
+Found comment reference comment at line 8031
+Found sub hotkeys at line 8032
+Found sub received_character_ID_and_Map at line 8055
+Found sub received_sync at line 8115
+Found sub actor_look_at at line 8121
+Found comment reference comment at line 8131
+Found comment reference comment at line 8132
+Found comment reference comment at line 8133
+Found comment reference comment at line 8134
+Found comment reference comment at line 8135
+Found sub actor_movement_interrupted at line 8136
+Found sub actor_trapped at line 8160
+Found sub party_join at line 8168
+Found comment reference comment at line 8222
+Found sub party_allow_invite at line 8223
+Found sub party_chat at line 8233
+Found sub party_exp at line 8258
+Found sub party_leader at line 8288
+Found sub party_hp_info at line 8301
+Found sub party_invite at line 8311
+Found sub party_invite_result at line 8324
+Found sub party_leave at line 8348
+Found sub party_location at line 8371
+Found sub party_organize_result at line 8383
+Found sub party_show_picker at line 8399
+Found sub party_users_info at line 8415
+Found comment reference comment at line 8470
+Found comment reference comment at line 8471
+Found sub party_dead at line 8472
+Found sub rodex_mail_list at line 8490
+Found sub rodex_read_mail at line 8580
+Found sub unread_rodex at line 8666
+Found sub rodex_remove_item at line 8672
+Found sub rodex_add_item at line 8692
+Found sub rodex_open_write at line 8734
+Found sub rodex_check_player at line 8748
+Found sub rodex_write_result at line 8779
+Found sub rodex_get_zeny at line 8791
+Found sub rodex_get_item at line 8805
+Found sub rodex_delete at line 8819
+Found comment reference comment at line 8833
+Found sub booking_register_request at line 8834
+Found comment reference comment at line 8847
+Found sub booking_search_request at line 8848
+Found comment reference comment at line 8869
+Found sub booking_delete_request at line 8870
+Found comment reference comment at line 8883
+Found sub booking_insert at line 8884
+Found comment reference comment at line 8890
+Found sub booking_update at line 8891
+Found comment reference comment at line 8897
+Found sub booking_delete at line 8898
+Found sub clan_user at line 8904
+Found sub clan_info at line 8913
+Found sub clan_chat at line 8944
+Found sub clan_leave at line 8967
+Found sub change_title at line 8976
+Found comment reference comment at line 8982
+Found comment reference comment at line 8983
+Found comment reference comment at line 8984
+Found sub pet_capture_process at line 8985
+Found sub pet_capture_result at line 8990
+Found sub pet_emotion at line 8999
+Found sub pet_evolution_result at line 9008
+Found sub pet_food at line 9025
+Found sub pet_info at line 9034
+Found sub pet_info2 at line 9046
+Found sub elemental_info at line 9100
+Found comment reference comment at line 9113
+Found sub upgrade_list at line 9114
+Found comment reference comment at line 9136
+Found sub cooking_list at line 9137
+Found sub refine_result at line 9161
+Found comment reference comment at line 9178
+Found sub upgrade_message at line 9179
+Found sub open_buying_store_fail at line 9194
+Found sub search_store_open at line 9209
+Found sub search_store_fail at line 9221
+Found sub search_store_result at line 9241
+Found sub search_store_pos at line 9280
+Found sub skill_msg at line 9286
+Found comment reference comment at line 9296
+Found comment reference comment at line 9297
+Found comment reference comment at line 9298
+Found comment reference comment at line 9299
+Found comment reference comment at line 9300
+Found comment reference comment at line 9301
+Found sub message_string at line 9302
+Found comment reference comment at line 9326
+Found sub skills_list at line 9327
+Found comment reference comment at line 9395
+Found sub skill_update at line 9396
+Found sub overweight_percent at line 9423
+Found sub partylv_info at line 9428
+Found sub achievement_reward_ack at line 9437
+Found sub achievement_update at line 9442
+Found sub achievement_list at line 9452
+Found comment reference comment at line 9486
+Found comment reference comment at line 9487
+Found comment reference comment at line 9488
+Found comment reference comment at line 9489
+Found comment reference comment at line 9490
+Found comment reference comment at line 9491
+Found sub quit_response at line 9492
+Found sub private_airship_type at line 9501
+Found comment reference comment at line 9518
+Found sub sell_result at line 9519
+Found sub GM_req_acc_name at line 9533
+Found comment reference comment at line 9538
+Found sub boss_map_info at line 9539
+Found sub adopt_reply at line 9557
+Found sub GM_silence at line 9568
+Found sub guild_storage_log at line 9577
+Found sub skill_delete at line 9615
+Found comment reference comment at line 9626
+Found comment reference comment at line 9628
+Found sub captcha_session_ID at line 9629
+Found comment reference comment at line 9634
+Found comment reference comment at line 9635
+Found sub captcha_image at line 9636
+Found comment reference comment at line 9656
+Found comment reference comment at line 9657
+Found sub captcha_answer at line 9658
+Found sub open_buying_store at line 9667
+Found comment reference comment at line 9673
+Found sub buyer_items at line 9674
+Unknown construct at line 0: 
+Found sub open_buying_store_item_list at line 9697
+Found comment reference comment at line 9710
+Found sub buying_store_found at line 9738
+Found sub buying_store_lost at line 9750
+Found sub buying_store_items_list at line 9758
+Found sub buying_store_item_delete at line 9829
+Found sub buying_store_fail at line 9840
+Found sub buying_store_update at line 9853
+Found sub buyer_found at line 9866
+Found sub buyer_lost at line 9878
+Found sub buying_buy_fail at line 9886
+Unknown use statement at line 9899: constant {
+Found sub special_item_obtain at line 9904
+Found sub inventory_item_favorite at line 9955
+Found sub private_message_sent at line 9965
+Found sub vender_buy_fail at line 9986
+Found comment reference comment at line 10004
+Found comment reference comment at line 10006
+Found comment reference comment at line 10007
+Found sub cash_dealer at line 10008
+Found comment reference comment at line 10043
+Found comment reference comment at line 10044
+Found sub merge_item_open at line 10046
+Found sub parse_merge_item_open at line 10063
+Found comment reference comment at line 10069
+Found comment reference comment at line 10070
+Found sub merge_item_result at line 10072
+Found sub parse_merge_item_result at line 10095
+Found sub memo_success at line 10100
+Found sub change_to_constate25 at line 10111
+Found comment reference comment at line 10116
+Found sub adopt_request at line 10117
+Found comment reference comment at line 10122
+Found comment reference comment at line 10123
+Found comment reference comment at line 10124
+Found comment reference comment at line 10125
+Found comment reference comment at line 10126
+Found comment reference comment at line 10127
+Found sub rank_points at line 10128
+Found comment reference comment at line 10137
+Found comment reference comment at line 10138
+Found sub blacksmith_points at line 10139
+Found comment reference comment at line 10144
+Found comment reference comment at line 10145
+Found sub alchemist_point at line 10146
+Found sub area_spell_disappears at line 10151
+Found sub arrow_none at line 10161
+Found sub arrowcraft_list at line 10184
+Found comment reference comment at line 10217
+Found comment reference comment at line 10218
+Found sub attack_range at line 10219
+Found sub auction_my_sell_stop at line 10239
+Found sub auction_windows at line 10254
+Found sub auction_add_item at line 10264
+Found sub premium_rates_info at line 10274
+Found comment reference comment at line 10279
+Found comment reference comment at line 10280
+Found comment reference comment at line 10281
+Found comment reference comment at line 10282
+Found comment reference comment at line 10283
+Found comment reference comment at line 10284
+Found sub rates_info2 at line 10285
+Found sub auction_result at line 10325
+Found comment reference comment at line 10354
+Found comment reference comment at line 10355
+Found sub battleground_message at line 10356
+Found comment reference comment at line 10361
+Found comment reference comment at line 10362
+Found sub battleground_emblem at line 10363
+Found comment reference comment at line 10368
+Found comment reference comment at line 10369
+Found sub guild_emblem at line 10370
+Found comment reference comment at line 10375
+Found comment reference comment at line 10376
+Found sub guild_emblem_update at line 10377
+Found comment reference comment at line 10382
+Found comment reference comment at line 10383
+Found sub char_emblem_update at line 10384
+Found comment reference comment at line 10389
+Found comment reference comment at line 10390
+Found sub guild_position_changed at line 10391
+Found comment reference comment at line 10396
+Found comment reference comment at line 10397
+Found sub guild_position at line 10398
+Found comment reference comment at line 10403
+Found comment reference comment at line 10404
+Found sub guild_unally at line 10405
+Found comment reference comment at line 10410
+Found comment reference comment at line 10411
+Found sub guild_opposition_result at line 10412
+Found comment reference comment at line 10417
+Found comment reference comment at line 10418
+Found sub guild_alliance_added at line 10419
+Found comment reference comment at line 10424
+Found comment reference comment at line 10425
+Found sub map_change_cell at line 10426
+Found comment reference comment at line 10431
+Found comment reference comment at line 10432
+Found sub blade_stop at line 10433
+Found sub divorced at line 10442
+Found sub hack_shield_alarm at line 10447
+Found sub talkie_box at line 10452
+Found sub manner_message at line 10457
+Found comment reference comment at line 10472
+Found comment reference comment at line 10473
+Found comment reference comment at line 10474
+Found comment reference comment at line 10475
+Found sub instance_window_start at line 10476
+Found comment reference comment at line 10481
+Found comment reference comment at line 10482
+Found comment reference comment at line 10483
+Found sub instance_window_queue at line 10484
+Found comment reference comment at line 10489
+Found comment reference comment at line 10490
+Found sub instance_window_join at line 10491
+Found comment reference comment at line 10498
+Found comment reference comment at line 10500
+Found comment reference comment at line 10505
+Found comment reference comment at line 10506
+Found sub instance_window_leave at line 10507
+Found sub card_merge_list at line 10525
+Found sub card_merge_status at line 10543
+Found sub combo_delay at line 10587
+Found comment reference comment at line 10599
+Found comment reference comment at line 10600
+Found sub book_read at line 10601
+Found comment reference comment at line 10606
+Found sub rental_time at line 10607
+Found comment reference comment at line 10612
+Found comment reference comment at line 10613
+Found sub cash_buy_fail at line 10614
+Found comment reference comment at line 10619
+Found comment reference comment at line 10620
+Found comment reference comment at line 10621
+Found comment reference comment at line 10622
+Found comment reference comment at line 10623
+Found comment reference comment at line 10624
+Found comment reference comment at line 10625
+Found comment reference comment at line 10626
+Found comment reference comment at line 10627
+Found sub equip_item at line 10628
+Found comment reference comment at line 10653
+Found comment reference comment at line 10654
+Found comment reference comment at line 10655
+Found sub equip_item_switch at line 10656
+Found comment reference comment at line 10683
+Found comment reference comment at line 10684
+Found sub equip_switch_run_res at line 10685
+Found comment reference comment at line 10694
+Found comment reference comment at line 10695
+Found sub equip_switch_log at line 10696
+Found comment reference comment at line 10705
+Found comment reference comment at line 10706
+Found sub font at line 10707
+Found sub initialize_message_id_encryption at line 10712
+Found sub mail_delete at line 10729
+Found sub mail_window at line 10739
+Found sub mail_return at line 10749
+Found sub mail_read at line 10756
+Found sub mail_refreshinbox at line 10780
+Found sub mail_getattachment at line 10824
+Found sub mail_setattachment at line 10835
+Found sub mail_send at line 10864
+Found sub mail_new at line 10871
+Found comment reference comment at line 10876
+Found comment reference comment at line 10877
+Found sub top10 at line 10878
+Found comment reference comment at line 10894
+Found comment reference comment at line 10895
+Found sub top10_alchemist_rank at line 10896
+Found comment reference comment at line 10906
+Found comment reference comment at line 10907
+Found sub top10_blacksmith_rank at line 10908
+Found comment reference comment at line 10918
+Found comment reference comment at line 10919
+Found sub top10_pk_rank at line 10920
+Found comment reference comment at line 10930
+Found comment reference comment at line 10931
+Found sub top10_taekwon_rank at line 10932
+Found comment reference comment at line 10942
+Found comment reference comment at line 10943
+Found sub taekwon_packets at line 10944
+Found comment reference comment at line 10964
+Found comment reference comment at line 10965
+Found sub taekwon_rank at line 10966
+Found sub storage_password_request at line 10971
+Found comment reference comment at line 11055
+Found sub storage_password_result at line 11056
+Found comment reference comment at line 11091
+Found comment reference comment at line 11092
+Found sub mercenary_init at line 11093
+Found comment reference comment at line 11130
+Found sub mercenary_off at line 11131
+Found comment reference comment at line 11138
+Found sub monster_ranged_attack at line 11140
+Found sub mvp_item at line 11165
+Found sub mvp_other at line 11172
+Found sub mvp_you at line 11179
+Found sub no_teleport at line 11186
+Found sub private_message at line 11200
+Found sub progress_bar_unit at line 11241
+Found sub pvp_rank at line 11246
+Found comment reference comment at line 11263
+Found comment reference comment at line 11264
+Found sub repair_list at line 11265
+Found comment reference comment at line 11320
+Found comment reference comment at line 11321
+Found comment reference comment at line 11322
+Found comment reference comment at line 11323
+Found comment reference comment at line 11324
+Found comment reference comment at line 11325
+Found comment reference comment at line 11326
+Found sub repair_result at line 11327
+Found sub resurrection at line 11341
+Found sub secure_login_key at line 11377
+Found sub self_chat at line 11383
+Found sub sync_request at line 11408
+Found sub sense_result at line 11427
+Found comment reference comment at line 11448
+Found comment reference comment at line 11449
+Found sub skill_cast at line 11450
+Found comment reference comment at line 11566
+Found comment reference comment at line 11567
+Found sub cast_cancelled at line 11568
+Found comment reference comment at line 11586
+Found comment reference comment at line 11587
+Found comment reference comment at line 11588
+Found comment reference comment at line 11589
+Found comment reference comment at line 11590
+Found comment reference comment at line 11591
+Found comment reference comment at line 11592
+Found sub switch_character at line 11593
+Found comment reference comment at line 11605
+Found comment reference comment at line 11606
+Found comment reference comment at line 11607
+Found comment reference comment at line 11608
+Found comment reference comment at line 11609
+Found comment reference comment at line 11610
+Found comment reference comment at line 11611
+Found sub unequip_item at line 11612
+Found comment reference comment at line 11641
+Found comment reference comment at line 11642
+Found sub unequip_item_switch at line 11643
+Found comment reference comment at line 11672
+Found sub use_item at line 11673
+Found sub users_online at line 11683
+Found comment reference comment at line 11688
+Found sub vender_found at line 11689
+Found sub vender_lost at line 11704
+Found sub skill_add at line 11712
+Found sub isvr_disconnect at line 11740
+Found sub skill_use_failed at line 11744
+Found sub open_store_status at line 11839
+Found sub stylist_res at line 11853
+Found comment reference comment at line 11864
+Found comment reference comment at line 11867
+Found comment reference comment at line 11868
+Found comment reference comment at line 11869
+Found comment reference comment at line 11870
+Found comment reference comment at line 11871
+Found comment reference comment at line 11872
+Found comment reference comment at line 11873
+Found comment reference comment at line 11874
+Found comment reference comment at line 11875
+Found comment reference comment at line 11876
+Found comment reference comment at line 11877
+Found sub open_ui at line 11878
+Found comment reference comment at line 11905
+Found comment reference comment at line 11906
+Found comment reference comment at line 11907
+Found comment reference comment at line 11908
+Found sub action_ui at line 11909
+Found comment reference comment at line 11916
+Found comment reference comment at line 11919
+Found comment reference comment at line 11920
+Found comment reference comment at line 11921
+Found sub attendance_ui at line 11922
+Found comment reference comment at line 11961
+Found comment reference comment at line 11962
+Found sub move_interrupt at line 11963
+Found comment reference comment at line 11969
+Found comment reference comment at line 11972
+Found comment reference comment at line 11973
+Found comment reference comment at line 11974
+Found comment reference comment at line 11975
+Found sub banking_check at line 11976
+Found comment reference comment at line 11990
+Found comment reference comment at line 11991
+Found comment reference comment at line 11992
+Found comment reference comment at line 11993
+Found comment reference comment at line 11994
+Found comment reference comment at line 11995
+Found comment reference comment at line 11996
+Found sub banking_deposit at line 11997
+Found comment reference comment at line 12015
+Found comment reference comment at line 12016
+Found comment reference comment at line 12017
+Found comment reference comment at line 12018
+Found comment reference comment at line 12019
+Found comment reference comment at line 12020
+Found sub banking_withdraw at line 12021
+Found comment reference comment at line 12038
+Found comment reference comment at line 12041
+Found comment reference comment at line 12042
+Found comment reference comment at line 12043
+Found sub navigate_to at line 12044
+Found comment reference comment at line 12057
+Found comment reference comment at line 12059
+Found comment reference comment at line 12060
+Found sub roulette_window at line 12061
+Found comment reference comment at line 12088
+Found comment reference comment at line 12089
+Found comment reference comment at line 12090
+Found sub roulette_info at line 12091
+Found comment reference comment at line 12109
+Found comment reference comment at line 12110
+Found sub roulette_recv_item at line 12111
+Found comment reference comment at line 12117
+Found comment reference comment at line 12118
+Found sub roulette_window_update at line 12119
+Found comment reference comment at line 12148
+Found comment reference comment at line 12149
+Found sub load_confirm at line 12150
+Found comment reference comment at line 12155
+Found comment reference comment at line 12156
+Found comment reference comment at line 12157
+Found comment reference comment at line 12158
+Found comment reference comment at line 12159
+Found comment reference comment at line 12160
+Found comment reference comment at line 12161
+Found comment reference comment at line 12162
+Found sub inventory_expansion_result at line 12163
+Found sub item_preview at line 12182
+Found comment reference comment at line 12195
+Found sub ping at line 12196
+Found comment reference comment at line 12201
+Found comment reference comment at line 12202
+Found sub starplace at line 12203
+Found comment reference comment at line 12210
+Found comment reference comment at line 12211
+Found comment reference comment at line 12215
+Found comment reference comment at line 12216
+Found sub captcha_upload_request at line 12217
+Found comment reference comment at line 12230
+Found comment reference comment at line 12231
+Found sub captcha_upload_request_status at line 12232
+Found comment reference comment at line 12236
+Found comment reference comment at line 12237
+Found sub macro_reporter_status at line 12238
+Found comment reference comment at line 12253
+Found comment reference comment at line 12254
+Found sub macro_detector at line 12255
+Found comment reference comment at line 12262
+Found comment reference comment at line 12263
+Found comment reference comment at line 12264
+Found sub macro_detector_image at line 12265
+Found comment reference comment at line 12306
+Found comment reference comment at line 12307
+Found sub macro_detector_show at line 12308
+Found comment reference comment at line 12316
+Found comment reference comment at line 12317
+Found sub macro_detector_status at line 12318
+Found comment reference comment at line 12333
+Found comment reference comment at line 12334
+Found sub captcha_preview at line 12335
+Found comment reference comment at line 12351
+Found comment reference comment at line 12352
+Found sub captcha_preview_image at line 12353
+Found comment reference comment at line 12374
+Found comment reference comment at line 12375
+Found sub macro_reporter_select at line 12376
+Found comment reference comment at line 12387
+Found sub repute_info at line 12388
+Found comment reference comment at line 12407
+Found comment reference comment at line 12408
+Found sub gold_pc_cafe_point at line 12409
+Found comment reference comment at line 12414
+Found sub dynamicnpc_create_result at line 12415
+Processing src/Network/Send.pm...
+GAP: Between new and import (lines 51-54, 4 lines)
+GAP: Between sendLoginPinCode and sendCloseBuyShop (lines 1126-1130, 5 lines)
+GAP: Between sendShowEquipPlayer and comment (lines 1183-1187, 5 lines)
+GAP: Between sendMiscConfigSet and sendSlaveAttack (lines 1206-1211, 6 lines)
+GAP: Between sendSlaveAttack and sendSlaveStandBy (lines 1223-1227, 5 lines)
+GAP: Between sendSlaveStandBy and comment (lines 1235-1239, 5 lines)
+GAP: Between sendEquip and comment (lines 1250-1254, 5 lines)
+Found 764 constructs and 301 subroutines in src/Network/Send.pm
+Found comment reference comment at line 2
+Found comment reference comment at line 3
+Found comment reference comment at line 5
+Found comment reference comment at line 6
+Found comment reference comment at line 7
+Found comment reference comment at line 8
+Found comment reference comment at line 9
+Found comment reference comment at line 10
+Found comment reference comment at line 12
+Found comment reference comment at line 13
+Found comment reference comment at line 17
+Found comment reference comment at line 19
+Found comment reference comment at line 20
+Found comment reference comment at line 22
+Found comment reference comment at line 23
+Unknown construct at line 24: Network::Send;
+Unknown use statement at line 26: strict;
+Unknown use statement at line 27: Time::HiRes qw(time);
+Unknown use statement at line 28: Network::PacketParser; # import
+Unknown use statement at line 29: base qw(Network::PacketParser);
+Unknown use statement at line 30: utf8;
+Unknown use statement at line 31: Carp::Assert;
+Unknown use statement at line 32: Digest::MD5;
+Unknown use statement at line 33: Math::BigInt;
+Found comment reference comment at line 35
+Unknown use statement at line 36: Globals qw(%config $bytesSent %packetDescriptions $enc_val1 $enc_val2 $char $masterServer $syncSync $accountID %timeout %talk $skillExchangeItem $net $rodexList $rodexWrite %universalCatalog %rpackets $mergeItemList $repairList %cashShop);
+Unknown use statement at line 38: I18N qw(bytesToString stringToBytes);
+Unknown use statement at line 39: Utils qw(existsInList getHex getTickCount getCoordString makeCoordsDir);
+Unknown use statement at line 40: Misc;
+Unknown use statement at line 41: Log qw(debug);
+Found sub new at line 43
+Found sub import at line 55
+Found comment reference comment at line 99
+Found sub encryptMessageID at line 100
+Found sub cryptKeys at line 149
+Found comment reference comment at line 159
+Found comment reference comment at line 161
+Found sub injectMessage at line 162
+Found comment reference comment at line 175
+Found comment reference comment at line 177
+Found sub injectAdminMessage at line 178
+Found comment reference comment at line 189
+Found comment reference comment at line 190
+Found comment reference comment at line 191
+Found comment reference comment at line 193
+Found sub pinEncode at line 194
+Found comment reference comment at line 227
+Found comment reference comment at line 229
+Found sub sendToServer at line 230
+Found comment reference comment at line 285
+Found comment reference comment at line 286
+Found comment reference comment at line 288
+Found sub sendRaw at line 289
+Found comment reference comment at line 300
+Found sub parse_master_login at line 302
+Found sub reconstruct_master_login at line 319
+Found sub sendMasterLogin at line 346
+Found sub secureLoginHash at line 379
+Found sub sendMasterSecureLogin at line 394
+Found sub reconstruct_game_login at line 409
+Found comment reference comment at line 427
+Found sub sendGameLogin at line 428
+Found sub sendCharLogin at line 441
+Found sub sendMapLogin at line 447
+Found sub sendMapLoaded at line 482
+Found sub reconstruct_sync at line 490
+Found sub sendSync at line 495
+Found sub parse_character_move at line 504
+Found sub reconstruct_character_move at line 509
+Found sub sendMove at line 517
+Found sub sendAction at line 529
+Found sub parse_public_chat at line 547
+Found sub reconstruct_public_chat at line 552
+Found sub sendChat at line 557
+Found sub sendGetPlayerInfo at line 562
+Found sub sendGetCharacterName at line 568
+Found sub sendTalk at line 574
+Found sub sendTalkCancel at line 582
+Found sub sendTalkContinue at line 589
+Found sub sendTalkResponse at line 595
+Found sub sendTalkNumber at line 603
+Found sub sendTalkText at line 611
+Found sub parse_private_message at line 625
+Found sub reconstruct_private_message at line 632
+Found sub sendPrivateMsg at line 639
+Found sub sendLook at line 644
+Found sub sendTake at line 651
+Found sub sendDrop at line 657
+Found sub sendItemUse at line 663
+Found comment reference comment at line 669
+Found sub sendRespawn at line 670
+Found comment reference comment at line 672
+Found sub sendQuitToCharSelect at line 673
+Found comment reference comment at line 675
+Found comment reference comment at line 676
+Found sub sendRestart at line 677
+Found sub sendStorageAdd at line 683
+Found sub sendStorageGet at line 693
+Found sub sendStoragePassword at line 703
+Found sub reconstruct_storage_password at line 715
+Found sub parse_party_chat at line 732
+Found sub reconstruct_party_chat at line 737
+Found sub sendPartyChat at line 742
+Found sub parse_buy_bulk_vender at line 748
+Found sub reconstruct_buy_bulk_vender at line 753
+Found comment reference comment at line 759
+Found sub sendBuyBulkVender at line 760
+Found sub reconstruct_buy_bulk_buyer at line 771
+Found sub sendBuyBulkBuyer at line 778
+Found sub sendEnteringBuyer at line 792
+Found sub sendBuyBulkOpenShop at line 798
+Found sub reconstruct_buy_bulk_openShop at line 815
+Found sub sendSkillUse at line 822
+Found sub sendSkillUseLoc at line 836
+Found sub sendGuildMasterMemberCheck at line 842
+Found sub sendGuildRequestInfo at line 848
+Found sub parse_guild_chat at line 857
+Found sub reconstruct_guild_chat at line 862
+Found sub sendGuildChat at line 867
+Found sub sendQuit at line 872
+Found sub sendCloseShop at line 878
+Found comment reference comment at line 884
+Found comment reference comment at line 885
+Found comment reference comment at line 886
+Found sub sendPartyOption at line 887
+Found comment reference comment at line 899
+Found sub sendPartyLeader at line 900
+Found comment reference comment at line 911
+Found sub sendPartyBookingRegister at line 912
+Found comment reference comment at line 922
+Found sub sendPartyBookingReqSearch at line 923
+Found comment reference comment at line 933
+Found sub sendPartyBookingDelete at line 934
+Found comment reference comment at line 940
+Found sub sendPartyBookingUpdate at line 941
+Found comment reference comment at line 951
+Found sub sendCharDelete2 at line 952
+Found comment reference comment at line 960
+Found comment reference comment at line 961
+Found sub sendCharDelete2Accept at line 962
+Found sub reconstruct_char_delete2_accept at line 968
+Found comment reference comment at line 973
+Found sub sendCharDelete2Cancel at line 974
+Found sub reconstruct_client_hash at line 981
+Found comment reference comment at line 1006
+Found sub sendClientMD5Hash at line 1007
+Found sub parse_actor_move at line 1015
+Found sub reconstruct_actor_move at line 1020
+Found sub sendSlaveMove at line 1028
+Found sub sendFriendListReply at line 1041
+Found sub sendFriendRequest at line 1052
+Found sub sendHomunculusCommand at line 1065
+Found sub sendPartyJoinRequestByName at line 1075
+Unknown construct at line 0: 
+Found sub sendSkillSelect at line 1087
+Found sub sendReplySyncRequestEx at line 1097
+Found sub sendLoginPinCode at line 1108
+Found sub sendCloseBuyShop at line 1131
+Found sub sendRequestCashItemsList at line 1137
+Found sub sendCashShopOpen at line 1143
+Found sub sendCashShopClose at line 1149
+Found sub sendCashBuy at line 1156
+Found sub reconstruct_cash_shop_buy at line 1169
+Found sub sendShowEquipPlayer at line 1177
+Found comment reference comment at line 1188
+Found comment reference comment at line 1189
+Found comment reference comment at line 1190
+Found comment reference comment at line 1191
+Found comment reference comment at line 1192
+Found comment reference comment at line 1193
+Found comment reference comment at line 1194
+Found comment reference comment at line 1195
+Found comment reference comment at line 1196
+Found comment reference comment at line 1197
+Found sub sendMiscConfigSet at line 1198
+Found sub sendSlaveAttack at line 1212
+Found sub sendSlaveStandBy at line 1228
+Found comment reference comment at line 1240
+Found comment reference comment at line 1241
+Found comment reference comment at line 1242
+Found sub sendEquip at line 1243
+Found comment reference comment at line 1255
+Found comment reference comment at line 1256
+Found sub sendEquipSwitchAdd at line 1257
+Found comment reference comment at line 1269
+Found comment reference comment at line 1270
+Found coGAP: Between sendItemListWindowSelected and reconstruct_item_list_window_selected (lines 1353-1355, 3 lines)
+GAP: Between sendCharCreate and sendCharDelete (lines 2309-2330, 22 lines)
+GAP: Between sendStorageGetToCart and sendStorageAddFromCart (lines 2407-2410, 4 lines)
+GAP: Between sendStorageAddFromCart and sendHomunculusName (lines 2426-2429, 4 lines)
+GAP: Between sendTop10Alchemist and sendTop10Blacksmith (lines 2652-2655, 4 lines)
+GAP: Between sendTop10Blacksmith and sendTop10PK (lines 2664-2667, 4 lines)
+GAP: Between sendTop10PK and sendTop10Taekwon (lines 2676-2679, 4 lines)
+GAP: Between sendTop10Taekwon and sendTop10 (lines 2688-2691, 4 lines)
+GAP: Between sendMailSetAttach and sendMailSend (lines 2933-2943, 11 lines)
+mment reference comment at line 1271
+Found sub sendEquipSwitchRemove at line 1272
+Found comment reference comment at line 1284
+Found comment reference comment at line 1285
+Found sub sendEquipSwitchRun at line 1286
+Found comment reference comment at line 1296
+Found comment reference comment at line 1297
+Found sub sendEquipSwitchSingle at line 1298
+Found sub sendProgress at line 1309
+Found sub sendDealAddItem at line 1317
+Found comment reference comment at line 1328
+Found comment reference comment at line 1329
+Found comment reference comment at line 1330
+Found comment reference comment at line 1331
+Found comment reference comment at line 1332
+Found comment reference comment at line 1333
+Found comment reference comment at line 1334
+Found comment reference comment at line 1335
+Found comment reference comment at line 1336
+Found sub sendItemListWindowSelected at line 1338
+Found sub reconstruct_item_list_window_selected at line 1356
+Found comment reference comment at line 1361
+Found comment reference comment at line 1362
+Found comment reference comment at line 1363
+Found comment reference comment at line 1364
+Found sub sendRefineUISelect at line 1365
+Found comment reference comment at line 1374
+Found comment reference comment at line 1375
+Found comment reference comment at line 1376
+Found comment reference comment at line 1377
+Found comment reference comment at line 1378
+Found comment reference comment at line 1379
+Found sub sendRefineUIRefine at line 1380
+Found comment reference comment at line 1391
+Found comment reference comment at line 1392
+Found comment reference comment at line 1393
+Found sub sendRefineUIClose at line 1394
+Found sub sendTokenToServer at line 1400
+Found comment reference comment at line 1430
+Found sub encrypt_password at line 1431
+Found sub sendReqRemainTime at line 1447
+Found sub sendBlockingPlayerCancel at line 1457
+Found sub rodex_delete_mail at line 1469
+Found sub rodex_request_zeny at line 1479
+Found sub rodex_request_items at line 1489
+Found sub rodex_cancel_write_mail at line 1499
+Found sub rodex_add_item at line 1507
+Found sub rodex_remove_item at line 1516
+Found sub rodex_open_write_mail at line 1525
+Found sub rodex_checkname at line 1533
+Found sub rodex_send_mail at line 1543
+Found sub rodex_refresh_maillist at line 1564
+Found sub rodex_read_mail at line 1579
+Found sub rodex_next_maillist at line 1589
+Found sub rodex_open_mailbox at line 1599
+Found sub rodex_close_mailbox at line 1614
+Found sub sendEnteringVender at line 1622
+Found sub sendUnequip at line 1630
+Found sub sendAddStatusPoint at line 1638
+Found sub sendAddSkillPoint at line 1647
+Found sub sendHotKeyChange at line 1655
+Found sub sendQuestState at line 1667
+Found sub sendClanChat at line 1677
+Found sub sendchangetitle at line 1683
+Found sub sendRecallSso at line 1692
+Found sub sendRemoveAidSso at line 1700
+Found sub sendMacroStart at line 1708
+Found sub sendMacroStop at line 1715
+Found sub sendReqCashTabCode at line 1722
+Found sub parse_pet_evolution at line 1730
+Found sub reconstruct_pet_evolution at line 1735
+Found sub sendPetEvolution at line 1740
+Found sub sendWeaponRefine at line 1749
+Found sub sendCooking at line 1762
+Found sub sendMakeItemRequest at line 1772
+Found sub sendSearchStoreClose at line 1784
+Found sub sendSearchStoreSearch at line 1794
+Found sub reconstruct_search_store_info at line 1809
+Found sub sendSearchStoreRequestNextPage at line 1820
+Found sub sendSearchStoreSelect at line 1828
+Found sub sendNoviceDoriDori at line 1841
+Found sub sendChangeDress at line 1849
+Found sub sendFriendRemove at line 1857
+Found sub sendRepairItem at line 1869
+Found sub sendAdoptRequest at line 1882
+Found sub sendAdoptReply at line 1893
+Found sub sendPrivateAirshipRequest at line 1906
+Found sub sendNoviceExplosionSpirits at line 1916
+Found sub sendBanCheck at line 1924
+Found sub sendChangeCart at line 1935
+Found sub sendArrowCraft at line 1947
+Found sub sendAutoSpell at line 1958
+Found sub sendEmotion at line 1967
+Found sub sendWho at line 1978
+Found sub sendNPCBuySellList at line 1985
+Found sub sendIgnore at line 1999
+Found sub sendIgnoreAll at line 2013
+Found sub sendGetIgnoreList at line 2024
+Found sub sendChatRoomCreate at line 2032
+Found sub sendChatRoomJoin at line 2046
+Found sub sendChatRoomChange at line 2058
+Found sub sendChatRoomBestow at line 2072
+Found sub sendChatRoomKick at line 2096
+Found sub sendChatRoomLeave at line 2107
+Found sub sendDeal at line 2115
+Found sub sendDealReply at line 2126
+Found sub sendDealFinalize at line 2147
+Found sub sendCurrentDealCancel at line 2155
+Found sub sendDealTrade at line 2163
+Found sub sendStorageClose at line 2171
+Found sub sendPartyJoinRequest at line 2179
+Found sub sendPartyJoin at line 2190
+Found sub sendPartyLeave at line 2202
+Found sub sendPartyKick at line 2210
+Found sub sendMemo at line 2222
+Found sub sendCompanionRelease at line 2230
+Found sub sendCartAdd at line 2238
+Found sub sendCartGet at line 2250
+Found sub sendIdentify at line 2262
+Found sub sendCardMergeRequest at line 2273
+Found sub sendCardMerge at line 2284
+Found sub sendCharCreate at line 2296
+Found sub sendCharDelete at line 2331
+Found sub sendGuildAlly at line 2343
+Found sub sendGuildRequestEmblem at line 2355
+Found sub sendGuildBreak at line 2366
+Found sub sendWarpTele at line 2377
+Found sub sendStorageGetToCart at line 2392
+Found sub sendStorageAddFromCart at line 2411
+Found sub sendHomunculusName at line 2430
+Found sub sendGuildLeave at line 2441
+Found sub sendGuildMemberKick at line 2455
+Found sub sendGuildCreate at line 2469
+Found sub sendGuildJoin at line 2481
+Found sub sendGuildJoinRequest at line 2493
+Found sub sendGuildNotice at line 2506
+Found sub sendGuildSetAlly at line 2519
+Found sub sendPetCapture at line 2538
+Found sub sendPetMenu at line 2548
+Found sub sendPetHatch at line 2566
+Found sub sendPetName at line 2577
+Found sub sendPetEmotion at line 2588
+Found sub sendBuyBulk at line 2600
+Found sub reconstruct_buy_bulk at line 2611
+Found sub sendSellBulk at line 2618
+Found sub reconstruct_sell_bulk at line 2629
+Found sub sendAchievementGetReward at line 2635
+Found sub sendTop10Alchemist at line 2644
+Found sub sendTop10Blacksmith at line 2656
+Found sub sendTop10PK at line 2668
+Found sub sendTop10Taekwon at line 2680
+Found sub sendTop10 at line 2692
+Found sub sendGMSummon at line 2707
+Found sub sendGMBroadcast at line 2716
+Found sub sendGMKick at line 2727
+Found sub sendGMKickAll at line 2736
+Found sub sendGMMonsterItem at line 2742
+Found sub sendGMMapMove at line 2751
+Found sub sendGMResetStateSkill at line 2762
+Found sub sendGMChangeMapType at line 2777
+Found sub sendGMBroadcastLocal at line 2794
+Found sub sendGMChangeEffectState at line 2803
+Found sub sendGMRemove at line 2814
+Found sub sendGMShift at line 2823
+Found sub sendGMRecall at line 2832
+Found sub sendAlignment at line 2841
+Found sub sendOpenShop at line 2854
+Found sub reconstruct_shop_open at line 2865
+Found sub sendMailboxOpen at line 2871
+Found sub sendMailRead at line 2879
+Found sub sendMailDelete at line 2890
+Found sub sendMailGetAttach at line 2901
+Found sub sendMailOperateWindow at line 2912
+Found sub sendMailSetAttach at line 2923
+Found sub sendMailSend at line 2944
+Found sub reconstruct_mail_send at line 2958
+Found sub sendMailReturn at line 2964
+Found sub sendAuctionAddItemCancel at line 2976
+Found sub sendAuctionAddItem at line 2989
+Found sub sendAuctionCreate at line 3001
+Found sub sendAuctionCancel at line 3014
+Found sub sendAuctionBuy at line 3025
+Found sub sendAuctionItemSearch at line 3037
+Found sub sendAuctionReqMyInfo at line 3060
+Found sub sendAuctionMySellStop at line 3071
+Found sub sendPartyJoinRequestByNameReply at line 3082
+Found sub sendAutoRevive at line 3094
+Found sub sendBattlegroundChat at line 3102
+Found sub sendMercenaryCommand at line 3113
+Found sub sendSkillUseLocInfo at line 3128
+Found sub sendGMGiveMannerByName at line 3143
+Found sub sendGMRequestStatus at line 3152
+Found sub sendFeelSaveOk at line 3161
+Found sub sendGMReqAccName at line 3172
+Found sub sendClientVersion at line 3183
+Found sub sendCaptchaAnswer at line 3192
+Found comment reference comment at line 3205
+Found comment reference comment at line 3206
+Found comment reference comment at line 3208
+Found sub sendCashShopBuy at line 3209
+Found sub sendStartSkillUse at line 3225
+Found sub sendStopSkillUse at line 3233
+Found comment reference comment at line 3242
+Found comment reference comment at line 3243
+Found comment reference comment at line 3244
+Found sub sendMergeItemRequest at line 3246
+Found sub reconstruct_merge_item_request at line 3257
+Found comment reference comment at line 3263
+Found comment reference comment at line 3264
+Found comment reference comment at line 3265
+Found sub sendMergeItemCancel at line 3267
+Found sub sendStylistChange at line 3278
+Found comment reference comment at line 3292
+Found comment reference comment at line 3295
+Found comment reference comment at line 3296
+Found sub sendOpenUIRequest at line 3297
+Found comment reference comment at line 3309
+Found comment reference comment at line 3312
+Found comment reference comment at line 3313
+Found sub sendAttendanceRewardRequest at line 3315
+Found comment reference comment at line 3327
+Found comment reference comment at line 3330
+Found comment reference comment at line 3331
+Found sub sendBankingCheck at line 3332
+Found comment reference comment at line 3340
+Found comment reference comment at line 3341
+Found sub sendBankingWithdraw at line 3342
+Found comment reference comment at line 3351
+Found comment reference comment at line 3352
+Found sub sendBankingDeposit at line 3353
+Found comment reference comment at line 3363
+Found comment reference comment at line 3366
+Found comment reference comment at line 3367
+Found sub sendRouletteWindowOpen at line 3368
+Found comment reference comment at line 3378
+Found comment reference comment at line 3379
+Found sub sendRouletteInfoRequest at line 3380
+Found comment reference comment at line 3390
+Found comment reference comment at line 3391
+Found sub sendRouletteClose at line 3392
+Found comment reference comment at line 3402
+Found comment reference comment at line 3403
+Found sub sendRouletteStart at line 3404
+Found comment reference comment at line 3414
+Found comment reference comment at line 3415
+Found sub sendRouletteClaimPrize at line 3416
+Found comment reference comment at line 3427
+Found comment reference comment at line 3430
+Found comment reference comment at line 3431
+Found sub sendSellBuyComplete at line 3432
+Found comment reference comment at line 3442
+Found comment reference comment at line 3443
+Found sub sendBuyBulkMarket at line 3444
+Found sub reconstruct_buy_bulk_market at line 3455
+Found comment reference comment at line 3462
+Found comment reference comment at line 3463
+Found sub sendMarketClose at line 3464
+Found comment reference comment at line 3474
+Found comment reference comment at line 3475
+Found sub sendInventoryExpansionRequest at line 3476
+Found comment reference comment at line 3481
+Found comment reference comment at line 3482
+Found sub sendInventoryExpansionRejected at line 3483
+Found comment reference comment at line 3488
+Found sub sendPing at line 3489
+Found comment reference comment at line 3494
+Found comment reference comment at line 3495
+Found sub sendMacroDetectorDownload at line 3496
+Found comment reference comment at line 3504
+Found comment reference comment at line 3505
+Found sub sendMacroDetectorAnswer at line 3506
+Found comment reference comment at line 3517
+Found comment reference comment at line 3518
+Found sub sendCaptchaPreviewRequest at line 3519
+Found comment reference comment at line 3528
+Found comment reference comment at line 3529
+Found sub sendMemorialDungeonCommand at line 3530
+Found comment reference comment at line 3541
+Found sub sendNPCCreateRequest at line 3542
+Analysis complete. Results written to packet_analysis.json
