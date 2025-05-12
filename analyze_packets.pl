@@ -4,6 +4,16 @@ use warnings;
 use PPI;
 use JSON;
 use Data::Dumper;
+use File::Basename;
+
+# Configuration
+my $output_dir = './output';  # Configurable output directory
+
+# Check command line arguments
+unless (@ARGV) {
+    die "Usage: $0 <input_file.pm>\n";
+}
+my $input_file = $ARGV[0];
 
 # Initialize JSON and logging
 my $json = JSON->new->pretty;
@@ -17,9 +27,9 @@ my $output = {
     hashes => {}
 };
 
-# Process files
-for my $file ('src/Network/Receive.pm', 'src/Network/Send.pm') {
-    print "Processing $file...\n";
+# Process input file
+my $file = $input_file;
+print "Processing $file...\n";
     
     my @constructs;
     my $grep_cmd = 'grep -E \'^[{}]|^);|^sub |^our |^use |^package |^#\' ' . $file . ' -n';
@@ -182,20 +192,29 @@ for my $file ('src/Network/Receive.pm', 'src/Network/Send.pm') {
     }
     close $fh;
     
-    # Rest of the processing logic...
-}
-
-# Generate JSON output
+    
+    # Generate JSON output
 my $json_output = eval { $json->encode($output) };
 if ($@) {
     warn "JSON generation error: $@";
     $json_output = "{}";
 }
 
+    # Create output directory if needed
+    unless (-d $output_dir) {
+        mkdir $output_dir or die "Cannot create output directory $output_dir: $!";
+    }
+
+    # Generate output filename from input filename
+my $base_name = basename($input_file, '.pm');
+my $output_file = "$output_dir/${base_name}_analysis.json";
+
 # Write JSON to file
-open my $out_fh, '>', 'packet_analysis.json' or die "Can't write output file: $!";
+open my $out_fh, '>', $output_file or die "Can't write output file $output_file: $!";
 print $out_fh $json_output;
 close $out_fh;
+
+print "Analysis complete. Output written to $output_file\n";
 
 # Helper to find which export tag a constant belongs to
 # Extract handler signature from sub declaration
@@ -212,89 +231,77 @@ sub extract_handler_signature {
 sub find_export_tag {
     my ($const_name, $file) = @_;
     
-    open my $fh, '<', $file or return undef;
-    my @lines = <$fh>;
+    # First check if we have eval-parsed EXPORT_TAGS data
+    if (exists $output->{hashes}{EXPORT_TAGS} &&
+        exists $output->{hashes}{EXPORT_TAGS}{eval_data}) {
+        my $tags = $output->{hashes}{EXPORT_TAGS}{eval_data};
+        
+        # Debug output showing full EXPORT_TAGS structure
+        print STDERR "DEBUG: Full EXPORT_TAGS structure:\n";
+        print STDERR Dumper($output->{hashes}{EXPORT_TAGS}) . "\n";
+        
+        print STDERR "DEBUG: Checking export tags for $const_name. Available tags: " .
+            join(', ', keys %$tags) . "\n";
+        
+        foreach my $tag (keys %$tags) {
+            # Handle both array ref and scalar cases
+            my @tag_values;
+            if (ref($tags->{$tag}) eq 'ARRAY') {
+                @tag_values = @{$tags->{$tag}};
+            } elsif (ref($tags->{$tag})) {
+                warn "Unexpected ref type for tag $tag: " . ref($tags->{$tag});
+                next;
+            } else {
+                @tag_values = split(/\s+/, $tags->{$tag});
+            }
+            
+            # More detailed debug output
+            print STDERR "DEBUG: Tag '$tag' has values:\n";
+            print STDERR "  - $_\n" for @tag_values;
+            
+            # Exact match against full constant name
+            if (grep { $_ eq $const_name } @tag_values) {
+                print STDERR "DEBUG: Found exact match for $const_name in tag $tag\n";
+                return $tag;
+            }
+            # Also check for case variations if exact match fails
+            if (grep { lc($_) eq lc($const_name) } @tag_values) {
+                print STDERR "DEBUG: Found case-insensitive match for $const_name in tag $tag\n";
+                return $tag;
+            }
+        }
+    }
+    
+    # Fallback to more robust @EXPORT check
+    open my $fh, '<', $file or do {
+        print STDERR "DEBUG: Couldn't open $file for export tag check\n";
+        return undef;
+    };
+    
+    my $file_content = do { local $/; <$fh> };
     close $fh;
     
-    my %export_tags;
-    my $in_export_tags = 0;
-    my $current_tag;
-    my $in_tag_array = 0;
-    
-    # First check if it's directly in @EXPORT
-    my $in_export = 0;
-    foreach my $line (@lines) {
-        if ($line =~ /\@EXPORT\s*=\s*\(/) {
-            $in_export = 1;
-            next;
-        }
-        if ($in_export && $line =~ /\)/) {
-            last;
-        }
-        if ($in_export && $line =~ /\b$const_name\b/) {
-            print STDERR "Found $const_name in direct EXPORT\n";
+    # Check for \@EXPORT = qw(...) style
+    if ($file_content =~ /\@EXPORT\s*=\s*qw\(([^)]*)\)/s) {
+        my $export_list = $1;
+        if ($export_list =~ /\b$const_name\b/) {
+            print STDERR "DEBUG: Found $const_name in \@EXPORT qw() list\n";
             return 'direct';
         }
-        
-        # Parse EXPORT_TAGS structure
-        if ($line =~ /\%EXPORT_TAGS\s*=\s*\(/) {
-            print STDERR "Entered EXPORT_TAGS section\n";
-            $in_export_tags = 1;
-            next;
-        }
-        
-        if ($in_export_tags) {
-            # Start of new tag group
-            if ($line =~ /^\s*(\w+)\s*=>\s*\[/) {
-                $current_tag = $1;
-                $in_tag_array = 1;
-                $export_tags{$current_tag} = [];
-                print STDERR "Found tag group: $current_tag\n";
-                next;
-            }
-            
-            # Inside a tag array - collect all constants
-            if ($in_tag_array) {
-                # Extract all constants from this line
-                while ($line =~ /(\b\w+\b)/g) {
-                    my $const = $1;
-                    next if $const eq 'qw'; # Skip Perl quote operator
-                    push @{$export_tags{$current_tag}}, $const;
-                    print STDERR "Added $const to $current_tag\n";
-                    
-                    # Check if this is our target constant
-                    if ($const eq $const_name) {
-                        print STDERR "Matched $const_name to tag $current_tag\n";
-                        return $current_tag;
-                    }
-                }
-                
-                # End of current tag array
-                if ($line =~ /\]/) {
-                    print STDERR "End of tag array for $current_tag\n";
-                    $in_tag_array = 0;
-                    $current_tag = undef;
-                }
-            }
-            
-            # End of EXPORT_TAGS
-            if ($line =~ /\)/) {
-                print STDERR "Exited EXPORT_TAGS section\n";
-                $in_export_tags = 0;
-                last;
-            }
+    }
+    
+    # Check for \@EXPORT = (...) style
+    if ($file_content =~ /\@EXPORT\s*=\s*\(([^)]*)\)/s) {
+        my $export_list = $1;
+        if ($export_list =~ /\b$const_name\b/) {
+            print STDERR "DEBUG: Found $const_name in \@EXPORT list\n";
+            return 'direct';
         }
     }
     
-    # Check all collected tags if we didn't find a direct match
-    foreach my $tag (keys %export_tags) {
-        if (grep { $_ eq $const_name } @{$export_tags{$tag}}) {
-            print STDERR "Found $const_name in tag $tag (delayed match)\n";
-            return $tag;
-        }
-    }
-    
-    print STDERR "No export tag found for $const_name\n";
+    print STDERR "DEBUG: No export tag found for $const_name after full search. Tags available: " .
+        (exists $output->{hashes}{EXPORT_TAGS} ?
+         join(', ', keys %{$output->{hashes}{EXPORT_TAGS}{eval_data}}) : 'none') . "\n";
     return undef;
 }
 
@@ -348,46 +355,39 @@ sub parse_hash {
             
             # Special handling for EXPORT_TAGS format
             if ($hash_name eq 'EXPORT_TAGS') {
-                # Start of new tag group
-                if ($line =~ /^\s*(\w+)\s*=>\s*\[/) {
-                    $current_tag = $1;
-                    $in_tag_array = 1;
-                    $current_entry = {
-                        key => $current_tag,
-                        line => $current_line,
+                # Extract the full hash definition
+                my @hash_lines = @lines[$start_line-1..$end_line-1];
+                my %export_tags;
+                
+                # Join all lines and parse tag groups that may span multiple lines
+                my $full_text = join('', @hash_lines);
+                while ($full_text =~ /(\w+)\s*=>\s*\[qw\(([^)]+)\)\]/gs) {
+                    my ($tag, $constants) = ($1, $2);
+                    # Clean up constants by removing newlines and extra whitespace
+                    $constants =~ s/\s+/ /g;
+                    $constants =~ s/^\s+|\s+$//g;
+                    my @values = split(/\s+/, $constants);
+                    
+                    push @entries, {
+                        key => $tag,
+                        line => $start_line,
                         type => 'tag_group',
-                        values => [],
-                        content => $line
+                        values => \@values,
+                        content => $line,
+                        end => $end_line
                     };
-                    push @entries, $current_entry;
-                    next;
+                    
+                    $export_tags{$tag} = \@values;
                 }
                 
-                # Inside tag array - collect constants
-                if ($in_tag_array) {
-                    # Extract all constants from this line, handling qw() lists
-                    if ($line =~ /qw\(([^)]+)\)/) {
-                        my @consts = split(/\s+/, $1);
-                        push @{$current_entry->{values}}, @consts;
-                    } else {
-                        while ($line =~ /(\b\w+\b)/g) {
-                            my $const = $1;
-                            next if $const eq 'qw'; # Skip Perl quote operator
-                            push @{$current_entry->{values}}, $const;
-                        }
-                    }
-                    
-                    # End of current tag array
-                    if ($line =~ /\]/) {
-                        $in_tag_array = 0;
-                        $current_entry->{content} .= $line;
-                        $current_entry->{end} = $current_line;
-                        $current_entry = undef;
-                    } elsif ($current_entry) {
-                        $current_entry->{content} .= $line;
-                    }
-                    next;
-                }
+                return {
+                    eval_data => \%export_tags,  # Store parsed data
+                    name => $hash_name,
+                    start => $start_line,
+                    end => $end_line,
+                    entries => \@entries,
+                    file => $file
+                };
             }
             
             # Default hash entry parsing
